@@ -37,19 +37,19 @@ export function CursorSpark() {
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY }
       
-      // Create new spark particles at cursor position
-      const particleCount = 4 + Math.floor(Math.random() * 3)
+      // Create new spark particles at cursor position (subtle amount)
+      const particleCount = 2 + Math.floor(Math.random() * 2)
       for (let i = 0; i < particleCount; i++) {
-        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.8
-        const speed = 1 + Math.random() * 2
+        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.6
+        const speed = 0.6 + Math.random() * 1.2
         particlesRef.current.push({
-          x: e.clientX + (Math.random() - 0.5) * 4,
-          y: e.clientY + (Math.random() - 0.5) * 4,
+          x: e.clientX + (Math.random() - 0.5) * 2,
+          y: e.clientY + (Math.random() - 0.5) * 2,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 0,
-          maxLife: 15 + Math.random() * 25,
-          size: 1.5 + Math.random() * 2.5
+          maxLife: 10 + Math.random() * 18,
+          size: 1 + Math.random() * 1.5,
         })
       }
     }
@@ -62,15 +62,15 @@ export function CursorSpark() {
       particlesRef.current = particlesRef.current.filter(particle => {
         particle.x += particle.vx
         particle.y += particle.vy
-        particle.vx *= 0.92 // Friction
-        particle.vy *= 0.92
+        particle.vx *= 0.9 // Friction
+        particle.vy *= 0.9
         particle.life++
 
         const alpha = 1 - (particle.life / particle.maxLife)
         const progress = particle.life / particle.maxLife
 
-        // Draw bright spark core
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
+        // Draw subtle spark core
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fill()
@@ -80,7 +80,7 @@ export function CursorSpark() {
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 2
         )
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.8})`)
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.6})`)
         gradient.addColorStop(1, `rgba(255, 255, 255, 0)`)
         ctx.fillStyle = gradient
         ctx.beginPath()
@@ -88,9 +88,9 @@ export function CursorSpark() {
         ctx.fill()
 
         // Draw spark trail (only for first part of life)
-        if (progress < 0.4) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.6})`
-          ctx.lineWidth = 1
+        if (progress < 0.3) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.4})`
+          ctx.lineWidth = 0.7
           ctx.lineCap = "round"
           ctx.beginPath()
           ctx.moveTo(particle.x, particle.y)
@@ -124,7 +124,7 @@ export function CursorSpark() {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 pointer-events-none z-50"
-      style={{ mixBlendMode: "screen" }}
+      style={{ mixBlendMode: "difference" }}
     />
   )
 }

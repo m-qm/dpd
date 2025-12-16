@@ -2,33 +2,15 @@
 
 import { useEffect, useRef, useState } from "react"
 import { SectionBadge } from "@/components/section-badge"
+import { copy, type Locale } from "@/lib/copy"
 
-const capabilities = [
-  {
-    title: "Brand Identity & Digital Expression",
-    description:
-      "Translating refined brand values into cohesive digital experiences that communicate with clarity and distinction.",
-  },
-  {
-    title: "Strategic Design & Art Direction",
-    description:
-      "Defining visual languages and interaction patterns that elevate perception and reinforce brand positioning.",
-  },
-  {
-    title: "Bespoke Digital Platforms",
-    description: "Engineering custom solutions for luxury brands, cultural institutions, and high-profile events that demand exceptional execution.",
-  },
-  {
-    title: "E-commerce & Digital Commerce",
-    description: "Creating sophisticated online experiences that reflect the quality and craftsmanship of premium products and services.",
-  },
-  {
-    title: "Technical Excellence & Performance",
-    description: "Delivering solutions built with precision, optimized for performance, and designed to evolve with your ambitions.",
-  },
-]
-
-export function CapabilitiesSection({ inverted = false }: { inverted?: boolean }) {
+export function CapabilitiesSection({
+  inverted = false,
+  locale = "en",
+}: {
+  inverted?: boolean
+  locale?: Locale
+}) {
   const [visibleItems, setVisibleItems] = useState<number[]>([])
   const sectionRef = useRef<HTMLDivElement>(null)
 
@@ -37,7 +19,7 @@ export function CapabilitiesSection({ inverted = false }: { inverted?: boolean }
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            capabilities.forEach((_, index) => {
+            copy[locale].capabilities.forEach((_, index) => {
               setTimeout(() => {
                 setVisibleItems((prev) => [...prev, index])
               }, index * 100)
@@ -65,13 +47,13 @@ export function CapabilitiesSection({ inverted = false }: { inverted?: boolean }
       }`}
     >
       <div className="max-w-7xl mx-auto">
-        <SectionBadge number={1} label="Capabilities" />
+        <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
         <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-24 md:mb-32 tracking-tight leading-[0.9]">
-          Capabilities
+          {copy[locale].capabilitiesHeading}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 lg:gap-24">
-          {capabilities.map((capability, index) => (
+          {copy[locale].capabilities.map((capability, index) => (
             <div
               key={index}
               className={`transition-all duration-700 ${

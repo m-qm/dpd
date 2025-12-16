@@ -16,17 +16,17 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <CursorSpark />
-      <HeroSection />
+      <HeroSection locale="en" />
       {/* Section 1: Capabilities - always inverted (white) */}
-      <CapabilitiesSection inverted={true} />
+      <CapabilitiesSection inverted={true} locale="en" />
       {/* Section 2: Approach - stays dark, never inverts */}
-      <ApproachSection inverted={false} />
-      {/* Section 3: Clients - always inverted (white) */}
-      <ClientsSection inverted={true} />
+      <ApproachSection inverted={false} locale="en" />
+      {/* Section 3: Clients - dedicated dark section */}
+      <ClientsSection inverted={false} locale="en" />
       {/* Section 4: Philosophy - stays dark, never inverts */}
       <PhilosophySection inverted={false} />
       {/* Section 5: Contact - always inverted (white) */}
-      <CTASection inverted={true} />
+      <CTASection inverted={true} locale="en" />
       <Footer />
     </main>
   )

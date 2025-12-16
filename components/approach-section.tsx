@@ -2,27 +2,9 @@
 
 import { useEffect, useRef, useState } from "react"
 import { SectionBadge } from "@/components/section-badge"
+import { copy, type Locale } from "@/lib/copy"
 
-const steps = [
-  {
-    title: "Discovery & Strategy",
-    description: "Deep understanding of your brand, audience, and objectives through thoughtful dialogue and strategic analysis.",
-  },
-  {
-    title: "Design & Art Direction",
-    description: "Defining refined visual languages and interaction patterns that communicate with clarity and distinction.",
-  },
-  {
-    title: "Engineering & Craft",
-    description: "Building with technical precision, exceptional performance, and meticulous attention to detail.",
-  },
-  {
-    title: "Ongoing Partnership",
-    description: "Evolving your digital presence as your brand grows, maintaining the highest standards of quality and execution.",
-  },
-]
-
-export function ApproachSection({ inverted = false }: { inverted?: boolean }) {
+export function ApproachSection({ inverted = false, locale = "en" }: { inverted?: boolean; locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
 
@@ -54,17 +36,17 @@ export function ApproachSection({ inverted = false }: { inverted?: boolean }) {
       }`}
     >
       <div className="max-w-7xl mx-auto">
-        <SectionBadge number={2} label="Approach" />
+        <SectionBadge number={2} label={locale === "en" ? "Approach" : "Enfoque"} />
         <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-12 md:mb-16 tracking-tight leading-[0.9]">
-          Our Approach
+          {copy[locale].approachHeading}
         </h2>
 
         <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mb-24 md:mb-32 leading-relaxed font-normal">
-          We work with precision and purpose, balancing aesthetic refinement with functional excellence. Every element is considered, every detail intentional.
+          {copy[locale].approachIntro}
         </p>
 
         <div className="space-y-0">
-          {steps.map((step, index) => (
+          {copy[locale].approachSteps.map((step, index) => (
             <div
               key={index}
               className={`py-12 md:py-16 border-b border-border transition-all duration-700 ${

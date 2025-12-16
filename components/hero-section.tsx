@@ -2,13 +2,43 @@
 
 import { useEffect, useState } from "react"
 import { AnimatedD } from "@/components/animated-d"
+import { LanguageToggle } from "@/components/language-toggle"
+import { copy, type Locale } from "@/lib/copy"
 
-export function HeroSection() {
+export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
+  const [altLineActive, setAltLineActive] = useState(false)
+  const [isFading, setIsFading] = useState(false)
 
   useEffect(() => {
-    setIsVisible(true)
+    // Small delay so the entrance animation starts after initial paint
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+    }, 450)
+
+    return () => clearTimeout(timer)
   }, [])
+
+  // Alternate the middle line between core claim and "Local development, global impact"
+  // with a very subtle, slow fade-out → swap → fade-in loop
+  useEffect(() => {
+    let timeoutId: number | undefined
+    const intervalId = window.setInterval(() => {
+      setIsFading(true)
+
+      timeoutId = window.setTimeout(() => {
+        setAltLineActive((prev) => !prev)
+        setIsFading(false)
+      }, 1100)
+    }, 9000)
+
+    return () => {
+      window.clearInterval(intervalId)
+      if (timeoutId) {
+        window.clearTimeout(timeoutId)
+      }
+    }
+  }, [locale])
 
   return (
     <section className="relative min-h-screen flex flex-col bg-gradient-to-b from-background via-background/95 to-black">
@@ -34,6 +64,8 @@ export function HeroSection() {
               hello@dualperspective.digital
             </a>
           </div>
+          <div className="hidden md:block h-4 w-px bg-border/60" />
+          <LanguageToggle />
         </div>
       </nav>
 
@@ -43,19 +75,37 @@ export function HeroSection() {
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
 
         <div
-          className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
-          <h1 className="text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-normal text-foreground mb-16 md:mb-20 leading-[0.85] tracking-[-0.02em]">
-            Digital
-            <br />
-            Experiences
-            <br />
-            That Endure
+          <h1
+            className={`text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-normal text-foreground mb-16 md:mb-20 leading-[0.85] tracking-[-0.02em] transition-opacity duration-1000 ${
+              isFading ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            {altLineActive ? (
+              // Alt state: only the "Local development, global impact" line
+              <span className="block">
+                {locale === "es" ? "Desarrollo local, impacto global" : "Local development, global impact"}
+                <br />
+              </span>
+            ) : (
+              // Default state: Digital / Experiences / That Endure
+              <>
+                {copy[locale].hero.titleLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                    <br />
+                  </span>
+                ))}
+              </>
+            )}
           </h1>
 
           <div className="max-w-2xl">
             <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-normal">
-              A digital agency creating essential experiences for brands, events, and organizations that care about refinement, consistency, and long-term impact.
+              {copy[locale].hero.subtitle}
             </p>
           </div>
         </div>
