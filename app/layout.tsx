@@ -11,9 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital — Young Barcelona Digital Agency",
+  title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
   description:
-    "Dual Perspective Digital is a young Barcelona-based digital agency partnering with brands, cultural institutions, and agencies to design and build refined, long-lasting digital experiences.",
+    "Dual Perspective Digital is a boutique digital product studio in Barcelona, specialised in custom software: products, internal tools, and integrations designed around real-world business processes.",
   metadataBase: new URL("https://digital-agency-website-5i3k91izl-mqms-projects.vercel.app"),
   alternates: {
     canonical: "/",
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dual Perspective Digital — Young Barcelona Digital Agency",
+    title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
     description:
-      "A Barcelona-based digital agency crafting refined digital experiences for brands, cultural institutions, and partner agencies.",
+      "Boutique digital product studio in Barcelona building custom software, internal tools, and integrations that fit how your team actually works.",
     url: "https://digital-agency-website-5i3k91izl-mqms-projects.vercel.app",
     siteName: "Dual Perspective Digital",
     type: "website",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dual Perspective Digital — Young Barcelona Digital Agency",
+    title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
     description:
-      "Barcelona-based digital agency for brands, cultural institutions, and agencies seeking refined digital experiences.",
+      "Custom digital products, internal tools, and process-focused integrations from a boutique studio in Barcelona.",
   },
   icons: {
     icon: [

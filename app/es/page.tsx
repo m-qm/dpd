@@ -1,5 +1,6 @@
-"use client"
+ "use client"
 
+import type { Metadata } from "next"
 import { HeroSection } from "@/components/hero-section"
 import { CapabilitiesSection } from "@/components/capabilities-section"
 import { ApproachSection } from "@/components/approach-section"
@@ -8,6 +9,28 @@ import { PhilosophySection } from "@/components/philosophy-section"
 import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { CursorSpark } from "@/components/cursor-spark"
+
+export const metadata: Metadata = {
+  title: "Dual Perspective Digital — Agencia boutique de producto digital en Barcelona",
+  description:
+    "Agencia boutique de producto digital en Barcelona, especializada en software a medida: productos, herramientas internas e integraciones (WhatsApp, Instagram, automatizaciones) diseñadas alrededor de tus procesos reales.",
+  alternates: {
+    canonical: "/es",
+    languages: {
+      en: "/",
+      es: "/es",
+    },
+  },
+  openGraph: {
+    title: "Dual Perspective Digital — Agencia boutique de producto digital en Barcelona",
+    description:
+      "Software a medida, herramientas internas e integraciones conectadas a tus procesos reales, diseñado y desarrollado desde Barcelona.",
+    url: "https://digital-agency-website-5i3k91izl-mqms-projects.vercel.app/es",
+    siteName: "Dual Perspective Digital",
+    type: "website",
+    locale: "es_ES",
+  },
+}
 
 export default function HomeEs() {
   return (
