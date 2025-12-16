@@ -27,73 +27,73 @@ type CopyShape = {
 
 const en: CopyShape = {
   hero: {
-    eyebrow: "Barcelona Digital Agency",
+    eyebrow: "Boutique digital product studio in Barcelona",
     titleLines: ["Digital", "Experiences", "That Endure"],
     subtitle:
-      "A young digital agency in Barcelona creating essential experiences for brands, events, and organizations that care about refinement, consistency, and long-term impact.",
+      "A boutique digital product studio in Barcelona, specialised in custom software: products, internal tools, and integrations (WhatsApp, Instagram, automation) designed around your real-world processes.",
   },
   capabilitiesHeading: "Capabilities",
   capabilitiesLabel: "Capabilities",
   capabilities: [
     {
-      title: "Brand Identity & Digital Expression",
+      title: "Custom digital products",
       description:
-        "Translating refined brand values into cohesive digital experiences that communicate with clarity and distinction.",
+        "We design and build web applications and internal tools that are fully tailored to how your team actually works, not to a generic template.",
     },
     {
-      title: "Digital Product Design",
+      title: "Product & experience design",
       description:
-        "Designing clear, digital-first interfaces and flows that make complex products feel simple to use.",
+        "We define the end-to-end product experience: flows, interfaces, and states that make complex processes feel clear and manageable.",
     },
     {
-      title: "Bespoke Digital Platforms",
+      title: "Platforms & connected systems",
       description:
-        "Engineering custom solutions for luxury brands, cultural institutions, and high-profile events that demand exceptional execution.",
+        "We create platforms that connect different systems, data, and services, with an architecture designed to scale sustainably.",
     },
     {
-      title: "E-commerce & Digital Commerce",
+      title: "E‑commerce & transactional flows",
       description:
-        "Creating sophisticated online experiences that reflect the quality and craftsmanship of premium products and services.",
+        "We design and implement purchasing experiences and payment flows that prioritise conversion, clarity, and user confidence.",
     },
     {
-      title: "Technical Excellence & Performance",
+      title: "Technical excellence & performance",
       description:
-        "Delivering solutions built with precision, optimized for performance, and designed to evolve with your ambitions.",
+        "We build with boutique-level precision: clean code, solid performance, and a technical foundation that lets your product evolve calmly over time.",
     },
   ],
   approachHeading: "Our Approach",
   approachIntro:
-    "We work with precision and purpose, balancing aesthetic refinement with functional excellence. Every element is considered, every detail intentional.",
+    "We work with precision and purpose, connecting business strategy, product design, and engineering. We start from your actual processes and translate them into clear, efficient, and—where it makes sense—automated digital flows.",
   approachSteps: [
     {
       title: "Discovery & Strategy",
       description:
-        "Deep understanding of your brand, audience, and objectives through thoughtful dialogue and strategic analysis.",
+        "We get close to your business, teams, and how you work today: processes, tools, friction points, and opportunities for automation. From there, we define what software makes the most sense to build.",
     },
     {
       title: "Design & Art Direction",
       description:
-        "Defining refined visual languages and interaction patterns that communicate with clarity and distinction.",
+        "We shape the product experience: interfaces, flows, and states that make complex tasks feel clear and usable, while keeping a visual language that feels true to your brand.",
     },
     {
       title: "Engineering & Craft",
       description:
-        "Building with technical precision, exceptional performance, and meticulous attention to detail.",
+        "We engineer custom software with technical precision: internal dashboards, platforms, and services that integrate with your existing systems (CRM, email tools, social platforms, etc.), with performance, accessibility, and stability built in from the start.",
     },
     {
       title: "Ongoing Partnership",
       description:
-        "Evolving your digital presence as your brand grows, maintaining the highest standards of quality and execution.",
+        "We stay close as your digital ecosystem evolves: measuring how the software is used, refining processes, adding new automations, and iterating on the product as your business grows.",
     },
   ],
   clientsHeading: "Select Clients",
   clientsLabel: "Clients",
   clientTypes: ["Luxury brands", "Cultural institutions", "Premium hospitality", "Design-led agencies", "High-end retail"],
   clientsIntro:
-    "We partner with industrial groups, global manufacturers, logistics leaders, and event specialists—often creating the very first digital presence for new brands—delivering tools and experiences that support their operations.",
-  ctaHeading: "For brands that value precision, craft, and enduring design.",
+    "We partner with industrial groups, global manufacturers, logistics leaders, and event specialists. Often, we are the team that creates the very first digital presence for new brands, designing and building the software that quietly supports their day-to-day operations.",
+  ctaHeading: "Custom software for processes that matter.",
   ctaBody:
-    "We collaborate with discerning clients who understand that exceptional digital experiences require both vision and restraint.",
+    "We work with teams who want to go beyond templates: first digital products, internal tools, process automation, and integrations tailored to their context. If you need a partner who understands your processes and turns them into well-crafted software, we can help.",
   ctaButton: "Start a conversation",
 }
 
