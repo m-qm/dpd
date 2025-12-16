@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
   description:
     "Dual Perspective Digital is a boutique digital product studio in Barcelona, specialised in custom software: products, internal tools, and integrations designed around real-world business processes.",
-  metadataBase: new URL("https://digital-agency-website-5i3k91izl-mqms-projects.vercel.app"),
+  metadataBase: new URL("https://dualperspective.digital"),
   alternates: {
     canonical: "/",
     languages: {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
     description:
       "Boutique digital product studio in Barcelona building custom software, internal tools, and integrations that fit how your team actually works.",
-    url: "https://digital-agency-website-5i3k91izl-mqms-projects.vercel.app",
+    url: "https://dualperspective.digital",
     siteName: "Dual Perspective Digital",
     type: "website",
     locale: "en_ES",
@@ -63,16 +63,26 @@ export default function RootLayout({
 }>) {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService"],
     name: "Dual Perspective Digital",
     description:
-      "Young digital agency in Barcelona partnering with brands, cultural institutions, and agencies to design and build refined digital experiences.",
-    url: "https://digital-agency-website-5i3k91izl-mqms-projects.vercel.app",
+      "Boutique digital product studio in Barcelona specialising in custom software, internal tools, and integrations designed around real-world business processes.",
+    url: "https://dualperspective.digital",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Barcelona",
       addressCountry: "ES",
     },
+    areaServed: [
+      {
+        "@type": "Place",
+        name: "Spain",
+      },
+      {
+        "@type": "Place",
+        name: "European Union",
+      },
+    ],
   }
 
   return (

@@ -27,10 +27,10 @@ type CopyShape = {
 
 const en: CopyShape = {
   hero: {
-    eyebrow: "Boutique digital product studio in Barcelona",
+    eyebrow: "Boutique custom software studio in Barcelona",
     titleLines: ["Digital", "Experiences", "That Endure"],
     subtitle:
-      "A boutique digital product studio in Barcelona, specialised in custom software: products, internal tools, and integrations (WhatsApp, Instagram, automation) designed around your real-world processes.",
+      "A boutique custom software studio in Barcelona, specialised in digital products, custom internal tools, and process automation, with integrations (WhatsApp, Telegram, Instagram) designed around your real-world workflows.",
   },
   capabilitiesHeading: "Capabilities",
   capabilitiesLabel: "Capabilities",
@@ -56,14 +56,14 @@ const en: CopyShape = {
         "We design and implement purchasing experiences and payment flows that prioritise conversion, clarity, and user confidence.",
     },
     {
-      title: "Technical excellence & performance",
+      title: "Technical excellence, data & automation",
       description:
-        "We build with boutique-level precision: clean code, solid performance, and a technical foundation that lets your product evolve calmly over time.",
+        "We build with boutique-level precision: clean code, solid performance, and a technical foundation for data visualisation, AI-assisted workflows, and process automation that can grow with your business.",
     },
   ],
   approachHeading: "Our Approach",
   approachIntro:
-    "We work with precision and purpose, connecting business strategy, product design, and engineering. We start from your actual processes and translate them into clear, efficient, and—where it makes sense—automated digital flows.",
+    "We design and build custom software in Next.js and React for teams that need tools shaped around their real processes—not generic platforms. We work with precision and purpose, connecting business strategy, product design, and engineering, and translating your workflows into clear, efficient, and—where it makes sense—automated digital flows.",
   approachSteps: [
     {
       title: "Discovery & Strategy",
@@ -99,10 +99,10 @@ const en: CopyShape = {
 
 const es: CopyShape = {
   hero: {
-    eyebrow: "Agencia boutique de producto digital en Barcelona",
+    eyebrow: "Agencia boutique de software a medida en Barcelona",
     titleLines: ["Desarrollo local", "Impacto global"],
     subtitle:
-      "Agencia boutique de producto digital en Barcelona, especializada en software a medida: productos, herramientas internas e integraciones (WhatsApp, Instagram, automatizaciones) diseñadas alrededor de tus procesos reales.",
+      "Agencia boutique de software a medida en Barcelona (España), especializada en productos digitales, herramientas internas personalizadas y automatización de procesos, con integraciones (WhatsApp, Telegram, Instagram) diseñadas alrededor de tus flujos reales.",
   },
   capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Capacidades",
@@ -128,14 +128,14 @@ const es: CopyShape = {
         "Diseñamos y construimos experiencias de compra y flujos de pago que priorizan conversión, claridad y confianza del usuario.",
     },
     {
-      title: "Excelencia Técnica & Rendimiento",
+      title: "Excelencia técnica, datos & automatización",
       description:
-        "Construimos con precisión boutique: código limpio, rendimiento sólido y una base técnica que permite evolucionar el producto con calma.",
+        "Construimos con precisión boutique: código limpio, rendimiento sólido y una base técnica preparada para visualización de datos, asistentes con IA y automatización de procesos que crecen junto a tu negocio.",
     },
   ],
   approachHeading: "Nuestro Enfoque",
   approachIntro:
-    "Trabajamos con precisión y propósito, conectando estrategia de negocio, diseño de producto e ingeniería. Partimos siempre de tus procesos reales y los traducimos en flujos digitales claros, eficientes y, cuando tiene sentido, automatizados.",
+    "Diseñamos y construimos software a medida con Next.js y React para equipos que necesitan herramientas adaptadas a sus procesos, no a una plataforma genérica. Trabajamos con precisión y propósito, conectando estrategia de negocio, diseño de producto e ingeniería, y traduciendo tus flujos reales en experiencias digitales claras, eficientes y, cuando tiene sentido, automatizadas.",
   approachSteps: [
     {
       title: "Descubrimiento & Estrategia",

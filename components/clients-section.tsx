@@ -74,7 +74,7 @@ export function ClientsSection({
         <div className="mt-16 md:mt-20 border-t border-border pt-10 md:pt-12">
           <div className="flex items-center justify-center mb-6">
             <p className="text-sm uppercase tracking-[0.16em] text-muted-foreground text-center">
-              {locale === "es" ? "Nuestros clientes" : "Current clients"}
+              {locale === "es" ? "Nuestros clientes" : "Our clients"}
             </p>
           </div>
 
@@ -84,9 +84,9 @@ export function ClientsSection({
             }`}
           >
             {[
-              { name: "PRO EXPO", src: "/clients/proexpo.webp" },
-              { name: "DAIKIN", src: "/clients/daikin.svg" },
-              { name: "Maersk", src: "/clients/maersk.png" },
+              { name: "PRO EXPO", src: "/clients/proexpo.webp", alt: "PRO EXPO logo — experiential events partner" },
+              { name: "DAIKIN", src: "/clients/daikin.svg", alt: "Daikin logo — HVAC manufacturer client" },
+              { name: "Maersk", src: "/clients/maersk.png", alt: "Maersk logo — global logistics and shipping client" },
             ].map((client) => {
               const isMaersk = client.name === "Maersk"
               const isDaikin = client.name === "DAIKIN"
@@ -104,7 +104,7 @@ export function ClientsSection({
                 <div key={client.name} className="flex h-16 md:h-28 items-center justify-center px-4 md:px-8">
                   <Image
                     src={client.src}
-                    alt={client.name}
+                    alt={client.alt}
                     width={width}
                     height={height}
                     className={`${maxHeight} w-auto object-contain`}
