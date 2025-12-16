@@ -41,9 +41,9 @@ const en: CopyShape = {
         "Translating refined brand values into cohesive digital experiences that communicate with clarity and distinction.",
     },
     {
-      title: "Strategic Design & Art Direction",
+      title: "Digital Product Design",
       description:
-        "Defining visual languages and interaction patterns that elevate perception and reinforce brand positioning.",
+        "Designing clear, digital-first interfaces and flows that make complex products feel simple to use.",
     },
     {
       title: "Bespoke Digital Platforms",
@@ -90,7 +90,7 @@ const en: CopyShape = {
   clientsLabel: "Clients",
   clientTypes: ["Luxury brands", "Cultural institutions", "Premium hospitality", "Design-led agencies", "High-end retail"],
   clientsIntro:
-    "We partner with industrial groups, global manufacturers, logistics leaders, and event specialists, producing digital tools and experiences that support their operations.",
+    "We partner with industrial groups, global manufacturers, logistics leaders, and event specialists—often creating the very first digital presence for new brands—delivering tools and experiences that support their operations.",
   ctaHeading: "For brands that value precision, craft, and enduring design.",
   ctaBody:
     "We collaborate with discerning clients who understand that exceptional digital experiences require both vision and restraint.",
@@ -99,63 +99,63 @@ const en: CopyShape = {
 
 const es: CopyShape = {
   hero: {
-    eyebrow: "Agencia Digital en Barcelona",
-    titleLines: ["Experiencias", "Digitales", "Que Permanecen"],
+    eyebrow: "Agencia boutique de producto digital en Barcelona",
+    titleLines: ["Desarrollo local", "Impacto global"],
     subtitle:
-      "Agencia digital joven en Barcelona que diseña y desarrolla experiencias esenciales para marcas, eventos y organizaciones que valoran el detalle y el impacto a largo plazo.",
+      "Agencia boutique de producto digital en Barcelona, especializada en software a medida: productos, herramientas internas e integraciones (WhatsApp, Instagram, automatizaciones) diseñadas alrededor de tus procesos reales.",
   },
   capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Capacidades",
   capabilities: [
     {
-      title: "Identidad de Marca & Expresión Digital",
+      title: "Productos digitales a medida",
       description:
-        "Traducimos el valor de tu marca en experiencias digitales coherentes que comunican con claridad y personalidad.",
+        "Diseñamos y desarrollamos aplicaciones web y herramientas internas completamente adaptadas a tu forma de trabajar, sin plantillas genéricas.",
     },
     {
-      title: "Diseño Estratégico & Dirección de Arte",
+      title: "Diseño de producto y experiencia",
       description:
-        "Definimos lenguajes visuales e interacciones que elevan la percepción y refuerzan tu posicionamiento.",
+        "Definimos la experiencia completa del producto: flujos, interfaces y estados que hacen que procesos complejos se sientan claros y manejables.",
     },
     {
-      title: "Plataformas Digitales a Medida",
+      title: "Plataformas y sistemas conectados",
       description:
-        "Desarrollamos soluciones a medida para marcas premium, instituciones culturales y eventos que exigen una ejecución impecable.",
+        "Creamos plataformas que integran distintos sistemas, datos y servicios, con una arquitectura pensada para crecer de forma sostenible.",
     },
     {
-      title: "E‑commerce & Experiencia de Compra",
+      title: "E‑commerce y flujos transaccionales",
       description:
-        "Creamos experiencias online que reflejan la calidad y el cuidado detrás de tus productos y servicios.",
+        "Diseñamos y construimos experiencias de compra y flujos de pago que priorizan conversión, claridad y confianza del usuario.",
     },
     {
       title: "Excelencia Técnica & Rendimiento",
       description:
-        "Construimos con precisión, optimizando rendimiento, accesibilidad y fiabilidad para el futuro.",
+        "Construimos con precisión boutique: código limpio, rendimiento sólido y una base técnica que permite evolucionar el producto con calma.",
     },
   ],
   approachHeading: "Nuestro Enfoque",
   approachIntro:
-    "Trabajamos con precisión y propósito, equilibrando la ambición creativa con la claridad funcional. Cada decisión es intencionada.",
+    "Trabajamos con precisión y propósito, conectando estrategia de negocio, diseño de producto e ingeniería. Partimos siempre de tus procesos reales y los traducimos en flujos digitales claros, eficientes y, cuando tiene sentido, automatizados.",
   approachSteps: [
     {
       title: "Descubrimiento & Estrategia",
       description:
-        "Entendemos tu marca, audiencia y objetivos a través de conversaciones cercanas y análisis estratégico.",
+        "Entendemos tu negocio, tus equipos y cómo trabajáis hoy: procesos, herramientas, puntos de fricción y oportunidades de automatización. A partir de ahí definimos qué software tiene más sentido construir.",
     },
     {
       title: "Diseño & Dirección de Arte",
       description:
-        "Definimos lenguajes visuales e interacciones que refuerzan tu posición y se sienten propios de tu marca.",
+        "Definimos la experiencia del producto: interfaces, flujos y estados que hacen que tareas complejas se sientan claras y utilizables, manteniendo una expresión visual coherente con tu marca.",
     },
     {
       title: "Ingeniería & Craft",
       description:
-        "Construimos con precisión técnica, cuidando rendimiento, accesibilidad y estabilidad desde el inicio.",
+        "Construimos software a medida con precisión técnica: paneles internos, plataformas y servicios que se integran con tus sistemas existentes (CRM, herramientas de email, redes sociales, etc.), cuidando rendimiento, accesibilidad y estabilidad desde el inicio.",
     },
     {
       title: "Relación Continua",
       description:
-        "Acompañamos la evolución de tu ecosistema digital, afinando y ampliando con el tiempo.",
+        "Acompañamos la evolución de tu ecosistema digital: medimos cómo se usa el software, afinamos procesos, añadimos nuevas automatizaciones e iteramos sobre el producto a medida que tu negocio crece.",
     },
   ],
   clientsHeading: "Clientes",
@@ -168,10 +168,10 @@ const es: CopyShape = {
     "Retail de alta gama",
   ],
   clientsIntro:
-    "Colaboramos con grupos industriales, fabricantes globales, compañías logísticas y especialistas en eventos, creando soluciones y experiencias digitales que apoyan su actividad.",
-  ctaHeading: "Para marcas que buscan un socio digital exigente.",
+    "Colaboramos con grupos industriales, fabricantes globales, compañías logísticas y especialistas en eventos. A menudo somos el equipo que crea la primera presencia digital de nuevas marcas, diseñando y desarrollando soluciones que sostienen su actividad día a día.",
+  ctaHeading: "Software a medida para procesos que importan.",
   ctaBody:
-    "Colaboramos con equipos que valoran la estrategia, el detalle y la consistencia a largo plazo en todos sus puntos de contacto digitales.",
+    "Trabajamos con equipos que quieren ir más allá de las plantillas: primeros productos digitales, herramientas internas, automatizaciones de procesos e integraciones específicas para su negocio. Si necesitas un socio que entienda tus procesos y los convierta en buen software, podemos ayudarte.",
   ctaButton: "Iniciar una conversación",
 }
 

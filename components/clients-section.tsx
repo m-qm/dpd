@@ -19,12 +19,12 @@ export function ClientsSection({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
             setIsVisible(true)
           }
         })
       },
-      { threshold: 0.1 },
+      { threshold: [0.35, 0.6] },
     )
 
     if (sectionRef.current) {
@@ -74,7 +74,7 @@ export function ClientsSection({
         <div className="mt-16 md:mt-20 border-t border-border pt-10 md:pt-12">
           <div className="flex items-center justify-center mb-6">
             <p className="text-sm uppercase tracking-[0.16em] text-muted-foreground text-center">
-              {locale === "es" ? "Clientes actuales" : "Current clients"}
+              {locale === "es" ? "Nuestros clientes" : "Current clients"}
             </p>
           </div>
 
@@ -91,13 +91,13 @@ export function ClientsSection({
               const isMaersk = client.name === "Maersk"
               const isDaikin = client.name === "DAIKIN"
 
-              // Slightly larger Maersk, slightly smaller Daikin, neutral Pro Expo
-              const width = isMaersk ? 260 : isDaikin ? 140 : 180
-              const height = isMaersk ? 120 : isDaikin ? 70 : 90
+              // Slightly larger Maersk, smaller Daikin, neutral Pro Expo
+              const width = isMaersk ? 260 : isDaikin ? 110 : 180
+              const height = isMaersk ? 120 : isDaikin ? 60 : 90
               const maxHeight = isMaersk
                 ? "max-h-16 md:max-h-24"
                 : isDaikin
-                  ? "max-h-10 md:max-h-14"
+                  ? "max-h-8 md:max-h-12"
                   : "max-h-12 md:max-h-18"
 
               return (

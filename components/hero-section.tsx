@@ -52,13 +52,12 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         </div>
         <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
           <a href="#capabilities" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
-            Capabilities
+            {locale === "es" ? "Capacidades" : "Capabilities"}
           </a>
           <a href="#approach" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
-            Approach
+            {locale === "es" ? "Enfoque" : "Approach"}
           </a>
           <div className="hidden md:flex items-center gap-2 text-foreground">
-            <span className="font-normal">All enquiries</span>
             <span className="text-muted-foreground">→</span>
             <a href="mailto:hello@dualperspective.digital" className="text-foreground hover:opacity-60 transition-opacity font-normal">
               hello@dualperspective.digital
@@ -79,34 +78,50 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h1
-            className={`text-[15vw] sm:text-[11vw] md:text-[7vw] lg:text-[9rem] xl:text-[11rem] font-normal text-foreground mb-10 md:mb-16 lg:mb-20 leading-[0.9] md:leading-[0.85] tracking-[-0.04em] transition-opacity duration-1000 ${
-              isFading ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            {altLineActive ? (
-              // Alt state: only the "Local development, global impact" line
-              <span className="block">
-                {locale === "es" ? "Desarrollo local, impacto global" : "Local development, global impact"}
-                <br />
-              </span>
-            ) : (
-              // Default state: Digital / Experiences / That Endure
-              <>
+          {/* Keep title animation from shifting the subtitle by pinning layout */}
+          <div className="min-h-[40vh] md:min-h-[50vh] flex flex-col justify-between gap-6 md:gap-8">
+            <h1 className="relative text-[13vw] sm:text-[10vw] md:text-[6vw] lg:text-[8rem] xl:text-[9.5rem] font-normal text-foreground mb-8 md:mb-14 lg:mb-16 leading-[0.95] md:leading-[0.9] tracking-[-0.04em]">
+              {/* Invisible skeleton to lock the height based on the 3-line title */}
+              <div className="opacity-0">
                 {copy[locale].hero.titleLines.map((line) => (
                   <span key={line} className="block">
                     {line}
                     <br />
                   </span>
                 ))}
-              </>
-            )}
-          </h1>
+              </div>
 
-          <div className="max-w-2xl">
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-normal">
-              {copy[locale].hero.subtitle}
-            </p>
+              {/* Animated layer on top */}
+              <div
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  isFading ? "opacity-0" : "opacity-100"
+                }`}
+              >
+                {altLineActive ? (
+                  // Alt state
+                  <span className="block">
+                    {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
+                    <br />
+                  </span>
+                ) : (
+                  // Default state: Digital / Experiences / That Endure
+                  <>
+                    {copy[locale].hero.titleLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </>
+                )}
+              </div>
+            </h1>
+
+            <div className="max-w-2xl">
+              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-normal">
+                {copy[locale].hero.subtitle}
+              </p>
+            </div>
           </div>
         </div>
       </div>

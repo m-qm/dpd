@@ -12,12 +12,13 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          // Trigger when a good chunk of the section is visible
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
             setIsVisible(true)
           }
         })
       },
-      { threshold: 0.1 },
+      { threshold: [0.35, 0.6] },
     )
 
     if (sectionRef.current) {

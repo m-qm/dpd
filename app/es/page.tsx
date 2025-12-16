@@ -17,7 +17,7 @@ export default function HomeEs() {
       <CapabilitiesSection inverted={true} locale="es" />
       <ApproachSection inverted={false} locale="es" />
       <ClientsSection inverted={false} locale="es" />
-      <PhilosophySection inverted={false} />
+      <PhilosophySection inverted={false} locale="es" />
       <CTASection inverted={true} locale="es" />
       <Footer />
     </main>

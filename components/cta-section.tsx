@@ -11,7 +11,7 @@ export function CTASection({ inverted = false, locale = "en" }: { inverted?: boo
       }`}
     >
       <div className="max-w-5xl mx-auto">
-        <SectionBadge number={5} label="Contact" />
+        <SectionBadge number={5} label={locale === "es" ? "Contacto" : "Contact"} />
         <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-8 md:mb-12 leading-[1.1] tracking-tight">
           {copy[locale].ctaHeading}
         </h2>

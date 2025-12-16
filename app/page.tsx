@@ -9,12 +9,14 @@ import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { CursorSpark } from "@/components/cursor-spark"
 import { useScrollAccent } from "@/hooks/use-scroll-accent"
+import { LanguageAutoswitch } from "@/components/language-autoswitch"
 
 export default function Home() {
   const accentedSections = useScrollAccent()
 
   return (
     <main className="min-h-screen">
+      <LanguageAutoswitch />
       <CursorSpark />
       <HeroSection locale="en" />
       {/* Section 1: Capabilities - always inverted (white) */}

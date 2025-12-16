@@ -17,20 +17,7 @@ export function Footer() {
               </a>
             </div>
 
-            <div>
-              <h4 className="text-lg md:text-xl font-normal text-foreground mb-6 tracking-tight">Connect</h4>
-              <div className="flex flex-col gap-4">
-                <a href="#" className="text-base md:text-lg text-foreground hover:opacity-60 transition-opacity font-normal">
-                  LinkedIn
-                </a>
-                <a href="#" className="text-base md:text-lg text-foreground hover:opacity-60 transition-opacity font-normal">
-                  Instagram
-                </a>
-                <a href="#" className="text-base md:text-lg text-foreground hover:opacity-60 transition-opacity font-normal">
-                  Behance
-                </a>
-              </div>
-            </div>
+            <div />
           </div>
         </div>
       </div>
@@ -40,19 +27,11 @@ export function Footer() {
         {/* Text Row */}
         <div className="px-6 md:px-12 lg:px-20 py-6 md:py-8">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
-            <div className="flex gap-6 md:gap-8">
-              <a href="#" className="text-sm md:text-base text-foreground hover:opacity-60 transition-opacity font-normal underline underline-offset-4">
-                LinkedIn
-              </a>
-              <a href="#" className="text-sm md:text-base text-foreground hover:opacity-60 transition-opacity font-normal underline underline-offset-4">
-                Instagram
-              </a>
-            </div>
             {/* <div className="text-sm md:text-base text-foreground font-normal">
               VAT No—00000000
             </div> */}
             <div className="text-sm md:text-base text-foreground font-normal">
-              © 2024—{new Date().getFullYear()}
+              © DPD {new Date().getFullYear()}
             </div>
           </div>
         </div>
