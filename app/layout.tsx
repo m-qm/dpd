@@ -11,9 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital — Refined Digital Experiences",
+  title: "Dual Perspective Digital — Boutique Digital Agency",
   description:
-    "A boutique digital studio designing and engineering modern platforms for agencies, events, and brands ready to evolve.",
+    "A boutique digital agency partnering with brands, events, and organizations to design and engineer refined, long-lasting digital experiences.",
   generator: "v0.app",
   icons: {
     icon: [

@@ -11,9 +11,9 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex flex-col">
+    <section className="relative min-h-screen flex flex-col bg-gradient-to-b from-background via-background/95 to-black">
       {/* Minimal Navigation - Norgram style */}
-      <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-8 md:py-10">
+      <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-8 md:py-10 bg-black/40 backdrop-blur-sm border-b border-border/60">
         <div className="flex items-center gap-3">
           <div className="flex-shrink-0">
             <AnimatedD />
@@ -38,9 +38,12 @@ export function HeroSection() {
       </nav>
 
       {/* Hero Content - Norgram style large typography */}
-      <div className="flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20 py-20 md:py-32">
+      <div className="relative flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20 py-20 md:py-32 overflow-hidden">
+        {/* Animated gradient highlight behind the hero title */}
+        <div className="pointer-events-none absolute inset-0 hero-gradient" />
+
         <div
-          className={`max-w-7xl mx-auto w-full transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
           <h1 className="text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-normal text-foreground mb-16 md:mb-20 leading-[0.85] tracking-[-0.02em]">
             Digital
@@ -52,7 +55,7 @@ export function HeroSection() {
 
           <div className="max-w-2xl">
             <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-normal">
-              A design studio creating essential digital experiences for luxury brands, cultural institutions, and discerning agencies. Where precision meets purpose.
+              A digital agency creating essential experiences for brands, events, and organizations that care about refinement, consistency, and long-term impact.
             </p>
           </div>
         </div>
