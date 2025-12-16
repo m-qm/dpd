@@ -99,7 +99,7 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
       <Button
         type="submit"
         disabled={submitting || !email || !message}
-        className="px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight rounded-none bg-foreground text-background hover:opacity-90 disabled:opacity-50"
+        className="inline-flex px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight rounded-none bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50"
       >
         {isSpanish ? "Enviar" : "Send message"}
       </Button>

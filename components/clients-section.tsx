@@ -42,7 +42,7 @@ export function ClientsSection({
     >
       <div className="max-w-7xl mx-auto">
         <SectionBadge number={3} label={copy[locale].clientsLabel} />
-        <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-8 md:mb-10 tracking-tight leading-[0.9]">
+        <h2 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-8 md:mb-10 tracking-tight leading-[0.9]">
           {copy[locale].clientsHeading}
         </h2>
         {copy[locale].clientsIntro && (

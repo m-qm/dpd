@@ -57,7 +57,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           <a href="#approach" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
             Approach
           </a>
-          <div className="flex items-center gap-2 text-foreground">
+          <div className="hidden md:flex items-center gap-2 text-foreground">
             <span className="font-normal">All enquiries</span>
             <span className="text-muted-foreground">→</span>
             <a href="mailto:hello@dualperspective.digital" className="text-foreground hover:opacity-60 transition-opacity font-normal">
@@ -80,7 +80,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           }`}
         >
           <h1
-            className={`text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-normal text-foreground mb-16 md:mb-20 leading-[0.85] tracking-[-0.02em] transition-opacity duration-1000 ${
+            className={`text-[15vw] sm:text-[11vw] md:text-[7vw] lg:text-[9rem] xl:text-[11rem] font-normal text-foreground mb-10 md:mb-16 lg:mb-20 leading-[0.9] md:leading-[0.85] tracking-[-0.04em] transition-opacity duration-1000 ${
               isFading ? "opacity-0" : "opacity-100"
             }`}
           >

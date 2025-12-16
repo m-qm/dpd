@@ -35,7 +35,26 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
         inverted ? "section-inverted" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative">
+        {/* Subtle circular gradient accent */}
+        <div
+          className="pointer-events-none absolute -left-32 md:-left-40 top-24 md:top-32 h-56 w-56 md:h-72 md:w-72 rounded-full opacity-30 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 40%, transparent 70%)",
+          }}
+        />
+
+        {/* Decorative shapes - subtle Norgram-style geometry */}
+        <div className="pointer-events-none absolute -right-10 md:-right-16 top-10 md:top-16 hidden md:flex flex-col gap-4 opacity-60">
+          <div className="h-16 w-16 border border-border" />
+          <div className="h-10 w-24 border border-border/60" />
+          <div className="flex gap-2 justify-end">
+            <div className="h-6 w-6 border border-border/40" />
+            <div className="h-6 w-10 border border-border/40" />
+          </div>
+        </div>
+
         <SectionBadge number={2} label={locale === "en" ? "Approach" : "Enfoque"} />
         <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-12 md:mb-16 tracking-tight leading-[0.9]">
           {copy[locale].approachHeading}
