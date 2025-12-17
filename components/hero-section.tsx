@@ -41,9 +41,9 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   }, [locale])
 
   return (
-    <section className="relative min-h-screen flex flex-col bg-gradient-to-b from-background via-background/95 to-black">
+    <section className="relative h-[100svh] flex flex-col bg-gradient-to-b from-background via-background/95 to-black">
       {/* Minimal Navigation - Norgram style */}
-      <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-8 md:py-10 bg-black/40 backdrop-blur-sm border-b border-border/60">
+      <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-8 md:py-10 bg-black/40 backdrop-blur-sm border-b border-border/60 shrink-0">
         <div className="flex items-center gap-3">
           <div className="flex-shrink-0">
             <Image
@@ -79,7 +79,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       </nav>
 
       {/* Hero Content */}
-      <div className="relative flex-1 flex items-center px-6 md:px-12 lg:px-20 py-20 md:py-28 lg:py-32 overflow-hidden">
+      <div className="relative flex-1 min-h-0 flex items-center px-6 md:px-12 lg:px-20 py-10 md:py-14 lg:py-16 overflow-hidden">
         {/* Background accents */}
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />

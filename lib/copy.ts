@@ -143,7 +143,7 @@ const es: CopyShape = {
         "Entendemos tu negocio, procesos y oportunidades de automatización. Definimos qué software construir.",
     },
     {
-      title: "Diseño & Dirección de Arte",
+      title: "Diseño de producto & UX",
       description:
         "Diseñamos interfaces y flujos que hacen tareas complejas claras, con expresión visual coherente con tu marca.",
     },
