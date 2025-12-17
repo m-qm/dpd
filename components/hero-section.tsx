@@ -97,14 +97,22 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </div>
 
               <h1 className="relative text-[12.5vw] sm:text-[9.5vw] md:text-[6vw] lg:text-[5.25rem] xl:text-[6.25rem] font-normal text-foreground mb-8 leading-[0.95] md:leading-[0.9] tracking-[-0.04em]">
-                {/* Invisible skeleton to lock the height based on the default title */}
-                <div className="opacity-0">
-                  {copy[locale].hero.titleLines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
+                {/* Invisible skeleton to lock height for both title states (prevents overlap when alt line wraps) */}
+                <div className="grid opacity-0">
+                  <div className="col-start-1 row-start-1">
+                    {copy[locale].hero.titleLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </div>
+                  <div className="col-start-1 row-start-1">
+                    <span className="block">
+                      {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
                       <br />
                     </span>
-                  ))}
+                  </div>
                 </div>
 
                 {/* Animated layer on top */}
