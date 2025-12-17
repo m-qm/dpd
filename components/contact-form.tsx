@@ -34,14 +34,22 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
       })
 
       if (!res.ok) {
-        throw new Error("Request failed")
+        let detail = ""
+        try {
+          const data = await res.json()
+          if (data?.error) detail = String(data.error)
+        } catch {
+          // ignore
+        }
+        throw new Error(detail || "Request failed")
       }
 
       setStatus("success")
       setName("")
       setEmail("")
       setMessage("")
-    } catch {
+    } catch (err) {
+      console.error("Contact form error", err)
       setStatus("error")
     } finally {
       setSubmitting(false)

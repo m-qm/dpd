@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+export const runtime = "nodejs"
+export const dynamic = "force-dynamic"
 
 export async function POST(request: Request) {
   try {
@@ -11,14 +12,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 })
     }
 
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.error("Resend error: missing RESEND_API_KEY")
+      return NextResponse.json({ error: "Email service not configured" }, { status: 500 })
+    }
+
     const subject =
       locale === "es" ? "Nuevo proyecto desde dualperspective.digital" : "New project from dualperspective.digital"
 
     const safeMessage = (message as string).replace(/</g, "&lt;").replace(/>/g, "&gt;")
 
-    await resend.emails.send({
-      from: "website@dualperspective.digital",
-      to: "hello@dualperspective.digital",
+    const resend = new Resend(apiKey)
+
+    const from = process.env.RESEND_FROM || "Dual Perspective Digital <hello@dualperspective.digital>"
+    const to = process.env.CONTACT_TO || "hello@dualperspective.digital"
+
+    const { data, error } = await resend.emails.send({
+      from,
+      to,
       subject,
       replyTo: email,
       html: `
@@ -82,6 +94,19 @@ export async function POST(request: Request) {
         </table>
       `,
     })
+
+    if (error) {
+      console.error("Resend error", error)
+      return NextResponse.json(
+        { error: error.message || "Email failed" },
+        { status: 502 },
+      )
+    }
+
+    if (!data?.id) {
+      console.error("Resend error: no id returned")
+      return NextResponse.json({ error: "Email failed" }, { status: 502 })
+    }
 
     return NextResponse.json({ ok: true })
   } catch (error) {
