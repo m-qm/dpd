@@ -78,59 +78,159 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         </div>
       </nav>
 
-      {/* Hero Content - Norgram style large typography */}
-      <div className="relative flex-1 flex items-center justify-center px-6 md:px-12 lg:px-20 py-20 md:py-32 overflow-hidden">
-        {/* Animated gradient highlight behind the hero title */}
+      {/* Hero Content */}
+      <div className="relative flex-1 flex items-center px-6 md:px-12 lg:px-20 py-20 md:py-28 lg:py-32 overflow-hidden">
+        {/* Background accents */}
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
+        <div className="pointer-events-none absolute inset-0 hero-grid" />
 
         <div
           className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {/* Keep title animation from shifting the subtitle by pinning layout */}
-          <div className="min-h-[40vh] md:min-h-[50vh] flex flex-col justify-between gap-6 md:gap-8">
-            <h1 className="relative text-[13vw] sm:text-[10vw] md:text-[6vw] lg:text-[8rem] xl:text-[9.5rem] font-normal text-foreground mb-8 md:mb-14 lg:mb-16 leading-[0.95] md:leading-[0.9] tracking-[-0.04em]">
-              {/* Invisible skeleton to lock the height based on the 3-line title */}
-              <div className="opacity-0">
-                {copy[locale].hero.titleLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                    <br />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Left: Copy */}
+            <div className="lg:col-span-7">
+              <div className="text-xs md:text-sm uppercase tracking-[0.18em] text-muted-foreground mb-6">
+                {copy[locale].hero.eyebrow}
+              </div>
+
+              <h1 className="relative text-[12.5vw] sm:text-[9.5vw] md:text-[6vw] lg:text-[5.25rem] xl:text-[6.25rem] font-normal text-foreground mb-8 leading-[0.95] md:leading-[0.9] tracking-[-0.04em]">
+                {/* Invisible skeleton to lock the height based on the default title */}
+                <div className="opacity-0">
+                  {copy[locale].hero.titleLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                </div>
+
+                {/* Animated layer on top */}
+                <div className={`absolute inset-0 transition-opacity duration-1000 ${isFading ? "opacity-0" : "opacity-100"}`}>
+                  {altLineActive ? (
+                    <span className="block">
+                      {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
+                      <br />
+                    </span>
+                  ) : (
+                    <>
+                      {copy[locale].hero.titleLines.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                          <br />
+                        </span>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </h1>
+
+              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-normal max-w-2xl">
+                {copy[locale].hero.subtitle}
+              </p>
+
+              {/* CTAs */}
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center px-7 md:px-9 py-3.5 md:py-4 text-base md:text-lg font-normal tracking-tight rounded-none bg-foreground text-background hover:bg-foreground/90 transition-colors"
+                >
+                  {copy[locale].ctaButton}
+                </a>
+                <a
+                  href="#capabilities"
+                  className="inline-flex items-center justify-center px-7 md:px-9 py-3.5 md:py-4 text-base md:text-lg font-normal tracking-tight rounded-none border border-border/70 text-foreground hover:border-foreground/70 hover:bg-white/5 transition-colors"
+                >
+                  {locale === "es" ? "Ver capacidades" : "View capabilities"}
+                </a>
+              </div>
+
+              {/* Chips */}
+              <div className="mt-8 flex flex-wrap gap-2">
+                {(
+                  locale === "es"
+                    ? ["Software a medida", "Herramientas internas", "Automatización de procesos", "Integraciones"]
+                    : ["Custom software", "Internal tools", "Process automation", "Integrations"]
+                ).map((label) => (
+                  <span
+                    key={label}
+                    className="inline-flex items-center px-3 py-1 text-xs md:text-sm uppercase tracking-[0.16em] text-muted-foreground border border-border/60 bg-black/20 backdrop-blur-sm"
+                  >
+                    {label}
                   </span>
                 ))}
               </div>
+            </div>
 
-              {/* Animated layer on top */}
-              <div
-                className={`absolute inset-0 transition-opacity duration-1000 ${
-                  isFading ? "opacity-0" : "opacity-100"
-                }`}
-              >
-                {altLineActive ? (
-                  // Alt state
-                  <span className="block">
-                    {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
-                    <br />
-                  </span>
-                ) : (
-                  // Default state: Digital / Experiences / That Endure
-                  <>
-                    {copy[locale].hero.titleLines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                        <br />
-                      </span>
+            {/* Right: Visual */}
+            <div className="lg:col-span-5 hidden lg:block">
+              <div className="relative border border-border/60 bg-black/30 backdrop-blur-sm p-8 overflow-hidden">
+                <div className="pointer-events-none absolute inset-0 opacity-60 hero-grid" />
+                <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
+
+                <div className="relative">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src="/favicon-32.png"
+                        alt="Dual Perspective Digital"
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 rounded-md object-contain"
+                      />
+                      <div className="text-sm text-foreground tracking-tight">Dual Perspective Digital</div>
+                    </div>
+                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Barcelona</div>
+                  </div>
+
+                  <div className="mt-10 grid grid-cols-2 gap-6">
+                    {[
+                      {
+                        title: locale === "es" ? "Herramientas internas" : "Internal tools",
+                        body: locale === "es" ? "Paneles, CRM, operaciones." : "Dashboards, ops, CRM.",
+                        shape: "square",
+                      },
+                      {
+                        title: locale === "es" ? "Automatización" : "Automation",
+                        body: locale === "es" ? "Menos trabajo manual." : "Less manual work.",
+                        shape: "circle",
+                      },
+                      {
+                        title: locale === "es" ? "Integraciones" : "Integrations",
+                        body: locale === "es" ? "Sistemas conectados." : "Systems connected.",
+                        shape: "triangle",
+                      },
+                      {
+                        title: locale === "es" ? "Datos" : "Data",
+                        body: locale === "es" ? "Visibilidad y control." : "Clarity and control.",
+                        shape: "line",
+                      },
+                    ].map((item) => (
+                      <div key={item.title} className="border-t border-border/60 pt-5">
+                        <div className="flex items-start gap-3">
+                          <div className="mt-1.5 h-4 w-4 flex items-center justify-center">
+                            {item.shape === "square" && <div className="h-3.5 w-3.5 border border-foreground/70" />}
+                            {item.shape === "circle" && <div className="h-3.5 w-3.5 rounded-full border border-foreground/70" />}
+                            {item.shape === "triangle" && (
+                              <div
+                                className="h-3.5 w-3.5 border border-foreground/70"
+                                style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+                              />
+                            )}
+                            {item.shape === "line" && <div className="h-px w-4 bg-foreground/70" />}
+                          </div>
+                          <div>
+                            <div className="text-sm text-foreground tracking-tight">{item.title}</div>
+                            <div className="text-xs text-muted-foreground mt-1">{item.body}</div>
+                          </div>
+                        </div>
+                      </div>
                     ))}
-                  </>
-                )}
+                  </div>
+                </div>
               </div>
-            </h1>
-
-            <div className="max-w-2xl">
-              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-normal">
-                {copy[locale].hero.subtitle}
-              </p>
             </div>
           </div>
         </div>
