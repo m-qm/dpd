@@ -28,14 +28,16 @@ export const metadata: Metadata = {
       "Boutique digital product studio in Barcelona building custom software, internal tools, and integrations that fit how your team actually works.",
     url: "https://dualperspective.digital",
     siteName: "Dual Perspective Digital",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital" }],
     type: "website",
-    locale: "en_ES",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
     description:
       "Custom digital products, internal tools, and process-focused integrations from a boutique studio in Barcelona.",
+    images: ["/og.png"],
   },
   icons: {
     icon: [

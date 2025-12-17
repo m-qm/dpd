@@ -19,9 +19,8 @@ export function CapabilitiesSection({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Trigger only when a good portion of the section is in view,
-          // so the animation doesn't happen off-screen.
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          // Trigger earlier on smaller viewports (tall sections may never reach high intersection ratios on mobile).
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
             copy[locale].capabilities.forEach((_, index) => {
               setTimeout(() => {
                 setVisibleItems((prev) => [...prev, index])
@@ -31,7 +30,7 @@ export function CapabilitiesSection({
           }
         })
       },
-      { threshold: [0.35, 0.6] },
+      { threshold: [0.12, 0.35] },
     )
 
     if (sectionRef.current) {
