@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { AnimatedD } from "@/components/animated-d"
 import { LanguageToggle } from "@/components/language-toggle"
 import { copy, type Locale } from "@/lib/copy"
+import Image from "next/image"
 
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
@@ -46,7 +46,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-8 md:py-10 bg-black/40 backdrop-blur-sm border-b border-border/60">
         <div className="flex items-center gap-3">
           <div className="flex-shrink-0">
-            <AnimatedD />
+            <Image
+              src="/favicon-512.png"
+              alt="Dual Perspective Digital"
+              width={32}
+              height={32}
+              className="h-8 w-8 rounded-md object-contain"
+              priority
+            />
           </div>
           <div className="text-base md:text-lg font-normal tracking-tight">Dual Perspective Digital</div>
         </div>
