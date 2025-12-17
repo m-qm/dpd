@@ -54,8 +54,11 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           <a href="#capabilities" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
             {locale === "es" ? "Capacidades" : "Capabilities"}
           </a>
-          <a href="#approach" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
-            {locale === "es" ? "Enfoque" : "Approach"}
+          <a href="#faq" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
+            FAQ
+          </a>
+          <a href="#contact" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
+            {locale === "es" ? "Contacto" : "Contact"}
           </a>
           <div className="hidden md:flex items-center gap-2 text-foreground">
             <span className="text-muted-foreground">→</span>

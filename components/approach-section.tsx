@@ -61,30 +61,48 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
           {copy[locale].approachHeading}
         </h2>
 
-        <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mb-24 md:mb-32 leading-relaxed font-normal">
+        <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mb-16 md:mb-20 leading-relaxed font-normal">
           {copy[locale].approachIntro}
         </p>
 
-        <div className="space-y-0">
-          {copy[locale].approachSteps.map((step, index) => (
-            <div
-              key={index}
-              className={`py-12 md:py-16 border-b border-border transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
-              }`}
-            >
-              <div className="flex items-start">
-                <div className="flex-1">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-6 tracking-tight leading-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl font-normal">
-                    {step.description}
-                  </p>
+        <div className="relative">
+          {/* Vertical line */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border/50" />
+
+          <div className="flex flex-col gap-16 md:gap-20">
+            {copy[locale].approachSteps.map((step, index) => {
+              const isLeft = index % 2 === 0
+              return (
+                <div
+                  key={index}
+                  className={`relative grid md:grid-cols-2 gap-10 md:gap-14 items-center transition-all duration-700 ${
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: `${index * 120}ms` }}
+                >
+                  {/* Timeline dot */}
+                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-foreground bg-background z-10" />
+
+                  <div
+                    className={`p-6 md:p-8 border border-border/70 bg-background/60 backdrop-blur-sm ${
+                      isLeft ? "md:order-1" : "md:order-2"
+                    }`}
+                  >
+                    <div className="text-sm font-normal text-muted-foreground uppercase tracking-[0.18em] mb-3">
+                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-normal text-foreground mb-4 tracking-tight leading-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{step.description}</p>
+                  </div>
+
+                  {/* Spacer column to keep alignment on desktop */}
+                  <div className={`hidden md:block ${isLeft ? "order-2" : "order-1"}`} />
                 </div>
-              </div>
-            </div>
-          ))}
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>

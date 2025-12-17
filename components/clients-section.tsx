@@ -41,7 +41,7 @@ export function ClientsSection({
       className="py-24 md:py-32 lg:py-48 px-6 md:px-12 lg:px-20 border-t border-border bg-black"
     >
       <div className="max-w-7xl mx-auto">
-        <SectionBadge number={3} label={copy[locale].clientsLabel} />
+        <SectionBadge number={4} label={copy[locale].clientsLabel} />
         <h2 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-8 md:mb-10 tracking-tight leading-[0.9]">
           {copy[locale].clientsHeading}
         </h2>

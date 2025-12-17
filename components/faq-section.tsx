@@ -18,31 +18,31 @@ const faqContent: Record<Locale, QA[]> = {
       id: "specialisation",
       question: "What kind of software do you specialise in?",
       answer:
-        "We specialise in bespoke web applications built with Next.js and React, internal dashboards, and process-focused tools designed around how your team actually works—not generic SaaS templates.",
+        "Bespoke web applications with Next.js and React, internal dashboards, and process-focused tools tailored to how your team works.",
     },
     {
       id: "integrations",
       question: "Can you integrate with WhatsApp, Telegram, Instagram, or other platforms?",
       answer:
-        "Yes. A large part of our work is connecting software with external services such as WhatsApp, Telegram, Instagram, email providers, and logistics platforms to centralise communication and reduce manual work.",
+        "Yes. We connect software with WhatsApp, Telegram, Instagram, email providers, and logistics platforms to centralise communication and reduce manual work.",
     },
     {
       id: "automation",
       question: "Do you handle process automation?",
       answer:
-        "We help you identify repetitive, manual steps in your workflows and automate them with custom logic, webhooks, and integrations—so your team can focus on the parts of the work that really need their attention.",
+        "We identify repetitive steps and automate them with custom logic, webhooks, and integrations so your team focuses on what matters.",
     },
     {
       id: "existing-systems",
       question: "Do you only build new products, or can you extend existing systems?",
       answer:
-        "Both. We often take teams from a rough idea to a first product, but we also extend existing systems with new modules, APIs, and integrations on top of CRMs or tools you already use.",
+        "Both. We take teams from idea to first product, and we extend existing systems with new modules, APIs, and integrations.",
     },
     {
       id: "getting-started",
       question: "How do projects usually start?",
       answer:
-        "We begin with a few focused sessions to understand your processes, constraints, and goals. From there we define a clear product scope, technical approach, and roadmap before writing any code.",
+        "We start with focused sessions to understand your processes and goals. Then we define product scope, technical approach, and roadmap before coding.",
     },
   ],
   es: [
@@ -50,31 +50,31 @@ const faqContent: Record<Locale, QA[]> = {
       id: "specialisation",
       question: "¿En qué tipo de software estáis especializados?",
       answer:
-        "Estamos especializados en aplicaciones web a medida con Next.js y React, paneles internos y herramientas orientadas a procesos, diseñadas alrededor de cómo trabaja realmente tu equipo, no de una plantilla genérica.",
+        "Aplicaciones web a medida con Next.js y React, paneles internos y herramientas orientadas a procesos, adaptadas a cómo trabaja tu equipo.",
     },
     {
       id: "integrations",
       question: "¿Podéis integrar el software con WhatsApp, Telegram, Instagram u otras plataformas?",
       answer:
-        "Sí. Gran parte de nuestro trabajo consiste en conectar el software con servicios externos como WhatsApp, Telegram, Instagram, plataformas de email o logística, para centralizar la comunicación y reducir trabajo manual.",
+        "Sí. Conectamos el software con WhatsApp, Telegram, Instagram, plataformas de email o logística para centralizar comunicación y reducir trabajo manual.",
     },
     {
       id: "automation",
       question: "¿Os encargáis también de automatizar procesos?",
       answer:
-        "Te ayudamos a detectar tareas repetitivas en tus flujos de trabajo y las automatizamos con lógica a medida, webhooks e integraciones, para que tu equipo pueda centrarse en el trabajo que realmente aporta valor.",
+        "Detectamos tareas repetitivas y las automatizamos con lógica a medida, webhooks e integraciones para que tu equipo se centre en lo que aporta valor.",
     },
     {
       id: "existing-systems",
       question: "¿Solo creáis productos nuevos o también ampliáis sistemas existentes?",
       answer:
-        "Ambas cosas. A menudo pasamos de una idea poco definida a un primer producto, pero también ampliamos sistemas existentes con nuevos módulos, APIs e integraciones sobre CRMs o herramientas que ya utilizas.",
+        "Ambas cosas. Pasamos de idea a primer producto, y ampliamos sistemas existentes con nuevos módulos, APIs e integraciones.",
     },
     {
       id: "getting-started",
       question: "¿Cómo empieza normalmente un proyecto?",
       answer:
-        "Empezamos con sesiones breves y enfocadas para entender tus procesos, limitaciones y objetivos. A partir de ahí definimos el alcance del producto, el enfoque técnico y una hoja de ruta antes de escribir una sola línea de código.",
+        "Empezamos con sesiones enfocadas para entender tus procesos y objetivos. Luego definimos alcance, enfoque técnico y hoja de ruta antes de codificar.",
     },
   ],
 }

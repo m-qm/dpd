@@ -38,10 +38,10 @@ export default function HomeEs() {
       <HeroSection locale="es" />
       <CapabilitiesSection inverted={true} locale="es" />
       <ApproachSection inverted={false} locale="es" />
+      <PhilosophySection inverted={true} locale="es" />
       <ClientsSection inverted={false} locale="es" />
-      <PhilosophySection inverted={false} locale="es" />
-      <FAQSection locale="es" />
       <CTASection inverted={true} locale="es" />
+      <FAQSection locale="es" />
       <Footer />
     </main>
   )
