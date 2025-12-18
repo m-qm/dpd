@@ -11,7 +11,7 @@ import { FAQSection } from "@/components/faq-section"
 import { getFaqJsonLd } from "@/lib/faq"
 
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital — Agencia boutique de producto digital en Barcelona",
+  title: "Dual Perspective Digital — Agencia boutique de software a medida en Barcelona",
   description:
     "Agencia boutique de software a medida en Barcelona: herramientas internas, automatización de procesos e integraciones diseñadas alrededor de tus flujos.",
   alternates: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dual Perspective Digital — Agencia boutique de producto digital en Barcelona",
+    title: "Dual Perspective Digital — Agencia boutique de software a medida en Barcelona",
     description:
       "Software a medida, herramientas internas y automatización de procesos diseñados alrededor de tus flujos, desde Barcelona.",
     url: "https://dualperspective.digital/es",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dual Perspective Digital — Agencia boutique de producto digital en Barcelona",
+    title: "Dual Perspective Digital — Agencia boutique de software a medida en Barcelona",
     description:
       "Software a medida, herramientas internas y automatización de procesos diseñados alrededor de tus flujos, desde Barcelona.",
     images: ["/og.png"],

@@ -50,9 +50,14 @@ export function CapabilitiesSection({
     >
       <div className="max-w-7xl mx-auto">
         <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
-        <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-24 md:mb-32 tracking-tight leading-[0.9]">
+        <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-6 tracking-tight leading-[0.9]">
           {copy[locale].capabilitiesHeading}
         </h2>
+        <p className="text-sm md:text-base text-muted-foreground uppercase tracking-[0.16em] mb-16 md:mb-20 max-w-3xl">
+          {locale === "es"
+            ? "Software a medida · Herramientas internas · Automatización de procesos · Integraciones"
+            : "Custom software · Internal tools · Process automation · Integrations"}
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
           {copy[locale].capabilities.map((capability, index) => {

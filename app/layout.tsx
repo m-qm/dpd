@@ -12,9 +12,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
+  title: "Dual Perspective Digital — Boutique Custom Software Studio in Barcelona",
   description:
-    "Dual Perspective Digital is a boutique digital product studio in Barcelona, specialised in custom software: products, internal tools, and integrations designed around real-world business processes.",
+    "Dual Perspective Digital is a boutique custom software studio in Barcelona. We build internal tools, dashboards, and process automation with integrations tailored to how your team works.",
   metadataBase: new URL("https://dualperspective.digital"),
   alternates: {
     canonical: "/",
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
+    title: "Dual Perspective Digital — Boutique Custom Software Studio in Barcelona",
     description:
-      "Boutique digital product studio in Barcelona building custom software, internal tools, and integrations that fit how your team actually works.",
+      "Boutique custom software studio in Barcelona building internal tools, dashboards, and process automation with integrations tailored to how your team works.",
     url: "https://dualperspective.digital",
     siteName: "Dual Perspective Digital",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital" }],
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dual Perspective Digital — Boutique Digital Product Studio in Barcelona",
+    title: "Dual Perspective Digital — Boutique Custom Software Studio in Barcelona",
     description:
-      "Custom digital products, internal tools, and process-focused integrations from a boutique studio in Barcelona.",
+      "Custom software, internal tools, dashboards, and process automation from a boutique studio in Barcelona.",
     images: ["/og.png"],
   },
   icons: {
@@ -59,7 +59,7 @@ export default function RootLayout({
     "@type": ["Organization", "ProfessionalService"],
     name: "Dual Perspective Digital",
     description:
-      "Boutique digital product studio in Barcelona specialising in custom software, internal tools, and integrations designed around real-world business processes.",
+      "Boutique custom software studio in Barcelona specialising in internal tools, dashboards, integrations, and process automation designed around real-world business processes.",
     url: "https://dualperspective.digital",
     address: {
       "@type": "PostalAddress",
