@@ -20,6 +20,7 @@ type TranscriptItem =
   | { role: "user"; text: string }
 
 function detectLocale(): Locale {
+  if (typeof window === "undefined" || typeof document === "undefined") return "en"
   const mainLang = document.querySelector("main")?.getAttribute("lang")
   const lang = (mainLang || document.documentElement.lang || "").toLowerCase()
   return lang.startsWith("es") ? "es" : "en"

@@ -159,10 +159,10 @@ html[data-theme="dark"] {
   }
   
   body {
-    /* Fix Chrome mobile viewport height */
-    min-height: calc(var(--vh, 1vh) * 100);
+    /* Fix Chrome mobile viewport height - use fallback first to prevent hydration mismatch */
     min-height: 100vh;
     min-height: 100dvh;
+    min-height: calc(var(--vh, 1vh) * 100);
   }
   
   /* Norgram-style typography */
@@ -541,9 +541,9 @@ html[data-theme="dark"] {
   @media (max-width: 768px) {
     /* Prevent layout shifts when Chrome navbar appears/disappears */
     section {
-      min-height: calc(var(--vh, 1vh) * 100);
       min-height: 100vh;
       min-height: 100dvh;
+      min-height: calc(var(--vh, 1vh) * 100);
     }
     
     /* Fix scrolling performance in capabilities section */

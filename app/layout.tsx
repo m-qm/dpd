@@ -85,15 +85,21 @@ export default function RootLayout({
         {/* Fix Chrome mobile viewport height when navbar appears/disappears */}
         <Script
           id="viewport-height-fix"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                if (typeof window === 'undefined') return;
                 function setViewportHeight() {
                   const vh = window.innerHeight * 0.01;
                   document.documentElement.style.setProperty('--vh', vh + 'px');
                 }
-                setViewportHeight();
+                // Set initial value
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', setViewportHeight);
+                } else {
+                  setViewportHeight();
+                }
                 window.addEventListener('resize', setViewportHeight);
                 window.addEventListener('orientationchange', setViewportHeight);
               })();
