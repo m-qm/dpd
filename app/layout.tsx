@@ -80,9 +80,9 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className={inter.variable} data-theme="dark">
+    <html lang="en" className={inter.variable} data-theme="dark" style={{ height: '100%', minHeight: '100%' }}>
       <body className={`font-sans antialiased`}>
-        {/* Fix Chrome mobile viewport height when navbar appears/disappears */}
+        {/* Fix Chrome mobile navbar - use dynamic viewport height */}
         <Script
           id="viewport-height-fix"
           strategy="afterInteractive"
@@ -91,54 +91,29 @@ export default function RootLayout({
               (function() {
                 if (typeof window === 'undefined') return;
                 
-                let ticking = false;
-                let lastHeight = window.innerHeight;
-                
-                function setViewportHeight() {
-                  const currentHeight = window.innerHeight;
-                  
-                  // Only update if height actually changed (prevents unnecessary updates)
-                  if (Math.abs(currentHeight - lastHeight) < 1) return;
-                  
-                  lastHeight = currentHeight;
-                  const vh = currentHeight * 0.01;
+                // Use dynamic viewport height - allows content to extend naturally
+                const setViewportHeight = () => {
+                  // Use current viewport height (updates with navbar)
+                  const height = window.innerHeight;
+                  const vh = height * 0.01;
                   document.documentElement.style.setProperty('--vh', vh + 'px');
-                  
-                  // Prevent visual glitches by using requestAnimationFrame
-                  if (!ticking) {
-                    window.requestAnimationFrame(function() {
-                      document.body.style.minHeight = 'calc(var(--vh, 1vh) * 100)';
-                      ticking = false;
-                    });
-                    ticking = true;
-                  }
-                }
+                };
                 
                 // Set initial value immediately
                 setViewportHeight();
                 
-                // Use visualViewport API if available (better for Chrome mobile)
-                if (window.visualViewport) {
-                  window.visualViewport.addEventListener('resize', setViewportHeight);
-                  window.visualViewport.addEventListener('scroll', setViewportHeight);
-                }
-                
-                // Fallback for browsers without visualViewport
+                // Update on resize (handles navbar show/hide)
                 window.addEventListener('resize', setViewportHeight, { passive: true });
+                
+                // Update on orientation change
                 window.addEventListener('orientationchange', function() {
                   setTimeout(setViewportHeight, 100);
                 });
                 
-                // Handle scroll events that trigger navbar show/hide
-                let lastScrollY = window.scrollY;
-                window.addEventListener('scroll', function() {
-                  const currentScrollY = window.scrollY;
-                  // Only update if scroll direction changed significantly
-                  if (Math.abs(currentScrollY - lastScrollY) > 50) {
-                    setTimeout(setViewportHeight, 50);
-                    lastScrollY = currentScrollY;
-                  }
-                }, { passive: true });
+                // Use visualViewport API if available (better for Chrome mobile)
+                if (window.visualViewport) {
+                  window.visualViewport.addEventListener('resize', setViewportHeight);
+                }
               })();
             `,
           }}
