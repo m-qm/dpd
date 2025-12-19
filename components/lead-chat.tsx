@@ -87,6 +87,8 @@ export function LeadChat() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
   const [isTyping, setIsTyping] = useState(false)
 
+  const scrollRef = useRef<HTMLDivElement>(null)
+
   const c = useMemo(() => copyFor(locale), [locale])
 
   useEffect(() => {
@@ -170,6 +172,16 @@ export function LeadChat() {
       ["--border" as any]: "oklch(0.2 0 0)",
     }
   }, [surfaceTheme])
+
+  // Auto-scroll to bottom when transcript changes or typing state changes
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      })
+    }
+  }, [transcript, isTyping])
 
   // Reset when opening
   useEffect(() => {
@@ -329,11 +341,11 @@ export function LeadChat() {
             </button>
           </div>
 
-          <div className="max-h-[46vh] overflow-auto px-4 py-4 space-y-3">
+          <div ref={scrollRef} className="max-h-[46vh] overflow-auto px-4 py-4 space-y-3">
             {transcript.map((m, idx) => (
               <div 
                 key={`${m.role}-${idx}-${m.text.slice(0, 10)}`}
-                className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} transition-opacity duration-200`}
+                className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} chat-message-enter`}
               >
                 <div
                   className={`max-w-[85%] text-sm leading-relaxed px-3 py-2 border ${
@@ -347,7 +359,7 @@ export function LeadChat() {
               </div>
             ))}
             {isTyping && (
-              <div className="flex justify-start">
+              <div className="flex justify-start chat-message-enter">
                 <div className="max-w-[85%] bg-background text-foreground border-2 border-foreground/30 px-3 py-2">
                   <div className="flex gap-1.5 py-1">
                     <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full" style={{ animation: "bounce 1.4s ease-in-out infinite" }} />

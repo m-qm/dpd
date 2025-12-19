@@ -45,42 +45,24 @@ export function CapabilitiesSection({
       id="capabilities" 
       ref={sectionRef} 
       data-theme={inverted ? "light" : "dark"}
-      className="dpd-section dpd-chapter relative pt-12 md:pt-16 lg:pt-20"
+      className="dpd-section dpd-chapter relative pt-24 md:pt-32 lg:pt-40"
     >
-      {/* Extended gradient from Hero for seamless blend - matches hero gradient position */}
+      {/* Gradient at bottom left */}
       <div 
-        className="pointer-events-none absolute inset-0 -top-80 md:-top-96 lg:-top-[120px]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] md:h-[50vh]"
         style={{
-          background: "radial-gradient(circle at 100% 35%, rgba(46, 88, 255, 0.18), transparent 75%)",
+          background: "radial-gradient(circle at 0% 100%, rgba(46, 88, 255, 0.18), transparent 75%)",
           filter: "blur(100px)",
           opacity: 0.7,
         }}
       />
       {/* Additional subtle gradient layer for smoother transition */}
       <div 
-        className="pointer-events-none absolute inset-0 -top-56 md:-top-72"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[30vh] md:h-[40vh]"
         style={{
-          background: "radial-gradient(circle at 100% 30%, rgba(46, 88, 255, 0.12), transparent 65%)",
+          background: "radial-gradient(circle at 0% 100%, rgba(46, 88, 255, 0.12), transparent 65%)",
           filter: "blur(110px)",
           opacity: 0.6,
-        }}
-      />
-      {/* Third layer for ultra-smooth blend */}
-      <div 
-        className="pointer-events-none absolute inset-0 -top-40 md:-top-56"
-        style={{
-          background: "radial-gradient(circle at 100% 25%, rgba(46, 88, 255, 0.08), transparent 60%)",
-          filter: "blur(120px)",
-          opacity: 0.5,
-        }}
-      />
-      {/* Fourth ultra-subtle layer for perfect imperceptible blend */}
-      <div 
-        className="pointer-events-none absolute inset-0 -top-24 md:-top-40"
-        style={{
-          background: "radial-gradient(circle at 100% 20%, rgba(46, 88, 255, 0.04), transparent 55%)",
-          filter: "blur(130px)",
-          opacity: 0.3,
         }}
       />
       {/* Grid overlay to match Hero aesthetic */}
