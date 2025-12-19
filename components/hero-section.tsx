@@ -125,14 +125,22 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const isMobile = useIsMobile()
 
   useEffect(() => {
+    // Reset visibility state when locale changes to prevent glitches
+    setIsVisible(false)
+    setAltLineActive(false)
+    setIsFading(false)
+    
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, 300)
+    }, 100)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [locale])
 
   useEffect(() => {
+    // Only start the alternating title animation after initial visibility
+    if (!isVisible) return
+    
     let timeoutId: number | undefined
     const intervalId = window.setInterval(() => {
       setIsFading(true)
@@ -148,13 +156,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         window.clearTimeout(timeoutId)
       }
     }
-  }, [locale])
+  }, [locale, isVisible])
 
 
   return (
     <section
       data-theme="dark"
-      className="relative h-[100svh] flex flex-col"
+      className="relative h-[100vh] h-[100dvh] flex flex-col"
+      style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
     >
       {/* 3D Cloud Canvas Background */}
       <div className="absolute inset-0 z-0">
@@ -187,7 +196,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       <HeroNavigation locale={locale} />
 
       {/* Hero Content */}
-      <div className="relative flex-1 min-h-0 flex items-center px-6 md:px-12 lg:px-20 py-12 md:py-16 lg:py-20 overflow-hidden z-10">
+      <div className="relative flex-1 min-h-0 flex items-center justify-center px-6 md:px-12 lg:px-20 py-8 md:py-12 lg:py-16 overflow-hidden z-10">
         {/* Background effects */}
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
@@ -232,39 +241,39 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           <div className="max-w-4xl">
             {/* Eyebrow */}
             <div className="mb-4 md:mb-8">
-              <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
+              <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
               </span>
             </div>
 
             {/* Main Title */}
-            <h1 className="relative mb-6 md:mb-10">
+            <h1 className="relative mb-6 md:mb-10 font-serif">
               <div className="grid opacity-0 pointer-events-none">
                 <div className="col-start-1 row-start-1">
                   {copy[locale].hero.titleLines.map((line) => (
-                    <span key={line} className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] leading-[0.95] tracking-[-0.03em]">
+                    <span key={line} className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">
                       {line}
                     </span>
                   ))}
                 </div>
                 <div className="col-start-1 row-start-1">
-                  <span className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] leading-[0.95] tracking-[-0.03em]">
-                    {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
+                  <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">
+                    {locale === "es" ? "Soluciones que funcionan" : "Solutions that work"}
                   </span>
                 </div>
               </div>
 
               <div className={`absolute inset-0 transition-opacity duration-800 ${isFading ? "opacity-0" : "opacity-100"}`}>
                 {altLineActive ? (
-                  <span className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] font-normal text-foreground leading-[0.95] tracking-[-0.03em]">
-                    {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
+                  <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">
+                    {locale === "es" ? "Soluciones que funcionan" : "Solutions that work"}
                   </span>
                 ) : (
                   <>
                     {copy[locale].hero.titleLines.map((line, index) => (
                       <span 
                         key={line} 
-                        className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] font-normal text-foreground leading-[0.95] tracking-[-0.03em]"
+                        className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
                         style={{ 
                           animationDelay: `${index * 100}ms`,
                           animation: isVisible ? 'fadeInUp 0.8s ease-out forwards' : 'none',
@@ -280,7 +289,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base md:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-12">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-12">
               {copy[locale].hero.subtitle}
             </p>
 
@@ -288,7 +297,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-12">
               <a
                 href="#contact"
-                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:shadow-xl hover:shadow-blue-500/30"
+                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:shadow-xl hover:shadow-blue-500/30"
               >
                 {/* Animated gradient shimmer effect */}
                 <span 
@@ -301,7 +310,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                 />
                 <span className="relative z-10 flex items-center">
                   {copy[locale].ctaButton}
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
                 {/* Subtle glow effect on hover */}
                 <span 
@@ -313,7 +322,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </a>
               <a
                 href="#capabilities"
-                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:shadow-blue-500/10 overflow-hidden"
+                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:shadow-blue-500/10 overflow-hidden"
               >
                 {/* Animated border glow */}
                 <span 
@@ -346,7 +355,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               ).map((label, index) => (
                 <span
                   key={label}
-                  className="inline-flex items-center px-4 py-2 text-xs uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200"
+                  className="inline-flex items-center px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200"
                   style={{
                     animationDelay: `${(index + 3) * 100}ms`,
                     animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
@@ -364,7 +373,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       {/* Scroll indicator - positioned to avoid collision with service tags */}
       <div className="absolute bottom-16 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block z-50">
         <div className="flex flex-col items-center gap-2 text-muted-foreground/60">
-          <span className="text-xs uppercase tracking-[0.2em]">Scroll</span>
+          <span className="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
           <div className="w-px h-8 bg-gradient-to-b from-foreground/40 to-transparent animate-pulse" />
         </div>
       </div>

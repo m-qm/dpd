@@ -78,7 +78,7 @@ html[data-theme="dark"] {
 
 @theme inline {
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
-  --font-serif: var(--font-inter), "Inter", "Georgia", serif;
+  --font-serif: var(--font-playfair), "Playfair Display", "Georgia", serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -196,9 +196,9 @@ html[data-theme="dark"] {
     max-width: 100%;
   }
   
-  /* Norgram-style typography */
+  /* Typography - Serif for headings, Sans for body (Onforyou-style) */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-normal tracking-tight;
+    @apply font-serif font-normal tracking-tight;
     letter-spacing: -0.02em;
   }
 }

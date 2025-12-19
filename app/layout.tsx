@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
 import { LeadChat } from "@/components/lead-chat"
@@ -10,6 +10,12 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+})
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-playfair",
 })
 
 export const metadata: Metadata = {
@@ -80,7 +86,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className={inter.variable} data-theme="dark" style={{ height: '100%', minHeight: '100%' }}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`} data-theme="dark" style={{ height: '100%', minHeight: '100%' }}>
       <body className={`font-sans antialiased`}>
         {/* Fix Chrome mobile navbar - use dynamic viewport height */}
         <Script

@@ -63,7 +63,7 @@ export function FAQSection({ locale = "en", inverted = false }: { locale?: Local
           <Accordion type="single" collapsible className="w-full border-t border-border/60">
             {items.map((item) => (
               <AccordionItem key={item.id} value={item.id} className="border-b border-border/60">
-                <AccordionTrigger className="text-left text-base md:text-lg font-normal tracking-tight py-4">
+                <AccordionTrigger className="text-left text-base md:text-lg font-sans font-normal tracking-tight py-4">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="pb-4">
