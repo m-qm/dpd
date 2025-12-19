@@ -257,17 +257,33 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                   ))}
                 </div>
                 <div className="col-start-1 row-start-1">
-                  <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">
-                    {locale === "es" ? "Soluciones que funcionan" : "Solutions that work"}
-                  </span>
+                  {locale === "es" ? (
+                    <>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">Soluciones</span>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">que funcionan</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">Solutions</span>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">that work</span>
+                    </>
+                  )}
                 </div>
               </div>
 
               <div className={`absolute inset-0 transition-opacity duration-800 ${isFading ? "opacity-0" : "opacity-100"}`}>
                 {altLineActive ? (
-                  <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">
-                    {locale === "es" ? "Soluciones que funcionan" : "Solutions that work"}
-                  </span>
+                  locale === "es" ? (
+                    <>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">Soluciones</span>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">que funcionan</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">Solutions</span>
+                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">that work</span>
+                    </>
+                  )
                 ) : (
                   <>
                     {copy[locale].hero.titleLines.map((line, index) => (
