@@ -249,7 +249,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         >
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="mb-4 md:mb-8">
+            <div className="mb-4 md:mb-8 hidden md:block">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
               </span>
