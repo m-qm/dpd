@@ -383,26 +383,27 @@ html[data-theme="dark"] {
     color: oklch(1 0 0) !important;
   }
 
-  /* Animated gradient used behind the hero title - more refined */
+  /* Animated gradient used behind the hero title - removed to prevent violet blur on first render */
   .hero-gradient {
-    background-image:
+    /* Disabled to prevent visible violet blur on first render */
+    opacity: 0;
+    /* background-image:
       radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
-      radial-gradient(circle at 100% 35%, rgba(46, 88, 255, 0.22), transparent 75%);
+      radial-gradient(circle at 100% 35%, rgba(46, 88, 255, 0.22), transparent 75%); */
     /* Removed blur filter for better performance and clarity */
-    opacity: 0.7;
-    transform: translate3d(0, 0, 0) scale(1.25);
-    animation: hero-gradient-move 24s ease-in-out infinite alternate;
+    /* transform: translate3d(0, 0, 0) scale(1.25); */
+    /* animation: hero-gradient-move 24s ease-in-out infinite alternate; */
   }
 
-  /* Subtle grid overlay for hero and hero cards - more refined */
+  /* Subtle grid overlay for hero and hero cards - barely visible */
   .hero-grid {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.002) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.002) 1px, transparent 1px);
     background-size: 64px 64px;
     background-position: center;
-    mask-image: radial-gradient(circle at 30% 15%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 90%);
-    opacity: 0.15;
+    mask-image: radial-gradient(circle at 30% 15%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 90%);
+    opacity: 0.01;
   }
 
   @keyframes hero-gradient-move {
@@ -474,6 +475,15 @@ html[data-theme="dark"] {
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
     }
   }
 

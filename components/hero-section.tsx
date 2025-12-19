@@ -192,37 +192,37 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
         
-        {/* Extended gradient that bleeds into next section - creates seamless transition */}
+        {/* Extended gradient that bleeds into next section - barely visible */}
         <div 
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[60vh] md:h-[70vh] lg:h-[80vh]"
           style={{
-            background: "radial-gradient(circle at 100% 0%, rgba(46, 88, 255, 0.18), transparent 75%)",
-            opacity: 0.7,
+            background: "radial-gradient(circle at 100% 0%, rgba(46, 88, 255, 0.02), transparent 95%)",
+            opacity: 0.05,
             transform: "translateY(20%)",
           }}
         />
-        {/* Additional bottom gradient layer for extra smoothness */}
+        {/* Additional bottom gradient layer - barely visible */}
         <div 
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] md:h-[50vh]"
           style={{
-            background: "radial-gradient(circle at 100% 5%, rgba(46, 88, 255, 0.12), transparent 65%)",
-            opacity: 0.5,
+            background: "radial-gradient(circle at 100% 5%, rgba(46, 88, 255, 0.01), transparent 90%)",
+            opacity: 0.03,
             transform: "translateY(30%)",
           }}
         />
-        {/* Ultra-subtle third layer for perfect blend */}
+        {/* Ultra-subtle third layer - almost invisible */}
         <div 
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[25vh] md:h-[35vh]"
           style={{
-            background: "radial-gradient(circle at 100% 10%, rgba(46, 88, 255, 0.06), transparent 60%)",
-            opacity: 0.4,
+            background: "radial-gradient(circle at 100% 10%, rgba(46, 88, 255, 0.008), transparent 85%)",
+            opacity: 0.02,
             transform: "translateY(40%)",
           }}
         />
         
-        {/* Subtle animated orbs - more subtle */}
-        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/3 rounded-full animate-pulse opacity-50" />
-        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/2 rounded-full animate-pulse opacity-40" style={{ animationDelay: '1s', animationDuration: '4s' }} />
+        {/* Animated orbs - barely visible */}
+        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/1 rounded-full animate-pulse opacity-[0.02]" />
+        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/1 rounded-full animate-pulse opacity-[0.01]" style={{ animationDelay: '1s', animationDuration: '4s' }} />
 
         <div
           className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${
@@ -288,16 +288,52 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-12">
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight bg-foreground text-background hover:bg-foreground/90 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:shadow-xl hover:shadow-blue-500/30"
               >
-                {copy[locale].ctaButton}
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                {/* Animated gradient shimmer effect */}
+                <span 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(46, 88, 255, 0.2) 50%, transparent 100%)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 2s ease-in-out infinite',
+                  }}
+                />
+                <span className="relative z-10 flex items-center">
+                  {copy[locale].ctaButton}
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+                {/* Subtle glow effect on hover */}
+                <span 
+                  className="absolute -inset-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md -z-10"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(46, 88, 255, 0.5) 0%, transparent 70%)',
+                  }}
+                />
               </a>
               <a
                 href="#capabilities"
-                className="inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-200"
+                className="group relative inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:shadow-blue-500/10 overflow-hidden"
               >
-                {locale === "es" ? "Ver capacidades" : "View capabilities"}
+                {/* Animated border glow */}
+                <span 
+                  className="absolute inset-0 border-2 border-blue-500/40 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    boxShadow: '0 0 20px rgba(46, 88, 255, 0.3)',
+                  }}
+                />
+                {/* Subtle background shimmer */}
+                <span 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(46, 88, 255, 0.05) 50%, transparent 100%)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 3s ease-in-out infinite',
+                  }}
+                />
+                <span className="relative z-10">
+                  {locale === "es" ? "Ver capacidades" : "View capabilities"}
+                </span>
               </a>
             </div>
 
