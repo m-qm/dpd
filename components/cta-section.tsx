@@ -6,12 +6,11 @@ export function CTASection({ inverted = false, locale = "en" }: { inverted?: boo
   return (
     <section 
       id="contact"
-      className={`py-24 md:py-32 lg:py-48 px-6 md:px-12 lg:px-20 border-t border-border transition-colors duration-500 ${
-        inverted ? "section-inverted" : ""
-      }`}
+      data-theme={inverted ? "light" : "dark"}
+      className="dpd-section-compact dpd-chapter scroll-mt-10 md:scroll-mt-14 pt-24 md:pt-32 lg:pt-40"
     >
-      <div className="max-w-5xl mx-auto">
-        <SectionBadge number={5} label={locale === "es" ? "Contacto" : "Contact"} />
+      <div className="dpd-container-narrow">
+        <SectionBadge number={6} label={locale === "es" ? "Contacto" : "Contact"} />
         <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-8 md:mb-12 leading-[1.1] tracking-tight">
           {copy[locale].ctaHeading}
         </h2>

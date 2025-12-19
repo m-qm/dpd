@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
+import { LeadChat } from "@/components/lead-chat"
 import "./globals.css"
 
 const inter = Inter({ 
@@ -79,11 +80,77 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className={`${inter.variable} dark`}>
+    <html lang="en" className={inter.variable} data-theme="dark">
       <body className={`font-sans antialiased`}>
+        <div aria-hidden className="site-bg" />
+        {/* Consent Mode v2 defaults (deny until the CMP grants consent). */}
+        <Script
+          id="consent-default"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{
+  'ad_storage':'denied',
+  'analytics_storage':'denied',
+  'ad_user_data':'denied',
+  'ad_personalization':'denied',
+  'functionality_storage':'granted',
+  'security_storage':'granted',
+  'wait_for_update':500
+});
+gtag('set','ads_data_redaction',true);
+`.trim(),
+          }}
+        />
+
+        {/* Cookiebot CMP (blocks scripts by category; integrates with consent updates). */}
+        <Script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          strategy="beforeInteractive"
+          data-cbid="8d1922ed-2465-4011-9bb9-342ee3cd73fd"
+          data-blockingmode="auto"
+          type="text/javascript"
+        />
+
+        <Script
+          id="cookiebot-consent-bridge"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+window.CookiebotCallback_OnAccept = function () {
+  try {
+    var c = window.Cookiebot && window.Cookiebot.consent ? window.Cookiebot.consent : null;
+    if (!c) return;
+    gtag('consent','update',{
+      'analytics_storage': c.statistics ? 'granted' : 'denied',
+      'ad_storage': c.marketing ? 'granted' : 'denied',
+      'ad_user_data': c.marketing ? 'granted' : 'denied',
+      'ad_personalization': c.marketing ? 'granted' : 'denied'
+    });
+  } catch (e) {}
+};
+window.CookiebotCallback_OnDecline = function () {
+  try {
+    gtag('consent','update',{
+      'analytics_storage':'denied',
+      'ad_storage':'denied',
+      'ad_user_data':'denied',
+      'ad_personalization':'denied'
+    });
+  } catch (e) {}
+};
+`.trim(),
+          }}
+        />
+
         <Script
           id="gtm"
           strategy="beforeInteractive"
+          type="text/plain"
+          data-cookieconsent="statistics"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -92,15 +159,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PZ6K444B');`,
           }}
         />
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PZ6K444B"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
         {children}
+        <LeadChat />
         <script
           type="application/ld+json"
           suppressHydrationWarning

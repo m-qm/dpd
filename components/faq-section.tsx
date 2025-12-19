@@ -11,7 +11,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
-export function FAQSection({ locale = "en" }: { locale?: Locale }) {
+export function FAQSection({ locale = "en", inverted = false }: { locale?: Locale; inverted?: boolean }) {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
 
@@ -19,12 +19,12 @@ export function FAQSection({ locale = "en" }: { locale?: Locale }) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
             setIsVisible(true)
           }
         })
       },
-      { threshold: [0.35, 0.6] },
+      { threshold: [0.12, 0.35] },
     )
 
     if (sectionRef.current) {
@@ -40,10 +40,11 @@ export function FAQSection({ locale = "en" }: { locale?: Locale }) {
     <section
       id="faq"
       ref={sectionRef}
-      className="py-24 md:py-32 lg:py-40 px-6 md:px-12 lg:px-20 border-t border-border bg-background"
+      data-theme={inverted ? "light" : "dark"}
+      className="dpd-section dpd-chapter pb-32 md:pb-40 lg:pb-48"
     >
-      <div className="max-w-5xl mx-auto">
-        <SectionBadge number={6} label={locale === "es" ? "Preguntas frecuentes" : "FAQ"} />
+      <div className="dpd-container-narrow">
+        <SectionBadge number={5} label={locale === "es" ? "Preguntas frecuentes" : "FAQ"} />
         <div
           className={`transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -56,13 +57,13 @@ export function FAQSection({ locale = "en" }: { locale?: Locale }) {
           </h2>
           <p className="text-sm md:text-base text-muted-foreground mb-8 max-w-2xl">
             {locale === "es"
-              ? "Respuestas rápidas sobre cómo trabajamos: software a medida con Next.js y React, integraciones con WhatsApp y Telegram, automatización de procesos y evolución continua del producto."
-              : "Quick answers to how we work: custom software with Next.js and React, WhatsApp and Telegram integrations, process automation, and long-term product evolution."}
+              ? "Respuestas rápidas sobre cómo trabajamos: software a medida, herramientas internas, automatización e integraciones."
+              : "Quick answers on how we work: custom software, internal tools, automation, and integrations."}
           </p>
           <Accordion type="single" collapsible className="w-full border-t border-border/60">
             {items.map((item) => (
               <AccordionItem key={item.id} value={item.id} className="border-b border-border/60">
-                <AccordionTrigger className="text-left text-base md:text-lg font-normal tracking-tight text-foreground py-4">
+                <AccordionTrigger className="text-left text-base md:text-lg font-normal tracking-tight py-4">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="pb-4">

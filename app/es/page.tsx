@@ -8,6 +8,7 @@ import { PhilosophySection } from "@/components/philosophy-section"
 import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { FAQSection } from "@/components/faq-section"
+import { TransitionAnimation } from "@/components/transition-animation"
 import { getFaqJsonLd } from "@/lib/faq"
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
 
 export default function HomeEs() {
   return (
-    <main className="min-h-screen" lang="es">
+    <main className="min-h-screen overflow-x-hidden" lang="es">
       <HomeClient locale="es" />
       <script
         type="application/ld+json"
@@ -50,13 +51,16 @@ export default function HomeEs() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getFaqJsonLd("es")) }}
       />
       <HeroSection locale="es" />
-      <CapabilitiesSection inverted={true} locale="es" />
+      {/* Section 1: Capabilities - stays dark like Hero, no color change */}
+      <CapabilitiesSection inverted={false} locale="es" />
       <ApproachSection inverted={false} locale="es" />
       <PhilosophySection inverted={true} locale="es" />
       <ClientsSection inverted={false} locale="es" />
-      <CTASection inverted={true} locale="es" />
-      <FAQSection locale="es" />
-      <Footer />
+      <FAQSection locale="es" inverted={true} />
+      {/* Cool transition animation */}
+      <TransitionAnimation locale="es" />
+      <CTASection inverted={false} locale="es" />
+      <Footer locale="es" />
     </main>
   )
 }

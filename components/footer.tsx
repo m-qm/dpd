@@ -1,44 +1,50 @@
 import { GeometricPattern } from "@/components/geometric-pattern"
+import type { Locale } from "@/lib/copy"
 
-export function Footer() {
+export function Footer({ locale = "en" }: { locale?: Locale }) {
   return (
-    <footer id="contact" className="border-t border-border">
-      {/* Contact Section */}
-      <div className="py-20 md:py-24 lg:py-32 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 mb-16 md:mb-20">
+    <footer data-theme="dark" className="bg-transparent dpd-chapter">
+      <div className="dpd-section pt-14 md:pt-16 lg:pt-20 pb-10 md:pb-12">
+        <div className="dpd-container">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
-              <h3 className="text-xl md:text-2xl font-normal text-foreground mb-6 tracking-tight">Dual Perspective Digital</h3>
+              <div className="text-sm md:text-base text-foreground tracking-tight">
+                Dual Perspective Digital
+              </div>
               <a
                 href="mailto:hello@dualperspective.digital"
-                className="text-lg md:text-xl text-foreground hover:opacity-60 transition-opacity font-normal block"
+                className="text-sm md:text-base text-muted-foreground hover:opacity-70 transition-opacity"
               >
                 hello@dualperspective.digital
               </a>
             </div>
 
-            <div />
-          </div>
-        </div>
-      </div>
-
-      {/* Footer Bottom with Geometric Pattern - Norgram style */}
-      <div className="bg-background">
-        {/* Text Row */}
-        <div className="px-6 md:px-12 lg:px-20 py-6 md:py-8">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
-            {/* <div className="text-sm md:text-base text-foreground font-normal">
-              VAT No—00000000
-            </div> */}
-            <div className="text-sm md:text-base text-foreground font-normal">
-              © DPD {new Date().getFullYear()}
+            <div className="flex items-center gap-4 text-sm md:text-base text-muted-foreground">
+              <a
+                href={locale === "es" ? "/es/privacy" : "/privacy"}
+                className="hover:opacity-70 transition-opacity"
+              >
+                {locale === "es" ? "Privacidad" : "Privacy"}
+              </a>
+              <span className="opacity-40">·</span>
+              <a
+                href={locale === "es" ? "/es/cookies" : "/cookies"}
+                className="hover:opacity-70 transition-opacity"
+              >
+                {locale === "es" ? "Cookies" : "Cookies"}
+              </a>
+              <span className="opacity-40">·</span>
+              <div className="text-foreground">
+                © DPD {new Date().getFullYear()}
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Geometric Pattern Canvas */}
-        <GeometricPattern />
       </div>
+
+      <GeometricPattern />
     </footer>
   )
 }
+
+

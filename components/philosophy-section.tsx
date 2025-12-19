@@ -31,11 +31,10 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
     <section
       id="philosophy"
       ref={sectionRef}
-      className={`py-24 md:py-32 lg:py-48 px-6 md:px-12 lg:px-20 border-t border-border transition-colors duration-500 ${
-        inverted ? "section-inverted" : ""
-      }`}
+      data-theme={inverted ? "light" : "dark"}
+      className="dpd-section dpd-chapter"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="dpd-container">
         <SectionBadge
           number={3}
           label={locale === "es" ? "Por qué trabajar con nosotros" : "Why Work With Us"}
@@ -53,13 +52,13 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
             {locale === "es" ? (
               <>
                 <div
-                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 ${
+                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 hover:bg-white/5 ${
                     isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
                   }`}
                   style={{ transitionDelay: "0ms" }}
                 >
                   <div className="flex items-start gap-8 md:gap-12">
-                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/40 transition-colors" />
+                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/60 group-hover:w-1.5 transition-all duration-300" />
                     <div className="flex-1">
                       <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 tracking-tight">
                         Software a medida, no plantillas
@@ -71,13 +70,13 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
                   </div>
                 </div>
                 <div
-                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 ${
+                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 hover:bg-white/5 ${
                     isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
                   }`}
                   style={{ transitionDelay: "150ms" }}
                 >
                   <div className="flex items-start gap-8 md:gap-12">
-                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/40 transition-colors" />
+                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/60 group-hover:w-1.5 transition-all duration-300" />
                     <div className="flex-1">
                       <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 tracking-tight">
                         De idea a producto real
@@ -95,7 +94,7 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
                   style={{ transitionDelay: "300ms" }}
                 >
                   <div className="flex items-start gap-8 md:gap-12">
-                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/40 transition-colors" />
+                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/60 group-hover:w-1.5 transition-all duration-300" />
                     <div className="flex-1">
                       <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 tracking-tight">
                         Automatización & evolución
@@ -110,13 +109,13 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
             ) : (
               <>
                 <div
-                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 ${
+                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 hover:bg-white/5 ${
                     isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
                   }`}
                   style={{ transitionDelay: "0ms" }}
                 >
                   <div className="flex items-start gap-8 md:gap-12">
-                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/40 transition-colors" />
+                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/60 group-hover:w-1.5 transition-all duration-300" />
                     <div className="flex-1">
                       <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 tracking-tight">
                         Custom software, not templates
@@ -128,13 +127,13 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
                   </div>
                 </div>
                 <div
-                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 ${
+                  className={`group py-12 md:py-16 border-b border-border/60 transition-all duration-700 hover:bg-white/5 ${
                     isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
                   }`}
                   style={{ transitionDelay: "150ms" }}
                 >
                   <div className="flex items-start gap-8 md:gap-12">
-                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/40 transition-colors" />
+                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/60 group-hover:w-1.5 transition-all duration-300" />
                     <div className="flex-1">
                       <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 tracking-tight">
                         From idea to working product
@@ -152,7 +151,7 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
                   style={{ transitionDelay: "300ms" }}
                 >
                   <div className="flex items-start gap-8 md:gap-12">
-                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/40 transition-colors" />
+                    <div className="flex-shrink-0 w-1 h-16 md:h-20 bg-foreground/20 group-hover:bg-foreground/60 group-hover:w-1.5 transition-all duration-300" />
                     <div className="flex-1">
                       <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 tracking-tight">
                         Automation & long-term partnership

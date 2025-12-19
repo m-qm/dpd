@@ -44,38 +44,73 @@ export function CapabilitiesSection({
     <section 
       id="capabilities" 
       ref={sectionRef} 
-      className={`py-24 md:py-32 lg:py-48 px-6 md:px-12 lg:px-20 border-t border-border transition-colors duration-500 ${
-        inverted ? "section-inverted" : ""
-      }`}
+      data-theme={inverted ? "light" : "dark"}
+      className="dpd-section dpd-chapter relative pt-12 md:pt-16 lg:pt-20"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Extended gradient from Hero for seamless blend - matches hero gradient position */}
+      <div 
+        className="pointer-events-none absolute inset-0 -top-80 md:-top-96 lg:-top-[120px]"
+        style={{
+          background: "radial-gradient(circle at 100% 35%, rgba(46, 88, 255, 0.18), transparent 75%)",
+          filter: "blur(100px)",
+          opacity: 0.7,
+        }}
+      />
+      {/* Additional subtle gradient layer for smoother transition */}
+      <div 
+        className="pointer-events-none absolute inset-0 -top-56 md:-top-72"
+        style={{
+          background: "radial-gradient(circle at 100% 30%, rgba(46, 88, 255, 0.12), transparent 65%)",
+          filter: "blur(110px)",
+          opacity: 0.6,
+        }}
+      />
+      {/* Third layer for ultra-smooth blend */}
+      <div 
+        className="pointer-events-none absolute inset-0 -top-40 md:-top-56"
+        style={{
+          background: "radial-gradient(circle at 100% 25%, rgba(46, 88, 255, 0.08), transparent 60%)",
+          filter: "blur(120px)",
+          opacity: 0.5,
+        }}
+      />
+      {/* Fourth ultra-subtle layer for perfect imperceptible blend */}
+      <div 
+        className="pointer-events-none absolute inset-0 -top-24 md:-top-40"
+        style={{
+          background: "radial-gradient(circle at 100% 20%, rgba(46, 88, 255, 0.04), transparent 55%)",
+          filter: "blur(130px)",
+          opacity: 0.3,
+        }}
+      />
+      {/* Grid overlay to match Hero aesthetic */}
+      <div className="pointer-events-none absolute inset-0 hero-grid" />
+      
+      <div className="dpd-container relative z-10">
         <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
-        <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-6 tracking-tight leading-[0.9]">
+        <h2 className="dpd-display font-normal text-foreground mb-6">
           {copy[locale].capabilitiesHeading}
         </h2>
-        <p className="text-sm md:text-base text-muted-foreground uppercase tracking-[0.16em] mb-16 md:mb-20 max-w-3xl">
+        <p className="dpd-kicker mb-14 md:mb-16 max-w-3xl">
           {locale === "es"
             ? "Software a medida · Herramientas internas · Automatización de procesos · Integraciones"
             : "Custom software · Internal tools · Process automation · Integrations"}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
           {copy[locale].capabilities.map((capability, index) => {
             const kind = iconKinds[index % iconKinds.length]
             return (
               <div
                 key={index}
-                className={`group relative border border-border bg-black/[0.03] hover:bg-black/[0.05] transition-all duration-500 ${
+                className={`dpd-card group ${
                   visibleItems.includes(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                } hover:-translate-y-1`}
+                } hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-500`}
               >
-                {/* subtle inner grid */}
-                <div className="pointer-events-none absolute inset-0 opacity-[0.12] hero-grid" />
-
                 <div className="relative p-8 md:p-10">
                   <div className="flex items-start justify-between gap-6 mb-10">
                     <div className="flex items-center gap-4">
-                      <div className="h-11 w-11 border border-border flex items-center justify-center bg-background/40">
+                      <div className="h-11 w-11 border border-border flex items-center justify-center bg-black/[0.02] group-hover:border-foreground/50 group-hover:scale-110 transition-all duration-300">
                         {kind === "square" && <div className="h-5 w-5 border border-foreground/70" />}
                         {kind === "circle" && <div className="h-5 w-5 rounded-full border border-foreground/70" />}
                         {kind === "triangle" && (
@@ -101,10 +136,10 @@ export function CapabilitiesSection({
 
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 leading-tight tracking-tight">
+                  <h3 className="text-2xl md:text-3xl font-normal text-foreground mb-4 leading-tight tracking-tight">
                     {capability.title}
                   </h3>
-                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-normal max-w-xl">
+                  <p className="dpd-body max-w-xl">
                     {capability.description}
                   </p>
                 </div>

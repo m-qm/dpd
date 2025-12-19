@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import type { MouseEvent } from "react"
 import { LanguageToggle } from "@/components/language-toggle"
 import { copy, type Locale } from "@/lib/copy"
 import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
@@ -11,26 +13,22 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [isFading, setIsFading] = useState(false)
 
   useEffect(() => {
-    // Small delay so the entrance animation starts after initial paint
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, 450)
+    }, 300)
 
     return () => clearTimeout(timer)
   }, [])
 
-  // Alternate the middle line between core claim and "Local development, global impact"
-  // with a very subtle, slow fade-out → swap → fade-in loop
   useEffect(() => {
     let timeoutId: number | undefined
     const intervalId = window.setInterval(() => {
       setIsFading(true)
-
       timeoutId = window.setTimeout(() => {
         setAltLineActive((prev) => !prev)
         setIsFading(false)
-      }, 1100)
-    }, 9000)
+      }, 800)
+    }, 10000)
 
     return () => {
       window.clearInterval(intervalId)
@@ -40,207 +38,214 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
     }
   }, [locale])
 
+  const scrollToId = (id: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    const el = document.getElementById(id)
+    if (!el) return
+    el.scrollIntoView({ behavior: "smooth", block: "center" })
+    window.history.replaceState(null, "", `#${id}`)
+  }
+
   return (
-    <section className="relative h-[100svh] flex flex-col bg-gradient-to-b from-background via-background/95 to-black">
-      {/* Minimal Navigation - Norgram style */}
-      <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-8 md:py-10 bg-black/40 backdrop-blur-sm border-b border-border/60 shrink-0">
+    <section
+      data-theme="dark"
+      className="relative h-[100svh] flex flex-col"
+    >
+      {/* Navigation */}
+      <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-6 md:py-10 shrink-0 z-50">
         <div className="flex items-center gap-3">
           <div className="flex-shrink-0">
             <Image
               src="/favicon-512.png"
               alt="Dual Perspective Digital"
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-md object-contain"
+              width={36}
+              height={36}
+              className="h-9 w-9 rounded-md object-contain"
               priority
             />
           </div>
-          <div className="text-base md:text-lg font-normal tracking-tight">Dual Perspective Digital</div>
+          <div className="text-sm md:text-base font-normal tracking-tight text-foreground">Dual Perspective Digital</div>
         </div>
-        <div className="flex items-center gap-4 md:gap-6 text-sm md:text-base">
-          <a href="#capabilities" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
+        <div className="flex items-center gap-5 md:gap-8 text-sm md:text-base">
+          <a
+            href="#capabilities"
+            onClick={scrollToId("capabilities")}
+            className="text-foreground/80 hover:text-foreground transition-colors font-normal hidden md:inline"
+          >
             {locale === "es" ? "Capacidades" : "Capabilities"}
           </a>
-          <a href="#faq" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
+          <a
+            href="#faq"
+            onClick={scrollToId("faq")}
+            className="text-foreground/80 hover:text-foreground transition-colors font-normal hidden md:inline"
+          >
             FAQ
           </a>
-          <a href="#contact" className="text-foreground hover:opacity-60 transition-opacity font-normal hidden md:inline">
+          <a
+            href="#contact"
+            onClick={scrollToId("contact")}
+            className="text-foreground/80 hover:text-foreground transition-colors font-normal hidden md:inline"
+          >
             {locale === "es" ? "Contacto" : "Contact"}
           </a>
-          <div className="hidden md:flex items-center gap-2 text-foreground">
-            <span className="text-muted-foreground">→</span>
-            <a href="mailto:hello@dualperspective.digital" className="text-foreground hover:opacity-60 transition-opacity font-normal">
+          <div className="hidden lg:flex items-center gap-2 text-foreground/60">
+            <span>→</span>
+            <a href="mailto:hello@dualperspective.digital" className="text-foreground/80 hover:text-foreground transition-colors font-normal text-sm">
               hello@dualperspective.digital
             </a>
           </div>
-          <div className="hidden md:block h-4 w-px bg-border/60" />
+          <div className="hidden md:block h-5 w-px bg-border/40" />
           <LanguageToggle />
         </div>
       </nav>
 
       {/* Hero Content */}
-      <div className="relative flex-1 min-h-0 flex items-center px-6 md:px-12 lg:px-20 py-10 md:py-14 lg:py-16 overflow-hidden">
-        {/* Background accents */}
+      <div className="relative flex-1 min-h-0 flex items-center px-6 md:px-12 lg:px-20 py-12 md:py-16 lg:py-20 overflow-hidden">
+        {/* Background effects */}
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
+        
+        {/* Extended gradient that bleeds into next section - creates seamless transition */}
+        <div 
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[60vh] md:h-[70vh] lg:h-[80vh]"
+          style={{
+            background: "radial-gradient(circle at 100% 0%, rgba(46, 88, 255, 0.18), transparent 75%)",
+            filter: "blur(100px)",
+            opacity: 0.7,
+            transform: "translateY(20%)",
+          }}
+        />
+        {/* Additional bottom gradient layer for extra smoothness */}
+        <div 
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] md:h-[50vh]"
+          style={{
+            background: "radial-gradient(circle at 100% 5%, rgba(46, 88, 255, 0.12), transparent 65%)",
+            filter: "blur(110px)",
+            opacity: 0.5,
+            transform: "translateY(30%)",
+          }}
+        />
+        {/* Ultra-subtle third layer for perfect blend */}
+        <div 
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[25vh] md:h-[35vh]"
+          style={{
+            background: "radial-gradient(circle at 100% 10%, rgba(46, 88, 255, 0.06), transparent 60%)",
+            filter: "blur(120px)",
+            opacity: 0.4,
+            transform: "translateY(40%)",
+          }}
+        />
+        
+        {/* Subtle animated orbs - more subtle */}
+        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/3 rounded-full blur-3xl animate-pulse opacity-50" />
+        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/2 rounded-full blur-3xl animate-pulse opacity-40" style={{ animationDelay: '1s', animationDuration: '4s' }} />
 
         <div
           className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left: Copy */}
-            <div className="lg:col-span-7">
-              <div className="text-xs md:text-sm uppercase tracking-[0.18em] text-muted-foreground mb-6">
+          <div className="max-w-4xl">
+            {/* Eyebrow */}
+            <div className="mb-6 md:mb-8">
+              <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
+              </span>
+            </div>
+
+            {/* Main Title */}
+            <h1 className="relative mb-8 md:mb-10">
+              <div className="grid opacity-0 pointer-events-none">
+                <div className="col-start-1 row-start-1">
+                  {copy[locale].hero.titleLines.map((line) => (
+                    <span key={line} className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] leading-[0.95] tracking-[-0.03em]">
+                      {line}
+                    </span>
+                  ))}
+                </div>
+                <div className="col-start-1 row-start-1">
+                  <span className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] leading-[0.95] tracking-[-0.03em]">
+                    {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
+                  </span>
+                </div>
               </div>
 
-              <h1 className="relative text-[12.5vw] sm:text-[9.5vw] md:text-[6vw] lg:text-[5.25rem] xl:text-[6.25rem] font-normal text-foreground mb-8 leading-[0.95] md:leading-[0.9] tracking-[-0.04em]">
-                {/* Invisible skeleton to lock height for both title states (prevents overlap when alt line wraps) */}
-                <div className="grid opacity-0">
-                  <div className="col-start-1 row-start-1">
-                    {copy[locale].hero.titleLines.map((line) => (
-                      <span key={line} className="block">
+              <div className={`absolute inset-0 transition-opacity duration-800 ${isFading ? "opacity-0" : "opacity-100"}`}>
+                {altLineActive ? (
+                  <span className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] font-normal text-foreground leading-[0.95] tracking-[-0.03em]">
+                    {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
+                  </span>
+                ) : (
+                  <>
+                    {copy[locale].hero.titleLines.map((line, index) => (
+                      <span 
+                        key={line} 
+                        className="block text-[13vw] sm:text-[10vw] md:text-[7vw] lg:text-[6rem] xl:text-[7rem] font-normal text-foreground leading-[0.95] tracking-[-0.03em]"
+                        style={{ 
+                          animationDelay: `${index * 100}ms`,
+                          animation: isVisible ? 'fadeInUp 0.8s ease-out forwards' : 'none',
+                          opacity: isVisible ? 1 : 0
+                        }}
+                      >
                         {line}
-                        <br />
                       </span>
                     ))}
-                  </div>
-                  <div className="col-start-1 row-start-1">
-                    <span className="block">
-                      {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
-                      <br />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Animated layer on top */}
-                <div className={`absolute inset-0 transition-opacity duration-1000 ${isFading ? "opacity-0" : "opacity-100"}`}>
-                  {altLineActive ? (
-                    <span className="block">
-                      {locale === "es" ? "Soluciones digitales a medida" : "Local development, global impact"}
-                      <br />
-                    </span>
-                  ) : (
-                    <>
-                      {copy[locale].hero.titleLines.map((line) => (
-                        <span key={line} className="block">
-                          {line}
-                          <br />
-                        </span>
-                      ))}
-                    </>
-                  )}
-                </div>
-              </h1>
-
-              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed font-normal max-w-2xl">
-                {copy[locale].hero.subtitle}
-              </p>
-
-              {/* CTAs */}
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center px-7 md:px-9 py-3.5 md:py-4 text-base md:text-lg font-normal tracking-tight rounded-none bg-foreground text-background hover:bg-foreground/90 transition-colors"
-                >
-                  {copy[locale].ctaButton}
-                </a>
-                <a
-                  href="#capabilities"
-                  className="inline-flex items-center justify-center px-7 md:px-9 py-3.5 md:py-4 text-base md:text-lg font-normal tracking-tight rounded-none border border-border/70 text-foreground hover:border-foreground/70 hover:bg-white/5 transition-colors"
-                >
-                  {locale === "es" ? "Ver capacidades" : "View capabilities"}
-                </a>
+                  </>
+                )}
               </div>
+            </h1>
 
-              {/* Chips */}
-              <div className="mt-8 flex flex-wrap gap-2">
-                {(
-                  locale === "es"
-                    ? ["Software a medida", "Herramientas internas", "Automatización de procesos", "Integraciones"]
-                    : ["Custom software", "Internal tools", "Process automation", "Integrations"]
-                ).map((label) => (
-                  <span
-                    key={label}
-                    className="inline-flex items-center px-3 py-1 text-xs md:text-sm uppercase tracking-[0.16em] text-muted-foreground border border-border/60 bg-black/20 backdrop-blur-sm"
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-10 md:mb-12">
+              {copy[locale].hero.subtitle}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 md:mb-12">
+              <a
+                href="#contact"
+                className="group inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight bg-foreground text-background hover:bg-foreground/90 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                {copy[locale].ctaButton}
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="#capabilities"
+                className="inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-200"
+              >
+                {locale === "es" ? "Ver capacidades" : "View capabilities"}
+              </a>
             </div>
 
-            {/* Right: Visual */}
-            <div className="lg:col-span-5 hidden lg:block">
-              <div className="relative border border-border/60 bg-black/30 backdrop-blur-sm p-8 overflow-hidden">
-                <div className="pointer-events-none absolute inset-0 opacity-60 hero-grid" />
-                <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
-
-                <div className="relative">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src="/favicon-32.png"
-                        alt="Dual Perspective Digital"
-                        width={28}
-                        height={28}
-                        className="h-7 w-7 rounded-md object-contain"
-                      />
-                      <div className="text-sm text-foreground tracking-tight">Dual Perspective Digital</div>
-                    </div>
-                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Barcelona</div>
-                  </div>
-
-                  <div className="mt-10 grid grid-cols-2 gap-6">
-                    {[
-                      {
-                        title: locale === "es" ? "Herramientas internas" : "Internal tools",
-                        body: locale === "es" ? "Paneles, CRM, operaciones." : "Dashboards, ops, CRM.",
-                        shape: "square",
-                      },
-                      {
-                        title: locale === "es" ? "Automatización" : "Automation",
-                        body: locale === "es" ? "Menos trabajo manual." : "Less manual work.",
-                        shape: "circle",
-                      },
-                      {
-                        title: locale === "es" ? "Integraciones" : "Integrations",
-                        body: locale === "es" ? "Sistemas conectados." : "Systems connected.",
-                        shape: "triangle",
-                      },
-                      {
-                        title: locale === "es" ? "Datos" : "Data",
-                        body: locale === "es" ? "Visibilidad y control." : "Clarity and control.",
-                        shape: "line",
-                      },
-                    ].map((item) => (
-                      <div key={item.title} className="border-t border-border/60 pt-5">
-                        <div className="flex items-start gap-3">
-                          <div className="mt-1.5 h-4 w-4 flex items-center justify-center">
-                            {item.shape === "square" && <div className="h-3.5 w-3.5 border border-foreground/70" />}
-                            {item.shape === "circle" && <div className="h-3.5 w-3.5 rounded-full border border-foreground/70" />}
-                            {item.shape === "triangle" && (
-                              <div
-                                className="h-3.5 w-3.5 border border-foreground/70"
-                                style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
-                              />
-                            )}
-                            {item.shape === "line" && <div className="h-px w-4 bg-foreground/70" />}
-                          </div>
-                          <div>
-                            <div className="text-sm text-foreground tracking-tight">{item.title}</div>
-                            <div className="text-xs text-muted-foreground mt-1">{item.body}</div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            {/* Service tags */}
+            <div className="flex flex-wrap gap-3 mb-16 md:mb-20">
+              {(
+                locale === "es"
+                  ? ["Software a medida", "Herramientas internas", "Automatización", "Integraciones"]
+                  : ["Custom software", "Internal tools", "Automation", "Integrations"]
+              ).map((label, index) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center px-4 py-2 text-xs uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200"
+                  style={{
+                    animationDelay: `${(index + 3) * 100}ms`,
+                    animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
+                    opacity: isVisible ? 1 : 0
+                  }}
+                >
+                  {label}
+                </span>
+              ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator - moved up to avoid collision with service tags */}
+      <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 hidden md:block">
+        <div className="flex flex-col items-center gap-2 text-muted-foreground/60">
+          <span className="text-xs uppercase tracking-[0.2em]">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-foreground/40 to-transparent animate-pulse" />
         </div>
       </div>
     </section>

@@ -63,34 +63,34 @@ const en: CopyShape = {
   ],
   approachHeading: "Our Approach",
   approachIntro:
-    "Custom software shaped around your real processes. We translate workflows into clear, efficient, and automated digital flows.",
+    "Custom software shaped around your real processes.",
   approachSteps: [
     {
       title: "Discovery & Strategy",
       description:
-        "We understand your business, processes, and automation opportunities. Then we define what software to build.",
+        "We understand your business and define what software to build.",
     },
     {
       title: "Design & Art Direction",
       description:
-        "We design interfaces and flows that make complex tasks clear, with a visual language true to your brand.",
+        "We design interfaces and flows that make complex tasks clear.",
     },
     {
       title: "Engineering & Craft",
       description:
-        "We build internal dashboards, platforms, and services that integrate with your existing systems, with performance and stability from day one.",
+        "We build platforms and services that integrate with your systems, with performance from day one.",
     },
     {
       title: "Ongoing Partnership",
       description:
-        "We measure usage, refine processes, add automations, and iterate as your business grows.",
+        "We measure, refine, and iterate as your business grows.",
     },
   ],
   clientsHeading: "Select Clients",
   clientsLabel: "Clients",
   clientTypes: ["Event organization", "Industrial groups", "Global manufacturers", "Logistics & shipping", "New brand launches"],
   clientsIntro:
-    "We partner with industrial groups, manufacturers, logistics companies, and event specialists. Often, we create the first digital presence for new brands.",
+    "We partner with industrial groups, manufacturers, logistics companies, and event specialists, creating solutions for their digital needs in events and beyond.",
   ctaHeading: "Custom software for processes that matter.",
   ctaBody:
     "First digital products, internal tools, process automation, and integrations tailored to your context.",
@@ -135,27 +135,27 @@ const es: CopyShape = {
   ],
   approachHeading: "Nuestro Enfoque",
   approachIntro:
-    "Software a medida adaptado a tus procesos. Traducimos flujos en experiencias digitales claras, eficientes y automatizadas.",
+    "Software a medida adaptado a tus procesos.",
   approachSteps: [
     {
       title: "Descubrimiento & Estrategia",
       description:
-        "Entendemos tu negocio, procesos y oportunidades de automatización. Definimos qué software construir.",
+        "Entendemos tu negocio y definimos qué software construir.",
     },
     {
       title: "Diseño de producto & UX",
       description:
-        "Diseñamos interfaces y flujos que hacen tareas complejas claras, con expresión visual coherente con tu marca.",
+        "Diseñamos interfaces y flujos que hacen tareas complejas claras.",
     },
     {
       title: "Ingeniería & Craft",
       description:
-        "Construimos paneles internos, plataformas y servicios que se integran con tus sistemas existentes, con rendimiento y estabilidad desde el inicio.",
+        "Construimos plataformas y servicios que se integran con tus sistemas, con rendimiento desde el inicio.",
     },
     {
       title: "Relación Continua",
       description:
-        "Medimos uso, afinamos procesos, añadimos automatizaciones e iteramos a medida que tu negocio crece.",
+        "Medimos, afinamos e iteramos a medida que tu negocio crece.",
     },
   ],
   clientsHeading: "Clientes",
