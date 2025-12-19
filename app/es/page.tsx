@@ -54,9 +54,9 @@ export default function HomeEs() {
       {/* Section 1: Capabilities - stays dark like Hero, no color change */}
       <CapabilitiesSection inverted={false} locale="es" />
       <ApproachSection inverted={false} locale="es" />
-      <PhilosophySection inverted={true} locale="es" />
+      <PhilosophySection inverted={false} locale="es" />
       <ClientsSection inverted={false} locale="es" />
-      <FAQSection locale="es" inverted={true} />
+      <FAQSection locale="es" inverted={false} />
       {/* Cool transition animation */}
       <TransitionAnimation locale="es" />
       <CTASection inverted={false} locale="es" />

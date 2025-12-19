@@ -47,20 +47,13 @@ export function CapabilitiesSection({
       data-theme={inverted ? "light" : "dark"}
       className="dpd-section dpd-chapter relative pt-24 md:pt-32 lg:pt-40"
     >
-      {/* Gradient at bottom left */}
-      <div 
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] md:h-[50vh]"
-        style={{
-          background: "radial-gradient(circle at 0% 100%, rgba(46, 88, 255, 0.18), transparent 75%)",
-          filter: "blur(100px)",
-          opacity: 0.7,
-        }}
-      />
+      {/* Gradient at bottom center */}
+      
       {/* Additional subtle gradient layer for smoother transition */}
       <div 
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[30vh] md:h-[40vh]"
+        className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-[50vh] md:h-[40vh]"
         style={{
-          background: "radial-gradient(circle at 0% 100%, rgba(46, 88, 255, 0.12), transparent 65%)",
+          background: "radial-gradient(circle at 50% 50%, rgba(46, 88, 255, 0.12), transparent 65%)",
           filter: "blur(110px)",
           opacity: 0.6,
         }}

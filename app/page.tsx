@@ -24,12 +24,12 @@ export default function Home() {
         <CapabilitiesSection inverted={false} locale="en" />
         {/* Section 2: Approach - stays dark, never inverts */}
         <ApproachSection inverted={false} locale="en" />
-        {/* Section 3: Philosophy - always inverted (white) */}
-        <PhilosophySection inverted={true} locale="en" />
+        {/* Section 3: Philosophy - stays dark */}
+        <PhilosophySection inverted={false} locale="en" />
         {/* Section 4: Clients - dedicated dark section */}
         <ClientsSection inverted={false} locale="en" />
         {/* Section 5: FAQ */}
-        <FAQSection locale="en" inverted={true} />
+        <FAQSection locale="en" inverted={false} />
         {/* Cool transition animation */}
         <TransitionAnimation locale="en" />
         {/* Section 6: Contact */}

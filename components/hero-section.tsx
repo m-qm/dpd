@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef, useMemo } from "react"
-import type { MouseEvent } from "react"
-import { LanguageToggle } from "@/components/language-toggle"
+import { HeroNavigation } from "@/components/hero-navigation"
 import { copy, type Locale } from "@/lib/copy"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
@@ -151,13 +150,6 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
     }
   }, [locale])
 
-  const scrollToId = (id: string) => (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault()
-    const el = document.getElementById(id)
-    if (!el) return
-    el.scrollIntoView({ behavior: "smooth", block: "center" })
-    window.history.replaceState(null, "", `#${id}`)
-  }
 
   return (
     <section
@@ -192,52 +184,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       </div>
 
       {/* Navigation */}
-      <nav className="relative flex justify-between items-center px-6 md:px-12 lg:px-20 py-6 md:py-10 shrink-0 z-50">
-        <div className="flex items-center gap-3">
-          <div className="flex-shrink-0">
-            <Image
-              src="/favicon-512.png"
-              alt="Dual Perspective Digital"
-              width={36}
-              height={36}
-              className="h-9 w-9 rounded-md object-contain"
-              priority
-            />
-          </div>
-          <div className="text-sm md:text-base font-normal tracking-tight text-foreground">Dual Perspective Digital</div>
-        </div>
-        <div className="flex items-center gap-5 md:gap-8 text-sm md:text-base">
-          <a
-            href="#capabilities"
-            onClick={scrollToId("capabilities")}
-            className="text-foreground/80 hover:text-foreground transition-colors font-normal hidden md:inline"
-          >
-            {locale === "es" ? "Capacidades" : "Capabilities"}
-          </a>
-          <a
-            href="#faq"
-            onClick={scrollToId("faq")}
-            className="text-foreground/80 hover:text-foreground transition-colors font-normal hidden md:inline"
-          >
-            FAQ
-          </a>
-          <a
-            href="#contact"
-            onClick={scrollToId("contact")}
-            className="text-foreground/80 hover:text-foreground transition-colors font-normal hidden md:inline"
-          >
-            {locale === "es" ? "Contacto" : "Contact"}
-          </a>
-          <div className="hidden lg:flex items-center gap-2 text-foreground/60">
-            <span>→</span>
-            <a href="mailto:hello@dualperspective.digital" className="text-foreground/80 hover:text-foreground transition-colors font-normal text-sm">
-              hello@dualperspective.digital
-            </a>
-          </div>
-          <div className="hidden md:block h-5 w-px bg-border/40" />
-          <LanguageToggle />
-        </div>
-      </nav>
+      <HeroNavigation locale={locale} />
 
       {/* Hero Content */}
       <div className="relative flex-1 min-h-0 flex items-center px-6 md:px-12 lg:px-20 py-12 md:py-16 lg:py-20 overflow-hidden z-10">
@@ -260,7 +207,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] md:h-[50vh]"
           style={{
             background: "radial-gradient(circle at 100% 5%, rgba(46, 88, 255, 0.12), transparent 65%)",
-            filter: "blur(110px)",
+            filter: "blur(10px)",
             opacity: 0.5,
             transform: "translateY(30%)",
           }}

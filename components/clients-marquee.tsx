@@ -9,12 +9,13 @@ const clients = [
 ]
 
 export function ClientsMarquee() {
-  // Duplicate items for seamless infinite scroll
-  const duplicatedClients = [...clients, ...clients]
+  // Duplicate items multiple times for seamless infinite scroll
+  // Need enough duplicates to ensure smooth looping without visible gaps
+  const duplicatedClients = [...clients, ...clients, ...clients, ...clients]
 
   return (
-    <div className="relative w-full overflow-hidden border-y border-border/40 py-8 md:py-10" style={{ contain: 'layout style paint' }}>
-      <div className="flex animate-marquee-reverse whitespace-nowrap will-change-transform" style={{ contain: 'layout style paint' }}>
+    <div className="relative w-full overflow-hidden border-y border-border/40 py-8 md:py-10">
+      <div className="flex animate-marquee-reverse whitespace-nowrap will-change-transform" style={{ width: 'fit-content' }}>
         {duplicatedClients.map((client, index) => {
           const isMaersk = client.name === "Maersk"
           const isDaikin = client.name === "DAIKIN"
