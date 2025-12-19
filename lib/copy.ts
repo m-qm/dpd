@@ -30,60 +30,60 @@ const en: CopyShape = {
     eyebrow: "Boutique custom software studio in Barcelona",
     titleLines: ["Your Process", "Our Focus"],
     subtitle:
-      "We partner with growing businesses and large companies. Custom software for small teams. Focused fixes for complex processes. A close, honest relationship from day one.",
+      "Fast. Specialized. Visually Striking. We build custom websites, interactive displays, and specialized solutions that demand rapid execution and exceptional visual design. A close, honest partnership from day one.",
   },
   capabilitiesHeading: "Capabilities",
   capabilitiesLabel: "Capabilities",
   capabilities: [
     {
-      title: "Custom digital products",
+      title: "Custom websites & web applications",
       description:
-        "Web applications and internal tools tailored to how your team works.",
+        "Bespoke websites and web applications tailored to your needs, built with fast execution and exceptional visual design.",
     },
     {
-      title: "Product & experience design",
+      title: "Interactive displays & event solutions",
       description:
-        "End-to-end product experience: flows and interfaces that make complex processes clear.",
+        "Interactive TV displays and screens for events and fairs. Specialized solutions that combine visual impact with technical precision.",
     },
     {
-      title: "Platforms & connected systems",
+      title: "Chatbots & conversational interfaces",
       description:
-        "Platforms that connect systems, data, and services with scalable architecture.",
+        "Intelligent chatbots and conversational interfaces that engage users and automate interactions across platforms.",
     },
     {
-      title: "E‑commerce & transactional flows",
+      title: "Messaging platform integrations",
       description:
-        "Purchase experiences and payment flows focused on conversion and clarity.",
+        "WhatsApp, Telegram, and messaging platform integrations that connect your systems with where your users communicate.",
     },
     {
-      title: "Technical excellence, data & automation",
+      title: "Fast execution & technical excellence",
       description:
-        "Clean code, solid performance, and a foundation for data visualisation, AI workflows, and process automation.",
+        "Highly specialized projects delivered quickly. Clean code, solid performance, and scalable architecture from day one.",
     },
   ],
   approachHeading: "Our Approach",
   approachIntro:
-    "Custom software shaped around your real processes.",
+    "Specialized solutions, executed fast, designed to impress.",
   approachSteps: [
     {
       title: "Discovery & Strategy",
       description:
-        "We understand your business and define what software to build.",
+        "We quickly understand your needs and define the specialized solution, even for time-sensitive projects.",
     },
     {
-      title: "Design & Art Direction",
+      title: "Design & Visual Craft",
       description:
-        "We design interfaces and flows that make complex tasks clear.",
+        "We design visually striking interfaces and experiences that make complex tasks clear and engaging.",
     },
     {
-      title: "Engineering & Craft",
+      title: "Fast Engineering & Execution",
       description:
-        "We build platforms and services that integrate with your systems, with performance from day one.",
+        "We build with speed and precision, delivering specialized solutions that integrate seamlessly and perform from day one.",
     },
     {
       title: "Ongoing Partnership",
       description:
-        "We measure, refine, and iterate as your business grows.",
+        "We measure, refine, and iterate as your business grows, maintaining the same fast, specialized approach.",
     },
   ],
   clientsHeading: "Select Clients",
@@ -91,9 +91,9 @@ const en: CopyShape = {
   clientTypes: ["Event organization", "Industrial groups", "Global manufacturers", "Logistics & shipping", "New brand launches"],
   clientsIntro:
     "We partner with industrial groups, manufacturers, logistics companies, and event specialists, creating solutions for their digital needs in events and beyond.",
-  ctaHeading: "Custom software for processes that matter.",
+  ctaHeading: "Specialized solutions, executed fast, designed to impress.",
   ctaBody:
-    "First digital products, internal tools, process automation, and integrations tailored to your context.",
+    "Custom websites, interactive displays, chatbots, messaging integrations, and specialized digital solutions tailored to your needs.",
   ctaButton: "Start a conversation",
 }
 
@@ -102,60 +102,60 @@ const es: CopyShape = {
     eyebrow: "Agencia boutique de software a medida en Barcelona",
     titleLines: ["Tu Proceso", "Nuestro Enfoque"],
     subtitle:
-      "Hacemos equipo con empresas en crecimiento y grandes compañías. Software a medida para equipos pequeños. Mejoras enfocadas para procesos complejos. Una relación cercana y honesta desde el primer día.",
+      "Rápido. Especializado. Visualmente Impactante. Construimos sitios web a medida, displays interactivos y soluciones especializadas que requieren ejecución rápida y diseño visual excepcional. Una relación cercana y honesta desde el primer día.",
   },
   capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Capacidades",
   capabilities: [
     {
-      title: "Productos digitales a medida",
+      title: "Sitios web y aplicaciones a medida",
       description:
-        "Aplicaciones web y herramientas internas adaptadas a cómo trabaja tu equipo.",
+        "Sitios web y aplicaciones web a medida adaptadas a tus necesidades, construidas con ejecución rápida y diseño visual excepcional.",
     },
     {
-      title: "Diseño de producto y experiencia",
+      title: "Displays interactivos y soluciones para eventos",
       description:
-        "Experiencia completa del producto: flujos e interfaces que hacen procesos complejos claros.",
+        "Displays interactivos y pantallas para eventos y ferias. Soluciones especializadas que combinan impacto visual con precisión técnica.",
     },
     {
-      title: "Plataformas y sistemas conectados",
+      title: "Chatbots e interfaces conversacionales",
       description:
-        "Plataformas que conectan sistemas, datos y servicios con arquitectura escalable.",
+        "Chatbots inteligentes e interfaces conversacionales que involucran a los usuarios y automatizan interacciones en múltiples plataformas.",
     },
     {
-      title: "E‑commerce y flujos transaccionales",
+      title: "Integraciones con plataformas de mensajería",
       description:
-        "Experiencias de compra y flujos de pago enfocados en conversión y claridad.",
+        "Integraciones con WhatsApp, Telegram y otras plataformas de mensajería que conectan tus sistemas con donde se comunican tus usuarios.",
     },
     {
-      title: "Excelencia técnica, datos & automatización",
+      title: "Ejecución rápida y excelencia técnica",
       description:
-        "Código limpio, rendimiento sólido y base técnica para visualización de datos, IA y automatización.",
+        "Proyectos altamente especializados entregados rápidamente. Código limpio, rendimiento sólido y arquitectura escalable desde el inicio.",
     },
   ],
   approachHeading: "Nuestro Enfoque",
   approachIntro:
-    "Software a medida adaptado a tus procesos.",
+    "Soluciones especializadas, ejecutadas rápido, diseñadas para impresionar.",
   approachSteps: [
     {
       title: "Descubrimiento & Estrategia",
       description:
-        "Entendemos tu negocio y definimos qué software construir.",
+        "Entendemos rápidamente tus necesidades y definimos la solución especializada, incluso para proyectos con plazos ajustados.",
     },
     {
-      title: "Diseño de producto & UX",
+      title: "Diseño & Craft Visual",
       description:
-        "Diseñamos interfaces y flujos que hacen tareas complejas claras.",
+        "Diseñamos interfaces y experiencias visualmente impactantes que hacen tareas complejas claras y atractivas.",
     },
     {
-      title: "Ingeniería & Craft",
+      title: "Ingeniería Rápida & Ejecución",
       description:
-        "Construimos plataformas y servicios que se integran con tus sistemas, con rendimiento desde el inicio.",
+        "Construimos con velocidad y precisión, entregando soluciones especializadas que se integran perfectamente y funcionan desde el inicio.",
     },
     {
       title: "Relación Continua",
       description:
-        "Medimos, afinamos e iteramos a medida que tu negocio crece.",
+        "Medimos, afinamos e iteramos a medida que tu negocio crece, manteniendo el mismo enfoque rápido y especializado.",
     },
   ],
   clientsHeading: "Clientes",
@@ -169,9 +169,9 @@ const es: CopyShape = {
   ],
   clientsIntro:
     "Colaboramos con grupos industriales, fabricantes, compañías logísticas y especialistas en eventos. A menudo creamos la primera presencia digital de nuevas marcas.",
-  ctaHeading: "Software a medida para procesos que importan.",
+  ctaHeading: "Soluciones especializadas, ejecutadas rápido, diseñadas para impresionar.",
   ctaBody:
-    "Primeros productos digitales, herramientas internas, automatizaciones e integraciones específicas para tu negocio.",
+    "Sitios web a medida, displays interactivos, chatbots, integraciones de mensajería y soluciones digitales especializadas adaptadas a tus necesidades.",
   ctaButton: "Iniciar una conversación",
 }
 

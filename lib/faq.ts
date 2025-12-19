@@ -10,65 +10,77 @@ export const faqContent: Record<Locale, FAQItem[]> = {
   en: [
     {
       id: "specialisation",
-      question: "What kind of software do you specialise in?",
+      question: "What kind of software and solutions do you specialize in?",
       answer:
-        "Bespoke web applications, internal dashboards, and process-focused tools tailored to how your team works.",
+        "We specialize in custom websites, interactive TV displays for events and fairs, chatbots, messaging platform integrations (WhatsApp, Telegram), and highly specialized digital solutions that require fast execution and exceptional visual design.",
     },
     {
-      id: "integrations",
-      question: "Can you build integrations with external platforms and tools?",
+      id: "chatbots-messaging",
+      question: "Do you build chatbots and messaging integrations?",
       answer:
-        "Yes. We connect software with external services to centralise communication and reduce manual work.",
+        "Yes. We build intelligent chatbots and conversational interfaces, as well as integrations with WhatsApp, Telegram, and other messaging platforms. These solutions connect your systems with where your users communicate, automating interactions and centralizing communication.",
     },
     {
-      id: "automation",
-      question: "Do you handle process automation?",
+      id: "event-projects",
+      question: "Do you work on event-specific projects?",
       answer:
-        "We identify repetitive steps and automate them with custom logic and integrations so your team focuses on what matters.",
+        "Yes. We frequently work on interactive displays and screens for events, fairs, and exhibitions. These projects require specialized expertise, fast execution, and visually striking design to create engaging experiences for event attendees.",
+    },
+    {
+      id: "fast-execution",
+      question: "How fast can you deliver custom solutions?",
+      answer:
+        "Speed is one of our core strengths. We're built for fast execution on specialized projects, especially time-sensitive ones like event displays. We quickly understand requirements, design visually striking solutions, and deliver with technical excellence—all while maintaining the quality and customization your project demands.",
+    },
+    {
+      id: "time-sensitive",
+      question: "What makes your approach different for time-sensitive projects?",
+      answer:
+        "We combine rapid execution with specialized expertise and visual excellence. Our approach prioritizes understanding your needs quickly, designing solutions that are both visually striking and technically sound, and executing with precision—even under tight deadlines. This makes us ideal for event projects, launches, and other time-sensitive initiatives.",
     },
     {
       id: "existing-systems",
       question: "Do you only build new products, or can you extend existing systems?",
       answer:
-        "Both. We take teams from idea to first product, and we extend existing systems with new modules, APIs, and integrations.",
-    },
-    {
-      id: "getting-started",
-      question: "How do projects usually start?",
-      answer:
-        "We start with focused sessions to understand your processes and goals. Then we define scope, technical approach, and roadmap.",
+        "Both. We take teams from idea to first product, and we extend existing systems with new modules, APIs, and integrations. Whether it's a new custom website, an interactive display system, or integrating chatbots into your existing platform, we adapt to your needs.",
     },
   ],
   es: [
     {
       id: "specialisation",
-      question: "¿En qué tipo de software estáis especializados?",
+      question: "¿En qué tipo de software y soluciones estáis especializados?",
       answer:
-        "Aplicaciones web a medida, paneles internos y herramientas orientadas a procesos, adaptadas a cómo trabaja tu equipo.",
+        "Estamos especializados en sitios web a medida, displays interactivos para eventos y ferias, chatbots, integraciones con plataformas de mensajería (WhatsApp, Telegram), y soluciones digitales altamente especializadas que requieren ejecución rápida y diseño visual excepcional.",
     },
     {
-      id: "integrations",
-      question: "¿Podéis crear integraciones con plataformas y herramientas externas?",
+      id: "chatbots-messaging",
+      question: "¿Construís chatbots e integraciones de mensajería?",
       answer:
-        "Sí. Conectamos el software con servicios externos para centralizar comunicación y reducir trabajo manual.",
+        "Sí. Construimos chatbots inteligentes e interfaces conversacionales, así como integraciones con WhatsApp, Telegram y otras plataformas de mensajería. Estas soluciones conectan tus sistemas con donde se comunican tus usuarios, automatizando interacciones y centralizando la comunicación.",
     },
     {
-      id: "automation",
-      question: "¿Os encargáis también de automatizar procesos?",
+      id: "event-projects",
+      question: "¿Trabajáis en proyectos específicos para eventos?",
       answer:
-        "Detectamos tareas repetitivas y las automatizamos con lógica a medida e integraciones para que tu equipo se centre en lo que aporta valor.",
+        "Sí. Trabajamos frecuentemente en displays interactivos y pantallas para eventos, ferias y exposiciones. Estos proyectos requieren experiencia especializada, ejecución rápida y diseño visualmente impactante para crear experiencias atractivas para los asistentes.",
+    },
+    {
+      id: "fast-execution",
+      question: "¿Qué tan rápido podéis entregar soluciones a medida?",
+      answer:
+        "La velocidad es una de nuestras fortalezas principales. Estamos construidos para ejecución rápida en proyectos especializados, especialmente aquellos con plazos ajustados como displays para eventos. Entendemos rápidamente los requisitos, diseñamos soluciones visualmente impactantes y entregamos con excelencia técnica—todo mientras mantenemos la calidad y personalización que tu proyecto requiere.",
+    },
+    {
+      id: "time-sensitive",
+      question: "¿Qué hace diferente vuestro enfoque para proyectos con plazos ajustados?",
+      answer:
+        "Combinamos ejecución rápida con experiencia especializada y excelencia visual. Nuestro enfoque prioriza entender tus necesidades rápidamente, diseñar soluciones que sean tanto visualmente impactantes como técnicamente sólidas, y ejecutar con precisión—incluso bajo plazos ajustados. Esto nos hace ideales para proyectos de eventos, lanzamientos y otras iniciativas con plazos ajustados.",
     },
     {
       id: "existing-systems",
       question: "¿Solo creáis productos nuevos o también ampliáis sistemas existentes?",
       answer:
-        "Ambas cosas. Pasamos de idea a primer producto, y ampliamos sistemas existentes con nuevos módulos, APIs e integraciones.",
-    },
-    {
-      id: "getting-started",
-      question: "¿Cómo empieza normalmente un proyecto?",
-      answer:
-        "Empezamos con sesiones enfocadas para entender tus procesos y objetivos. Luego definimos alcance, enfoque técnico y hoja de ruta.",
+        "Ambas cosas. Pasamos de idea a primer producto, y ampliamos sistemas existentes con nuevos módulos, APIs e integraciones. Ya sea un nuevo sitio web a medida, un sistema de displays interactivos, o integrar chatbots en tu plataforma existente, nos adaptamos a tus necesidades.",
     },
   ],
 }

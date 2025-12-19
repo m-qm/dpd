@@ -34,7 +34,7 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
               </a>
               <span className="opacity-40">·</span>
               <div className="text-foreground">
-                © DPD {new Date().getFullYear()}
+                © Dual Perspective {new Date().getFullYear()}
               </div>
             </div>
           </div>

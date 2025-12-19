@@ -109,7 +109,7 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
                   {/* Timeline dot with icon */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-10 h-10 rounded-full border-2 border-foreground/40 bg-background group-hover:border-blue-500/60 group-hover:scale-110 group-hover:bg-blue-500/5 transition-all duration-300">
+                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-10 h-10 rounded-full border-2 border-foreground/40 bg-background/80 backdrop-blur-md group-hover:border-blue-500/60 group-hover:scale-110 group-hover:bg-blue-500/10 transition-all duration-300">
                     {Icon && (
                       <Icon className="w-4 h-4 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300" />
                     )}
@@ -127,7 +127,7 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
                     >
                       {/* Number badge - large and prominent */}
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 border-2 border-border/60 flex items-center justify-center bg-background/60 group-hover/card:border-blue-500/40 group-hover/card:scale-110 group-hover/card:bg-blue-500/5 transition-all duration-300">
+                        <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 border-2 border-border/60 flex items-center justify-center bg-background/60 backdrop-blur-md group-hover/card:border-blue-500/40 group-hover/card:scale-110 group-hover/card:bg-blue-500/10 transition-all duration-300">
                           {Icon && (
                             <Icon className="w-8 h-8 md:w-10 md:h-10 text-foreground/70 group-hover/card:text-blue-400 transition-colors duration-300" />
                           )}

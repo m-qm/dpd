@@ -1,13 +1,69 @@
+"use client"
+
+import { useEffect, useRef } from "react"
 import { SectionBadge } from "@/components/section-badge"
 import { copy, type Locale } from "@/lib/copy"
 import { ContactForm } from "@/components/contact-form"
 
 export function CTASection({ inverted = false, locale = "en" }: { inverted?: boolean; locale?: Locale }) {
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Handle smooth scroll to contact section with offset
+    const scrollToContact = () => {
+      if (contentRef.current) {
+        const element = contentRef.current
+        const offset = 300 // Adjust this value as needed
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - offset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    const handleHashChange = () => {
+      if (window.location.hash === "#contact") {
+        // Small delay to ensure element is positioned
+        setTimeout(scrollToContact, 100)
+      }
+    }
+
+    // Check on mount if hash is already #contact (with delay for positioning)
+    if (window.location.hash === "#contact") {
+      setTimeout(scrollToContact, 300)
+    }
+
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange)
+    
+    // Also handle clicks on anchor links
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      const link = target.closest('a[href="#contact"]')
+      if (link) {
+        e.preventDefault()
+        scrollToContact()
+        // Update URL without triggering scroll
+        window.history.pushState(null, "", "#contact")
+      }
+    }
+
+    document.addEventListener("click", handleClick)
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange)
+      document.removeEventListener("click", handleClick)
+    }
+  }, [])
+
   return (
     <section 
       id="contact"
       data-theme={inverted ? "light" : "dark"}
-      className="dpd-section-compact dpd-chapter scroll-mt-10 md:scroll-mt-14 pt-24 md:pt-32 lg:pt-40 relative overflow-hidden"
+      className="dpd-section-compact dpd-chapter pt-[calc(6rem+30px)] md:pt-[calc(8rem+30px)] lg:pt-[calc(10rem+30px)] relative overflow-hidden"
     >
       {/* Gradient centered to match other sections */}
       <div 
@@ -28,7 +84,7 @@ export function CTASection({ inverted = false, locale = "en" }: { inverted?: boo
         }}
       />
       
-      <div className="dpd-container-narrow relative z-10">
+      <div ref={contentRef} className="dpd-container-narrow relative z-10">
         <SectionBadge number={6} label={locale === "es" ? "Contacto" : "Contact"} />
         <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-8 md:mb-12 leading-[1.1] tracking-tight">
           {copy[locale].ctaHeading}
