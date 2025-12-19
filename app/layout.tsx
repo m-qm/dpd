@@ -82,6 +82,24 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} data-theme="dark">
       <body className={`font-sans antialiased`}>
+        {/* Fix Chrome mobile viewport height when navbar appears/disappears */}
+        <Script
+          id="viewport-height-fix"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function setViewportHeight() {
+                  const vh = window.innerHeight * 0.01;
+                  document.documentElement.style.setProperty('--vh', vh + 'px');
+                }
+                setViewportHeight();
+                window.addEventListener('resize', setViewportHeight);
+                window.addEventListener('orientationchange', setViewportHeight);
+              })();
+            `,
+          }}
+        />
         <div aria-hidden className="site-bg" />
         {/* Consent Mode v2 defaults (deny until the CMP grants consent). */}
         <Script

@@ -151,6 +151,18 @@ html[data-theme="dark"] {
     height: -webkit-fill-available;
     /* Prevent pull-to-refresh on iOS */
     overscroll-behavior-y: none;
+    /* Fix Chrome mobile viewport height changes */
+    height: 100%;
+    height: 100dvh;
+    /* Use CSS variable for dynamic viewport height */
+    --vh: 1vh;
+  }
+  
+  body {
+    /* Fix Chrome mobile viewport height */
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: 100vh;
+    min-height: 100dvh;
   }
   
   /* Norgram-style typography */
@@ -522,6 +534,48 @@ html[data-theme="dark"] {
     [class*="overflow-x-auto"] {
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
+    }
+  }
+
+  /* Fix Chrome mobile scrolling glitches */
+  @media (max-width: 768px) {
+    /* Prevent layout shifts when Chrome navbar appears/disappears */
+    section {
+      min-height: calc(var(--vh, 1vh) * 100);
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+    
+    /* Fix scrolling performance in capabilities section */
+    .dpd-section {
+      will-change: scroll-position;
+      -webkit-overflow-scrolling: touch;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+    
+    /* Optimize cards for smooth scrolling */
+    .dpd-card {
+      will-change: transform, opacity;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+    
+    /* Fix fixed elements on Chrome mobile */
+    [class*="fixed"] {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+    
+    /* Smooth scrolling for all containers */
+    [class*="overflow-auto"],
+    [class*="overflow-y-auto"],
+    [class*="overflow-x-auto"] {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      scroll-behavior: smooth;
     }
   }
 }

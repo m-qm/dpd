@@ -88,6 +88,9 @@ export function CapabilitiesSection({
                 className={`dpd-card group ${
                   visibleItems.includes(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 } hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-500`}
+                style={{
+                  willChange: visibleItems.includes(index) ? 'auto' : 'transform, opacity',
+                }}
               >
                 <div className="relative p-8 md:p-10">
                   <div className="flex items-start justify-between gap-6 mb-10">
