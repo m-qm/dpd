@@ -1,16 +1,129 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef, useMemo } from "react"
 import type { MouseEvent } from "react"
 import { LanguageToggle } from "@/components/language-toggle"
 import { copy, type Locale } from "@/lib/copy"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { Canvas, useFrame } from "@react-three/fiber"
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei"
+import * as THREE from "three"
+
+// Cloud particle component
+function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { particleCount?: number; opacity?: number; size?: number }) {
+  const cloudRef = useRef<THREE.Points>(null)
+  
+  const { positions, colors } = useMemo(() => {
+    const positions = new Float32Array(particleCount * 3)
+    const colors = new Float32Array(particleCount * 3)
+    
+    for (let i = 0; i < particleCount; i++) {
+      const i3 = i * 3
+      
+      // Create cloud-like distribution
+      const radius = Math.random() * 20 + 8
+      const theta = Math.random() * Math.PI * 2
+      const phi = Math.acos(Math.random() * 2 - 1)
+      
+      positions[i3] = radius * Math.sin(phi) * Math.cos(theta)
+      positions[i3 + 1] = (Math.random() - 0.5) * 12
+      positions[i3 + 2] = radius * Math.sin(phi) * Math.sin(theta)
+      
+      // Galaxy-like color palette: purples, pinks, blues, whites
+      const colorType = Math.random()
+      const brightness = Math.random() * 0.3 + 0.5 // Subtle brightness
+      
+      if (colorType < 0.3) {
+        // Deep purple/magenta
+        colors[i3] = brightness * 0.8 // R
+        colors[i3 + 1] = brightness * 0.4 // G
+        colors[i3 + 2] = brightness * 1.0 // B
+      } else if (colorType < 0.55) {
+        // Pink/magenta
+        colors[i3] = brightness * 1.0 // R
+        colors[i3 + 1] = brightness * 0.6 // G
+        colors[i3 + 2] = brightness * 0.9 // B
+      } else if (colorType < 0.75) {
+        // Blue/cyan
+        colors[i3] = brightness * 0.3 // R
+        colors[i3 + 1] = brightness * 0.7 // G
+        colors[i3 + 2] = brightness * 1.0 // B
+      } else if (colorType < 0.9) {
+        // Purple-blue
+        colors[i3] = brightness * 0.6 // R
+        colors[i3 + 1] = brightness * 0.5 // G
+        colors[i3 + 2] = brightness * 1.0 // B
+      } else {
+        // Soft white/blue-white
+        colors[i3] = brightness * 0.95 // R
+        colors[i3 + 1] = brightness * 0.95 // G
+        colors[i3 + 2] = brightness * 1.0 // B
+      }
+    }
+    
+    return { positions, colors }
+  }, [])
+
+  useFrame((state) => {
+    if (cloudRef.current) {
+      cloudRef.current.rotation.y = state.clock.elapsedTime * 0.02
+    }
+  })
+
+  return (
+    <points ref={cloudRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={positions.length / 3}
+          array={positions}
+          itemSize={3}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          count={colors.length / 3}
+          array={colors}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={size}
+        vertexColors
+        transparent
+        opacity={opacity}
+        sizeAttenuation
+        blending={THREE.AdditiveBlending}
+        depthWrite={false}
+      />
+    </points>
+  )
+}
+
+// Multiple cloud layers for depth
+function CloudLayers({ isMobile = false }: { isMobile?: boolean }) {
+  const particleCount = isMobile ? 1200 : 4000
+  const opacity = isMobile ? 0.12 : 0.2
+  const size = isMobile ? 0.06 : 0.08
+  
+  return (
+    <>
+      <CloudParticles particleCount={particleCount} opacity={opacity} size={size} />
+      {!isMobile && (
+        <group position={[6, 1, -4]} scale={0.6}>
+          <CloudParticles particleCount={Math.floor(particleCount * 0.6)} opacity={opacity * 0.8} size={size} />
+        </group>
+      )}
+    </>
+  )
+}
 
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
   const [altLineActive, setAltLineActive] = useState(false)
   const [isFading, setIsFading] = useState(false)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -51,8 +164,35 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       data-theme="dark"
       className="relative h-[100svh] flex flex-col"
     >
+      {/* 3D Cloud Canvas Background */}
+      <div className="absolute inset-0 z-0">
+        <Canvas>
+          <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={75} />
+          
+          {/* Lighting - Galaxy colors */}
+          <ambientLight intensity={0.4} />
+          <directionalLight position={[10, 10, 5]} intensity={0.5} color="#b8a0ff" />
+          <pointLight position={[-10, -10, -5]} intensity={0.25} color="#ffa0d0" />
+          <pointLight position={[5, -8, 3]} intensity={0.2} color="#a0c8ff" />
+          <pointLight position={[-5, 8, -3]} intensity={0.2} color="#d0a0ff" />
+          
+          {/* Cloud layers */}
+          <CloudLayers isMobile={isMobile} />
+          
+          {/* Controls for interaction */}
+          <OrbitControls 
+            enableZoom={false}
+            enablePan={false}
+            autoRotate
+            autoRotateSpeed={0.2}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 3}
+          />
+        </Canvas>
+      </div>
+
       {/* Navigation */}
-      <nav className="flex justify-between items-center px-6 md:px-12 lg:px-20 py-6 md:py-10 shrink-0 z-50">
+      <nav className="relative flex justify-between items-center px-6 md:px-12 lg:px-20 py-6 md:py-10 shrink-0 z-50">
         <div className="flex items-center gap-3">
           <div className="flex-shrink-0">
             <Image
@@ -100,7 +240,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       </nav>
 
       {/* Hero Content */}
-      <div className="relative flex-1 min-h-0 flex items-center px-6 md:px-12 lg:px-20 py-12 md:py-16 lg:py-20 overflow-hidden">
+      <div className="relative flex-1 min-h-0 flex items-center px-6 md:px-12 lg:px-20 py-12 md:py-16 lg:py-20 overflow-hidden z-10">
         {/* Background effects */}
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
@@ -147,14 +287,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         >
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="mb-6 md:mb-8">
+            <div className="mb-4 md:mb-8">
               <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
               </span>
             </div>
 
             {/* Main Title */}
-            <h1 className="relative mb-8 md:mb-10">
+            <h1 className="relative mb-6 md:mb-10">
               <div className="grid opacity-0 pointer-events-none">
                 <div className="col-start-1 row-start-1">
                   {copy[locale].hero.titleLines.map((line) => (
@@ -196,12 +336,12 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-10 md:mb-12">
+            <p className="text-base md:text-xl lg:text-2xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-12">
               {copy[locale].hero.subtitle}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 md:mb-12">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-12">
               <a
                 href="#contact"
                 className="group inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight bg-foreground text-background hover:bg-foreground/90 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
@@ -217,8 +357,8 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </a>
             </div>
 
-            {/* Service tags */}
-            <div className="flex flex-wrap gap-3 mb-16 md:mb-20">
+            {/* Service tags - hidden on mobile */}
+            <div className="hidden md:flex flex-wrap gap-3 mb-16 md:mb-20">
               {(
                 locale === "es"
                   ? ["Software a medida", "Herramientas internas", "Automatización", "Integraciones"]
@@ -241,8 +381,8 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         </div>
       </div>
 
-      {/* Scroll indicator - moved up to avoid collision with service tags */}
-      <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 hidden md:block">
+      {/* Scroll indicator - positioned to avoid collision with service tags */}
+      <div className="absolute bottom-16 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block z-50">
         <div className="flex flex-col items-center gap-2 text-muted-foreground/60">
           <span className="text-xs uppercase tracking-[0.2em]">Scroll</span>
           <div className="w-px h-8 bg-gradient-to-b from-foreground/40 to-transparent animate-pulse" />

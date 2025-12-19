@@ -308,8 +308,12 @@ export function LeadChat() {
       {/* Panel */}
       {open && (
         <div 
-          className="w-[92vw] max-w-[360px] border-2 border-foreground/30 bg-background/90 backdrop-blur-sm shadow-lg transition-opacity duration-200" 
-          style={panelVars}
+          className="w-[92vw] max-w-[360px] border-2 border-foreground/30 bg-background/90 backdrop-blur-sm shadow-lg"
+          style={{
+            ...panelVars,
+            animation: "chatSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+            transformOrigin: "bottom right",
+          }}
         >
           <div className="px-4 py-3 border-b-2 border-foreground/20 flex items-center justify-between">
             <div>
