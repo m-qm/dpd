@@ -1,4 +1,3 @@
-import { GeometricPattern } from "@/components/geometric-pattern"
 import type { Locale } from "@/lib/copy"
 
 export function Footer({ locale = "en" }: { locale?: Locale }) {
@@ -41,8 +40,6 @@ export function Footer({ locale = "en" }: { locale?: Locale }) {
           </div>
         </div>
       </div>
-
-      <GeometricPattern />
     </footer>
   )
 }

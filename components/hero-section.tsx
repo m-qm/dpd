@@ -201,37 +201,46 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
         
-        {/* Extended gradient that bleeds into next section - barely visible */}
+        {/* Extended gradient that bleeds into next section - more visible */}
         <div 
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[60vh] md:h-[70vh] lg:h-[80vh]"
           style={{
-            background: "radial-gradient(circle at 100% 0%, rgba(46, 88, 255, 0.02), transparent 95%)",
-            opacity: 0.05,
+            background: "radial-gradient(circle at 100% 0%, rgba(46, 88, 255, 0.08), transparent 95%)",
+            opacity: 0.15,
             transform: "translateY(20%)",
+            filter: "blur(40px)",
           }}
         />
-        {/* Additional bottom gradient layer - barely visible */}
+        {/* Additional bottom gradient layer */}
         <div 
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] md:h-[50vh]"
           style={{
-            background: "radial-gradient(circle at 100% 5%, rgba(46, 88, 255, 0.01), transparent 90%)",
-            opacity: 0.03,
+            background: "radial-gradient(circle at 100% 5%, rgba(184, 160, 255, 0.06), transparent 90%)",
+            opacity: 0.12,
             transform: "translateY(30%)",
+            filter: "blur(30px)",
           }}
         />
-        {/* Ultra-subtle third layer - almost invisible */}
+        {/* Third layer for depth */}
         <div 
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[25vh] md:h-[35vh]"
           style={{
-            background: "radial-gradient(circle at 100% 10%, rgba(46, 88, 255, 0.008), transparent 85%)",
-            opacity: 0.02,
+            background: "radial-gradient(circle at 100% 10%, rgba(160, 200, 255, 0.04), transparent 85%)",
+            opacity: 0.08,
             transform: "translateY(40%)",
+            filter: "blur(20px)",
           }}
         />
         
-        {/* Animated orbs - barely visible */}
-        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/1 rounded-full animate-pulse opacity-[0.02]" />
-        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/1 rounded-full animate-pulse opacity-[0.01]" style={{ animationDelay: '1s', animationDuration: '4s' }} />
+        {/* Animated orbs - more visible for depth */}
+        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full animate-pulse opacity-30" style={{ filter: 'blur(60px)' }} />
+        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-500/5 rounded-full animate-pulse opacity-25" style={{ animationDelay: '1s', animationDuration: '4s', filter: 'blur(50px)' }} />
+        <div className="pointer-events-none absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-500/4 rounded-full animate-pulse opacity-20" style={{ animationDelay: '2s', animationDuration: '5s', filter: 'blur(40px)' }} />
+        
+        {/* Floating geometric shapes */}
+        <div className="pointer-events-none absolute top-[15%] right-[20%] w-2 h-2 bg-foreground/20 rounded-full animate-float" />
+        <div className="pointer-events-none absolute bottom-[25%] right-[15%] w-1.5 h-1.5 bg-blue-400/30 rounded-full animate-float-delayed" />
+        <div className="pointer-events-none absolute top-[60%] left-[10%] w-1 h-1 bg-purple-400/25 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
 
         <div
           className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${
@@ -310,7 +319,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-12">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-8 md:mb-12">
               <a
                 href="#contact"
                 className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:shadow-xl hover:shadow-blue-500/30"
@@ -362,8 +371,40 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </a>
             </div>
 
-            {/* Service tags - hidden on mobile */}
-            <div className="hidden md:flex flex-wrap gap-3 mb-16 md:mb-20">
+            {/* Stats Section */}
+            <div className="flex flex-wrap items-center gap-6 md:gap-8 mb-8 md:mb-12">
+              {(
+                locale === "es"
+                  ? [
+                      { value: "Barcelona", label: "Estudio" },
+                      { value: "A medida", label: "Enfoque" },
+                    ]
+                  : [
+                      { value: "Barcelona", label: "Studio" },
+                      { value: "Custom", label: "Focus" },
+                    ]
+              ).map((stat, index) => (
+                <div
+                  key={stat.label}
+                  className="flex items-baseline gap-2"
+                  style={{
+                    animationDelay: `${(index + 5) * 100}ms`,
+                    animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
+                    opacity: isVisible ? 1 : 0
+                  }}
+                >
+                  <span className="text-2xl md:text-3xl font-serif text-foreground tracking-tight">
+                    {stat.value}
+                  </span>
+                  <span className="text-xs md:text-sm uppercase tracking-[0.12em] text-muted-foreground/70 font-medium">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Service tags - visible on all screens but smaller on mobile */}
+            <div className="flex flex-wrap gap-2 md:gap-3 mb-12 md:mb-16">
               {(
                 locale === "es"
                   ? ["Software a medida", "Herramientas internas", "Automatización", "Integraciones"]
@@ -371,9 +412,9 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               ).map((label, index) => (
                 <span
                   key={label}
-                  className="inline-flex items-center px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200"
+                  className="inline-flex items-center px-2.5 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200"
                   style={{
-                    animationDelay: `${(index + 3) * 100}ms`,
+                    animationDelay: `${(index + 8) * 100}ms`,
                     animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
                     opacity: isVisible ? 1 : 0
                   }}

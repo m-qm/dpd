@@ -63,7 +63,7 @@ export function CapabilitiesSection({
       
       <div className="dpd-container relative z-10">
         <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
-        <h2 className="dpd-display font-normal text-foreground mb-6">
+        <h2 className="dpd-display font-normal text-foreground mb-10 md:mb-12">
           {copy[locale].capabilitiesHeading}
         </h2>
         <p className="dpd-kicker mb-14 md:mb-16 max-w-3xl">
