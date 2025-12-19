@@ -90,18 +90,55 @@ export default function RootLayout({
             __html: `
               (function() {
                 if (typeof window === 'undefined') return;
+                
+                let ticking = false;
+                let lastHeight = window.innerHeight;
+                
                 function setViewportHeight() {
-                  const vh = window.innerHeight * 0.01;
+                  const currentHeight = window.innerHeight;
+                  
+                  // Only update if height actually changed (prevents unnecessary updates)
+                  if (Math.abs(currentHeight - lastHeight) < 1) return;
+                  
+                  lastHeight = currentHeight;
+                  const vh = currentHeight * 0.01;
                   document.documentElement.style.setProperty('--vh', vh + 'px');
+                  
+                  // Prevent visual glitches by using requestAnimationFrame
+                  if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                      document.body.style.minHeight = 'calc(var(--vh, 1vh) * 100)';
+                      ticking = false;
+                    });
+                    ticking = true;
+                  }
                 }
-                // Set initial value
-                if (document.readyState === 'loading') {
-                  document.addEventListener('DOMContentLoaded', setViewportHeight);
-                } else {
-                  setViewportHeight();
+                
+                // Set initial value immediately
+                setViewportHeight();
+                
+                // Use visualViewport API if available (better for Chrome mobile)
+                if (window.visualViewport) {
+                  window.visualViewport.addEventListener('resize', setViewportHeight);
+                  window.visualViewport.addEventListener('scroll', setViewportHeight);
                 }
-                window.addEventListener('resize', setViewportHeight);
-                window.addEventListener('orientationchange', setViewportHeight);
+                
+                // Fallback for browsers without visualViewport
+                window.addEventListener('resize', setViewportHeight, { passive: true });
+                window.addEventListener('orientationchange', function() {
+                  setTimeout(setViewportHeight, 100);
+                });
+                
+                // Handle scroll events that trigger navbar show/hide
+                let lastScrollY = window.scrollY;
+                window.addEventListener('scroll', function() {
+                  const currentScrollY = window.scrollY;
+                  // Only update if scroll direction changed significantly
+                  if (Math.abs(currentScrollY - lastScrollY) > 50) {
+                    setTimeout(setViewportHeight, 50);
+                    lastScrollY = currentScrollY;
+                  }
+                }, { passive: true });
               })();
             `,
           }}
