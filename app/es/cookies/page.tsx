@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import Script from "next/script"
 import { Breadcrumbs } from "@/components/breadcrumbs"
+import { CookieDeclaration } from "@/components/cookie-declaration"
 
 export const metadata: Metadata = {
   title: "Cookies — Dual Perspective Digital",
@@ -34,13 +34,7 @@ export default function CookiesPageEs() {
             La lista de cookies se genera automáticamente por nuestro gestor de consentimiento.
           </p>
 
-          <Script
-            id="CookieDeclaration"
-            src="https://consent.cookiebot.com/8d1922ed-2465-4011-9bb9-342ee3cd73fd/cd.js"
-            strategy="afterInteractive"
-            type="text/javascript"
-          />
-          <div id="CookieDeclaration" />
+          <CookieDeclaration locale="es" />
         </div>
       </div>
     </main>

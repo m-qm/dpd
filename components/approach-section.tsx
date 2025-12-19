@@ -109,9 +109,9 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
                   {/* Timeline dot with icon */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-14 h-14 rounded-full border-2 border-foreground/40 bg-background group-hover:border-blue-500/60 group-hover:scale-110 group-hover:bg-blue-500/5 transition-all duration-300">
+                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-10 h-10 rounded-full border-2 border-foreground/40 bg-background group-hover:border-blue-500/60 group-hover:scale-110 group-hover:bg-blue-500/5 transition-all duration-300">
                     {Icon && (
-                      <Icon className="w-6 h-6 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300" />
+                      <Icon className="w-4 h-4 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300" />
                     )}
                   </div>
 
