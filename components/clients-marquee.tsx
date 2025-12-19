@@ -13,8 +13,8 @@ export function ClientsMarquee() {
   const duplicatedClients = [...clients, ...clients]
 
   return (
-    <div className="relative w-full overflow-hidden border-y border-border/40 py-8 md:py-10">
-      <div className="flex animate-marquee-reverse whitespace-nowrap will-change-transform">
+    <div className="relative w-full overflow-hidden border-y border-border/40 py-8 md:py-10" style={{ contain: 'layout style paint' }}>
+      <div className="flex animate-marquee-reverse whitespace-nowrap will-change-transform" style={{ contain: 'layout style paint' }}>
         {duplicatedClients.map((client, index) => {
           const isMaersk = client.name === "Maersk"
           const isDaikin = client.name === "DAIKIN"
