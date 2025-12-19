@@ -341,18 +341,6 @@ html[data-theme="dark"] {
     transform: translateY(-2px);
   }
 
-  .geometric-pattern {
-    background-image: repeating-linear-gradient(
-      90deg,
-      oklch(0.05 0 0) 0px,
-      oklch(0.05 0 0) 2px,
-      oklch(1 0 0) 2px,
-      oklch(1 0 0) 4px
-    );
-    background-size: 4px 100%;
-    background-repeat: repeat-x;
-  }
-
   /* Full color inversion - white background, black text */
   .section-inverted {
     /* kept for legacy usage; prefer data-theme + dpd-chapter tokens */

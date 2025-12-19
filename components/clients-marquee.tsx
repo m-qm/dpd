@@ -6,6 +6,7 @@ const clients = [
   { name: "PRO EXPO", src: "/clients/proexpo.webp", alt: "PRO EXPO logo — experiential events partner" },
   { name: "DAIKIN", src: "/clients/daikin.svg", alt: "Daikin logo — HVAC manufacturer client" },
   { name: "Maersk", src: "/clients/maersk.png", alt: "Maersk logo — global logistics and shipping client" },
+  { name: "Eseme", src: "/clients/eseme.png", alt: "Eseme logo — digital agency client" },
 ]
 
 export function ClientsMarquee() {
@@ -15,6 +16,18 @@ export function ClientsMarquee() {
 
   return (
     <div className="relative w-full overflow-hidden border-y border-border/40 py-8 md:py-10">
+      {/* Left fade gradient */}
+      <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 z-10 pointer-events-none" 
+        style={{
+          background: 'linear-gradient(to right, var(--background) 0%, transparent 100%)'
+        }}
+      />
+      {/* Right fade gradient */}
+      <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 z-10 pointer-events-none" 
+        style={{
+          background: 'linear-gradient(to left, var(--background) 0%, transparent 100%)'
+        }}
+      />
       <div className="flex animate-marquee-reverse whitespace-nowrap will-change-transform" style={{ width: 'fit-content' }}>
         {duplicatedClients.map((client, index) => {
           const isMaersk = client.name === "Maersk"

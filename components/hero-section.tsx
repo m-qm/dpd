@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef, useMemo } from "react"
 import { HeroNavigation } from "@/components/hero-navigation"
 import { copy, type Locale } from "@/lib/copy"
-import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Canvas, useFrame } from "@react-three/fiber"
@@ -130,9 +129,10 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
     setAltLineActive(false)
     setIsFading(false)
     
+    // Wait for any ongoing transitions to complete before showing new content
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, 100)
+    }, 200)
 
     return () => clearTimeout(timer)
   }, [locale])
@@ -141,17 +141,29 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
     // Only start the alternating title animation after initial visibility
     if (!isVisible) return
     
+    // Reset to default state when locale changes
+    setAltLineActive(false)
+    setIsFading(false)
+    
+    let intervalId: number | undefined
     let timeoutId: number | undefined
-    const intervalId = window.setInterval(() => {
-      setIsFading(true)
-      timeoutId = window.setTimeout(() => {
-        setAltLineActive((prev) => !prev)
-        setIsFading(false)
-      }, 800)
-    }, 10000)
+    
+    // Wait a bit before starting the alternating animation
+    const startTimer = setTimeout(() => {
+      intervalId = window.setInterval(() => {
+        setIsFading(true)
+        timeoutId = window.setTimeout(() => {
+          setAltLineActive((prev) => !prev)
+          setIsFading(false)
+        }, 800)
+      }, 10000)
+    }, 2000) // Start alternating after 2 seconds
 
     return () => {
-      window.clearInterval(intervalId)
+      clearTimeout(startTimer)
+      if (intervalId) {
+        window.clearInterval(intervalId)
+      }
       if (timeoutId) {
         window.clearTimeout(timeoutId)
       }
@@ -243,20 +255,26 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         <div className="pointer-events-none absolute top-[60%] left-[10%] w-1 h-1 bg-purple-400/25 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
 
         <div
-          className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${
+          key={`hero-content-${locale}`}
+          className={`relative max-w-7xl mx-auto w-full transition-all duration-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="mb-4 md:mb-8 hidden md:block">
+            <div 
+              key={`eyebrow-${locale}`}
+              className={`mb-4 md:mb-8 hidden md:block transition-opacity duration-300 ${
+                isVisible ? "opacity-100" : "opacity-0"
+              }`}
+            >
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
               </span>
             </div>
 
             {/* Main Title */}
-            <h1 className="relative mb-6 md:mb-10 font-serif">
+            <h1 key={locale} className="relative mb-6 md:mb-10 font-serif">
               <div className="grid opacity-0 pointer-events-none">
                 <div className="col-start-1 row-start-1">
                   {copy[locale].hero.titleLines.map((line) => (
@@ -280,7 +298,10 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                 </div>
               </div>
 
-              <div className={`absolute inset-0 transition-opacity duration-800 ${isFading ? "opacity-0" : "opacity-100"}`}>
+              <div 
+                key={`title-content-${locale}`}
+                className={`absolute inset-0 transition-opacity duration-300 ${isFading && isVisible ? "opacity-0" : isVisible ? "opacity-100" : "opacity-0"}`}
+              >
                 {altLineActive ? (
                   locale === "es" ? (
                     <>
@@ -314,7 +335,12 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-12">
+            <p 
+              key={`subtitle-${locale}`}
+              className={`text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-12 transition-opacity duration-300 ${
+                isVisible ? "opacity-100" : "opacity-0"
+              }`}
+            >
               {copy[locale].hero.subtitle}
             </p>
 
