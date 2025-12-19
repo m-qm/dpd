@@ -197,7 +197,6 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[60vh] md:h-[70vh] lg:h-[80vh]"
           style={{
             background: "radial-gradient(circle at 100% 0%, rgba(46, 88, 255, 0.18), transparent 75%)",
-            filter: "blur(100px)",
             opacity: 0.7,
             transform: "translateY(20%)",
           }}
@@ -207,7 +206,6 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] md:h-[50vh]"
           style={{
             background: "radial-gradient(circle at 100% 5%, rgba(46, 88, 255, 0.12), transparent 65%)",
-            filter: "blur(10px)",
             opacity: 0.5,
             transform: "translateY(30%)",
           }}
@@ -217,15 +215,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[25vh] md:h-[35vh]"
           style={{
             background: "radial-gradient(circle at 100% 10%, rgba(46, 88, 255, 0.06), transparent 60%)",
-            filter: "blur(120px)",
             opacity: 0.4,
             transform: "translateY(40%)",
           }}
         />
         
         {/* Subtle animated orbs - more subtle */}
-        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/3 rounded-full blur-3xl animate-pulse opacity-50" />
-        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/2 rounded-full blur-3xl animate-pulse opacity-40" style={{ animationDelay: '1s', animationDuration: '4s' }} />
+        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/3 rounded-full animate-pulse opacity-50" />
+        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/2 rounded-full animate-pulse opacity-40" style={{ animationDelay: '1s', animationDuration: '4s' }} />
 
         <div
           className={`relative max-w-7xl mx-auto w-full transition-all duration-1000 ${

@@ -142,6 +142,8 @@ html[data-theme="dark"] {
     height: 100dvh; /* Use dynamic viewport height */
     /* Use CSS variable for viewport height (set by JS) */
     --vh: 1vh;
+    /* Ensure dark background to prevent white showing through */
+    background-color: var(--background);
   }
   
   @media (min-width: 768px) {
@@ -152,7 +154,8 @@ html[data-theme="dark"] {
   
   body {
     @apply text-foreground;
-    background: transparent;
+    /* Use dark background to prevent white showing through */
+    background-color: var(--background);
     font-feature-settings: "kern" 1, "liga" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -211,11 +214,16 @@ html[data-theme="dark"] {
 
   .site-bg {
     position: fixed;
-    /* Use env() for safe area insets on iOS - ensures full coverage */
-    top: env(safe-area-inset-top, 0);
-    bottom: env(safe-area-inset-bottom, 0);
-    left: env(safe-area-inset-left, 0);
-    right: env(safe-area-inset-right, 0);
+    /* Cover full viewport - extend beyond safe areas to prevent white gaps */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* Extend into safe areas to prevent white showing through */
+    top: calc(0px - env(safe-area-inset-top, 0));
+    bottom: calc(0px - env(safe-area-inset-bottom, 0));
+    left: calc(0px - env(safe-area-inset-left, 0));
+    right: calc(0px - env(safe-area-inset-right, 0));
     z-index: -10;
     background-color: var(--background);
     /* Remove transition to prevent first-render glitch */
@@ -380,7 +388,7 @@ html[data-theme="dark"] {
     background-image:
       radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
       radial-gradient(circle at 100% 35%, rgba(46, 88, 255, 0.22), transparent 75%);
-    filter: blur(80px);
+    /* Removed blur filter for better performance and clarity */
     opacity: 0.7;
     transform: translate3d(0, 0, 0) scale(1.25);
     animation: hero-gradient-move 24s ease-in-out infinite alternate;
@@ -643,11 +651,17 @@ html[data-theme="dark"] {
     
     /* Ensure site-bg covers full viewport including safe areas */
     .site-bg {
-      /* Cover full viewport including safe areas */
-      top: env(safe-area-inset-top, 0);
-      bottom: env(safe-area-inset-bottom, 0);
-      left: env(safe-area-inset-left, 0);
-      right: env(safe-area-inset-right, 0);
+      /* Cover full viewport - extend into safe areas to prevent white gaps */
+      top: calc(0px - env(safe-area-inset-top, 0));
+      bottom: calc(0px - env(safe-area-inset-bottom, 0));
+      left: calc(0px - env(safe-area-inset-left, 0));
+      right: calc(0px - env(safe-area-inset-right, 0));
+    }
+    
+    /* Ensure html and body have dark background on mobile */
+    html,
+    body {
+      background-color: var(--background);
     }
     
     /* Ensure main and sections don't overflow on mobile */
