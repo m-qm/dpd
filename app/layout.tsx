@@ -19,9 +19,9 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Custom Websites & Interactive Displays | Dual Perspective Digital Barcelona",
+  title: "Dual Perspective Digital | Custom Websites & Interactive Displays Barcelona",
   description:
-    "Fast, specialized, visually striking. Custom websites, interactive displays for events, chatbots, and WhatsApp/Telegram integrations. Boutique software studio in Barcelona delivering specialized solutions with rapid execution.",
+    "Dual Perspective Digital - Fast, specialized, visually striking. Custom websites, interactive displays for events, chatbots, and WhatsApp/Telegram integrations. Boutique software studio in Barcelona delivering specialized solutions with rapid execution.",
   keywords: [
     "custom website Barcelona",
     "interactive displays events",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Custom Websites & Interactive Displays | Dual Perspective Digital Barcelona",
+    title: "Dual Perspective Digital | Custom Websites & Interactive Displays Barcelona",
     description:
-      "Fast, specialized, visually striking. Custom websites, interactive displays for events, chatbots, and messaging integrations. Boutique software studio in Barcelona.",
+      "Dual Perspective Digital - Fast, specialized, visually striking. Custom websites, interactive displays for events, chatbots, and messaging integrations. Boutique software studio in Barcelona.",
     url: "https://dualperspective.digital",
     siteName: "Dual Perspective Digital",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital - Custom Websites & Interactive Displays" }],
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Custom Websites & Interactive Displays | Dual Perspective Digital",
+    title: "Dual Perspective Digital | Custom Websites & Interactive Displays",
     description:
-      "Fast, specialized, visually striking. Custom websites, interactive displays, chatbots, and messaging integrations from Barcelona.",
+      "Dual Perspective Digital - Fast, specialized, visually striking. Custom websites, interactive displays, chatbots, and messaging integrations from Barcelona.",
     images: ["/og.png"],
   },
   icons: {
@@ -84,7 +84,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "Dual Perspective Digital",
     description:
-      "Boutique custom software studio in Barcelona specializing in custom websites, interactive displays for events, chatbots, messaging platform integrations, and specialized web solutions with fast execution and exceptional visual design.",
+      "Dual Perspective Digital - Boutique custom software studio in Barcelona specializing in custom websites, interactive displays for events, chatbots, messaging platform integrations, and specialized web solutions with fast execution and exceptional visual design.",
     url: "https://dualperspective.digital",
     logo: "https://dualperspective.digital/favicon-512.png",
     email: "hello@dualperspective.digital",

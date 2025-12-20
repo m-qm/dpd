@@ -38,9 +38,9 @@ const Footer = dynamic(() => import("@/components/footer").then(mod => ({ defaul
 })
 
 export const metadata: Metadata = {
-  title: "Sitios Web a Medida y Displays Interactivos | Dual Perspective Digital Barcelona",
+  title: "Dual Perspective Digital | Sitios Web a Medida y Displays Interactivos Barcelona",
   description:
-    "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de WhatsApp/Telegram. Estudio boutique en Barcelona con ejecución rápida.",
+    "Dual Perspective Digital - Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de WhatsApp/Telegram. Estudio boutique en Barcelona con ejecución rápida.",
   keywords: [
     "sitio web a medida Barcelona",
     "displays interactivos eventos",
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Sitios Web a Medida y Displays Interactivos | Dual Perspective Digital Barcelona",
+    title: "Dual Perspective Digital | Sitios Web a Medida y Displays Interactivos Barcelona",
     description:
-      "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de mensajería. Estudio boutique en Barcelona.",
+      "Dual Perspective Digital - Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de mensajería. Estudio boutique en Barcelona.",
     url: "https://dualperspective.digital/es",
     siteName: "Dual Perspective Digital",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital - Sitios Web a Medida y Displays Interactivos" }],
@@ -76,9 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sitios Web a Medida y Displays Interactivos | Dual Perspective Digital",
+    title: "Dual Perspective Digital | Sitios Web a Medida y Displays Interactivos",
     description:
-      "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos, chatbots e integraciones de mensajería desde Barcelona.",
+      "Dual Perspective Digital - Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos, chatbots e integraciones de mensajería desde Barcelona.",
     images: ["/og.png"],
   },
 }
