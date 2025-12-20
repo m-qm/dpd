@@ -162,8 +162,6 @@ const nextConfig = {
     }
     return config
   },
-  // Turbopack config (for regular builds)
-  turbopack: {},
 }
 
 export default withBundleAnalyzer(nextConfig)
