@@ -28,6 +28,8 @@ export function useScrollTheme({
 
     let nodes: HTMLElement[] = []
     let rafId = 0
+    let resizeTimeout: NodeJS.Timeout | null = null
+    let moTimeout: NodeJS.Timeout | null = null
 
     const rescan = () => {
       nodes = Array.from(document.querySelectorAll<HTMLElement>(selector))
@@ -77,8 +79,25 @@ export function useScrollTheme({
       }
     }
 
+    // Throttle scroll handler for better mobile performance
+    let lastScrollTime = 0
+    const scrollThrottle = 16 // ~60fps
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768
+    const throttleDelay = isMobile ? 32 : 16 // Slower on mobile
+
     const schedule = () => {
       if (rafId) return
+      const now = performance.now()
+      if (now - lastScrollTime < throttleDelay) {
+        // Schedule for next frame if throttled
+        setTimeout(() => {
+          if (!rafId) {
+            rafId = window.requestAnimationFrame(apply)
+          }
+        }, throttleDelay - (now - lastScrollTime))
+        return
+      }
+      lastScrollTime = now
       rafId = window.requestAnimationFrame(apply)
     }
 
@@ -93,18 +112,25 @@ export function useScrollTheme({
     retry()
 
     window.addEventListener("scroll", schedule, { passive: true })
+    
+    // Debounce resize for better performance
     const onResize = () => {
-      rescan()
-      schedule()
+      if (resizeTimeout) clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        rescan()
+        schedule()
+      }, 150)
     }
-    window.addEventListener("resize", onResize)
+    window.addEventListener("resize", onResize, { passive: true })
 
-    // If the DOM changes (Next.js route transitions, locale switches, async mounts),
-    // our cached node list can become stale. Observe and rescan.
+    // Throttle MutationObserver for better performance
     const moTarget = document.querySelector("main") ?? document.body
     const mo = new MutationObserver(() => {
-      rescan()
-      schedule()
+      if (moTimeout) clearTimeout(moTimeout)
+      moTimeout = setTimeout(() => {
+        rescan()
+        schedule()
+      }, 100)
     })
     mo.observe(moTarget, { subtree: true, childList: true, attributes: true })
 
@@ -113,6 +139,8 @@ export function useScrollTheme({
       window.removeEventListener("resize", onResize)
       mo.disconnect()
       if (rafId) window.cancelAnimationFrame(rafId)
+      if (resizeTimeout) clearTimeout(resizeTimeout)
+      if (moTimeout) clearTimeout(moTimeout)
       if (lastOwnerRef.current) {
         lastOwnerRef.current.classList.remove("dpd-theme-owner")
         lastOwnerRef.current = null

@@ -16,10 +16,14 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
   const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   useEffect(() => {
+    // Lower threshold on mobile for better performance
+    const threshold = isMobile ? [0.1, 0.3] : [0.2, 0.5]
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
+          const minRatio = isMobile ? 0.1 : 0.2
+          if (entry.isIntersecting && entry.intersectionRatio >= minRatio) {
             setIsVisible(true)
             // On mobile or reduced motion, show all steps at once or with minimal delay
             const delay = (isMobile || prefersReducedMotion) ? 50 : 150
@@ -32,7 +36,7 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
           }
         })
       },
-      { threshold: [0.2, 0.5] },
+      { threshold, rootMargin: isMobile ? '50px' : '0px' }, // Larger rootMargin on mobile
     )
 
     if (sectionRef.current) {

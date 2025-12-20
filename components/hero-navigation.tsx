@@ -35,13 +35,19 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
       lastScrollY.current = currentScrollY
     }
 
-    // Throttle scroll events
+    // Throttle scroll events - more aggressive on mobile
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768
     let ticking = false
+    let lastTime = 0
+    const throttleDelay = isMobile ? 32 : 16 // ~30fps on mobile, 60fps on desktop
+    
     const throttledScroll = () => {
-      if (!ticking) {
+      const now = performance.now()
+      if (!ticking && (now - lastTime) >= throttleDelay) {
         window.requestAnimationFrame(() => {
           handleScroll()
           ticking = false
+          lastTime = now
         })
         ticking = true
       }

@@ -468,6 +468,30 @@ html[data-theme="dark"] {
     .animate-float-delayed {
       animation: none !important;
     }
+    
+    /* Reduce backdrop-blur on mobile (expensive) */
+    [class*="backdrop-blur"] {
+      backdrop-filter: blur(4px) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
+    }
+    
+    /* Use CSS containment for better performance */
+    section,
+    .dpd-section {
+      contain: layout style paint;
+    }
+    
+    /* Optimize transforms for hardware acceleration */
+    [class*="translate"],
+    [class*="transform"] {
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+    
+    /* Reduce blur filters on mobile */
+    [style*="blur"] {
+      filter: blur(20px) !important;
+    }
   }
 
   /* Respect prefers-reduced-motion */
@@ -726,17 +750,28 @@ html[data-theme="dark"] {
     
     /* Fix scrolling performance in capabilities section */
     .dpd-section {
-      /* Remove will-change: scroll-position to prevent internal scrolling */
-      transform: translateZ(0);
+      /* Use transform3d for better hardware acceleration */
+      transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
+      /* Use CSS containment */
+      contain: layout style paint;
     }
     
-    /* Optimize cards for smooth scrolling */
+    /* Optimize cards for smooth scrolling - only when animating */
     .dpd-card {
-      will-change: transform, opacity;
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
+      /* Only use will-change when actually animating */
+    }
+    
+    .dpd-card[style*="opacity: 0"],
+    .dpd-card:not(.opacity-100) {
+      will-change: transform, opacity;
+    }
+    
+    .dpd-card.opacity-100 {
+      will-change: auto;
     }
     
     /* Fix fixed elements on Chrome mobile - prevent glitches */

@@ -19,11 +19,15 @@ export function CapabilitiesSection({
   const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   useEffect(() => {
+    // Lower threshold on mobile for better performance
+    const threshold = isMobile ? [0.05, 0.15] : [0.12, 0.35]
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           // Trigger earlier on smaller viewports (tall sections may never reach high intersection ratios on mobile).
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+          const minRatio = isMobile ? 0.05 : 0.12
+          if (entry.isIntersecting && entry.intersectionRatio >= minRatio) {
             // On mobile or reduced motion, show all items at once or with minimal delay
             const delay = (isMobile || prefersReducedMotion) ? 30 : 120
             
@@ -36,7 +40,7 @@ export function CapabilitiesSection({
           }
         })
       },
-      { threshold: [0.12, 0.35] },
+      { threshold, rootMargin: isMobile ? '50px' : '0px' }, // Larger rootMargin on mobile
     )
 
     if (sectionRef.current) {
@@ -89,6 +93,7 @@ export function CapabilitiesSection({
                 } hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-500`}
                 style={{
                   willChange: (!isMobile && !visibleItems.includes(index)) ? 'transform, opacity' : 'auto',
+                  transform: 'translate3d(0, 0, 0)', // Hardware acceleration
                 }}
               >
                 <div className="relative p-8 md:p-10">
