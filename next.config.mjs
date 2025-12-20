@@ -22,9 +22,67 @@ const nextConfig = {
   },
   // Optimizaciones de producción
   productionBrowserSourceMaps: false, // Reducir tamaño del build
-  // Headers de caché para mejorar performance
+  // Headers de caché y seguridad para mejorar performance y seguridad
   async headers() {
+    const securityHeaders = [
+      {
+        key: 'X-DNS-Prefetch-Control',
+        value: 'on'
+      },
+      {
+        key: 'Strict-Transport-Security',
+        value: 'max-age=63072000; includeSubDomains; preload'
+      },
+      {
+        key: 'X-Frame-Options',
+        value: 'SAMEORIGIN'
+      },
+      {
+        key: 'X-Content-Type-Options',
+        value: 'nosniff'
+      },
+      {
+        key: 'X-XSS-Protection',
+        value: '1; mode=block'
+      },
+      {
+        key: 'Referrer-Policy',
+        value: 'strict-origin-when-cross-origin'
+      },
+      {
+        key: 'Permissions-Policy',
+        value: 'camera=(), microphone=(), geolocation=()'
+      },
+      {
+        key: 'Cross-Origin-Opener-Policy',
+        value: 'same-origin'
+      },
+      {
+        key: 'Content-Security-Policy',
+        value: [
+          "default-src 'self'",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://vitals.vercel-insights.com",
+          "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+          "font-src 'self' https://fonts.gstatic.com data:",
+          "img-src 'self' data: https: blob:",
+          "connect-src 'self' https://vitals.vercel-insights.com https://*.vercel-insights.com",
+          "frame-ancestors 'self'",
+          "base-uri 'self'",
+          "form-action 'self'",
+          "frame-src 'self'",
+          "object-src 'none'",
+          "upgrade-insecure-requests",
+        ].join('; ')
+      },
+    ]
+
     return [
+      // Security headers for all routes
+      {
+        source: '/:path*',
+        headers: securityHeaders,
+      },
+      // Cache headers for static assets
       {
         source: '/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif)',
         headers: [
@@ -36,6 +94,16 @@ const nextConfig = {
       },
       {
         source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Cache headers for fonts
+      {
+        source: '/:all*(woff|woff2|ttf|otf|eot)',
         headers: [
           {
             key: 'Cache-Control',
