@@ -162,6 +162,8 @@ const nextConfig = {
     }
     return config
   },
+  // Turbopack config - empty object to silence warning when using webpack config
+  turbopack: {},
 }
 
 export default withBundleAnalyzer(nextConfig)
