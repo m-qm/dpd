@@ -1,16 +1,7 @@
-import type { Metadata } from "next"
-import { Breadcrumbs } from "@/components/breadcrumbs"
-import { CookieDeclaration } from "@/components/cookie-declaration"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Cookies — Dual Perspective Digital",
-  description:
-    "Política de cookies y declaración de cookies de dualperspective.digital. Gestiona tu consentimiento y revisa las cookies utilizadas en este sitio.",
-  alternates: {
-    canonical: "/es/cookies",
-    languages: { en: "/cookies", es: "/es/cookies" },
-  },
-}
+import { Breadcrumbs } from "@/components/breadcrumbs"
+import { Button } from "@/components/ui/button"
 
 export default function CookiesPageEs() {
   return (
@@ -24,21 +15,38 @@ export default function CookiesPageEs() {
           Cookies
         </h1>
         <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-10">
-          Utilizamos cookies para que el sitio funcione y, con tu consentimiento, para entender el uso y mejorar el
-          rendimiento. Puedes cambiar tus preferencias en cualquier momento desde el banner.
+          Este sitio web no utiliza cookies para seguimiento o análisis. Utilizamos análisis del lado del servidor 
+          (Vercel Analytics) que no requiere cookies ni consentimiento del usuario, garantizando pleno cumplimiento 
+          del GDPR sin ningún banner de cookies.
         </p>
 
         <div className="border-t border-border/60 pt-10">
-          <h2 className="text-xl md:text-2xl tracking-tight mb-4">Declaración de cookies</h2>
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
-            La lista de cookies se genera automáticamente por nuestro gestor de consentimiento.
-          </p>
+          <h2 className="text-xl md:text-2xl tracking-tight mb-4">Nuestro Enfoque de Privacidad</h2>
 
-          <CookieDeclaration locale="es" />
+          <div className="prose prose-sm max-w-none dark:prose-invert">
+            <p className="text-muted-foreground">
+              Creemos en la privacidad por diseño. Este sitio web utiliza <strong>solo análisis del lado del servidor</strong>, 
+              lo que significa:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-muted-foreground mt-4">
+              <li><strong>No se requieren cookies:</strong> No establecemos cookies de seguimiento en tu dispositivo</li>
+              <li><strong>No se necesita consentimiento:</strong> Los análisis del lado del servidor son compatibles con GDPR por defecto</li>
+              <li><strong>Privacidad primero:</strong> Solo recopilamos datos agregados y anonimizados</li>
+              <li><strong>Mejor rendimiento:</strong> Sin seguimiento JavaScript = páginas más rápidas</li>
+            </ul>
+            <h3 className="text-lg font-semibold mt-6 mb-3">Qué Rastreamos (Solo del Lado del Servidor)</h3>
+            <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li>Visualizaciones de página (agregadas)</li>
+              <li>Visitantes únicos (anonimizados)</li>
+              <li>Referencias (de dónde viene el tráfico)</li>
+              <li>Datos geográficos (a nivel de país, anonimizados)</li>
+            </ul>
+            <p className="text-muted-foreground mt-6">
+              Todos los análisis se procesan del lado del servidor por Vercel y no involucran ningún seguimiento del lado del cliente ni cookies.
+            </p>
+          </div>
         </div>
       </div>
     </main>
   )
 }
-
-

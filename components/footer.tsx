@@ -1,3 +1,5 @@
+"use client"
+
 import type { Locale } from "@/lib/copy"
 
 export function Footer({ locale = "en" }: { locale?: Locale }) {

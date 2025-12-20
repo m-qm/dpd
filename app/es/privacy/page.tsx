@@ -42,7 +42,7 @@ export default function PrivacyPageEs() {
             <h2 className="text-xl md:text-2xl tracking-tight mb-3">Qué datos recopilamos</h2>
             <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-muted-foreground leading-relaxed">
               <li>Datos del formulario de contacto (nombre, email, mensaje y preferencia de idioma).</li>
-              <li>Datos básicos de analítica web (solo si aceptas cookies/analítica).</li>
+              <li>Datos de analítica del lado del servidor (agregados, anonimizados, no se requieren cookies).</li>
             </ul>
           </section>
 
@@ -51,7 +51,7 @@ export default function PrivacyPageEs() {
             <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-muted-foreground leading-relaxed">
               <li>Responder a consultas y valorar proyectos.</li>
               <li>Operar y proteger el sitio web.</li>
-              <li>Medir y mejorar el rendimiento (con consentimiento).</li>
+              <li>Medir y mejorar el rendimiento (analítica del lado del servidor, sin consentimiento necesario).</li>
             </ul>
           </section>
 
@@ -59,7 +59,7 @@ export default function PrivacyPageEs() {
             <h2 className="text-xl md:text-2xl tracking-tight mb-3">Base legal</h2>
             <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-muted-foreground leading-relaxed">
               <li>Interés legítimo para responder a tu solicitud.</li>
-              <li>Consentimiento para cookies/analítica (cuando aplique).</li>
+              <li>Interés legítimo para analítica del lado del servidor (no se necesita consentimiento, compatible con GDPR).</li>
             </ul>
           </section>
 

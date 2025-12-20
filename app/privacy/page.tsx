@@ -42,7 +42,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl md:text-2xl tracking-tight mb-3">What we collect</h2>
             <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-muted-foreground leading-relaxed">
               <li>Contact form data (name, email, message, and language preference).</li>
-              <li>Basic website analytics data (only if you consent to cookies/analytics).</li>
+              <li>Server-side analytics data (aggregated, anonymized, no cookies required).</li>
             </ul>
           </section>
 
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl md:text-2xl tracking-tight mb-3">Legal basis</h2>
             <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-muted-foreground leading-relaxed">
               <li>Legitimate interest to respond to your request.</li>
-              <li>Consent for analytics/cookies (where applicable).</li>
+              <li>Legitimate interest for server-side analytics (no consent needed, GDPR compliant).</li>
             </ul>
           </section>
 
