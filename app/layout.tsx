@@ -191,7 +191,7 @@ export default function RootLayout({
           }}
         />
         <div aria-hidden className="site-bg" />
-        {/* Consent Mode v2 defaults (deny until the CMP grants consent). */}
+        {/* Consent Mode v2 defaults - simplified without Cookiebot */}
         <Script
           id="consent-default"
           strategy="beforeInteractive"
@@ -201,72 +201,55 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{
   'ad_storage':'denied',
-  'analytics_storage':'denied',
+  'analytics_storage':'granted',
   'ad_user_data':'denied',
   'ad_personalization':'denied',
   'functionality_storage':'granted',
-  'security_storage':'granted',
-  'wait_for_update':500
+  'security_storage':'granted'
 });
 gtag('set','ads_data_redaction',true);
 `.trim(),
           }}
         />
 
-        {/* Cookiebot CMP (blocks scripts by category; integrates with consent updates). */}
-        <Script
-          id="Cookiebot"
-          src="https://consent.cookiebot.com/uc.js"
-          strategy="beforeInteractive"
-          data-cbid="8d1922ed-2465-4011-9bb9-342ee3cd73fd"
-          data-blockingmode="auto"
-          type="text/javascript"
-        />
+        {/* Google Analytics 4 */}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
 
-        <Script
-          id="cookiebot-consent-bridge"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-window.CookiebotCallback_OnAccept = function () {
-  try {
-    var c = window.Cookiebot && window.Cookiebot.consent ? window.Cookiebot.consent : null;
-    if (!c) return;
-    gtag('consent','update',{
-      'analytics_storage': c.statistics ? 'granted' : 'denied',
-      'ad_storage': c.marketing ? 'granted' : 'denied',
-      'ad_user_data': c.marketing ? 'granted' : 'denied',
-      'ad_personalization': c.marketing ? 'granted' : 'denied'
-    });
-  } catch (e) {}
-};
-window.CookiebotCallback_OnDecline = function () {
-  try {
-    gtag('consent','update',{
-      'analytics_storage':'denied',
-      'ad_storage':'denied',
-      'ad_user_data':'denied',
-      'ad_personalization':'denied'
-    });
-  } catch (e) {}
-};
-`.trim(),
-          }}
-        />
-
-        <Script
-          id="gtm"
-          strategy="beforeInteractive"
-          type="text/plain"
-          data-cookieconsent="statistics"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        {/* Google Tag Manager */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <Script
+            id="gtm"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PZ6K444B');`,
-          }}
-        />
+})(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`,
+            }}
+          />
+        )}
         {children}
         <LeadChat />
         <script
