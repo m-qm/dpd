@@ -50,6 +50,7 @@ export function ClientsMarquee() {
                 alt={client.alt}
                 width={width}
                 height={height}
+                loading="lazy"
                 className={`${maxHeight} w-auto object-contain opacity-70 hover:opacity-100 transition-opacity`}
               />
             </div>

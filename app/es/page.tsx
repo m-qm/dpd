@@ -58,9 +58,60 @@ export const metadata: Metadata = {
 }
 
 export default function HomeEs() {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": ["Organization", "ProfessionalService", "WebDesignCompany"],
+    name: "Dual Perspective Digital",
+    description:
+      "Estudio boutique de software a medida en Barcelona especializado en sitios web a medida, displays interactivos para eventos, chatbots, integraciones con plataformas de mensajería y soluciones web especializadas con ejecución rápida y diseño visual excepcional.",
+    url: "https://dualperspective.digital/es",
+    logo: "https://dualperspective.digital/favicon-512.png",
+    email: "hello@dualperspective.digital",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Barcelona",
+      addressRegion: "Cataluña",
+      addressCountry: "ES",
+    },
+    areaServed: [
+      {
+        "@type": "Place",
+        name: "Barcelona",
+      },
+      {
+        "@type": "Place",
+        name: "España",
+      },
+      {
+        "@type": "Place",
+        name: "Unión Europea",
+      },
+    ],
+    serviceType: [
+      "Desarrollo de Sitios Web a Medida",
+      "Sistemas de Displays Interactivos",
+      "Desarrollo de Chatbots",
+      "Integración de Plataformas de Mensajería",
+      "Desarrollo de Aplicaciones Web",
+      "Soluciones de Tecnología para Eventos",
+    ],
+    offers: {
+      "@type": "Offer",
+      description: "Sitios web a medida, displays interactivos, chatbots e integraciones de mensajería con ejecución rápida y diseño visual excepcional",
+    },
+    sameAs: [
+      "https://www.linkedin.com/company/dual-perspective-digital",
+    ],
+  }
+
   return (
     <main className="min-h-screen overflow-x-hidden" lang="es">
       <HomeClient locale="es" />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <script
         type="application/ld+json"
         suppressHydrationWarning
