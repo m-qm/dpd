@@ -19,9 +19,25 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital — Boutique Custom Software Studio in Barcelona",
+  title: "Custom Websites & Interactive Displays | Dual Perspective Digital Barcelona",
   description:
-    "Dual Perspective Digital is a boutique custom software studio in Barcelona. We build internal tools, dashboards, and process automation with integrations tailored to how your team works.",
+    "Fast, specialized, visually striking. Custom websites, interactive displays for events, chatbots, and WhatsApp/Telegram integrations. Boutique software studio in Barcelona delivering specialized solutions with rapid execution.",
+  keywords: [
+    "custom website Barcelona",
+    "interactive displays events",
+    "chatbot development Barcelona",
+    "WhatsApp integration",
+    "Telegram integration",
+    "custom software Barcelona",
+    "web development Barcelona",
+    "event technology solutions",
+    "fast web development",
+    "custom web applications",
+    "interactive TV displays",
+    "messaging platform integration",
+    "specialized software solutions",
+    "boutique web development",
+  ],
   metadataBase: new URL("https://dualperspective.digital"),
   alternates: {
     canonical: "/",
@@ -31,20 +47,20 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dual Perspective Digital — Boutique Custom Software Studio in Barcelona",
+    title: "Custom Websites & Interactive Displays | Dual Perspective Digital Barcelona",
     description:
-      "Boutique custom software studio in Barcelona building internal tools, dashboards, and process automation with integrations tailored to how your team works.",
+      "Fast, specialized, visually striking. Custom websites, interactive displays for events, chatbots, and messaging integrations. Boutique software studio in Barcelona.",
     url: "https://dualperspective.digital",
     siteName: "Dual Perspective Digital",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital - Custom Websites & Interactive Displays" }],
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dual Perspective Digital — Boutique Custom Software Studio in Barcelona",
+    title: "Custom Websites & Interactive Displays | Dual Perspective Digital",
     description:
-      "Custom software, internal tools, dashboards, and process automation from a boutique studio in Barcelona.",
+      "Fast, specialized, visually striking. Custom websites, interactive displays, chatbots, and messaging integrations from Barcelona.",
     images: ["/og.png"],
   },
   icons: {
@@ -65,17 +81,24 @@ export default function RootLayout({
 }>) {
   const schema = {
     "@context": "https://schema.org",
-    "@type": ["Organization", "ProfessionalService"],
+    "@type": ["Organization", "ProfessionalService", "WebDesignCompany"],
     name: "Dual Perspective Digital",
     description:
-      "Boutique custom software studio in Barcelona specialising in internal tools, dashboards, integrations, and process automation designed around real-world business processes.",
+      "Boutique custom software studio in Barcelona specializing in custom websites, interactive displays for events, chatbots, messaging platform integrations, and specialized web solutions with fast execution and exceptional visual design.",
     url: "https://dualperspective.digital",
+    logo: "https://dualperspective.digital/favicon-512.png",
+    email: "hello@dualperspective.digital",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Barcelona",
+      addressRegion: "Catalonia",
       addressCountry: "ES",
     },
     areaServed: [
+      {
+        "@type": "Place",
+        name: "Barcelona",
+      },
       {
         "@type": "Place",
         name: "Spain",
@@ -84,6 +107,21 @@ export default function RootLayout({
         "@type": "Place",
         name: "European Union",
       },
+    ],
+    serviceType: [
+      "Custom Website Development",
+      "Interactive Display Systems",
+      "Chatbot Development",
+      "Messaging Platform Integration",
+      "Web Application Development",
+      "Event Technology Solutions",
+    ],
+    offers: {
+      "@type": "Offer",
+      description: "Custom websites, interactive displays, chatbots, and messaging integrations with fast execution and exceptional visual design",
+    },
+    sameAs: [
+      "https://www.linkedin.com/company/dual-perspective-digital",
     ],
   }
 

@@ -12,9 +12,25 @@ import { TransitionAnimation } from "@/components/transition-animation"
 import { getFaqJsonLd } from "@/lib/faq"
 
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital — Agencia boutique de software a medida en Barcelona",
+  title: "Sitios Web a Medida y Displays Interactivos | Dual Perspective Digital Barcelona",
   description:
-    "Agencia boutique de software a medida en Barcelona: herramientas internas, automatización de procesos e integraciones diseñadas alrededor de tus flujos.",
+    "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de WhatsApp/Telegram. Estudio boutique en Barcelona con ejecución rápida.",
+  keywords: [
+    "sitio web a medida Barcelona",
+    "displays interactivos eventos",
+    "desarrollo chatbot Barcelona",
+    "integración WhatsApp",
+    "integración Telegram",
+    "software a medida Barcelona",
+    "desarrollo web Barcelona",
+    "soluciones tecnología eventos",
+    "desarrollo web rápido",
+    "aplicaciones web a medida",
+    "displays TV interactivos",
+    "integración plataformas mensajería",
+    "soluciones software especializadas",
+    "desarrollo web boutique",
+  ],
   alternates: {
     canonical: "/es",
     languages: {
@@ -23,20 +39,20 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dual Perspective Digital — Agencia boutique de software a medida en Barcelona",
+    title: "Sitios Web a Medida y Displays Interactivos | Dual Perspective Digital Barcelona",
     description:
-      "Software a medida, herramientas internas y automatización de procesos diseñados alrededor de tus flujos, desde Barcelona.",
+      "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de mensajería. Estudio boutique en Barcelona.",
     url: "https://dualperspective.digital/es",
     siteName: "Dual Perspective Digital",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Dual Perspective Digital - Sitios Web a Medida y Displays Interactivos" }],
     type: "website",
     locale: "es_ES",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dual Perspective Digital — Agencia boutique de software a medida en Barcelona",
+    title: "Sitios Web a Medida y Displays Interactivos | Dual Perspective Digital",
     description:
-      "Software a medida, herramientas internas y automatización de procesos diseñados alrededor de tus flujos, desde Barcelona.",
+      "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos, chatbots e integraciones de mensajería desde Barcelona.",
     images: ["/og.png"],
   },
 }
