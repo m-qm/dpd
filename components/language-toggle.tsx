@@ -22,7 +22,7 @@ export function LanguageToggle() {
       onClick={handleClick}
       className="text-xs md:text-sm uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground transition-colors"
     >
-      {isSpanish ? "EN" : "ES"}
+      {isSpanish ? "ENGLISH" : "ESPAÑOL"}
     </a>
   )
 }
