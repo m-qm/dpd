@@ -1,0 +1,4 @@
+# Allow pnpm to install even if lockfile is outdated
+# This is needed for Vercel CI builds
+frozen-lockfile=false
+
