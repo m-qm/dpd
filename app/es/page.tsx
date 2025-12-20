@@ -1,15 +1,41 @@
 import type { Metadata } from "next"
 import { HomeClient } from "@/components/home-client"
 import { HeroSection } from "@/components/hero-section"
-import { CapabilitiesSection } from "@/components/capabilities-section"
-import { ApproachSection } from "@/components/approach-section"
-import { ClientsSection } from "@/components/clients-section"
-import { PhilosophySection } from "@/components/philosophy-section"
-import { CTASection } from "@/components/cta-section"
-import { Footer } from "@/components/footer"
-import { FAQSection } from "@/components/faq-section"
-import { TransitionAnimation } from "@/components/transition-animation"
+import dynamic from "next/dynamic"
 import { getFaqJsonLd } from "@/lib/faq"
+
+// Lazy load components that are below the fold
+const CapabilitiesSection = dynamic(() => import("@/components/capabilities-section").then(mod => ({ default: mod.CapabilitiesSection })), {
+  loading: () => <div className="h-screen" />,
+})
+
+const ApproachSection = dynamic(() => import("@/components/approach-section").then(mod => ({ default: mod.ApproachSection })), {
+  loading: () => <div className="h-screen" />,
+})
+
+const PhilosophySection = dynamic(() => import("@/components/philosophy-section").then(mod => ({ default: mod.PhilosophySection })), {
+  loading: () => <div className="h-96" />,
+})
+
+const ClientsSection = dynamic(() => import("@/components/clients-section").then(mod => ({ default: mod.ClientsSection })), {
+  loading: () => <div className="h-64" />,
+})
+
+const FAQSection = dynamic(() => import("@/components/faq-section").then(mod => ({ default: mod.FAQSection })), {
+  loading: () => <div className="h-96" />,
+})
+
+const TransitionAnimation = dynamic(() => import("@/components/transition-animation").then(mod => ({ default: mod.TransitionAnimation })), {
+  loading: () => null,
+})
+
+const CTASection = dynamic(() => import("@/components/cta-section").then(mod => ({ default: mod.CTASection })), {
+  loading: () => <div className="h-96" />,
+})
+
+const Footer = dynamic(() => import("@/components/footer").then(mod => ({ default: mod.Footer })), {
+  loading: () => null,
+})
 
 export const metadata: Metadata = {
   title: "Sitios Web a Medida y Displays Interactivos | Dual Perspective Digital Barcelona",
@@ -58,9 +84,10 @@ export const metadata: Metadata = {
 }
 
 export default function HomeEs() {
+
   const organizationSchema = {
     "@context": "https://schema.org",
-    "@type": ["Organization", "ProfessionalService", "WebDesignCompany"],
+    "@type": "Organization",
     name: "Dual Perspective Digital",
     description:
       "Estudio boutique de software a medida en Barcelona especializado en sitios web a medida, displays interactivos para eventos, chatbots, integraciones con plataformas de mensajería y soluciones web especializadas con ejecución rápida y diseño visual excepcional.",
@@ -87,17 +114,43 @@ export default function HomeEs() {
         name: "Unión Europea",
       },
     ],
-    serviceType: [
-      "Desarrollo de Sitios Web a Medida",
-      "Sistemas de Displays Interactivos",
-      "Desarrollo de Chatbots",
-      "Integración de Plataformas de Mensajería",
-      "Desarrollo de Aplicaciones Web",
-      "Soluciones de Tecnología para Eventos",
-    ],
-    offers: {
-      "@type": "Offer",
-      description: "Sitios web a medida, displays interactivos, chatbots e integraciones de mensajería con ejecución rápida y diseño visual excepcional",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Servicios",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Desarrollo de Sitios Web a Medida",
+            description: "Sitios web y aplicaciones web personalizadas adaptadas a tus necesidades",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Sistemas de Displays Interactivos",
+            description: "Displays interactivos y pantallas para eventos y ferias",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Desarrollo de Chatbots",
+            description: "Chatbots inteligentes e interfaces conversacionales",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Integración de Plataformas de Mensajería",
+            description: "Integraciones con WhatsApp, Telegram y otras plataformas de mensajería",
+          },
+        },
+      ],
     },
     sameAs: [
       "https://www.linkedin.com/company/dual-perspective-digital",

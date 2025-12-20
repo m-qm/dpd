@@ -81,7 +81,7 @@ export default function RootLayout({
 }>) {
   const schema = {
     "@context": "https://schema.org",
-    "@type": ["Organization", "ProfessionalService", "WebDesignCompany"],
+    "@type": "Organization",
     name: "Dual Perspective Digital",
     description:
       "Boutique custom software studio in Barcelona specializing in custom websites, interactive displays for events, chatbots, messaging platform integrations, and specialized web solutions with fast execution and exceptional visual design.",
@@ -108,17 +108,43 @@ export default function RootLayout({
         name: "European Union",
       },
     ],
-    serviceType: [
-      "Custom Website Development",
-      "Interactive Display Systems",
-      "Chatbot Development",
-      "Messaging Platform Integration",
-      "Web Application Development",
-      "Event Technology Solutions",
-    ],
-    offers: {
-      "@type": "Offer",
-      description: "Custom websites, interactive displays, chatbots, and messaging integrations with fast execution and exceptional visual design",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Custom Website Development",
+            description: "Bespoke websites and web applications tailored to your needs",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Interactive Display Systems",
+            description: "Interactive TV displays and screens for events and fairs",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Chatbot Development",
+            description: "Intelligent chatbots and conversational interfaces",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Messaging Platform Integration",
+            description: "WhatsApp, Telegram, and messaging platform integrations",
+          },
+        },
+      ],
     },
     sameAs: [
       "https://www.linkedin.com/company/dual-perspective-digital",

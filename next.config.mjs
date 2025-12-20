@@ -14,6 +14,8 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  // Optimizaciones de producción
+  productionBrowserSourceMaps: false, // Reducir tamaño del build
   // Headers de caché para mejorar performance
   async headers() {
     return [
@@ -36,6 +38,10 @@ const nextConfig = {
         ],
       },
     ]
+  },
+  // Optimizaciones experimentales
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-accordion', '@radix-ui/react-dialog'],
   },
 }
 
