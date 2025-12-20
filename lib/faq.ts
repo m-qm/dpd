@@ -10,77 +10,77 @@ export const faqContent: Record<Locale, FAQItem[]> = {
   en: [
     {
       id: "specialisation",
-      question: "What kind of software and solutions do you specialize in?",
+      question: "What makes your approach different?",
       answer:
-        "We specialize in custom websites, interactive TV displays for events and fairs, chatbots, messaging platform integrations (WhatsApp, Telegram), and highly specialized digital solutions that require fast execution and exceptional visual design.",
+        "We focus on understanding your team's process first, then building software that fits how you actually work. Instead of forcing you into templates, we create custom solutions—from websites to interactive event displays—that reduce manual work and connect your systems seamlessly.",
     },
     {
       id: "chatbots-messaging",
-      question: "Do you build chatbots and messaging integrations?",
+      question: "How do chatbots and messaging integrations help my business?",
       answer:
-        "Yes. We build intelligent chatbots and conversational interfaces, as well as integrations with WhatsApp, Telegram, and other messaging platforms. These solutions connect your systems with where your users communicate, automating interactions and centralizing communication.",
+        "They automate repetitive interactions and centralize communication. For example, a logistics company might use WhatsApp integration to send shipment updates automatically, or an event organizer could use a chatbot to answer attendee questions 24/7. We connect these tools to your existing systems so everything works together.",
     },
     {
       id: "event-projects",
-      question: "Do you work on event-specific projects?",
+      question: "What can interactive displays do for events?",
       answer:
-        "Yes. We frequently work on interactive displays and screens for events, fairs, and exhibitions. These projects require specialized expertise, fast execution, and visually striking design to create engaging experiences for event attendees.",
+        "They turn static booths into engaging experiences. Imagine a trade fair where visitors interact with a display that shows real-time product data, schedules meetings, or collects leads—all connected to your CRM. We've built displays that handle everything from registration to live data visualization, making events more interactive and data-driven.",
     },
     {
       id: "fast-execution",
-      question: "How fast can you deliver custom solutions?",
+      question: "How do you deliver projects quickly without cutting corners?",
       answer:
-        "Speed is one of our core strengths. We're built for fast execution on specialized projects, especially time-sensitive ones like event displays. We quickly understand requirements, design visually striking solutions, and deliver with technical excellence—all while maintaining the quality and customization your project demands.",
+        "Speed comes from specialization and deep process understanding, not shortcuts. When we understand your workflow upfront, we can build exactly what you need—no unnecessary features, no rework. For urgent projects like event displays, we prioritize core functionality first, then iterate based on real usage.",
     },
     {
       id: "time-sensitive",
-      question: "What makes your approach different for time-sensitive projects?",
+      question: "Can you handle projects with tight deadlines?",
       answer:
-        "We combine rapid execution with specialized expertise and visual excellence. Our approach prioritizes understanding your needs quickly, designing solutions that are both visually striking and technically sound, and executing with precision—even under tight deadlines. This makes us ideal for event projects, launches, and other time-sensitive initiatives.",
+        "Yes. We've delivered interactive event displays in weeks, not months. The key is starting with a clear understanding of your process and what success looks like. Once we know that, we can move fast because we're building the right thing from day one, not guessing and iterating later.",
     },
     {
       id: "existing-systems",
-      question: "Do you only build new products, or can you extend existing systems?",
+      question: "Do you work with existing systems or only build new ones?",
       answer:
-        "Both. We take teams from idea to first product, and we extend existing systems with new modules, APIs, and integrations. Whether it's a new custom website, an interactive display system, or integrating chatbots into your existing platform, we adapt to your needs.",
+        "Both. We often extend what you already have—adding a chatbot to your website, connecting your CRM to WhatsApp, or building an interactive display that pulls data from your existing database. We integrate with your tools rather than replacing them, so your team doesn't have to learn new systems.",
     },
   ],
   es: [
     {
       id: "specialisation",
-      question: "¿En qué tipo de software y soluciones estáis especializados?",
+      question: "¿Qué hace diferente vuestro enfoque?",
       answer:
-        "Estamos especializados en sitios web a medida, displays interactivos para eventos y ferias, chatbots, integraciones con plataformas de mensajería (WhatsApp, Telegram), y soluciones digitales altamente especializadas que requieren ejecución rápida y diseño visual excepcional.",
+        "Nos enfocamos en entender primero el proceso de tu equipo, luego construimos software que se adapta a cómo trabajáis realmente. En lugar de forzaros a usar plantillas, creamos soluciones a medida—desde sitios web hasta displays interactivos para eventos—que reducen trabajo manual y conectan vuestros sistemas sin problemas.",
     },
     {
       id: "chatbots-messaging",
-      question: "¿Construís chatbots e integraciones de mensajería?",
+      question: "¿Cómo ayudan los chatbots e integraciones de mensajería a mi negocio?",
       answer:
-        "Sí. Construimos chatbots inteligentes e interfaces conversacionales, así como integraciones con WhatsApp, Telegram y otras plataformas de mensajería. Estas soluciones conectan tus sistemas con donde se comunican tus usuarios, automatizando interacciones y centralizando la comunicación.",
+        "Automatizan interacciones repetitivas y centralizan la comunicación. Por ejemplo, una empresa logística podría usar integración con WhatsApp para enviar actualizaciones de envío automáticamente, o un organizador de eventos podría usar un chatbot para responder preguntas de asistentes 24/7. Conectamos estas herramientas con vuestros sistemas existentes para que todo funcione junto.",
     },
     {
       id: "event-projects",
-      question: "¿Trabajáis en proyectos específicos para eventos?",
+      question: "¿Qué pueden hacer los displays interactivos para eventos?",
       answer:
-        "Sí. Trabajamos frecuentemente en displays interactivos y pantallas para eventos, ferias y exposiciones. Estos proyectos requieren experiencia especializada, ejecución rápida y diseño visualmente impactante para crear experiencias atractivas para los asistentes.",
+        "Convierten stands estáticos en experiencias atractivas. Imagina una feria donde los visitantes interactúan con un display que muestra datos de productos en tiempo real, agenda reuniones o recopila leads—todo conectado a vuestro CRM. Hemos construido displays que manejan desde registro hasta visualización de datos en vivo, haciendo los eventos más interactivos y basados en datos.",
     },
     {
       id: "fast-execution",
-      question: "¿Cuánto tiempo suele tardar un proyecto?",
+      question: "¿Cómo entregáis proyectos rápidamente sin recortar calidad?",
       answer:
-        "Depende de la complejidad y alcance, pero la velocidad es una de nuestras fortalezas. Estamos preparados para ejecución rápida en proyectos especializados, especialmente aquellos con plazos ajustados como displays para eventos. Entendemos rápidamente los requisitos, diseñamos soluciones visualmente impactantes y entregamos con excelencia técnica—todo mientras mantenemos la calidad y personalización que tu proyecto requiere.",
+        "La velocidad viene de la especialización y entender en profundidad el proceso, no de atajos. Cuando entendemos vuestro flujo de trabajo desde el inicio, podemos construir exactamente lo que necesitáis—sin características innecesarias, sin rehacer. Para proyectos urgentes como displays para eventos, priorizamos la funcionalidad principal primero, luego iteramos basándonos en el uso real.",
     },
     {
       id: "time-sensitive",
-      question: "¿Qué hace diferente vuestro enfoque para proyectos con plazos ajustados?",
+      question: "¿Podéis manejar proyectos con plazos muy ajustados?",
       answer:
-        "Combinamos ejecución rápida con experiencia especializada y excelencia visual. Nuestro enfoque prioriza entender tus necesidades rápidamente, diseñar soluciones que sean tanto visualmente impactantes como técnicamente sólidas, y ejecutar con precisión—incluso bajo plazos ajustados. Esto nos hace ideales para proyectos de eventos, lanzamientos y otras iniciativas con plazos ajustados.",
+        "Sí. Hemos entregado displays interactivos para eventos en semanas, no meses. La clave es empezar con una comprensión clara de vuestro proceso y cómo se ve el éxito. Una vez que sabemos eso, podemos movernos rápido porque estamos construyendo lo correcto desde el primer día, no adivinando e iterando después.",
     },
     {
       id: "existing-systems",
-      question: "¿Solo creáis productos nuevos o también ampliáis sistemas existentes?",
+      question: "¿Trabajáis con sistemas existentes o solo creáis nuevos?",
       answer:
-        "Ambas cosas. Pasamos de idea a primer producto, y ampliamos sistemas existentes con nuevos módulos, APIs e integraciones. Ya sea un nuevo sitio web a medida, un sistema de displays interactivos, o integrar chatbots en tu plataforma existente, nos adaptamos a tus necesidades.",
+        "Ambas cosas. A menudo ampliamos lo que ya tenéis—agregando un chatbot a vuestro sitio web, conectando vuestro CRM a WhatsApp, o construyendo un display interactivo que extrae datos de vuestra base de datos existente. Nos integramos con vuestras herramientas en lugar de reemplazarlas, para que vuestro equipo no tenga que aprender nuevos sistemas.",
     },
   ],
 }

@@ -78,8 +78,8 @@ export function CapabilitiesSection({
         </h2>
         <p className="dpd-kicker mb-14 md:mb-16 max-w-3xl">
           {locale === "es"
-            ? "Software a medida · Herramientas internas · Automatización de procesos · Integraciones"
-            : "Custom software · Internal tools · Process automation · Integrations"}
+            ? "Construimos soluciones que se adaptan a tu flujo de trabajo"
+            : "We build solutions that adapt to your workflow"}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">

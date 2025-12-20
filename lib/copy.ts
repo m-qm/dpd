@@ -30,7 +30,7 @@ const en: CopyShape = {
     eyebrow: "Boutique custom software studio in Barcelona",
     titleLines: ["Your Process", "Our Focus"],
     subtitle:
-      "Fast. Specialized. Visually Striking. Custom websites, interactive displays, and specialized solutions. A close, honest partnership from day one.",
+      "We turn your process into working software. Custom websites, interactive displays, and integrations that fit how your team actually works. A close, honest partnership from day one.",
   },
   capabilitiesHeading: "Capabilities",
   capabilitiesLabel: "Capabilities",
@@ -38,62 +38,62 @@ const en: CopyShape = {
     {
       title: "Custom websites & web applications",
       description:
-        "Bespoke websites and web applications tailored to your needs, built with fast execution and exceptional visual design.",
+        "Websites and applications built around your team's workflow, not generic templates. Reduce manual work and streamline processes.",
     },
     {
       title: "Interactive displays & event solutions",
       description:
-        "Interactive TV displays and screens for events and fairs. Specialized solutions that combine visual impact with technical precision.",
+        "Engage event attendees with interactive displays that connect to your systems. Real-time data, seamless integrations, visual impact.",
     },
     {
       title: "Chatbots & conversational interfaces",
       description:
-        "Intelligent chatbots and conversational interfaces that engage users and automate interactions across platforms.",
+        "Automate interactions and centralize communication. Intelligent chatbots that understand context and reduce support workload.",
     },
     {
       title: "Messaging platform integrations",
       description:
-        "WhatsApp, Telegram, and messaging platform integrations that connect your systems with where your users communicate.",
+        "Connect your systems with WhatsApp, Telegram, and messaging platforms. Reach users where they already communicate.",
     },
     {
-      title: "Fast execution & technical excellence",
+      title: "Process automation & integrations",
       description:
-        "Highly specialized projects delivered quickly. Clean code, solid performance, and scalable architecture from day one.",
+        "Turn manual workflows into automated flows. Connect existing systems, reduce errors, and scale operations efficiently.",
     },
   ],
   approachHeading: "Our Approach",
   approachIntro:
-    "Specialized solutions, executed fast, designed to impress.",
+    "We understand your process first, then build the solution. Fast execution comes from deep understanding, not shortcuts.",
   approachSteps: [
     {
-      title: "Discovery & Strategy",
+      title: "Understand Your Process",
       description:
-        "We quickly understand your needs and define the specialized solution, even for time-sensitive projects.",
+        "We start by learning how your team works, what slows you down, and what success looks like. Even for urgent projects, we take time to understand first.",
     },
     {
-      title: "Design & Visual Craft",
+      title: "Design for Clarity",
       description:
-        "We design visually striking interfaces and experiences that make complex tasks clear and engaging.",
+        "We create interfaces that make complex processes feel simple. Visual design that guides users, not just looks good.",
     },
     {
-      title: "Fast Engineering & Execution",
+      title: "Build with Precision",
       description:
-        "We build with speed and precision, delivering specialized solutions that integrate seamlessly and perform from day one.",
+        "We deliver solutions that integrate seamlessly with your existing systems. Clean code, solid performance, ready from day one.",
     },
     {
-      title: "Ongoing Partnership",
+      title: "Evolve Together",
       description:
-        "We measure, refine, and iterate as your business grows, maintaining the same fast, specialized approach.",
+        "As your needs change, we adapt. We measure what matters, refine what doesn't work, and iterate as your business grows.",
     },
   ],
   clientsHeading: "Select Clients",
   clientsLabel: "Clients",
   clientTypes: ["Event organization", "Industrial groups", "Global manufacturers", "Logistics & shipping", "New brand launches"],
   clientsIntro:
-    "We partner with industrial groups, manufacturers, logistics companies, and event specialists, creating solutions for their digital needs in events and beyond.",
-  ctaHeading: "Specialized solutions, executed fast, designed to impress.",
+    "We work with teams who need software that fits their process, not the other way around. From event organizers who need interactive displays connected to their systems, to manufacturers launching new brands who need their first digital presence—we build solutions that work from day one.",
+  ctaHeading: "Ready to turn your process into your advantage?",
   ctaBody:
-    "Custom websites, interactive displays, chatbots, messaging integrations, and specialized digital solutions tailored to your needs.",
+    "Let's talk about your specific needs. Whether it's a custom website, interactive event displays, chatbots, or integrations—we build solutions that fit how you work.",
   ctaButton: "Start a conversation",
 }
 
@@ -102,7 +102,7 @@ const es: CopyShape = {
     eyebrow: "Agencia boutique de software a medida en Barcelona",
     titleLines: ["Tu Proceso", "Nuestro Enfoque"],
     subtitle:
-      "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos y soluciones especializadas. Una relación cercana y honesta desde el primer día.",
+      "Convertimos tu proceso en software funcional. Sitios web a medida, displays interactivos e integraciones que se adaptan a cómo trabaja realmente tu equipo. Una relación cercana y honesta desde el primer día.",
   },
   capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Capacidades",
@@ -110,52 +110,52 @@ const es: CopyShape = {
     {
       title: "Sitios web y aplicaciones a medida",
       description:
-        "Sitios web y aplicaciones web a medida adaptadas a tus necesidades, construidas con ejecución rápida y diseño visual excepcional.",
+        "Sitios web y aplicaciones construidas alrededor del flujo de trabajo de tu equipo, no plantillas genéricas. Reduce trabajo manual y optimiza procesos.",
     },
     {
       title: "Displays interactivos y soluciones para eventos",
       description:
-        "Displays interactivos y pantallas para eventos y ferias. Soluciones especializadas que combinan impacto visual con precisión técnica.",
+        "Involucra a los asistentes con displays interactivos conectados a tus sistemas. Datos en tiempo real, integraciones fluidas, impacto visual.",
     },
     {
       title: "Chatbots e interfaces conversacionales",
       description:
-        "Chatbots inteligentes e interfaces conversacionales que involucran a los usuarios y automatizan interacciones en múltiples plataformas.",
+        "Automatiza interacciones y centraliza la comunicación. Chatbots inteligentes que entienden contexto y reducen la carga de soporte.",
     },
     {
       title: "Integraciones con plataformas de mensajería",
       description:
-        "Integraciones con WhatsApp, Telegram y otras plataformas de mensajería que conectan tus sistemas con donde se comunican tus usuarios.",
+        "Conecta tus sistemas con WhatsApp, Telegram y plataformas de mensajería. Llega a tus usuarios donde ya se comunican.",
     },
     {
-      title: "Ejecución rápida y excelencia técnica",
+      title: "Automatización de procesos e integraciones",
       description:
-        "Proyectos altamente especializados entregados rápidamente. Código limpio, rendimiento sólido y arquitectura escalable desde el inicio.",
+        "Convierte flujos de trabajo manuales en procesos automatizados. Conecta sistemas existentes, reduce errores y escala operaciones eficientemente.",
     },
   ],
   approachHeading: "Nuestro Enfoque",
   approachIntro:
-    "Soluciones especializadas, ejecutadas rápido, diseñadas para impresionar.",
+    "Entendemos tu proceso primero, luego construimos la solución. La ejecución rápida viene de entender en profundidad, no de atajos.",
   approachSteps: [
     {
-      title: "Descubrimiento & Estrategia",
+      title: "Entender Tu Proceso",
       description:
-        "Entendemos rápidamente tus necesidades y definimos la solución especializada, incluso para proyectos con plazos ajustados.",
+        "Empezamos aprendiendo cómo trabaja tu equipo, qué los ralentiza y cómo se ve el éxito. Incluso para proyectos urgentes, tomamos tiempo para entender primero.",
     },
     {
-      title: "Diseño & Craft Visual",
+      title: "Diseñar para la Claridad",
       description:
-        "Diseñamos interfaces y experiencias visualmente impactantes que hacen tareas complejas claras y atractivas.",
+        "Creamos interfaces que hacen que procesos complejos se sientan simples. Diseño visual que guía a los usuarios, no solo se ve bien.",
     },
     {
-      title: "Ingeniería Rápida & Ejecución",
+      title: "Construir con Precisión",
       description:
-        "Construimos con velocidad y precisión, entregando soluciones especializadas que se integran perfectamente y funcionan desde el inicio.",
+        "Entregamos soluciones que se integran perfectamente con tus sistemas existentes. Código limpio, rendimiento sólido, listo desde el inicio.",
     },
     {
-      title: "Relación Continua",
+      title: "Evolucionar Juntos",
       description:
-        "Medimos, afinamos e iteramos a medida que tu negocio crece, manteniendo el mismo enfoque rápido y especializado.",
+        "A medida que tus necesidades cambian, nos adaptamos. Medimos lo que importa, afinamos lo que no funciona e iteramos mientras tu negocio crece.",
     },
   ],
   clientsHeading: "Clientes",
@@ -168,10 +168,10 @@ const es: CopyShape = {
     "Lanzamientos de nuevas marcas",
   ],
   clientsIntro:
-    "Colaboramos con grupos industriales, fabricantes, compañías logísticas y especialistas en eventos. A menudo creamos la primera presencia digital de nuevas marcas.",
-  ctaHeading: "Soluciones especializadas, ejecutadas rápido, diseñadas para impresionar.",
+    "Trabajamos con equipos que necesitan software que se adapte a su proceso, no al revés. Desde organizadores de eventos que necesitan displays interactivos conectados a sus sistemas, hasta fabricantes que lanzan nuevas marcas y necesitan su primera presencia digital—construimos soluciones que funcionan desde el primer día.",
+  ctaHeading: "¿Listo para convertir tu proceso en tu ventaja?",
   ctaBody:
-    "Sitios web a medida, displays interactivos, chatbots, integraciones de mensajería y soluciones digitales especializadas adaptadas a tus necesidades.",
+    "Hablemos de tus necesidades específicas. Ya sea un sitio web a medida, displays interactivos para eventos, chatbots o integraciones—construimos soluciones que se adaptan a cómo trabajas.",
   ctaButton: "Iniciar una conversación",
 }
 
