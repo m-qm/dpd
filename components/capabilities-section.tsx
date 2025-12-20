@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { SectionBadge } from "@/components/section-badge"
 import { copy, type Locale } from "@/lib/copy"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function CapabilitiesSection({
   inverted = false,
@@ -14,6 +15,8 @@ export function CapabilitiesSection({
   const [visibleItems, setVisibleItems] = useState<number[]>([])
   const sectionRef = useRef<HTMLDivElement>(null)
   const iconKinds = ["square", "circle", "triangle", "line", "grid"] as const
+  const isMobile = useIsMobile()
+  const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,10 +24,13 @@ export function CapabilitiesSection({
         entries.forEach((entry) => {
           // Trigger earlier on smaller viewports (tall sections may never reach high intersection ratios on mobile).
           if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+            // On mobile or reduced motion, show all items at once or with minimal delay
+            const delay = (isMobile || prefersReducedMotion) ? 30 : 120
+            
             copy[locale].capabilities.forEach((_, index) => {
               setTimeout(() => {
                 setVisibleItems((prev) => [...prev, index])
-              }, index * 120)
+              }, index * delay)
             })
             observer.disconnect()
           }
@@ -38,7 +44,7 @@ export function CapabilitiesSection({
     }
 
     return () => observer.disconnect()
-  }, [locale])
+  }, [locale, isMobile, prefersReducedMotion])
 
   return (
     <section 
@@ -82,7 +88,7 @@ export function CapabilitiesSection({
                   visibleItems.includes(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 } hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-500`}
                 style={{
-                  willChange: visibleItems.includes(index) ? 'auto' : 'transform, opacity',
+                  willChange: (!isMobile && !visibleItems.includes(index)) ? 'transform, opacity' : 'auto',
                 }}
               >
                 <div className="relative p-8 md:p-10">

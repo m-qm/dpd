@@ -4,21 +4,26 @@ import { useEffect, useRef, useState } from "react"
 import { SectionBadge } from "@/components/section-badge"
 import type { Locale } from "@/lib/copy"
 import { Sparkles, Zap, Code2, Rocket } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function PhilosophySection({ inverted = false, locale = "en" }: { inverted?: boolean; locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
+    // Lower threshold on mobile for better performance
+    const threshold = isMobile ? 0.2 : 0.4
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+          if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
             setIsVisible(true)
           }
         })
       },
-      { threshold: [0.4, 0.7] },
+      { threshold: [threshold, threshold + 0.3] },
     )
 
     if (sectionRef.current) {
@@ -26,7 +31,7 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [isMobile])
 
   const philosophyPoints = locale === "es" 
     ? [

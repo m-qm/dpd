@@ -28,7 +28,7 @@ export function ClientsMarquee() {
           background: 'linear-gradient(to left, var(--background) 0%, transparent 100%)'
         }}
       />
-      <div className="flex animate-marquee-reverse whitespace-nowrap will-change-transform" style={{ width: 'fit-content' }}>
+      <div className="flex animate-marquee-reverse whitespace-nowrap" style={{ width: 'fit-content' }}>
         {duplicatedClients.map((client, index) => {
           const isMaersk = client.name === "Maersk"
           const isDaikin = client.name === "DAIKIN"

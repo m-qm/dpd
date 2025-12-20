@@ -10,10 +10,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function FAQSection({ locale = "en", inverted = false }: { locale?: Locale; inverted?: boolean }) {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +48,7 @@ export function FAQSection({ locale = "en", inverted = false }: { locale?: Local
       <div className="dpd-container-narrow">
         <SectionBadge number={5} label={locale === "es" ? "Preguntas frecuentes" : "FAQ"} />
         <div
-          className={`transition-all duration-700 ${
+          className={`transition-all ${isMobile ? "duration-300" : "duration-700"} ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >

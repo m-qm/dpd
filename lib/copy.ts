@@ -30,7 +30,7 @@ const en: CopyShape = {
     eyebrow: "Boutique custom software studio in Barcelona",
     titleLines: ["Your Process", "Our Focus"],
     subtitle:
-      "Fast. Specialized. Visually Striking. We build custom websites, interactive displays, and specialized solutions that demand rapid execution and exceptional visual design. A close, honest partnership from day one.",
+      "Fast. Specialized. Visually Striking. Custom websites, interactive displays, and specialized solutions. A close, honest partnership from day one.",
   },
   capabilitiesHeading: "Capabilities",
   capabilitiesLabel: "Capabilities",
@@ -102,7 +102,7 @@ const es: CopyShape = {
     eyebrow: "Agencia boutique de software a medida en Barcelona",
     titleLines: ["Tu Proceso", "Nuestro Enfoque"],
     subtitle:
-      "Rápido. Especializado. Visualmente Impactante. Construimos sitios web a medida, displays interactivos y soluciones especializadas que requieren ejecución rápida y diseño visual excepcional. Una relación cercana y honesta desde el primer día.",
+      "Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos y soluciones especializadas. Una relación cercana y honesta desde el primer día.",
   },
   capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Capacidades",

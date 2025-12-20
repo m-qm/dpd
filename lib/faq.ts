@@ -66,9 +66,9 @@ export const faqContent: Record<Locale, FAQItem[]> = {
     },
     {
       id: "fast-execution",
-      question: "¿Qué tan rápido podéis entregar soluciones a medida?",
+      question: "¿Cuánto tiempo suele tardar un proyecto?",
       answer:
-        "La velocidad es una de nuestras fortalezas principales. Estamos construidos para ejecución rápida en proyectos especializados, especialmente aquellos con plazos ajustados como displays para eventos. Entendemos rápidamente los requisitos, diseñamos soluciones visualmente impactantes y entregamos con excelencia técnica—todo mientras mantenemos la calidad y personalización que tu proyecto requiere.",
+        "Depende de la complejidad y alcance, pero la velocidad es una de nuestras fortalezas. Estamos preparados para ejecución rápida en proyectos especializados, especialmente aquellos con plazos ajustados como displays para eventos. Entendemos rápidamente los requisitos, diseñamos soluciones visualmente impactantes y entregamos con excelencia técnica—todo mientras mantenemos la calidad y personalización que tu proyecto requiere.",
     },
     {
       id: "time-sensitive",

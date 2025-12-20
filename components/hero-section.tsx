@@ -208,7 +208,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       <HeroNavigation locale={locale} />
 
       {/* Hero Content */}
-      <div className="relative flex-1 min-h-0 flex items-center justify-center px-6 md:px-12 lg:px-20 py-8 md:py-12 lg:py-16 overflow-hidden z-10">
+      <div className="relative flex-1 min-h-0 flex items-center justify-center px-6 md:px-12 lg:px-20 py-12 md:py-12 lg:py-16 overflow-hidden z-10">
         {/* Background effects */}
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
@@ -244,15 +244,19 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           }}
         />
         
-        {/* Animated orbs - more visible for depth */}
-        <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full animate-pulse opacity-30" style={{ filter: 'blur(60px)' }} />
-        <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-500/5 rounded-full animate-pulse opacity-25" style={{ animationDelay: '1s', animationDuration: '4s', filter: 'blur(50px)' }} />
-        <div className="pointer-events-none absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-500/4 rounded-full animate-pulse opacity-20" style={{ animationDelay: '2s', animationDuration: '5s', filter: 'blur(40px)' }} />
-        
-        {/* Floating geometric shapes */}
-        <div className="pointer-events-none absolute top-[15%] right-[20%] w-2 h-2 bg-foreground/20 rounded-full animate-float" />
-        <div className="pointer-events-none absolute bottom-[25%] right-[15%] w-1.5 h-1.5 bg-blue-400/30 rounded-full animate-float-delayed" />
-        <div className="pointer-events-none absolute top-[60%] left-[10%] w-1 h-1 bg-purple-400/25 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
+        {/* Animated orbs - more visible for depth, reduced on mobile */}
+        {!isMobile && (
+          <>
+            <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full animate-pulse opacity-30" style={{ filter: 'blur(60px)' }} />
+            <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-500/5 rounded-full animate-pulse opacity-25" style={{ animationDelay: '1s', animationDuration: '4s', filter: 'blur(50px)' }} />
+            <div className="pointer-events-none absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-500/4 rounded-full animate-pulse opacity-20" style={{ animationDelay: '2s', animationDuration: '5s', filter: 'blur(40px)' }} />
+            
+            {/* Floating geometric shapes */}
+            <div className="pointer-events-none absolute top-[15%] right-[20%] w-2 h-2 bg-foreground/20 rounded-full animate-float" />
+            <div className="pointer-events-none absolute bottom-[25%] right-[15%] w-1.5 h-1.5 bg-blue-400/30 rounded-full animate-float-delayed" />
+            <div className="pointer-events-none absolute top-[60%] left-[10%] w-1 h-1 bg-purple-400/25 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
+          </>
+        )}
 
         <div
           key={`hero-content-${locale}`}
@@ -274,7 +278,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </div>
 
             {/* Main Title */}
-            <h1 key={locale} className="relative mb-6 md:mb-10 font-serif">
+            <h1 key={locale} className="relative mb-4 md:mb-10 font-serif">
               <div className="grid opacity-0 pointer-events-none">
                 <div className="col-start-1 row-start-1">
                   {copy[locale].hero.titleLines.map((line) => (
@@ -337,7 +341,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             {/* Subtitle */}
             <p 
               key={`subtitle-${locale}`}
-              className={`text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-12 transition-opacity duration-300 ${
+              className={`text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-5 md:mb-12 transition-opacity duration-300 ${
                 isVisible ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -345,7 +349,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-8 md:mb-12">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-12">
               <a
                 href="#contact"
                 className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:shadow-xl hover:shadow-blue-500/30"
@@ -398,7 +402,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </div>
 
             {/* Stats Section */}
-            <div className="flex flex-wrap items-center gap-6 md:gap-8 mb-8 md:mb-12">
+            <div className="hidden md:flex flex-wrap items-center gap-4 md:gap-8 mb-6 md:mb-12">
               {(
                 locale === "es"
                   ? [
@@ -419,10 +423,10 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                     opacity: isVisible ? 1 : 0
                   }}
                 >
-                  <span className="text-2xl md:text-3xl font-serif text-foreground tracking-tight">
+                  <span className="text-xl md:text-3xl font-serif text-foreground tracking-tight">
                     {stat.value}
                   </span>
-                  <span className="text-xs md:text-sm uppercase tracking-[0.12em] text-muted-foreground/70 font-medium">
+                  <span className="text-[10px] md:text-sm uppercase tracking-[0.12em] text-muted-foreground/70 font-medium">
                     {stat.label}
                   </span>
                 </div>
@@ -430,7 +434,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </div>
 
             {/* Service tags - visible on all screens but smaller on mobile */}
-            <div className="flex flex-wrap gap-2 md:gap-3 mb-12 md:mb-16">
+            <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-16">
               {(
                 locale === "es"
                   ? ["Software a medida", "Herramientas internas", "Automatización", "Integraciones"]

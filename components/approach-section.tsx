@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { SectionBadge } from "@/components/section-badge"
 import { copy, type Locale } from "@/lib/copy"
 import { Search, Palette, Code, TrendingUp } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const approachIcons = [Search, Palette, Code, TrendingUp]
 
@@ -11,6 +12,8 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
   const [isVisible, setIsVisible] = useState(false)
   const [visibleSteps, setVisibleSteps] = useState<number[]>([])
   const sectionRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
+  const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -18,11 +21,12 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
             setIsVisible(true)
-            // Animate steps sequentially
+            // On mobile or reduced motion, show all steps at once or with minimal delay
+            const delay = (isMobile || prefersReducedMotion) ? 50 : 150
             copy[locale].approachSteps.forEach((_, index) => {
               setTimeout(() => {
                 setVisibleSteps((prev) => [...prev, index])
-              }, index * 150)
+              }, index * delay)
             })
             observer.disconnect()
           }
@@ -36,7 +40,7 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
     }
 
     return () => observer.disconnect()
-  }, [locale])
+  }, [locale, isMobile, prefersReducedMotion])
 
   return (
     <section
@@ -47,9 +51,13 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
     >
       {/* Animated background elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Floating gradient orbs */}
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/8 rounded-full blur-3xl animate-float opacity-60" />
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-float-delayed opacity-50" />
+        {/* Floating gradient orbs - disabled on mobile for performance */}
+        {!isMobile && (
+          <>
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/8 rounded-full blur-3xl animate-float opacity-60" />
+            <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-white/5 rounded-full blur-3xl animate-float-delayed opacity-50" />
+          </>
+        )}
         
         {/* Subtle grid pattern */}
         <div
@@ -103,10 +111,10 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
               return (
                 <div
                   key={index}
-                  className={`relative group transition-all duration-700 ${
+                  className={`relative group transition-all ${isMobile ? "duration-300" : "duration-700"} ${
                     isStepVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
+                  style={{ transitionDelay: isMobile ? `${index * 50}ms` : `${index * 150}ms` }}
                 >
                   {/* Timeline dot with icon */}
                   <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-10 h-10 rounded-full border-2 border-foreground/40 bg-background/80 backdrop-blur-md group-hover:border-blue-500/60 group-hover:scale-110 group-hover:bg-blue-500/10 transition-all duration-300">
@@ -114,9 +122,6 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
                       <Icon className="w-4 h-4 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300" />
                     )}
                   </div>
-
-                  {/* Mobile: Simple dot */}
-                  <div className="md:hidden absolute left-0 top-6 w-3 h-3 rounded-full border-2 border-foreground/40 bg-background group-hover:border-blue-500/60 transition-all duration-300" />
 
                   <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     {/* Card */}

@@ -23,7 +23,7 @@ export function IndustriesMarquee({ locale = "en" }: { locale?: Locale }) {
           background: 'linear-gradient(to left, var(--background) 0%, transparent 100%)'
         }}
       />
-      <div className="flex animate-marquee whitespace-nowrap will-change-transform">
+      <div className="flex animate-marquee whitespace-nowrap">
         {duplicatedIndustries.map((industry, index) => (
           <div
             key={`${industry}-${index}`}
