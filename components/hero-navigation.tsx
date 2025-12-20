@@ -74,6 +74,7 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
             height={28}
             className="h-7 w-7 rounded-md object-contain"
             priority
+            fetchPriority="high"
           />
         </div>
         <div className="text-xs md:text-sm font-normal tracking-tight text-foreground">Dual Perspective Digital</div>
