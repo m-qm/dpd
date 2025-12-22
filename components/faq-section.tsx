@@ -53,9 +53,7 @@ export function FAQSection({ locale = "en", inverted = false }: { locale?: Local
           }`}
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground mb-4 tracking-tight leading-tight">
-            {locale === "es"
-              ? "Preguntas frecuentes sobre nuestro trabajo"
-              : "Frequently asked questions about our work"}
+            FAQ
           </h2>
           <p className="text-sm md:text-base text-muted-foreground mb-8 max-w-2xl">
             {locale === "es"

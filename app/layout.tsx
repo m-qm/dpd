@@ -154,12 +154,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} data-theme="dark" style={{ height: '100%', minHeight: '100%' }}>
       <head>
+        {/* Favicons for search engines and browsers */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
         {/* Preload critical resources for LCP optimization */}
-        <link
-          rel="preload"
-          href="/favicon.ico"
-          as="image"
-        />
         <link
           rel="preload"
           href="/og.png"
