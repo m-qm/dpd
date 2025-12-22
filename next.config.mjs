@@ -21,7 +21,8 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   // Optimizaciones de producción
-  productionBrowserSourceMaps: false, // Reducir tamaño del build
+  // Activa sourcemaps en producción para mejorar debugging y recomendaciones de Lighthouse
+  productionBrowserSourceMaps: true,
   // Headers de caché y seguridad para mejorar performance y seguridad
   async headers() {
     const securityHeaders = [

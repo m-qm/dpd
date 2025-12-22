@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { MessageCircle } from "lucide-react"
+import { useRouter, usePathname } from "next/navigation"
 
 type Locale = "en" | "es"
 type ThemeMode = "dark" | "light"
@@ -9,6 +10,7 @@ type ThemeMode = "dark" | "light"
 type ScopeOption = "internal_tool" | "automation" | "integrations" | "website" | "other"
 
 type ChatStep =
+  | { id: "language" }
   | { id: "scope" }
   | { id: "other_details" }
   | { id: "contact_name" }
@@ -26,6 +28,39 @@ function detectLocale(): Locale {
   return lang.startsWith("es") ? "es" : "en"
 }
 
+function isLikelyInSpain(): boolean {
+  if (typeof window === "undefined" || typeof Intl === "undefined") return false
+  
+  try {
+    // Check timezone - Spain uses Europe/Madrid
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    if (timezone === "Europe/Madrid" || timezone === "Europe/Barcelona") {
+      return true
+    }
+    
+    // Check browser language
+    const lang = navigator.language || navigator.languages?.[0] || ""
+    if (lang.toLowerCase().startsWith("es")) {
+      return true
+    }
+    
+    // Check if any of the user's preferred languages is Spanish
+    if (navigator.languages) {
+      for (const l of navigator.languages) {
+        if (l.toLowerCase().startsWith("es")) {
+          return true
+        }
+      }
+    }
+  } catch {
+    // Fallback: just check language if timezone detection fails
+    const lang = navigator.language || navigator.languages?.[0] || ""
+    return lang.toLowerCase().startsWith("es")
+  }
+  
+  return false
+}
+
 function copyFor(locale: Locale) {
   const isEs = locale === "es"
   return {
@@ -34,6 +69,9 @@ function copyFor(locale: Locale) {
     subtitle: isEs ? "Respuestas rápidas. Sin compromiso." : "Quick questions. No pressure.",
     close: isEs ? "Cerrar" : "Close",
     start: isEs ? "Empezar" : "Start",
+    qLanguage: "¿Prefieres español? / Do you prefer Spanish?",
+    optSpanish: "Español",
+    optEnglish: "English",
     qScope: isEs ? "¿Qué necesitas?" : "What do you need?",
     optInternal: isEs ? "Herramienta interna" : "Internal tool",
     optAutomation: isEs ? "Automatización" : "Automation",
@@ -49,8 +87,8 @@ function copyFor(locale: Locale) {
     send: isEs ? "Enviar" : "Send",
     next: isEs ? "Siguiente" : "Next",
     sending: isEs ? "Enviando…" : "Sending…",
-    success: isEs ? "Gracias. Te escribiremos pronto." : "Thanks. We’ll get back to you soon.",
-    error: isEs ? "No se pudo enviar. Prueba de nuevo." : "Couldn’t send. Please try again.",
+    success: isEs ? "Gracias. Te escribiremos pronto." : "Thanks. We'll get back to you soon.",
+    error: isEs ? "No se pudo enviar. Prueba de nuevo." : "Couldn't send. Please try again.",
     invalidEmail: isEs ? "Escribe un email válido." : "Write a valid email.",
     required: isEs ? "Obligatorio" : "Required",
   }
@@ -73,12 +111,14 @@ function scopeLabel(locale: Locale, scope: ScopeOption) {
 }
 
 export function LeadChat() {
+  const router = useRouter()
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [locale, setLocale] = useState<Locale>("en")
   const [surfaceTheme, setSurfaceTheme] = useState<ThemeMode>("dark")
   const lastSurfaceThemeRef = useRef<ThemeMode>("dark")
 
-  const [step, setStep] = useState<ChatStep>({ id: "scope" })
+  const [step, setStep] = useState<ChatStep>({ id: "language" })
   const [transcript, setTranscript] = useState<TranscriptItem[]>([])
 
   const [scope, setScope] = useState<ScopeOption | null>(null)
@@ -87,6 +127,14 @@ export function LeadChat() {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
   const [isTyping, setIsTyping] = useState(false)
+  const [hasUnread, setHasUnread] = useState(() => {
+    // Check on initial render if user has seen chat
+    if (typeof window !== "undefined") {
+      return !window.localStorage.getItem("dpd-chat-seen")
+    }
+    return false
+  })
+  const [autoOpened, setAutoOpened] = useState(false)
 
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -154,25 +202,17 @@ export function LeadChat() {
     }
   }, [surfaceTheme])
 
-  // Panel: invert against the underlying section (same as launcher - if page is dark, panel is light; if light, panel is dark)
+  // Panel: use site's actual theme colors (dark theme)
   const panelVars = useMemo<React.CSSProperties>(() => {
-    if (surfaceTheme === "dark") {
-      // Underlying is dark → panel becomes light
-      return {
-        ["--background" as any]: "#f5f5f5",
-        ["--foreground" as any]: "oklch(0.1 0 0)",
-        ["--muted-foreground" as any]: "oklch(0.4 0 0)",
-        ["--border" as any]: "oklch(0.9 0 0)",
-      }
-    }
-    // Underlying is light → panel becomes dark
+    // Always use dark theme to match site's aesthetic
     return {
       ["--background" as any]: "#0b0b0b",
       ["--foreground" as any]: "oklch(1 0 0)",
       ["--muted-foreground" as any]: "oklch(0.6 0 0)",
       ["--border" as any]: "oklch(0.2 0 0)",
+      ["--muted" as any]: "oklch(0.15 0 0)",
     }
-  }, [surfaceTheme])
+  }, [])
 
   // Auto-scroll to bottom when transcript changes or typing state changes
   useEffect(() => {
@@ -186,11 +226,23 @@ export function LeadChat() {
 
   // Reset when opening
   useEffect(() => {
-    if (!open) return
-    const l = detectLocale()
-    setLocale(l)
-    setStep({ id: "scope" })
-    setTranscript([{ role: "bot", text: copyFor(l).qScope }])
+    if (!open) {
+      // Reset autoOpened flag when chat closes
+      setAutoOpened(false)
+      return
+    }
+    // Mark as read when chat is opened
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("dpd-chat-seen", "true")
+      setHasUnread(false)
+    }
+    // Detect current page language
+    const currentPageLocale = detectLocale()
+    // Always start with language selection (even for Spanish users, ask them)
+    setStep({ id: "language" })
+    setTranscript([{ role: "bot", text: copyFor("en").qLanguage }])
+    // Set locale to current page language initially, will be confirmed/updated when user chooses
+    setLocale(currentPageLocale)
     setScope(null)
     setOtherDetails("")
     setName("")
@@ -209,6 +261,34 @@ export function LeadChat() {
     } else {
       setTranscript((t) => [...t, { role: "bot", text }])
     }
+  }
+
+  const onPickLanguage = (selectedLocale: Locale) => {
+    setLocale(selectedLocale)
+    const langLabel = selectedLocale === "es" ? copyFor("en").optSpanish : copyFor("en").optEnglish
+    pushUser(langLabel)
+    
+    // Save language preference
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("dpd-lang", selectedLocale)
+    }
+    
+    // Redirect to appropriate page if needed
+    const isOnSpanishPage = pathname.startsWith("/es")
+    if (selectedLocale === "es" && !isOnSpanishPage) {
+      // Spanish selected, but on English page → redirect to Spanish
+      const basePath = pathname === "/" ? "" : pathname
+      router.push(`/es${basePath}`)
+    } else if (selectedLocale === "en" && isOnSpanishPage) {
+      // English selected, but on Spanish page → redirect to English
+      const basePath = pathname.replace(/^\/es/, "") || "/"
+      router.push(basePath)
+    }
+    
+    // Continue with the normal flow
+    setStep({ id: "scope" })
+    const c = copyFor(selectedLocale)
+    pushBot(c.qScope, 300)
   }
 
   const onPickScope = (value: ScopeOption) => {
@@ -294,66 +374,98 @@ export function LeadChat() {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-[60]">
+    <div className="fixed bottom-6 right-6 z-[60]">
       {/* Launcher */}
       {!open && (
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="flex items-center justify-center h-13 w-13 rounded-full shadow-lg transition-transform duration-150"
+          className={`relative flex items-center justify-center h-13 w-13 border transition-opacity hover:opacity-70 ${
+            hasUnread ? "animate-chatPulse" : ""
+          }`}
           style={{
-            backgroundColor: launcherVars["--launcher-bg" as any],
-            color: launcherVars["--launcher-text" as any],
-            border: `2px solid ${launcherVars["--launcher-border" as any]}`,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.04)"
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)"
+            backgroundColor: "#0b0b0b",
+            color: "oklch(1 0 0)",
+            borderColor: "oklch(0.2 0 0)",
           }}
           aria-label={c.launcher}
         >
-          <MessageCircle className="h-6 w-6" style={{ color: launcherVars["--launcher-text" as any] }} />
+          <MessageCircle className="h-5 w-5" style={{ color: "oklch(1 0 0)" }} />
+          {hasUnread && (
+            <>
+              {/* Notification badge */}
+              <span
+                className="absolute -top-0.5 -right-0.5 h-3 w-3 animate-badgePulse"
+                style={{
+                  backgroundColor: "#ef4444",
+                  border: `2px solid #0b0b0b`,
+                }}
+              />
+              {/* Outer pulse ring */}
+              <span
+                className="absolute inset-0 animate-ringPulse"
+                style={{
+                  border: `1px solid #ef4444`,
+                  opacity: 0.4,
+                }}
+              />
+            </>
+          )}
         </button>
       )}
 
       {/* Panel */}
       {open && (
         <div 
-          className="w-[92vw] max-w-[360px] border-2 border-foreground/30 bg-background/90 backdrop-blur-sm shadow-lg"
+          className="w-[92vw] max-w-[400px] border overflow-hidden"
           style={{
             ...panelVars,
+            backgroundColor: panelVars["--background" as any],
+            borderColor: panelVars["--border" as any],
             animation: "chatSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
             transformOrigin: "bottom right",
           }}
         >
-          <div className="px-4 py-3 border-b-2 border-foreground/20 flex items-center justify-between">
+          <div 
+            className="px-5 py-4 border-b flex items-center justify-between"
+            style={{
+              borderColor: panelVars["--border" as any],
+            }}
+          >
             <div>
-              <div className="text-sm text-foreground tracking-tight">{c.title}</div>
-              <div className="text-xs text-muted-foreground">{c.subtitle}</div>
+              <div className="text-sm tracking-tight" style={{ color: panelVars["--foreground" as any] }}>{c.title}</div>
+              <div className="text-xs mt-0.5" style={{ color: panelVars["--muted-foreground" as any] }}>{c.subtitle}</div>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:opacity-70 transition-opacity"
+              className="h-8 w-8 flex items-center justify-center transition-opacity hover:opacity-70"
+              style={{ color: panelVars["--muted-foreground" as any] }}
+              aria-label={c.close}
             >
-              {c.close}
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
 
-          <div ref={scrollRef} className="max-h-[46vh] overflow-auto px-4 py-4 space-y-3">
+          <div ref={scrollRef} className="max-h-[50vh] overflow-auto px-5 py-4 space-y-3" style={{ backgroundColor: panelVars["--background" as any] }}>
             {transcript.map((m, idx) => (
               <div 
                 key={`${m.role}-${idx}-${m.text.slice(0, 10)}`}
                 className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} chat-message-enter`}
               >
                 <div
-                  className={`max-w-[85%] text-sm leading-relaxed px-3 py-2 border ${
-                    m.role === "user"
-                      ? "bg-foreground text-background border-foreground"
-                      : "bg-background text-foreground border-2 border-foreground/30"
-                  }`}
+                  className="max-w-[80%] text-sm leading-relaxed px-4 py-2.5 border"
+                  style={{
+                    backgroundColor: m.role === "user" 
+                      ? panelVars["--foreground" as any]
+                      : panelVars["--muted" as any],
+                    color: m.role === "user"
+                      ? panelVars["--background" as any]
+                      : panelVars["--foreground" as any],
+                    borderColor: panelVars["--border" as any],
+                  }}
                 >
                   {m.text}
                 </div>
@@ -361,26 +473,92 @@ export function LeadChat() {
             ))}
             {isTyping && (
               <div className="flex justify-start chat-message-enter">
-                <div className="max-w-[85%] bg-background text-foreground border-2 border-foreground/30 px-3 py-2">
-                  <div className="flex gap-1.5 py-1">
-                    <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full" style={{ animation: "bounce 1.4s ease-in-out infinite" }} />
-                    <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full" style={{ animation: "bounce 1.4s ease-in-out infinite 0.2s" }} />
-                    <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full" style={{ animation: "bounce 1.4s ease-in-out infinite 0.4s" }} />
+                <div 
+                  className="max-w-[80%] px-4 py-3 border"
+                  style={{
+                    backgroundColor: panelVars["--muted" as any],
+                    borderColor: panelVars["--border" as any],
+                  }}
+                >
+                  <div className="flex gap-1.5">
+                    <span 
+                      className="w-2 h-2 rounded-full animate-bounce" 
+                      style={{ 
+                        backgroundColor: panelVars["--foreground" as any],
+                        opacity: 0.6,
+                        animationDelay: "0ms" 
+                      }} 
+                    />
+                    <span 
+                      className="w-2 h-2 rounded-full animate-bounce" 
+                      style={{ 
+                        backgroundColor: panelVars["--foreground" as any],
+                        opacity: 0.6,
+                        animationDelay: "150ms" 
+                      }} 
+                    />
+                    <span 
+                      className="w-2 h-2 rounded-full animate-bounce" 
+                      style={{ 
+                        backgroundColor: panelVars["--foreground" as any],
+                        opacity: 0.6,
+                        animationDelay: "300ms" 
+                      }} 
+                    />
                   </div>
                 </div>
               </div>
             )}
           </div>
 
-          <div className="px-4 py-4 border-t-2 border-foreground/20">
+          <div 
+            className="px-5 py-4 border-t"
+            style={{
+              borderColor: panelVars["--border" as any],
+            }}
+          >
+            {step.id === "language" && (
+              <div className="grid grid-cols-2 gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => onPickLanguage("es")}
+                  className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                  style={{
+                    backgroundColor: panelVars["--background" as any],
+                    color: panelVars["--foreground" as any],
+                    borderColor: panelVars["--border" as any],
+                  }}
+                >
+                  {copyFor("en").optSpanish}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onPickLanguage("en")}
+                  className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                  style={{
+                    backgroundColor: panelVars["--background" as any],
+                    color: panelVars["--foreground" as any],
+                    borderColor: panelVars["--border" as any],
+                  }}
+                >
+                  {copyFor("en").optEnglish}
+                </button>
+              </div>
+            )}
+
             {step.id === "scope" && (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2.5">
                 {(["internal_tool", "automation", "integrations", "website", "other"] as const).map((v) => (
                   <button
                     key={v}
                     type="button"
                     onClick={() => onPickScope(v)}
-                    className="px-3 py-2 text-xs uppercase tracking-[0.16em] border-2 border-foreground/40 hover:border-foreground/80 hover:bg-foreground/10 active:scale-[0.98] transition-all duration-200 text-foreground"
+                    className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                    style={{
+                      backgroundColor: panelVars["--background" as any],
+                      color: panelVars["--foreground" as any],
+                      borderColor: panelVars["--border" as any],
+                    }}
                   >
                     {scopeLabel(locale, v)}
                   </button>
@@ -393,14 +571,24 @@ export function LeadChat() {
                 <textarea
                   value={otherDetails}
                   onChange={(e) => setOtherDetails(e.target.value)}
-                  rows={2}
+                  rows={3}
                   placeholder={c.placeholderOther}
-                  className="w-full text-sm text-foreground bg-transparent border-2 border-foreground/40 px-3 py-2 focus:outline-none focus:border-foreground/80 transition-all duration-200 placeholder:text-muted-foreground"
+                  className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-opacity resize-none"
+                  style={{
+                    backgroundColor: panelVars["--background" as any],
+                    color: panelVars["--foreground" as any],
+                    borderColor: panelVars["--border" as any],
+                  }}
                 />
                 <button
                   type="button"
                   onClick={onSubmitOther}
-                  className="w-full px-3 py-2 bg-foreground text-background text-sm hover:bg-foreground/90 active:scale-[0.98] transition-all duration-200"
+                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                  style={{
+                    backgroundColor: panelVars["--foreground" as any],
+                    color: panelVars["--background" as any],
+                    borderColor: panelVars["--foreground" as any],
+                  }}
                 >
                   {c.start}
                 </button>
@@ -409,9 +597,9 @@ export function LeadChat() {
 
             {step.id === "contact_name" && (
               <div className="space-y-3">
-                <div className="space-y-1">
-                  <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    {c.name} · {c.required}
+                <div className="space-y-2">
+                  <label className="text-xs tracking-tight" style={{ color: panelVars["--muted-foreground" as any] }}>
+                    {c.name} <span style={{ opacity: 0.6 }}>· {c.required}</span>
                   </label>
                   <input
                     value={name}
@@ -422,7 +610,13 @@ export function LeadChat() {
                         onSubmitName()
                       }
                     }}
-                    className="w-full text-sm text-foreground bg-transparent border-2 border-foreground/40 px-3 py-2 focus:outline-none focus:border-foreground/80 transition-all duration-200 placeholder:text-muted-foreground"
+                    className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-opacity"
+                    style={{
+                      backgroundColor: panelVars["--background" as any],
+                      color: panelVars["--foreground" as any],
+                      borderColor: panelVars["--border" as any],
+                    }}
+                    placeholder={c.name}
                     autoComplete="name"
                   />
                 </div>
@@ -430,7 +624,12 @@ export function LeadChat() {
                   type="button"
                   disabled={status === "sending" || !name.trim()}
                   onClick={onSubmitName}
-                  className="w-full px-3 py-2 bg-foreground text-background text-sm border-2 border-foreground hover:bg-foreground/90 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:border-foreground/50"
+                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50 disabled:opacity-30"
+                  style={{
+                    backgroundColor: panelVars["--foreground" as any],
+                    color: panelVars["--background" as any],
+                    borderColor: panelVars["--foreground" as any],
+                  }}
                 >
                   {c.next}
                 </button>
@@ -439,9 +638,9 @@ export function LeadChat() {
 
             {step.id === "contact_email" && (
               <div className="space-y-3">
-                <div className="space-y-1">
-                  <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    {c.email} · {c.required}
+                <div className="space-y-2">
+                  <label className="text-xs tracking-tight" style={{ color: panelVars["--muted-foreground" as any] }}>
+                    {c.email} <span style={{ opacity: 0.6 }}>· {c.required}</span>
                   </label>
                   <input
                     value={email}
@@ -452,7 +651,13 @@ export function LeadChat() {
                         onSubmitEmail()
                       }
                     }}
-                    className="w-full text-sm text-foreground bg-transparent border-2 border-foreground/40 px-3 py-2 focus:outline-none focus:border-foreground/80 transition-all duration-200 placeholder:text-muted-foreground"
+                    className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-opacity"
+                    style={{
+                      backgroundColor: panelVars["--background" as any],
+                      color: panelVars["--foreground" as any],
+                      borderColor: panelVars["--border" as any],
+                    }}
+                    placeholder={c.email}
                     autoComplete="email"
                     type="email"
                   />
@@ -461,7 +666,12 @@ export function LeadChat() {
                   type="button"
                   disabled={status === "sending" || !email.trim() || !name.trim()}
                   onClick={onSubmitEmail}
-                  className="w-full px-3 py-2 bg-foreground text-background text-sm border-2 border-foreground hover:bg-foreground/90 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:border-foreground/50"
+                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50 disabled:opacity-30"
+                  style={{
+                    backgroundColor: panelVars["--foreground" as any],
+                    color: panelVars["--background" as any],
+                    borderColor: panelVars["--foreground" as any],
+                  }}
                 >
                   {status === "sending" ? c.sending : c.send}
                 </button>
@@ -470,15 +680,21 @@ export function LeadChat() {
 
             {step.id === "done" && (
               <div className="flex justify-between items-center">
-                <div className={`text-xs transition-colors duration-300 ${status === "success" ? "text-green-500" : "text-red-500"}`}>
+                <div className="text-sm tracking-tight" style={{ 
+                  color: status === "success" ? "oklch(0.7 0.15 150)" : "oklch(0.6 0.2 25)" 
+                }}>
                   {status === "success" ? c.success : c.error}
                 </div>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:opacity-70 transition-opacity"
+                  className="h-8 w-8 flex items-center justify-center transition-opacity hover:opacity-70"
+                  style={{ color: panelVars["--muted-foreground" as any] }}
+                  aria-label={c.close}
                 >
-                  {c.close}
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
             )}

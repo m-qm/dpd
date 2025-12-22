@@ -665,6 +665,53 @@ html[data-theme="dark"] {
     animation: messageSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
+  @keyframes chatPulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes badgePulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.15);
+      opacity: 0.85;
+    }
+  }
+
+  @keyframes ringPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  .animate-chatPulse {
+    animation: chatPulse 2s ease-in-out infinite;
+  }
+
+  .animate-badgePulse {
+    animation: badgePulse 1.5s ease-in-out infinite;
+  }
+
+  .animate-ringPulse {
+    animation: ringPulse 2s ease-in-out infinite;
+  }
+
   /* Fix iOS scrolling glitches */
   @supports (-webkit-touch-callout: none) {
     /* iOS Safari specific fixes */
