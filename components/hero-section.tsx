@@ -74,12 +74,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       className="relative h-[100vh] h-[100dvh] flex flex-col"
       style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
     >
-      {/* 3D Cloud Canvas Background - Lazy loaded */}
-      <div className="absolute inset-0 z-0">
-        <Suspense fallback={null}>
-          <ParticleBackground isMobile={isMobile} />
-        </Suspense>
-      </div>
+      {/* 3D Cloud Canvas Background - Lazy loaded (desktop only to reduce JS on mobile) */}
+      {!isMobile && (
+        <div className="absolute inset-0 z-0">
+          <Suspense fallback={null}>
+            <ParticleBackground isMobile={isMobile} />
+          </Suspense>
+        </div>
+      )}
 
       {/* Navigation */}
       <HeroNavigation locale={locale} />
