@@ -71,8 +71,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   return (
     <section
       data-theme="dark"
-      className="relative h-[100vh] h-[100dvh] flex flex-col"
-      style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
+      className="relative min-h-screen flex flex-col"
     >
       {/* 3D Cloud Canvas Background - Lazy loaded (desktop only to reduce JS on mobile) */}
       {!isMobile && (

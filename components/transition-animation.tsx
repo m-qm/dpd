@@ -10,10 +10,26 @@ export function TransitionAnimation({ locale = "en" }: { locale?: Locale }) {
   const [efficiencyCount, setEfficiencyCount] = useState(0)
 
   useEffect(() => {
+    // If already triggered, don't re‑attach observer (prevents double timers)
+    if (isVisible) return
+
+    // Detect mobile to trigger earlier and with more lenient margins
+    let isMobile = false
+    if (typeof window !== "undefined") {
+      isMobile = window.matchMedia("(max-width: 768px)").matches
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          const minRatio = isMobile ? 0.05 : 0.2
+          if (entry.isIntersecting && entry.intersectionRatio >= minRatio) {
+            // Guard in case the callback fires multiple times
+            if (isVisible) {
+              observer.disconnect()
+              return
+            }
+
             setIsVisible(true)
             
             // Animate speed counter (weeks to delivery)
@@ -51,10 +67,17 @@ export function TransitionAnimation({ locale = "en" }: { locale?: Locale }) {
                 setEfficiencyCount(Math.floor(efficiencyCurrent))
               }
             }, efficiencyStepDuration)
+
+            // Once triggered for the first time, we can stop observing
+            observer.disconnect()
           }
         })
       },
-      { threshold: 0.2 }
+      {
+        // On mobile, trigger earlier and with some look‑ahead margin
+        threshold: isMobile ? 0.05 : 0.2,
+        rootMargin: isMobile ? "100px 0px" : "0px",
+      }
     )
 
     const element = document.getElementById("transition-animation")
@@ -64,7 +87,7 @@ export function TransitionAnimation({ locale = "en" }: { locale?: Locale }) {
       if (element) observer.unobserve(element)
       observer.disconnect()
     }
-  }, [])
+  }, [isVisible])
 
   const stats = locale === "es" 
     ? [

@@ -170,42 +170,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`font-sans antialiased`}>
-        {/* Fix Chrome mobile navbar - use dynamic viewport height */}
-        <Script
-          id="viewport-height-fix"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                if (typeof window === 'undefined') return;
-                
-                // Use dynamic viewport height - allows content to extend naturally
-                const setViewportHeight = () => {
-                  // Use current viewport height (updates with navbar)
-                  const height = window.innerHeight;
-                  const vh = height * 0.01;
-                  document.documentElement.style.setProperty('--vh', vh + 'px');
-                };
-                
-                // Set initial value immediately
-                setViewportHeight();
-                
-                // Update on resize (handles navbar show/hide)
-                window.addEventListener('resize', setViewportHeight, { passive: true });
-                
-                // Update on orientation change
-                window.addEventListener('orientationchange', function() {
-                  setTimeout(setViewportHeight, 100);
-                });
-                
-                // Use visualViewport API if available (better for Chrome mobile)
-                if (window.visualViewport) {
-                  window.visualViewport.addEventListener('resize', setViewportHeight);
-                }
-              })();
-            `,
-          }}
-        />
         <div aria-hidden className="site-bg" />
         {children}
         <LeadChat />
