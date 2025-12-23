@@ -37,11 +37,18 @@ const Footer = dynamic(() => import("@/components/footer").then(mod => ({ defaul
   loading: () => null,
 })
 
+// Revalidate the Spanish homepage periodically to keep HTML stable between crawls
+export const revalidate = 3600
+
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital | Sitios Web a Medida y Displays Interactivos Barcelona",
+  title: "Dual Perspective Digital | Estudio de Software Digital y Sitios Web a Medida Barcelona",
   description:
-    "Dual Perspective Digital - Rápido. Especializado. Visualmente Impactante. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de WhatsApp/Telegram. Estudio boutique en Barcelona con ejecución rápida.",
+    "Dual Perspective Digital - Estudio boutique de software digital en Barcelona. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de WhatsApp/Telegram con una doble perspectiva de negocio y tecnología.",
   keywords: [
+    "dual perspective",
+    "Dual Perspective Digital",
+    "software digital",
+    "software digital Barcelona",
     "sitio web a medida Barcelona",
     "displays interactivos eventos",
     "desarrollo chatbot Barcelona",
@@ -56,6 +63,8 @@ export const metadata: Metadata = {
     "integración plataformas mensajería",
     "soluciones software especializadas",
     "desarrollo web boutique",
+    "servicio abierto",
+    "nuevas perspectivas digitales",
   ],
   alternates: {
     canonical: "/es",

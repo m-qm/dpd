@@ -164,14 +164,10 @@ export function TransitionAnimation({ locale = "en" }: { locale?: Locale }) {
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 lg:px-20">
         {/* Main heading */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-normal text-foreground mb-4 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground mb-4 transition-all duration-1000 opacity-100 translate-y-0">
             {locale === "es" ? "Velocidad y eficiencia" : "Speed & Efficiency"}
           </h2>
-          <p className={`text-base md:text-lg text-muted-foreground/80 max-w-2xl mx-auto transition-all duration-1000 delay-200 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}>
+          <p className="text-base md:text-lg text-muted-foreground/80 max-w-2xl mx-auto transition-all duration-1000 delay-200 opacity-100 translate-y-0">
             {locale === "es" 
               ? "Entregamos soluciones modernas rápidamente, sin comprometer la calidad."
               : "We deliver modern solutions fast, without compromising quality."}
@@ -185,9 +181,7 @@ export function TransitionAnimation({ locale = "en" }: { locale?: Locale }) {
             return (
               <div
                 key={stat.label}
-                className={`group relative p-8 md:p-10 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:bg-black/30 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                className="group relative p-8 md:p-10 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:bg-black/30 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 opacity-100 translate-y-0"
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Icon */}

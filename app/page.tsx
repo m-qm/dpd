@@ -36,6 +36,9 @@ const Footer = dynamic(() => import("@/components/footer").then(mod => ({ defaul
   loading: () => null,
 })
 
+// Revalidate the homepage periodically to keep HTML stable between crawls
+export const revalidate = 3600
+
 export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden" lang="en">

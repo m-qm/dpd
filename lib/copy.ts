@@ -27,10 +27,10 @@ type CopyShape = {
 
 const en: CopyShape = {
   hero: {
-    eyebrow: "Boutique custom software studio in Barcelona",
-    titleLines: ["Your Process", "Our Focus"],
+    eyebrow: "Boutique digital software studio in Barcelona",
+    titleLines: ["Your Process", "Our Dual Perspective"],
     subtitle:
-      "We turn your process into working software. Custom websites, interactive displays, and integrations that fit how your team actually works. A close, honest partnership from day one.",
+      "We turn your process into digital software. Custom websites, interactive displays, and integrations that fit how your team actually works. An open service mindset and a close, honest partnership from day one.",
   },
   capabilitiesHeading: "Capabilities",
   capabilitiesLabel: "Capabilities",
@@ -99,10 +99,10 @@ const en: CopyShape = {
 
 const es: CopyShape = {
   hero: {
-    eyebrow: "Agencia boutique de software a medida en Barcelona",
-    titleLines: ["Tu Proceso", "Nuestro Enfoque"],
+    eyebrow: "Estudio boutique de software digital a medida en Barcelona",
+    titleLines: ["Tu Proceso", "Nuestra Doble Perspectiva"],
     subtitle:
-      "Convertimos tu proceso en software funcional. Sitios web a medida, displays interactivos e integraciones que se adaptan a cómo trabaja realmente tu equipo. Una relación cercana y honesta desde el primer día.",
+      "Convertimos tu proceso en software digital funcional. Sitios web a medida, displays interactivos e integraciones que se adaptan a cómo trabaja realmente tu equipo. Un servicio abierto, cercano y honesto desde el primer día.",
   },
   capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Capacidades",

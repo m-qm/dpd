@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function CursorSpark() {
+  const [isReady, setIsReady] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Array<{
     x: number
@@ -13,10 +14,25 @@ export function CursorSpark() {
     maxLife: number
     size: number
   }>>([])
-  const mouseRef = useRef({ x: 0, y: 0 })
   const animationFrameRef = useRef<number>()
+  const mouseRef = useRef({ x: 0, y: 0 })
+
+  // Defer heavy canvas work and skip entirely for bots/crawlers
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      const ua = navigator.userAgent.toLowerCase()
+      if (ua.includes("googlebot") || ua.includes("bingbot") || ua.includes("duckduckbot") || ua.includes("baiduspider")) {
+        return
+      }
+    }
+
+    const timer = setTimeout(() => setIsReady(true), 800)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
+    if (!isReady) return
+
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -118,7 +134,7 @@ export function CursorSpark() {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [])
+  }, [isReady])
 
   return (
     <canvas

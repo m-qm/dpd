@@ -19,10 +19,14 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Dual Perspective Digital | Custom Websites & Interactive Displays Barcelona",
+  title: "Dual Perspective Digital | Digital Software Studio & Interactive Websites Barcelona",
   description:
-    "Dual Perspective Digital - Fast, specialized, visually striking. Custom websites, interactive displays for events, chatbots, and WhatsApp/Telegram integrations. Boutique software studio in Barcelona delivering specialized solutions with rapid execution.",
+    "Dual Perspective Digital - A boutique digital software studio in Barcelona. Custom websites, interactive displays for events, open service-style collaborations, chatbots, and WhatsApp/Telegram integrations with a dual perspective on business and technology.",
   keywords: [
+    "dual perspective",
+    "Dual Perspective Digital",
+    "digital software studio",
+    "digital software Barcelona",
     "custom website Barcelona",
     "interactive displays events",
     "chatbot development Barcelona",
@@ -37,6 +41,8 @@ export const metadata: Metadata = {
     "messaging platform integration",
     "specialized software solutions",
     "boutique web development",
+    "open service collaboration",
+    "product perspectives",
   ],
   metadataBase: new URL("https://dualperspective.digital"),
   alternates: {
