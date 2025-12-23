@@ -27,12 +27,12 @@ type CopyShape = {
 
 const en: CopyShape = {
   hero: {
-    eyebrow: "Boutique digital software studio in Barcelona",
-    titleLines: ["Simpler digital", "processes", "Custom software for your team"],
+    eyebrow: "Boutique custom software studio in Barcelona",
+    titleLines: ["Digital Solutions", "Built Around", "Your Process"],
     subtitle:
-      "Digital solutions built around your process. Custom software, interactive displays, and integrations that work the way your team actually works. Barcelona-based, process-focused, built to last.",
+      "Custom software, interactive displays, and integrations designed to work the way your team actually works. No templates. No guesswork.",
   },
-  capabilitiesHeading: "Capabilities",
+  capabilitiesHeading: "What We Build: Custom Software & Interactive Solutions",
   capabilitiesLabel: "Capabilities",
   capabilities: [
     {
@@ -100,11 +100,11 @@ const en: CopyShape = {
 const es: CopyShape = {
   hero: {
     eyebrow: "Estudio boutique de software digital a medida en Barcelona",
-    titleLines: ["Procesos digitales", "más simples", "Software a medida para tu equipo"],
+    titleLines: ["Soluciones digitales", "construidas alrededor", "de tu proceso"],
     subtitle:
-      "Convertimos tu proceso en software digital funcional. Sitios web a medida, displays interactivos e integraciones que se adaptan a cómo trabaja realmente tu equipo. Un servicio abierto, cercano y honesto desde el primer día.",
+      "Software a medida, displays interactivos e integraciones diseñadas para funcionar como trabaja realmente tu equipo. Sin plantillas. Sin adivinar.",
   },
-  capabilitiesHeading: "Procesos digitales, más simples",
+  capabilitiesHeading: "Qué construimos: software a medida y soluciones interactivas",
   capabilitiesLabel: "Capacidades",
   capabilities: [
     {

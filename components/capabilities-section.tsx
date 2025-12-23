@@ -73,13 +73,13 @@ export function CapabilitiesSection({
       
       <div className="dpd-container relative z-10">
         <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
-        <h2 className="dpd-display font-normal text-foreground mb-10 md:mb-12">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-normal text-foreground leading-[1.1] tracking-tight mb-6 md:mb-8">
           {copy[locale].capabilitiesHeading}
         </h2>
         <p className="dpd-kicker mb-14 md:mb-16 max-w-3xl">
           {locale === "es"
-            ? "Construimos soluciones que se adaptan a tu flujo de trabajo"
-            : "We build solutions that adapt to your workflow"}
+            ? "Soluciones enfocadas en el proceso · Con base en Barcelona · Diseñadas para durar"
+            : "Process-focused solutions · Barcelona-based · Built to last"}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">

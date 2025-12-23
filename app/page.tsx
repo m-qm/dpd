@@ -5,33 +5,54 @@ import dynamic from "next/dynamic"
 import { getFaqJsonLd } from "@/lib/faq"
 
 // Lazy load components that are below the fold
-const CapabilitiesSection = dynamic(() => import("@/components/capabilities-section").then(mod => ({ default: mod.CapabilitiesSection })), {
-  loading: () => <div className="h-screen" />,
-})
+const CapabilitiesSection = dynamic(
+  () => import("@/components/capabilities-section").then(mod => ({ default: mod.CapabilitiesSection })),
+  {
+    loading: () => <div className="h-screen" />,
+  },
+)
 
-const ApproachSection = dynamic(() => import("@/components/approach-section").then(mod => ({ default: mod.ApproachSection })), {
-  loading: () => <div className="h-screen" />,
-})
+const ApproachSection = dynamic(
+  () => import("@/components/approach-section").then(mod => ({ default: mod.ApproachSection })),
+  {
+    loading: () => <div className="h-screen" />,
+  },
+)
 
-const PhilosophySection = dynamic(() => import("@/components/philosophy-section").then(mod => ({ default: mod.PhilosophySection })), {
-  loading: () => <div className="h-96" />,
-})
+const PhilosophySection = dynamic(
+  () => import("@/components/philosophy-section").then(mod => ({ default: mod.PhilosophySection })),
+  {
+    loading: () => <div className="h-96" />,
+  },
+)
 
-const ClientsSection = dynamic(() => import("@/components/clients-section").then(mod => ({ default: mod.ClientsSection })), {
-  loading: () => <div className="h-64" />,
-})
+const ClientsSection = dynamic(
+  () => import("@/components/clients-section").then(mod => ({ default: mod.ClientsSection })),
+  {
+    loading: () => <div className="h-64" />,
+  },
+)
 
-const FAQSection = dynamic(() => import("@/components/faq-section").then(mod => ({ default: mod.FAQSection })), {
-  loading: () => <div className="h-96" />,
-})
+const FAQSection = dynamic(
+  () => import("@/components/faq-section").then(mod => ({ default: mod.FAQSection })),
+  {
+    loading: () => <div className="h-96" />,
+  },
+)
 
-const TransitionAnimation = dynamic(() => import("@/components/transition-animation").then(mod => ({ default: mod.TransitionAnimation })), {
-  loading: () => null,
-})
+const TransitionAnimation = dynamic(
+  () => import("@/components/transition-animation").then(mod => ({ default: mod.TransitionAnimation })),
+  {
+    loading: () => null,
+  },
+)
 
-const CTASection = dynamic(() => import("@/components/cta-section").then(mod => ({ default: mod.CTASection })), {
-  loading: () => <div className="h-96" />,
-})
+const CTASection = dynamic(
+  () => import("@/components/cta-section").then(mod => ({ default: mod.CTASection })),
+  {
+    loading: () => <div className="h-96" />,
+  },
+)
 
 const Footer = dynamic(() => import("@/components/footer").then(mod => ({ default: mod.Footer })), {
   loading: () => null,

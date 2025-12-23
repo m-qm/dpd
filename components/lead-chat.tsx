@@ -69,7 +69,10 @@ function copyFor(locale: Locale) {
     subtitle: isEs ? "Respuestas rápidas. Sin compromiso." : "Quick questions. No pressure.",
     close: isEs ? "Cerrar" : "Close",
     start: isEs ? "Empezar" : "Start",
-    qLanguage: "¿Prefieres español? / Do you prefer Spanish?",
+    qLanguage:
+      locale === "es"
+        ? "¿Prefieres inglés? / Do you prefer English?"
+        : "¿Prefieres español? / Do you prefer Spanish?",
     optSpanish: "Español",
     optEnglish: "English",
     qScope: isEs ? "¿Qué necesitas?" : "What do you need?",
@@ -238,11 +241,11 @@ export function LeadChat() {
     }
     // Detect current page language
     const currentPageLocale = detectLocale()
-    // Always start with language selection (even for Spanish users, ask them)
-    setStep({ id: "language" })
-    setTranscript([{ role: "bot", text: copyFor("en").qLanguage }])
-    // Set locale to current page language initially, will be confirmed/updated when user chooses
+    // Set locale to current page language initially
     setLocale(currentPageLocale)
+    // Start with language selection; question text depends on page language
+    setStep({ id: "language" })
+    setTranscript([{ role: "bot", text: copyFor(currentPageLocale).qLanguage }])
     setScope(null)
     setOtherDetails("")
     setName("")
@@ -274,14 +277,15 @@ export function LeadChat() {
     }
     
     // Redirect to appropriate page if needed
-    const isOnSpanishPage = pathname.startsWith("/es")
-    if (selectedLocale === "es" && !isOnSpanishPage) {
-      // Spanish selected, but on English page → redirect to Spanish
+    // Spanish is the default at "/" and English lives under "/en"
+    const isOnEnglishPage = pathname === "/en" || pathname.startsWith("/en/")
+    if (selectedLocale === "en" && !isOnEnglishPage) {
+      // User chose English while on Spanish route → send to /en equivalent
       const basePath = pathname === "/" ? "" : pathname
-      router.push(`/es${basePath}`)
-    } else if (selectedLocale === "en" && isOnSpanishPage) {
-      // English selected, but on Spanish page → redirect to English
-      const basePath = pathname.replace(/^\/es/, "") || "/"
+      router.push(`/en${basePath}`)
+    } else if (selectedLocale === "es" && isOnEnglishPage) {
+      // User chose Spanish while on English route → strip /en prefix
+      const basePath = pathname.replace(/^\/en/, "") || "/"
       router.push(basePath)
     }
     
@@ -519,30 +523,63 @@ export function LeadChat() {
           >
             {step.id === "language" && (
               <div className="grid grid-cols-2 gap-2.5">
-                <button
-                  type="button"
-                  onClick={() => onPickLanguage("es")}
-                  className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
-                  style={{
-                    backgroundColor: panelVars["--background" as any],
-                    color: panelVars["--foreground" as any],
-                    borderColor: panelVars["--border" as any],
-                  }}
-                >
-                  {copyFor("en").optSpanish}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onPickLanguage("en")}
-                  className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
-                  style={{
-                    backgroundColor: panelVars["--background" as any],
-                    color: panelVars["--foreground" as any],
-                    borderColor: panelVars["--border" as any],
-                  }}
-                >
-                  {copyFor("en").optEnglish}
-                </button>
+                {locale === "es" ? (
+                  <>
+                    {/* On Spanish pages, offer English first */}
+                    <button
+                      type="button"
+                      onClick={() => onPickLanguage("en")}
+                      className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                      style={{
+                        backgroundColor: panelVars["--background" as any],
+                        color: panelVars["--foreground" as any],
+                        borderColor: panelVars["--border" as any],
+                      }}
+                    >
+                      {copyFor("en").optEnglish}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onPickLanguage("es")}
+                      className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                      style={{
+                        backgroundColor: panelVars["--background" as any],
+                        color: panelVars["--foreground" as any],
+                        borderColor: panelVars["--border" as any],
+                      }}
+                    >
+                      {copyFor("en").optSpanish}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {/* On English pages, offer Spanish first */}
+                    <button
+                      type="button"
+                      onClick={() => onPickLanguage("es")}
+                      className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                      style={{
+                        backgroundColor: panelVars["--background" as any],
+                        color: panelVars["--foreground" as any],
+                        borderColor: panelVars["--border" as any],
+                      }}
+                    >
+                      {copyFor("en").optSpanish}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onPickLanguage("en")}
+                      className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                      style={{
+                        backgroundColor: panelVars["--background" as any],
+                        color: panelVars["--foreground" as any],
+                        borderColor: panelVars["--border" as any],
+                      }}
+                    >
+                      {copyFor("en").optEnglish}
+                    </button>
+                  </>
+                )}
               </div>
             )}
 

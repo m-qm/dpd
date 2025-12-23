@@ -16,15 +16,11 @@ const ParticleBackground = dynamic(() => import("@/components/particle-backgroun
 
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
-  const [showSecondaryTitle, setShowSecondaryTitle] = useState(false)
-  const [isFading, setIsFading] = useState(false)
   const isMobile = useIsMobile()
 
   useEffect(() => {
     // Reset visibility state when locale changes to prevent glitches
     setIsVisible(false)
-    setShowSecondaryTitle(false)
-    setIsFading(false)
     
     // Wait for any ongoing transitions to complete before showing new content
     const timer = setTimeout(() => {
@@ -33,31 +29,6 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
 
     return () => clearTimeout(timer)
   }, [locale])
-
-  // Alternate between primary (Tu camino a la / digitalización) and secondary (Software que se adapta a ti)
-  useEffect(() => {
-    if (!isVisible) return
-
-    let intervalId: number | undefined
-    let timeoutId: number | undefined
-
-    const startTimer = setTimeout(() => {
-      intervalId = window.setInterval(() => {
-        setIsFading(true)
-        timeoutId = window.setTimeout(() => {
-          setShowSecondaryTitle(prev => !prev)
-          setIsFading(false)
-        }, 600)
-      }, 9000)
-    }, 2500)
-
-    return () => {
-      clearTimeout(startTimer)
-      if (intervalId) window.clearInterval(intervalId)
-      if (timeoutId) window.clearTimeout(timeoutId)
-    }
-  }, [isVisible, locale])
-
 
   return (
     <section
@@ -148,29 +119,19 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
 
             {/* Main Title */}
             <h1 key={locale} className="relative mb-4 md:mb-10 font-serif">
-              <div
-                className={`transition-opacity duration-300 ${
-                  isFading ? "opacity-0" : isVisible ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                {(
-                  showSecondaryTitle
-                    ? [copy[locale].hero.titleLines[2]]
-                    : copy[locale].hero.titleLines.slice(0, 2)
-                ).map((line, index) => (
-                  <span
-                    key={`${line}-${index}`}
-                    className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
-                    style={{
-                      animationDelay: `${index * 100}ms`,
-                      animation: isVisible ? "fadeInUp 0.8s ease-out forwards" : "none",
-                      opacity: isVisible ? 1 : 0,
-                    }}
-                  >
-                    {line}
-                  </span>
-                ))}
-              </div>
+              {copy[locale].hero.titleLines.map((line, index) => (
+                <span
+                  key={`${line}-${index}`}
+                  className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                    animation: isVisible ? "fadeInUp 0.8s ease-out forwards" : "none",
+                    opacity: isVisible ? 1 : 0,
+                  }}
+                >
+                  {line}
+                </span>
+              ))}
             </h1>
 
             {/* Subtitle */}
@@ -236,44 +197,12 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </a>
             </div>
 
-            {/* Stats Section */}
-            <div className="hidden md:flex flex-wrap items-center gap-4 md:gap-8 mb-6 md:mb-12">
-              {(
-                locale === "es"
-                  ? [
-                      { value: "Barcelona", label: "Estudio" },
-                      { value: "A medida", label: "Enfoque" },
-                    ]
-                  : [
-                      { value: "Barcelona", label: "Studio" },
-                      { value: "Custom", label: "Focus" },
-                    ]
-              ).map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className="flex items-baseline gap-2"
-                  style={{
-                    animationDelay: `${(index + 5) * 100}ms`,
-                    animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
-                    opacity: isVisible ? 1 : 0
-                  }}
-                >
-                  <span className="text-xl md:text-3xl font-serif text-foreground tracking-tight">
-                    {stat.value}
-                  </span>
-                  <span className="text-[10px] md:text-sm uppercase tracking-[0.12em] text-muted-foreground/70 font-medium">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
             {/* Service tags - visible on all screens but smaller on mobile */}
             <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-16">
               {(
                 locale === "es"
-                  ? ["Software a medida", "Herramientas internas", "Automatización", "Integraciones"]
-                  : ["Custom software", "Internal tools", "Automation", "Integrations"]
+                  ? ["Software a medida", "Displays interactivos", "Automatización de procesos", "Integraciones de sistemas"]
+                  : ["Custom software", "Interactive displays", "Process automation", "System integrations"]
               ).map((label, index) => (
                 <span
                   key={label}

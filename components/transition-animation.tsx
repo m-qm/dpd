@@ -33,7 +33,7 @@ export function TransitionAnimation({ locale = "en" }: { locale?: Locale }) {
             setIsVisible(true)
             
             // Animate speed counter (weeks to delivery)
-            const speedTarget = 8
+            const speedTarget = 4
             const speedDuration = 1500
             const speedSteps = 40
             const speedIncrement = speedTarget / speedSteps
