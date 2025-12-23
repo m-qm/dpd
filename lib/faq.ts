@@ -9,6 +9,36 @@ export type FAQItem = {
 export const faqContent: Record<Locale, FAQItem[]> = {
   en: [
     {
+      id: "crm-erp",
+      question: "Can you integrate with our existing CRM/ERP system?",
+      answer:
+        "Yes. Most of our work involves connecting to tools you already use—CRMs, ERPs, marketing platforms, or internal databases. We map your process first, then design integrations so data flows between systems without your team having to copy-paste or maintain extra spreadsheets.",
+    },
+    {
+      id: "timeline-budget",
+      question: "What's your typical project timeline and cost?",
+      answer:
+        "Smaller projects like a focused web experience or chatbot typically take 3–6 weeks. Larger custom software or event solutions can run 8–12 weeks or more, depending on scope. We always start with a short scoping phase and give you a clear range before writing any code.",
+    },
+    {
+      id: "post-launch",
+      question: "Do you offer ongoing support after launch?",
+      answer:
+        "Yes. We can either hand over a well-documented project to your internal team, or stay on as a long-term partner. Many clients keep us on a light retainer for improvements, new features, and support around key events or launches.",
+    },
+    {
+      id: "whatsapp-chatbots",
+      question: "Can you build a chatbot for WhatsApp Business?",
+      answer:
+        "Yes. We design and build WhatsApp chatbots that can qualify leads, answer FAQs, route requests, and sync with your existing tools. We can work with official WhatsApp Business providers and help you choose the right setup for your use case.",
+    },
+    {
+      id: "non-technical",
+      question: "Do you work with non-technical clients?",
+      answer:
+        "Often. Many of our clients are operations, marketing, or event teams without an internal dev team. We keep language clear, focus on outcomes instead of jargon, and make sure there's always a simple way for your team to use and update what we build.",
+    },
+    {
       id: "specialisation",
       question: "What makes your approach different?",
       answer:
@@ -46,6 +76,36 @@ export const faqContent: Record<Locale, FAQItem[]> = {
     },
   ],
   es: [
+    {
+      id: "crm-erp",
+      question: "¿Podéis integraros con nuestro CRM o ERP actual?",
+      answer:
+        "Sí. Gran parte de nuestro trabajo consiste en conectar las herramientas que ya usáis—CRMs, ERPs, plataformas de marketing o bases de datos internas. Primero mapeamos vuestro proceso y después diseñamos las integraciones para que los datos fluyan entre sistemas sin copias manuales ni excels extra.",
+    },
+    {
+      id: "timeline-budget",
+      question: "¿Cuál es vuestro plazo y coste típico de proyecto?",
+      answer:
+        "Proyectos más acotados, como una experiencia web concreta o un chatbot, suelen tardar entre 3 y 6 semanas. Soluciones de software a medida o para eventos más grandes pueden ir de 8 a 12 semanas o más, según el alcance. Siempre empezamos con una fase corta de definición y te damos un rango claro antes de escribir código.",
+    },
+    {
+      id: "post-launch",
+      question: "¿Ofrecéis soporte continuo después del lanzamiento?",
+      answer:
+        "Sí. Podemos entregar un proyecto bien documentado a tu equipo interno o seguir como partner a largo plazo. Muchos clientes nos mantienen con una bolsa de horas ligera para mejoras, nuevas funcionalidades y soporte alrededor de eventos o lanzamientos clave.",
+    },
+    {
+      id: "whatsapp-chatbots",
+      question: "¿Podéis crear un chatbot para WhatsApp Business?",
+      answer:
+        "Sí. Diseñamos y desarrollamos chatbots para WhatsApp que cualifican leads, responden preguntas frecuentes, enrutan solicitudes y se sincronizan con tus herramientas actuales. Trabajamos con proveedores oficiales de WhatsApp Business y te ayudamos a elegir la opción adecuada para tu caso.",
+    },
+    {
+      id: "non-technical",
+      question: "¿Trabajáis con equipos no técnicos?",
+      answer:
+        "A menudo. Muchos de nuestros clientes son equipos de operaciones, marketing o eventos sin equipo técnico propio. Usamos un lenguaje claro, nos centramos en resultados en lugar de jerga y nos aseguramos de que siempre haya una forma sencilla de usar y actualizar lo que construimos.",
+    },
     {
       id: "specialisation",
       question: "¿Qué hace diferente vuestro enfoque?",

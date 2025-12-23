@@ -16,14 +16,14 @@ const ParticleBackground = dynamic(() => import("@/components/particle-backgroun
 
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
-  const [altLineActive, setAltLineActive] = useState(false)
+  const [showSecondaryTitle, setShowSecondaryTitle] = useState(false)
   const [isFading, setIsFading] = useState(false)
   const isMobile = useIsMobile()
 
   useEffect(() => {
     // Reset visibility state when locale changes to prevent glitches
     setIsVisible(false)
-    setAltLineActive(false)
+    setShowSecondaryTitle(false)
     setIsFading(false)
     
     // Wait for any ongoing transitions to complete before showing new content
@@ -34,38 +34,29 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
     return () => clearTimeout(timer)
   }, [locale])
 
+  // Alternate between primary (Tu camino a la / digitalización) and secondary (Software que se adapta a ti)
   useEffect(() => {
-    // Only start the alternating title animation after initial visibility
     if (!isVisible) return
-    
-    // Reset to default state when locale changes
-    setAltLineActive(false)
-    setIsFading(false)
-    
+
     let intervalId: number | undefined
     let timeoutId: number | undefined
-    
-    // Wait a bit before starting the alternating animation
+
     const startTimer = setTimeout(() => {
       intervalId = window.setInterval(() => {
         setIsFading(true)
         timeoutId = window.setTimeout(() => {
-          setAltLineActive((prev) => !prev)
+          setShowSecondaryTitle(prev => !prev)
           setIsFading(false)
-        }, 800)
-      }, 10000)
-    }, 2000) // Start alternating after 2 seconds
+        }, 600)
+      }, 9000)
+    }, 2500)
 
     return () => {
       clearTimeout(startTimer)
-      if (intervalId) {
-        window.clearInterval(intervalId)
-      }
-      if (timeoutId) {
-        window.clearTimeout(timeoutId)
-      }
+      if (intervalId) window.clearInterval(intervalId)
+      if (timeoutId) window.clearTimeout(timeoutId)
     }
-  }, [locale, isVisible])
+  }, [isVisible, locale])
 
 
   return (
@@ -157,62 +148,28 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
 
             {/* Main Title */}
             <h1 key={locale} className="relative mb-4 md:mb-10 font-serif">
-              <div className="grid opacity-0 pointer-events-none">
-                <div className="col-start-1 row-start-1">
-                  {copy[locale].hero.titleLines.map((line) => (
-                    <span key={line} className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">
-                      {line}
-                    </span>
-                  ))}
-                </div>
-                <div className="col-start-1 row-start-1">
-                  {locale === "es" ? (
-                    <>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">Soluciones</span>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">que funcionan</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">Solutions</span>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] leading-[0.95] tracking-[-0.02em]">that work</span>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              <div 
-                key={`title-content-${locale}`}
-                className={`absolute inset-0 transition-opacity duration-300 ${isFading && isVisible ? "opacity-0" : isVisible ? "opacity-100" : "opacity-0"}`}
+              <div
+                className={`transition-opacity duration-300 ${
+                  isFading ? "opacity-0" : isVisible ? "opacity-100" : "opacity-0"
+                }`}
               >
-                {altLineActive ? (
-                  locale === "es" ? (
-                    <>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">Soluciones</span>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">que funcionan</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">Solutions</span>
-                      <span className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]">that work</span>
-                    </>
-                  )
-                ) : (
-                  <>
-                    {copy[locale].hero.titleLines.map((line, index) => (
-                      <span 
-                        key={line} 
-                        className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
-                        style={{ 
-                          animationDelay: `${index * 100}ms`,
-                          animation: isVisible ? 'fadeInUp 0.8s ease-out forwards' : 'none',
-                          opacity: isVisible ? 1 : 0
-                        }}
-                      >
-                        {line}
-                      </span>
-                    ))}
-                  </>
-                )}
+                {(
+                  showSecondaryTitle
+                    ? [copy[locale].hero.titleLines[2]]
+                    : copy[locale].hero.titleLines.slice(0, 2)
+                ).map((line, index) => (
+                  <span
+                    key={`${line}-${index}`}
+                    className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
+                    style={{
+                      animationDelay: `${index * 100}ms`,
+                      animation: isVisible ? "fadeInUp 0.8s ease-out forwards" : "none",
+                      opacity: isVisible ? 1 : 0,
+                    }}
+                  >
+                    {line}
+                  </span>
+                ))}
               </div>
             </h1>
 

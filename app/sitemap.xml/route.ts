@@ -17,7 +17,7 @@ export async function GET() {
 
   const urls = [
     { loc: `${baseUrl}/`, lastmod: now, changefreq: "weekly", priority: "1.0" },
-    { loc: `${baseUrl}/es`, lastmod: now, changefreq: "weekly", priority: "1.0" },
+    { loc: `${baseUrl}/en`, lastmod: now, changefreq: "weekly", priority: "0.9" },
     { loc: `${baseUrl}/privacy`, lastmod: now, changefreq: "yearly", priority: "0.3" },
     { loc: `${baseUrl}/es/privacy`, lastmod: now, changefreq: "yearly", priority: "0.3" },
     { loc: `${baseUrl}/cookies`, lastmod: now, changefreq: "yearly", priority: "0.3" },

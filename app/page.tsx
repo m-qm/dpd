@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { HomeClient } from "@/components/home-client"
 import { HeroSection } from "@/components/hero-section"
 import dynamic from "next/dynamic"
@@ -5,7 +6,7 @@ import { getFaqJsonLd } from "@/lib/faq"
 
 // Lazy load components that are below the fold
 const CapabilitiesSection = dynamic(() => import("@/components/capabilities-section").then(mod => ({ default: mod.CapabilitiesSection })), {
-  loading: () => <div className="h-screen" />, // Prevent layout shift
+  loading: () => <div className="h-screen" />,
 })
 
 const ApproachSection = dynamic(() => import("@/components/approach-section").then(mod => ({ default: mod.ApproachSection })), {
@@ -39,31 +40,30 @@ const Footer = dynamic(() => import("@/components/footer").then(mod => ({ defaul
 // Revalidate the homepage periodically to keep HTML stable between crawls
 export const revalidate = 3600
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Dual Perspective Digital | Estudio de Software Digital y Sitios Web a Medida Barcelona",
+  description:
+    "Dual Perspective Digital - Estudio boutique de software digital en Barcelona. Sitios web a medida, displays interactivos para eventos, chatbots e integraciones de WhatsApp/Telegram con una doble perspectiva de negocio y tecnología.",
+}
+
+export default function HomeEsDefault() {
   return (
-    <main className="min-h-screen overflow-x-hidden" lang="en">
-      <HomeClient locale="en" />
+    <main className="min-h-screen overflow-x-hidden" lang="es">
+      <HomeClient locale="es" />
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(getFaqJsonLd("en")) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getFaqJsonLd("es")) }}
       />
-        <HeroSection locale="en" />
-        {/* Section 1: Capabilities - stays dark like Hero, no color change */}
-        <CapabilitiesSection inverted={false} locale="en" />
-        {/* Section 2: Approach - stays dark, never inverts */}
-        <ApproachSection inverted={false} locale="en" />
-        {/* Section 3: Philosophy - stays dark */}
-        <PhilosophySection inverted={false} locale="en" />
-        {/* Section 4: Clients - dedicated dark section */}
-        <ClientsSection inverted={false} locale="en" />
-        {/* Section 5: FAQ */}
-        <FAQSection locale="en" inverted={false} />
-        {/* Cool transition animation */}
-        <TransitionAnimation locale="en" />
-        {/* Section 6: Contact */}
-        <CTASection inverted={false} locale="en" />
-        <Footer locale="en" />
+      <HeroSection locale="es" />
+      <CapabilitiesSection inverted={false} locale="es" />
+      <ApproachSection inverted={false} locale="es" />
+      <PhilosophySection inverted={false} locale="es" />
+      <ClientsSection inverted={false} locale="es" />
+      <FAQSection locale="es" inverted={false} />
+      <TransitionAnimation locale="es" />
+      <CTASection inverted={false} locale="es" />
+      <Footer locale="es" />
     </main>
   )
 }

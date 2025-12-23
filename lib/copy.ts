@@ -28,9 +28,9 @@ type CopyShape = {
 const en: CopyShape = {
   hero: {
     eyebrow: "Boutique digital software studio in Barcelona",
-    titleLines: ["Your Process", "Our Dual Perspective"],
+    titleLines: ["Simpler digital", "processes", "Custom software for your team"],
     subtitle:
-      "We turn your process into digital software. Custom websites, interactive displays, and integrations that fit how your team actually works. An open service mindset and a close, honest partnership from day one.",
+      "Digital solutions built around your process. Custom software, interactive displays, and integrations that work the way your team actually works. Barcelona-based, process-focused, built to last.",
   },
   capabilitiesHeading: "Capabilities",
   capabilitiesLabel: "Capabilities",
@@ -38,27 +38,27 @@ const en: CopyShape = {
     {
       title: "Custom websites & web applications",
       description:
-        "Websites and applications built around your team's workflow, not generic templates. Reduce manual work and streamline processes.",
+        "Custom web applications that automate your internal processes. Example: event organizers managing exhibitor data, floor plans, and attendee check-ins from one dashboard.",
     },
     {
       title: "Interactive displays & event solutions",
       description:
-        "Engage event attendees with interactive displays that connect to your systems. Real-time data, seamless integrations, visual impact.",
+        "Interactive displays tailored to your event workflow. Example: multi-screen experiences that pull data from your CRM and update in real time as attendees interact.",
     },
     {
       title: "Chatbots & conversational interfaces",
       description:
-        "Automate interactions and centralize communication. Intelligent chatbots that understand context and reduce support workload.",
+        "Chatbots that centralize communication and reduce manual replies. Example: a WhatsApp bot that qualifies leads, routes requests, and syncs with your internal tools.",
     },
     {
       title: "Messaging platform integrations",
       description:
-        "Connect your systems with WhatsApp, Telegram, and messaging platforms. Reach users where they already communicate.",
+        "Integrations with WhatsApp, Telegram, and messaging platforms so your systems talk to where your users already are.",
     },
     {
       title: "Process automation & integrations",
       description:
-        "Turn manual workflows into automated flows. Connect existing systems, reduce errors, and scale operations efficiently.",
+        "We turn manual workflows into automated flows by connecting the tools you already use. Fewer spreadsheets, fewer status meetings, fewer errors.",
     },
   ],
   approachHeading: "Our Approach",
@@ -91,7 +91,7 @@ const en: CopyShape = {
   clientTypes: ["Event organization", "Industrial groups", "Global manufacturers", "Logistics & shipping", "New brand launches"],
   clientsIntro:
     "We work with teams who need software that fits their process, not the other way around. From event organizers who need interactive displays connected to their systems, to manufacturers launching new brands who need their first digital presence—we build solutions that work from day one.",
-  ctaHeading: "Ready to turn your process into your advantage?",
+  ctaHeading: "Ready when your team is",
   ctaBody:
     "Let's talk about your specific needs. Whether it's a custom website, interactive event displays, chatbots, or integrations—we build solutions that fit how you work.",
   ctaButton: "Start a conversation",
@@ -100,11 +100,11 @@ const en: CopyShape = {
 const es: CopyShape = {
   hero: {
     eyebrow: "Estudio boutique de software digital a medida en Barcelona",
-    titleLines: ["Tu Proceso", "Nuestra Doble Perspectiva"],
+    titleLines: ["Procesos digitales", "más simples", "Software a medida para tu equipo"],
     subtitle:
       "Convertimos tu proceso en software digital funcional. Sitios web a medida, displays interactivos e integraciones que se adaptan a cómo trabaja realmente tu equipo. Un servicio abierto, cercano y honesto desde el primer día.",
   },
-  capabilitiesHeading: "Capacidades",
+  capabilitiesHeading: "Procesos digitales, más simples",
   capabilitiesLabel: "Capacidades",
   capabilities: [
     {
@@ -169,7 +169,7 @@ const es: CopyShape = {
   ],
   clientsIntro:
     "Trabajamos con equipos que necesitan software que se adapte a su proceso, no al revés. Desde organizadores de eventos que necesitan displays interactivos conectados a sus sistemas, hasta fabricantes que lanzan nuevas marcas y necesitan su primera presencia digital—construimos soluciones que funcionan desde el primer día.",
-  ctaHeading: "¿Listo para convertir tu proceso en tu ventaja?",
+  ctaHeading: "Listo cuando tu equipo lo necesita",
   ctaBody:
     "Hablemos de tus necesidades específicas. Ya sea un sitio web a medida, displays interactivos para eventos, chatbots o integraciones—construimos soluciones que se adaptan a cómo trabajas.",
   ctaButton: "Iniciar una conversación",

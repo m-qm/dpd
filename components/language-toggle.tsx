@@ -6,17 +6,18 @@ export function LanguageToggle() {
   const pathname = usePathname()
   const router = useRouter()
 
-  const isSpanish = pathname.startsWith("/es")
-  const basePath = isSpanish ? pathname.replace(/^\/es/, "") || "/" : pathname || "/"
+  // New logic: Spanish is the default language at "/"
+  const isEnglish = pathname.startsWith("/en")
+  const basePath = isEnglish ? pathname.replace(/^\/en/, "") || "/" : pathname || "/"
 
-  const targetPath = isSpanish ? basePath : `/es${basePath === "/" ? "" : basePath}`
+  const targetPath = isEnglish ? basePath : `/en${basePath === "/" ? "" : basePath}`
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     
     // Save language preference
     if (typeof window !== "undefined") {
-      window.localStorage.setItem("dpd-lang", isSpanish ? "en" : "es")
+      window.localStorage.setItem("dpd-lang", isEnglish ? "es" : "en")
     }
     
     // Use client-side navigation to avoid hard reload
@@ -29,7 +30,7 @@ export function LanguageToggle() {
       onClick={handleClick}
       className="text-xs md:text-sm uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
     >
-      {isSpanish ? "ENGLISH" : "ESPAÑOL"}
+      {isEnglish ? "ESPAÑOL" : "ENGLISH"}
     </a>
   )
 }

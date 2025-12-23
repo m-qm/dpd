@@ -108,7 +108,7 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
           </label>
           <Input
             type="text"
-            autoComplete="name"
+            autoComplete="given-name"
             name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
