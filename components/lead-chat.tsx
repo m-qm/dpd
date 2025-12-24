@@ -383,33 +383,44 @@ export function LeadChat() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className={`relative flex items-center justify-center h-13 w-13 border transition-opacity hover:opacity-70 ${
+          className={`relative flex items-center justify-center h-14 w-14 md:h-16 md:w-16 rounded-full border-2 transition-all duration-300 hover:scale-110 active:scale-95 shadow-2xl hover:shadow-blue-500/30 ${
             hasUnread ? "animate-chatPulse" : ""
           }`}
           style={{
             backgroundColor: "#0b0b0b",
             color: "oklch(1 0 0)",
-            borderColor: "oklch(0.2 0 0)",
+            borderColor: "oklch(0.35 0 0)",
+            boxShadow: "0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 88, 255, 0.2)",
           }}
           aria-label={c.launcher}
         >
-          <MessageCircle className="h-5 w-5" style={{ color: "oklch(1 0 0)" }} />
+          {/* Glow effect */}
+          <div 
+            className="absolute inset-0 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+            style={{
+              background: "radial-gradient(circle, rgba(46, 88, 255, 0.3) 0%, transparent 70%)",
+              filter: "blur(8px)",
+            }}
+          />
+          <MessageCircle className="relative h-6 w-6 md:h-7 md:w-7" style={{ color: "oklch(1 0 0)" }} />
           {hasUnread && (
             <>
-              {/* Notification badge */}
+              {/* Notification badge - larger and more visible */}
               <span
-                className="absolute -top-0.5 -right-0.5 h-3 w-3 animate-badgePulse"
+                className="absolute -top-1 -right-1 h-4 w-4 md:h-5 md:w-5 rounded-full animate-badgePulse"
                 style={{
                   backgroundColor: "#ef4444",
-                  border: `2px solid #0b0b0b`,
+                  border: `3px solid #0b0b0b`,
+                  boxShadow: "0 0 10px rgba(239, 68, 68, 0.6)",
                 }}
               />
-              {/* Outer pulse ring */}
+              {/* Outer pulse ring - more visible */}
               <span
-                className="absolute inset-0 animate-ringPulse"
+                className="absolute inset-0 rounded-full animate-ringPulse"
                 style={{
-                  border: `1px solid #ef4444`,
-                  opacity: 0.4,
+                  border: `2px solid #ef4444`,
+                  opacity: 0.6,
+                  boxShadow: "0 0 20px rgba(239, 68, 68, 0.4)",
                 }}
               />
             </>
