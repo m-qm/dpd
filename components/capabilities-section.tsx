@@ -55,7 +55,7 @@ export function CapabilitiesSection({
       id="capabilities" 
       ref={sectionRef} 
       data-theme={inverted ? "light" : "dark"}
-      className="dpd-section dpd-chapter relative pt-24 md:pt-32 lg:pt-40"
+      className="dpd-section dpd-chapter dpd-theme-owner relative pt-24 md:pt-32 lg:pt-40"
     >
       {/* Gradient at bottom center */}
       
@@ -73,7 +73,7 @@ export function CapabilitiesSection({
       
       <div className="dpd-container relative z-10">
         <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
-        <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-normal text-foreground leading-[1.1] tracking-tight mb-6 md:mb-8">
+        <h2 className="dpd-display font-normal text-foreground mb-6 md:mb-8">
           {copy[locale].capabilitiesHeading}
         </h2>
         <p className="dpd-kicker mb-14 md:mb-16 max-w-3xl">

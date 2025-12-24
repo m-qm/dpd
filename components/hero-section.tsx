@@ -197,6 +197,38 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </a>
             </div>
 
+            {/* Stats Section */}
+            <div className="hidden md:flex flex-wrap items-center gap-4 md:gap-8 mb-6 md:mb-12">
+              {(
+                locale === "es"
+                  ? [
+                      { value: "Barcelona", label: "Estudio" },
+                      { value: "A medida", label: "Enfoque" },
+                    ]
+                  : [
+                      { value: "Barcelona", label: "Studio" },
+                      { value: "Custom", label: "Focus" },
+                    ]
+              ).map((stat, index) => (
+                <div
+                  key={stat.label}
+                  className="flex items-baseline gap-2"
+                  style={{
+                    animationDelay: `${(index + 5) * 100}ms`,
+                    animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
+                    opacity: isVisible ? 1 : 0
+                  }}
+                >
+                  <span className="text-xl md:text-3xl font-serif text-foreground tracking-tight">
+                    {stat.value}
+                  </span>
+                  <span className="text-[10px] md:text-sm uppercase tracking-[0.12em] text-muted-foreground/70 font-medium">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
             {/* Service tags - visible on all screens but smaller on mobile */}
             <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-16">
               {(

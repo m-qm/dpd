@@ -100,11 +100,11 @@ const en: CopyShape = {
 const es: CopyShape = {
   hero: {
     eyebrow: "Estudio boutique de software digital a medida en Barcelona",
-    titleLines: ["Soluciones digitales", "construidas alrededor", "de tu proceso"],
-    subtitle:
-      "Software a medida, displays interactivos e integraciones diseñadas para funcionar como trabaja realmente tu equipo. Sin plantillas. Sin adivinar.",
+    titleLines: ["Soluciones digitales", "a tu medida"],
+      subtitle:
+        "Software a medida, displays interactivos e integraciones diseñadas para funcionar como trabaja realmente tu equipo. Sin plantillas. Con precisión.",
   },
-  capabilitiesHeading: "Qué construimos: software a medida y soluciones interactivas",
+  capabilitiesHeading: "Qué construimos: software a medida",
   capabilitiesLabel: "Capacidades",
   capabilities: [
     {
@@ -143,7 +143,7 @@ const es: CopyShape = {
         "Empezamos aprendiendo cómo trabaja tu equipo, qué los ralentiza y cómo se ve el éxito. Incluso para proyectos urgentes, tomamos tiempo para entender primero.",
     },
     {
-      title: "Diseñar para la Claridad",
+      title: "Diseño Claro",
       description:
         "Creamos interfaces que hacen que procesos complejos se sientan simples. Diseño visual que guía a los usuarios, no solo se ve bien.",
     },

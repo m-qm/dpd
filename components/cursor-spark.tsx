@@ -49,23 +49,29 @@ export function CursorSpark() {
 
     resizeCanvas()
 
-    // Track mouse position
+    // Track mouse position - create subtle spark particles
+    let lastParticleTime = 0
+    const particleInterval = 30 // Create particles every 30ms for smoother effect
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY }
       
-      // Create new spark particles at cursor position (subtle amount)
-      const particleCount = 2 + Math.floor(Math.random() * 2)
+      const now = Date.now()
+      if (now - lastParticleTime < particleInterval) return
+      lastParticleTime = now
+      
+      // Create subtle spark particles (more frequent but still subtle)
+      const particleCount = Math.random() > 0.4 ? 1 : 0 // 60% chance of creating a particle
       for (let i = 0; i < particleCount; i++) {
-        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.6
-        const speed = 0.6 + Math.random() * 1.2
+        const angle = Math.random() * Math.PI * 2
+        const speed = 0.4 + Math.random() * 0.6 // Slightly faster for visibility
         particlesRef.current.push({
-          x: e.clientX + (Math.random() - 0.5) * 2,
-          y: e.clientY + (Math.random() - 0.5) * 2,
+          x: e.clientX + (Math.random() - 0.5) * 1.5,
+          y: e.clientY + (Math.random() - 0.5) * 1.5,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 0,
-          maxLife: 10 + Math.random() * 18,
-          size: 1 + Math.random() * 1.5,
+          maxLife: 10 + Math.random() * 15, // Longer lifetime
+          size: 0.8 + Math.random() * 1.2, // Slightly larger size
         })
       }
     }
@@ -74,45 +80,45 @@ export function CursorSpark() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Update and draw particles
+      // Update and draw particles - much more subtle
       particlesRef.current = particlesRef.current.filter(particle => {
         particle.x += particle.vx
         particle.y += particle.vy
-        particle.vx *= 0.9 // Friction
-        particle.vy *= 0.9
+        particle.vx *= 0.92 // More friction for slower movement
+        particle.vy *= 0.92
         particle.life++
 
         const alpha = 1 - (particle.life / particle.maxLife)
         const progress = particle.life / particle.maxLife
 
-        // Draw subtle spark core
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`
+        // Draw subtle spark core (increased opacity for visibility)
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.5})`
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fill()
 
-        // Draw glow around spark
+        // Draw subtle glow around spark
         const gradient = ctx.createRadialGradient(
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size * 2
         )
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.6})`)
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.3})`)
         gradient.addColorStop(1, `rgba(255, 255, 255, 0)`)
         ctx.fillStyle = gradient
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2)
         ctx.fill()
 
-        // Draw spark trail (only for first part of life)
+        // Draw subtle spark trail (only for first part of life)
         if (progress < 0.3) {
-          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.4})`
-          ctx.lineWidth = 0.7
+          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.3})`
+          ctx.lineWidth = 0.6
           ctx.lineCap = "round"
           ctx.beginPath()
           ctx.moveTo(particle.x, particle.y)
           ctx.lineTo(
-            particle.x - particle.vx * 4,
-            particle.y - particle.vy * 4
+            particle.x - particle.vx * 3,
+            particle.y - particle.vy * 3
           )
           ctx.stroke()
         }

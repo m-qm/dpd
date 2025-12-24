@@ -254,7 +254,7 @@ html[data-theme="dark"] {
     --muted-foreground: oklch(0.6 0 0);
     --accent: oklch(1 0 0);
     --accent-foreground: oklch(0.1 0 0);
-    --border: oklch(0.2 0 0);
+    --border: oklch(0.35 0 0);
     --input: oklch(0.2 0 0);
     --ring: oklch(1 0 0);
   }
@@ -277,7 +277,7 @@ html[data-theme="dark"] {
     --muted-foreground: oklch(0.6 0 0);
     --accent: oklch(1 0 0);
     --accent-foreground: oklch(0.1 0 0);
-    --border: oklch(0.2 0 0);
+    --border: oklch(0.35 0 0);
     --input: oklch(0.2 0 0);
     --ring: oklch(1 0 0);
   }
@@ -327,13 +327,13 @@ html[data-theme="dark"] {
   }
 
   .dpd-card {
-    @apply relative border border-border bg-black/[0.02] transition-all duration-300;
+    @apply relative border border-border/60 bg-black/[0.02] transition-all duration-300;
     backdrop-filter: blur(1px);
   }
 
   .dpd-card:hover {
     background-color: rgba(0, 0, 0, 0.04);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
   }
 

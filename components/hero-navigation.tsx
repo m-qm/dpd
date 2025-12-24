@@ -10,36 +10,19 @@ type HeroNavigationProps = {
 }
 
 export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
-  const [isVisible, setIsVisible] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false)
-  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      
-      // Show navbar at the very top (first 100px)
-      if (currentScrollY < 100) {
-        setIsVisible(true)
-        setIsScrolled(false)
-      } else {
-        setIsScrolled(true)
-        // Hide when scrolling down, show when scrolling up
-        if (currentScrollY > lastScrollY.current && currentScrollY > 200) {
-          setIsVisible(false)
-        } else {
-          setIsVisible(true)
-        }
-      }
-      
-      lastScrollY.current = currentScrollY
+      // Only update background state, header always stays visible
+      setIsScrolled(currentScrollY > 100)
     }
 
-    // Throttle scroll events - more aggressive on mobile
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768
+    // Throttle scroll events for better performance
     let ticking = false
     let lastTime = 0
-    const throttleDelay = isMobile ? 32 : 16 // ~30fps on mobile, 60fps on desktop
+    const throttleDelay = 16 // ~60fps
     
     const throttledScroll = () => {
       const now = performance.now()
@@ -61,12 +44,17 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 flex justify-between items-center px-4 sm:px-6 md:px-12 lg:px-20 py-2.5 sm:py-3 md:py-4 z-50 transition-transform duration-300 ease-in-out ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      } ${isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border/20" : "bg-transparent"}`}
+      className={`fixed top-0 left-0 right-0 flex justify-between items-center px-4 sm:px-6 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 z-50 transition-all duration-300 ease-in-out ${
+        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border/20" : "bg-transparent"
+      }`}
       style={{ 
-        paddingTop: 'max(0.625rem, env(safe-area-inset-top, 0px))',
-        paddingBottom: 'max(0.625rem, env(safe-area-inset-bottom, 0px))'
+        paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))',
+        paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))',
+        minHeight: 'calc(3.5rem + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px))',
+        transform: 'translateY(0)',
+        opacity: 1,
+        visibility: 'visible',
+        display: 'flex'
       }}
     >
       <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 flex-1 pr-2">
@@ -76,14 +64,13 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
             alt="Dual Perspective Digital"
             width={28}
             height={28}
-            className="h-6 w-6 sm:h-7 sm:w-7 rounded-md object-contain"
+            className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-contain"
             priority
             fetchPriority="high"
           />
         </div>
-        <div className="text-xs sm:text-xs md:text-sm font-normal tracking-tight text-foreground truncate">
-          <span className="hidden sm:inline">Dual Perspective Digital</span>
-          <span className="sm:hidden">DPD</span>
+        <div className="text-xs sm:text-sm md:text-sm font-normal tracking-tight text-foreground truncate">
+          Dual Perspective Digital
         </div>
       </div>
       <div className="flex items-center gap-2 sm:gap-4 md:gap-6 text-xs md:text-sm flex-shrink-0">

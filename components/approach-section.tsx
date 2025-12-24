@@ -11,7 +11,9 @@ const approachIcons = [Search, Palette, Code, TrendingUp]
 export function ApproachSection({ inverted = false, locale = "en" }: { inverted?: boolean; locale?: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
   const [visibleSteps, setVisibleSteps] = useState<number[]>([])
+  const [highlightedCards, setHighlightedCards] = useState<Set<number>>(new Set())
   const sectionRef = useRef<HTMLDivElement>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const isMobile = useIsMobile()
   const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
@@ -45,6 +47,44 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
 
     return () => observer.disconnect()
   }, [locale, isMobile, prefersReducedMotion])
+
+  // Track which cards are in viewport for highlight effect
+  useEffect(() => {
+    if (!isVisible) return
+
+    const observers: IntersectionObserver[] = []
+
+    cardRefs.current.forEach((cardRef, index) => {
+      if (!cardRef) return
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+              setHighlightedCards((prev) => new Set(prev).add(index))
+            } else {
+              setHighlightedCards((prev) => {
+                const next = new Set(prev)
+                next.delete(index)
+                return next
+              })
+            }
+          })
+        },
+        {
+          threshold: [0.3, 0.5, 0.7],
+          rootMargin: '-10% 0px -10% 0px', // Only highlight when card is in center area
+        }
+      )
+
+      observer.observe(cardRef)
+      observers.push(observer)
+    })
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [isVisible, locale])
 
   return (
     <section
@@ -130,31 +170,58 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
                   <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     {/* Card */}
                     <div
-                      className={`group/card relative p-8 md:p-10 lg:p-12 border-2 border-border/50 bg-background/40 backdrop-blur-sm hover:border-blue-500/30 hover:bg-background/60 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-1 transition-all duration-500 ${
+                      ref={(el) => (cardRefs.current[index] = el)}
+                      className={`group/card relative p-8 md:p-10 lg:p-12 border-2 transition-all duration-500 ${
                         isLeft ? "md:order-1" : "md:order-2"
+                      } ${
+                        highlightedCards.has(index)
+                          ? "border-blue-500/50 bg-background/70 shadow-xl shadow-blue-500/10 -translate-y-2"
+                          : "border-border/50 bg-background/40 backdrop-blur-sm hover:border-blue-500/30 hover:bg-background/60 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-1"
                       }`}
                     >
                       {/* Number badge - large and prominent */}
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 border-2 border-border/60 flex items-center justify-center bg-background/60 backdrop-blur-md group-hover/card:border-blue-500/40 group-hover/card:scale-110 group-hover/card:bg-blue-500/10 transition-all duration-300">
+                        <div className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 border-2 flex items-center justify-center backdrop-blur-md transition-all duration-300 ${
+                          highlightedCards.has(index)
+                            ? "border-blue-500/60 scale-110 bg-blue-500/15"
+                            : "border-border/60 bg-background/60 group-hover/card:border-blue-500/40 group-hover/card:scale-110 group-hover/card:bg-blue-500/10"
+                        }`}>
                           {Icon && (
-                            <Icon className="w-8 h-8 md:w-10 md:h-10 text-foreground/70 group-hover/card:text-blue-400 transition-colors duration-300" />
+                            <Icon className={`w-8 h-8 md:w-10 md:h-10 transition-colors duration-300 ${
+                              highlightedCards.has(index)
+                                ? "text-blue-400"
+                                : "text-foreground/70 group-hover/card:text-blue-400"
+                            }`} />
                           )}
                         </div>
-                        <div className="text-4xl md:text-5xl lg:text-6xl font-normal text-foreground/30 group-hover/card:text-foreground/50 transition-colors duration-300 tracking-tight">
+                        <div className={`text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight transition-colors duration-300 ${
+                          highlightedCards.has(index)
+                            ? "text-foreground/70"
+                            : "text-foreground/30 group-hover/card:text-foreground/50"
+                        }`}>
                           {index + 1 < 10 ? `0${index + 1}` : index + 1}
                         </div>
                       </div>
 
-                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 md:mb-6 tracking-tight leading-tight group-hover/card:text-foreground transition-colors duration-300">
+                      <h3 className={`text-2xl md:text-3xl lg:text-4xl font-normal mb-4 md:mb-6 tracking-tight leading-tight transition-colors duration-300 ${
+                        highlightedCards.has(index)
+                          ? "text-foreground"
+                          : "text-foreground group-hover/card:text-foreground"
+                      }`}>
                         {step.title}
                       </h3>
-                      <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed group-hover/card:text-muted-foreground/90 transition-colors duration-300">
+                      <p className={`text-base md:text-lg lg:text-xl leading-relaxed transition-colors duration-300 ${
+                        highlightedCards.has(index)
+                          ? "text-muted-foreground/95"
+                          : "text-muted-foreground group-hover/card:text-muted-foreground/90"
+                      }`}>
                         {step.description}
                       </p>
 
-                      {/* Hover accent line */}
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
+                      {/* Highlight accent line */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent transition-opacity duration-500 ${
+                        highlightedCards.has(index) ? "opacity-100" : "opacity-0 group-hover/card:opacity-100"
+                      }`} />
                     </div>
 
                     {/* Spacer for desktop alignment */}

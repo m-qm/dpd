@@ -102,29 +102,29 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
               return (
                 <div
                   key={index}
-                  className={`group relative p-8 md:p-10 border-2 border-border/30 bg-background/40 backdrop-blur-sm hover:border-foreground/50 hover:bg-background/60 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-2 transition-all duration-500 ${
+                  className={`group relative p-8 md:p-10 border-2 border-border/30 bg-background/40 backdrop-blur-sm hover:border-blue-500/50 hover:bg-background/70 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300 ease-out ${
                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
                   {/* Animated icon container */}
                   <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg blur-xl group-hover:blur-2xl transition-all duration-500" />
-                    <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl border-2 border-border/40 bg-background/60 backdrop-blur-sm flex items-center justify-center group-hover:border-blue-500/60 group-hover:bg-blue-500/5 group-hover:scale-110 transition-all duration-300">
-                      <Icon className="w-8 h-8 md:w-10 md:h-10 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg blur-xl group-hover:blur-2xl group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300 ease-out" />
+                    <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl border-2 border-border/40 bg-background/60 backdrop-blur-sm flex items-center justify-center group-hover:border-blue-500/60 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 ease-out">
+                      <Icon className="w-8 h-8 md:w-10 md:h-10 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300 ease-out" />
                     </div>
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-2xl md:text-3xl font-normal text-foreground mb-4 tracking-tight group-hover:text-foreground transition-colors">
+                  <h3 className="text-2xl md:text-3xl font-normal text-foreground mb-4 tracking-tight group-hover:text-foreground transition-colors duration-300 ease-out">
                     {point.title}
                   </h3>
-                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed group-hover:text-muted-foreground/90 transition-colors">
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed group-hover:text-muted-foreground/95 transition-colors duration-300 ease-out">
                     {point.description}
                   </p>
 
                   {/* Decorative accent line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out" />
                 </div>
               )
             })}
