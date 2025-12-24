@@ -76,10 +76,20 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
       data-theme={inverted ? "light" : "dark"}
       className="dpd-section dpd-chapter relative overflow-hidden"
     >
-      {/* Animated background elements */}
+      {/* Unique background - diagonal gradient lines */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse opacity-60" />
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse opacity-50" style={{ animationDelay: '1s', animationDuration: '4s' }} />
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 100px,
+              rgba(46, 88, 255, 0.1) 100px,
+              rgba(46, 88, 255, 0.1) 200px
+            )`,
+          }}
+        />
       </div>
 
       <div className="dpd-container relative z-10">
@@ -92,39 +102,56 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground leading-[1.1] tracking-tight mb-12 md:mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text-foreground leading-[0.95] tracking-tight mb-20 md:mb-24 max-w-5xl">
             {locale === "es" ? "Por qué trabajar con nosotros" : "Why Work With Us"}
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {/* Unique visual design - no numbers, just beautiful content blocks */}
+          <div className="space-y-20 md:space-y-28 lg:space-y-32">
             {philosophyPoints.map((point, index) => {
               const Icon = point.icon
+              const isLast = index === philosophyPoints.length - 1
               return (
                 <div
                   key={index}
-                  className={`group relative p-8 md:p-10 border-2 border-border/30 bg-background/40 backdrop-blur-sm hover:border-blue-500/50 hover:bg-background/70 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300 ease-out ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  className={`group relative transition-all duration-700 ${
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
                   }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
+                  style={{ transitionDelay: `${index * 300}ms` }}
                 >
-                  {/* Animated icon container */}
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg blur-xl group-hover:blur-2xl group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300 ease-out" />
-                    <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl border-2 border-border/40 bg-background/60 backdrop-blur-sm flex items-center justify-center group-hover:border-blue-500/60 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 ease-out">
-                      <Icon className="w-8 h-8 md:w-10 md:h-10 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300 ease-out" />
+                  {/* Large icon as focal point - no numbers */}
+                  <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12 lg:gap-16">
+                    {/* Icon section - large and prominent */}
+                    <div className="flex-shrink-0 relative">
+                      <div className="relative">
+                        {/* Glow effect behind icon */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-700 opacity-50 group-hover:opacity-100" />
+                        {/* Icon container */}
+                        <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-3xl border-2 border-border/60 bg-background/90 backdrop-blur-xl flex items-center justify-center group-hover:border-blue-500/80 group-hover:bg-blue-500/15 group-hover:scale-105 group-hover:rotate-[-2deg] transition-all duration-700 ease-out shadow-2xl group-hover:shadow-blue-500/20">
+                          <Icon className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-foreground/90 group-hover:text-blue-400 transition-colors duration-700" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content section */}
+                    <div className="flex-1 space-y-6 md:space-y-8">
+                      <div>
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground tracking-tight leading-[1.05] mb-6 group-hover:text-foreground transition-colors duration-700">
+                          {point.title}
+                        </h3>
+                        {/* Decorative underline that expands */}
+                        <div className="h-1 w-20 bg-gradient-to-r from-blue-500/80 via-blue-500/60 to-transparent group-hover:w-32 transition-all duration-700 rounded-full" />
+                      </div>
+                      <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl group-hover:text-muted-foreground/95 transition-colors duration-700">
+                        {point.description}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <h3 className="text-2xl md:text-3xl font-normal text-foreground mb-4 tracking-tight group-hover:text-foreground transition-colors duration-300 ease-out">
-                    {point.title}
-                  </h3>
-                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed group-hover:text-muted-foreground/95 transition-colors duration-300 ease-out">
-                    {point.description}
-                  </p>
-
-                  {/* Decorative accent line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out" />
+                  {/* Connecting decorative line between items (only on desktop) */}
+                  {!isLast && (
+                    <div className="hidden md:block absolute left-12 md:left-16 lg:left-20 top-full mt-10 md:mt-14 lg:mt-16 bottom-auto w-px h-20 md:h-28 bg-gradient-to-b from-border/60 via-border/30 to-transparent" />
+                  )}
                 </div>
               )
             })}
