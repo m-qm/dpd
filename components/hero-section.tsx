@@ -14,21 +14,51 @@ const ParticleBackground = dynamic(() => import("@/components/particle-backgroun
 })
 
 
+// Two value proposition options for each locale (only titles change)
+const heroVariants = {
+  en: [
+    {
+      titleLines: ["Digital Solutions", "Built Around", "Your Process"],
+    },
+    {
+      titleLines: ["Fast. Specialized.", "Visually Impactful."],
+    },
+  ],
+  es: [
+    {
+      titleLines: ["Soluciones digitales", "a tu medida"],
+    },
+    {
+      titleLines: ["Rápido. Especializado.", "Impactante."],
+    },
+  ],
+}
+
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
-  const [isVisible, setIsVisible] = useState(false)
+  const [currentVariant, setCurrentVariant] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const isMobile = useIsMobile()
 
+  // Auto-rotate between variants every 5 seconds
   useEffect(() => {
-    // Reset visibility state when locale changes to prevent glitches
-    setIsVisible(false)
-    
-    // Wait for any ongoing transitions to complete before showing new content
-    const timer = setTimeout(() => {
-      setIsVisible(true)
-    }, 200)
+    const interval = setInterval(() => {
+      // Start fade out
+      setIsTransitioning(true)
+      
+      // After fade out completes, change content and fade in
+      setTimeout(() => {
+        setCurrentVariant((prev) => (prev + 1) % heroVariants[locale].length)
+        // Small delay before fade in for smoother transition
+        setTimeout(() => {
+          setIsTransitioning(false)
+        }, 50)
+      }, 500) // Wait for fade out to complete (500ms)
+    }, 5000) // Change every 5 seconds
 
-    return () => clearTimeout(timer)
+    return () => clearInterval(interval)
   }, [locale])
+
+  const currentHero = heroVariants[locale][currentVariant]
 
   return (
     <section
@@ -98,35 +128,27 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           </>
         )}
 
-        <div
-          key={`hero-content-${locale}`}
-          className={`relative max-w-7xl mx-auto w-full transition-all duration-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
-        >
+        <div className="relative max-w-7xl mx-auto w-full">
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div 
-              key={`eyebrow-${locale}`}
-              className={`mb-4 md:mb-8 hidden md:block transition-opacity duration-300 ${
-                isVisible ? "opacity-100" : "opacity-0"
-              }`}
-            >
+            <div className="mb-4 md:mb-8 hidden md:block">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
               </span>
             </div>
 
             {/* Main Title */}
-            <h1 key={locale} className="relative mb-4 md:mb-10 font-serif">
-              {copy[locale].hero.titleLines.map((line, index) => (
+            <h1 className="relative mb-4 md:mb-10 font-serif min-h-[4.8rem] md:min-h-[5.6rem]">
+              {currentHero.titleLines.map((line, index) => (
                 <span
-                  key={`${line}-${index}`}
-                  className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
+                  key={`${locale}-${currentVariant}-${line}-${index}`}
+                  className={`block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em] transition-all ${
+                    isTransitioning ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"
+                  }`}
                   style={{
-                    animationDelay: `${index * 100}ms`,
-                    animation: isVisible ? "fadeInUp 0.8s ease-out forwards" : "none",
-                    opacity: isVisible ? 1 : 0,
+                    transitionDuration: isTransitioning ? "500ms" : "700ms",
+                    transitionTimingFunction: isTransitioning ? "cubic-bezier(0.4, 0, 0.2, 1)" : "cubic-bezier(0.16, 1, 0.3, 1)",
+                    transitionDelay: isTransitioning ? "0ms" : `${index * 120}ms`,
                   }}
                 >
                   {line}
@@ -134,13 +156,8 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               ))}
             </h1>
 
-            {/* Subtitle */}
-            <p 
-              key={`subtitle-${locale}`}
-              className={`text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-5 md:mb-12 transition-opacity duration-300 ${
-                isVisible ? "opacity-100" : "opacity-0"
-              }`}
-            >
+            {/* Subtitle - static, doesn't change */}
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-5 md:mb-12">
               {copy[locale].hero.subtitle}
             </p>
 
@@ -215,8 +232,8 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                   className="flex items-baseline gap-2"
                   style={{
                     animationDelay: `${(index + 5) * 100}ms`,
-                    animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
-                    opacity: isVisible ? 1 : 0
+                    animation: 'fadeInUp 0.6s ease-out forwards',
+                    opacity: 1
                   }}
                 >
                   <span className="text-xl md:text-3xl font-serif text-foreground tracking-tight">
@@ -241,8 +258,8 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                   className="inline-flex items-center px-2.5 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200"
                   style={{
                     animationDelay: `${(index + 8) * 100}ms`,
-                    animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none',
-                    opacity: isVisible ? 1 : 0
+                    animation: 'fadeInUp 0.6s ease-out forwards',
+                    opacity: 1
                   }}
                 >
                   {label}

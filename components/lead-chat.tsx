@@ -274,15 +274,18 @@ export function LeadChat() {
     }
     
     // Redirect to appropriate page if needed
-    const isOnSpanishPage = pathname.startsWith("/es")
-    if (selectedLocale === "es" && !isOnSpanishPage) {
+    // Note: "/" is Spanish by default, "/en" is English, "/es" is also Spanish
+    const isOnEnglishPage = pathname.startsWith("/en")
+    const isOnSpanishPage = pathname === "/" || pathname.startsWith("/es")
+    
+    if (selectedLocale === "es" && isOnEnglishPage) {
       // Spanish selected, but on English page → redirect to Spanish
-      const basePath = pathname === "/" ? "" : pathname
-      router.push(`/es${basePath}`)
+      const basePath = pathname.replace(/^\/en/, "") || "/"
+      router.push(basePath === "/" ? "/" : `/es${basePath}`)
     } else if (selectedLocale === "en" && isOnSpanishPage) {
       // English selected, but on Spanish page → redirect to English
-      const basePath = pathname.replace(/^\/es/, "") || "/"
-      router.push(basePath)
+      const basePath = pathname === "/" ? "" : pathname.replace(/^\/es/, "")
+      router.push(`/en${basePath === "/" ? "" : basePath}`)
     }
     
     // Continue with the normal flow
