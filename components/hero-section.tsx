@@ -78,7 +78,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       <HeroNavigation locale={locale} />
 
       {/* Hero Content */}
-      <div className="relative flex-1 min-h-0 flex items-center justify-center px-6 md:px-12 lg:px-20 py-12 md:py-12 lg:py-16 overflow-hidden z-10">
+      <div className="relative flex-1 min-h-0 flex items-center justify-center px-6 md:px-12 lg:px-20 py-20 md:py-24 lg:py-28 overflow-hidden z-10">
         {/* Background effects */}
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
@@ -131,14 +131,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         <div className="relative max-w-7xl mx-auto w-full">
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="mb-4 md:mb-8 hidden md:block">
+            <div className="mb-2 md:mb-3 hidden md:block">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
               </span>
             </div>
 
             {/* Main Title - Fixed height to prevent layout shift */}
-            <h1 className="relative mb-4 md:mb-10 font-serif h-[32vw] sm:h-[26vw] md:h-[16rem] lg:h-[17rem] flex flex-col justify-center overflow-hidden">
+            <h1 className="relative mb-4 md:mb-6 font-serif h-[32vw] sm:h-[26vw] md:h-[16rem] lg:h-[17rem] flex flex-col justify-center overflow-hidden">
               <div className="relative">
                 {currentHero.titleLines.map((line, index) => (
                   <span
@@ -159,12 +159,12 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </h1>
 
             {/* Subtitle - static, doesn't change */}
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-5 md:mb-12">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-8">
               {copy[locale].hero.subtitle}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-12">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-8">
               <a
                 href="#contact"
                 className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:shadow-xl hover:shadow-blue-500/30"
@@ -217,7 +217,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </div>
 
             {/* Stats Section */}
-            <div className="hidden md:flex flex-wrap items-center gap-4 md:gap-8 mb-6 md:mb-12">
+            <div className="hidden md:flex flex-wrap items-center gap-6 md:gap-10 mb-6 md:mb-8">
               {(
                 locale === "es"
                   ? [
@@ -249,7 +249,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </div>
 
             {/* Service tags - visible on all screens but smaller on mobile */}
-            <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-16">
+            <div className="flex flex-wrap gap-2.5 md:gap-3 mb-6 md:mb-8">
               {(
                 locale === "es"
                   ? ["Software a medida", "Displays interactivos", "Automatización de procesos", "Integraciones de sistemas"]
@@ -273,10 +273,22 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       </div>
 
       {/* Scroll indicator - positioned to avoid collision with service tags */}
-      <div className="absolute bottom-16 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block z-50">
-        <div className="flex flex-col items-center gap-2 text-muted-foreground/60">
-          <span className="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-foreground/40 to-transparent animate-pulse" />
+      <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block z-[100] pointer-events-none">
+        <div className="flex flex-col items-center gap-3">
+          <span 
+            className="text-sm uppercase tracking-[0.2em] font-medium text-foreground"
+            style={{
+              textShadow: '0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1)',
+            }}
+          >
+            Scroll
+          </span>
+          <div 
+            className="w-0.5 h-16 bg-gradient-to-b from-foreground via-foreground/70 to-transparent animate-pulse"
+            style={{
+              boxShadow: '0 0 8px rgba(255, 255, 255, 0.4), 0 0 16px rgba(255, 255, 255, 0.2)',
+            }}
+          />
         </div>
       </div>
     </section>

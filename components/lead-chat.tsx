@@ -127,13 +127,8 @@ export function LeadChat() {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
   const [isTyping, setIsTyping] = useState(false)
-  const [hasUnread, setHasUnread] = useState(() => {
-    // Check on initial render if user has seen chat
-    if (typeof window !== "undefined") {
-      return !window.localStorage.getItem("dpd-chat-seen")
-    }
-    return false
-  })
+  // Initialize to false to match server render, then update in useEffect after hydration
+  const [hasUnread, setHasUnread] = useState(false)
   const [autoOpened, setAutoOpened] = useState(false)
 
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -142,6 +137,14 @@ export function LeadChat() {
 
   useEffect(() => {
     setLocale(detectLocale())
+  }, [])
+
+  // Check for unread status after hydration to avoid mismatch
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const seen = window.localStorage.getItem("dpd-chat-seen")
+      setHasUnread(!seen)
+    }
   }, [])
 
   // Keep the launcher/panel always readable by adapting to the theme of what's *behind* it.
