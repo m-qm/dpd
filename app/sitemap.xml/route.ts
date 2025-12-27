@@ -15,6 +15,8 @@ function xmlEscape(value: string) {
 export async function GET() {
   const now = new Date().toISOString()
 
+  // Solo incluir páginas válidas que no redirigen
+  // /es redirige a /, por lo que no se incluye aquí
   const urls = [
     { loc: `${baseUrl}/`, lastmod: now, changefreq: "weekly", priority: "1.0" },
     { loc: `${baseUrl}/en`, lastmod: now, changefreq: "weekly", priority: "0.9" },

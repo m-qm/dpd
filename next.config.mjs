@@ -114,6 +114,16 @@ const nextConfig = {
       },
     ]
   },
+  // Redirecciones permanentes (301) para SEO
+  async redirects() {
+    return [
+      {
+        source: '/es',
+        destination: '/',
+        permanent: true, // 301 redirect - indica a Google que es permanente
+      },
+    ]
+  },
   // Optimizaciones experimentales
   experimental: {
     optimizePackageImports: [
