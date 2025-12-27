@@ -9,9 +9,10 @@ import * as THREE from "three"
 function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { particleCount?: number; opacity?: number; size?: number }) {
   const cloudRef = useRef<THREE.Points>(null)
   
-  const { positions, colors } = useMemo(() => {
+  const { positions, colors, sizes } = useMemo(() => {
     const positions = new Float32Array(particleCount * 3)
     const colors = new Float32Array(particleCount * 3)
+    const sizes = new Float32Array(particleCount)
     
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3
@@ -24,6 +25,9 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
       positions[i3] = radius * Math.sin(phi) * Math.cos(theta)
       positions[i3 + 1] = (Math.random() - 0.5) * 12
       positions[i3 + 2] = radius * Math.sin(phi) * Math.sin(theta)
+      
+      // Vary particle sizes slightly for more natural look
+      sizes[i] = size * (0.8 + Math.random() * 0.4)
       
       // Galaxy-like color palette: purples, pinks, blues, whites
       const colorType = Math.random()
@@ -57,8 +61,8 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
       }
     }
     
-    return { positions, colors }
-  }, [particleCount])
+    return { positions, colors, sizes }
+  }, [particleCount, size])
   
   useFrame((state) => {
     if (cloudRef.current) {
@@ -81,15 +85,55 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
           array={colors}
           itemSize={3}
         />
+        <bufferAttribute
+          attach="attributes-size"
+          count={sizes.length}
+          array={sizes}
+          itemSize={1}
+        />
       </bufferGeometry>
-      <pointsMaterial
-        size={size}
-        vertexColors
+      <shaderMaterial
+        vertexShader={`
+          attribute float size;
+          attribute vec3 color;
+          varying vec3 vColor;
+          varying float vSize;
+          
+          void main() {
+            vColor = color;
+            vSize = size;
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            gl_PointSize = size * (300.0 / -mvPosition.z);
+            gl_Position = projectionMatrix * mvPosition;
+          }
+        `}
+        fragmentShader={`
+          varying vec3 vColor;
+          varying float vSize;
+          
+          void main() {
+            vec2 center = gl_PointCoord - vec2(0.5);
+            float dist = length(center);
+            
+            // Create perfect circular shape with smooth edges
+            // Using a tighter smoothstep for a more defined circle
+            float radius = 0.5;
+            float edgeSoftness = 0.1;
+            float alpha = 1.0 - smoothstep(radius - edgeSoftness, radius, dist);
+            
+            // Discard pixels outside the circle for perfect circular shape
+            if (dist > radius) {
+              discard;
+            }
+            
+            gl_FragColor = vec4(vColor, alpha);
+          }
+        `}
         transparent
         opacity={opacity}
-        sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}
+        uniforms={{}}
       />
     </points>
   )
