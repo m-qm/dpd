@@ -71,9 +71,9 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon-512.png", type: "image/png", sizes: "512x512" },
-      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
       { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-512.png", type: "image/png", sizes: "512x512" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
@@ -162,6 +162,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} data-theme="dark" style={{ height: '100%', minHeight: '100%' }}>
       <head>
+        {/* Favicon links for better browser compatibility */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         {/* Preload critical resources for LCP optimization */}
         <link
           rel="preload"
