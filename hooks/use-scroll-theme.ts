@@ -101,39 +101,15 @@ export function useScrollTheme({
       rafId = window.requestAnimationFrame(apply)
     }
 
-    // Wait for hydration to complete before adding classes
-    // This prevents hydration mismatches
-    const initAfterHydration = () => {
-      // Use requestIdleCallback or setTimeout to ensure DOM is fully hydrated
-      if (typeof requestIdleCallback !== 'undefined') {
-        requestIdleCallback(() => {
-          rescan()
-          schedule()
-        }, { timeout: 1000 })
-      } else {
-        setTimeout(() => {
-          rescan()
-          schedule()
-        }, 100)
-      }
-    }
-    
     // Retry a few times (client sections mount after hydration)
     let attempts = 0
     const retry = () => {
       attempts += 1
       rescan()
-      if (nodes.length) {
-        schedule()
-      } else if (attempts < 10) {
-        window.setTimeout(retry, 200)
-      }
+      schedule()
+      if (!nodes.length && attempts < 10) window.setTimeout(retry, 200)
     }
-    
-    // Initialize after a short delay to ensure hydration is complete
-    initAfterHydration()
-    // Also retry in case sections load later
-    setTimeout(retry, 300)
+    retry()
 
     window.addEventListener("scroll", schedule, { passive: true })
     

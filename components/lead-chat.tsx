@@ -217,9 +217,14 @@ export function LeadChat() {
   // Auto-scroll to bottom when transcript changes or typing state changes
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollHeight,
-        behavior: "smooth",
+      // Use requestAnimationFrame for smoother scrolling
+      requestAnimationFrame(() => {
+        if (scrollRef.current) {
+          scrollRef.current.scrollTo({
+            top: scrollRef.current.scrollHeight,
+            behavior: "smooth",
+          })
+        }
       })
     }
   }, [transcript, isTyping])
@@ -383,7 +388,7 @@ export function LeadChat() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className={`relative flex items-center justify-center h-14 w-14 md:h-16 md:w-16 rounded-full border-2 transition-all duration-300 hover:scale-110 active:scale-95 shadow-2xl hover:shadow-blue-500/30 ${
+          className={`relative flex items-center justify-center h-14 w-14 md:h-16 md:w-16 rounded-full border-2 transition-all duration-500 ease-out hover:scale-110 active:scale-95 shadow-2xl hover:shadow-blue-500/30 ${
             hasUnread ? "animate-chatPulse" : ""
           }`}
           style={{
@@ -396,7 +401,7 @@ export function LeadChat() {
         >
           {/* Glow effect */}
           <div 
-            className="absolute inset-0 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute inset-0 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500 ease-out"
             style={{
               background: "radial-gradient(circle, rgba(46, 88, 255, 0.3) 0%, transparent 70%)",
               filter: "blur(8px)",
@@ -436,8 +441,9 @@ export function LeadChat() {
             ...panelVars,
             backgroundColor: panelVars["--background" as any],
             borderColor: panelVars["--border" as any],
-            animation: "chatSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+            animation: "chatSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
             transformOrigin: "bottom right",
+            willChange: "transform, opacity",
           }}
         >
           <div 
@@ -453,7 +459,7 @@ export function LeadChat() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="h-8 w-8 flex items-center justify-center transition-opacity hover:opacity-70"
+              className="h-8 w-8 flex items-center justify-center transition-all duration-300 ease-out hover:opacity-70 hover:scale-110 active:scale-95"
               style={{ color: panelVars["--muted-foreground" as any] }}
               aria-label={c.close}
             >
@@ -468,6 +474,9 @@ export function LeadChat() {
               <div 
                 key={`${m.role}-${idx}-${m.text.slice(0, 10)}`}
                 className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} chat-message-enter`}
+                style={{
+                  animationDelay: `${idx * 50}ms`,
+                }}
               >
                 <div
                   className="max-w-[80%] text-sm leading-relaxed px-4 py-2.5 border"
@@ -500,7 +509,9 @@ export function LeadChat() {
                       style={{ 
                         backgroundColor: panelVars["--foreground" as any],
                         opacity: 0.6,
-                        animationDelay: "0ms" 
+                        animationDelay: "0ms",
+                        animationDuration: "1.4s",
+                        animationTimingFunction: "ease-in-out",
                       }} 
                     />
                     <span 
@@ -508,7 +519,9 @@ export function LeadChat() {
                       style={{ 
                         backgroundColor: panelVars["--foreground" as any],
                         opacity: 0.6,
-                        animationDelay: "150ms" 
+                        animationDelay: "200ms",
+                        animationDuration: "1.4s",
+                        animationTimingFunction: "ease-in-out",
                       }} 
                     />
                     <span 
@@ -516,7 +529,9 @@ export function LeadChat() {
                       style={{ 
                         backgroundColor: panelVars["--foreground" as any],
                         opacity: 0.6,
-                        animationDelay: "300ms" 
+                        animationDelay: "400ms",
+                        animationDuration: "1.4s",
+                        animationTimingFunction: "ease-in-out",
                       }} 
                     />
                   </div>
@@ -536,7 +551,7 @@ export function LeadChat() {
                 <button
                   type="button"
                   onClick={() => onPickLanguage("es")}
-                  className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                  className="px-4 py-2.5 text-sm tracking-tight border transition-all duration-300 ease-out hover:opacity-70 hover:scale-[1.02] active:opacity-50 active:scale-[0.98]"
                   style={{
                     backgroundColor: panelVars["--background" as any],
                     color: panelVars["--foreground" as any],
@@ -548,7 +563,7 @@ export function LeadChat() {
                 <button
                   type="button"
                   onClick={() => onPickLanguage("en")}
-                  className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                  className="px-4 py-2.5 text-sm tracking-tight border transition-all duration-300 ease-out hover:opacity-70 hover:scale-[1.02] active:opacity-50 active:scale-[0.98]"
                   style={{
                     backgroundColor: panelVars["--background" as any],
                     color: panelVars["--foreground" as any],
@@ -567,7 +582,7 @@ export function LeadChat() {
                     key={v}
                     type="button"
                     onClick={() => onPickScope(v)}
-                    className="px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                    className="px-4 py-2.5 text-sm tracking-tight border transition-all duration-300 ease-out hover:opacity-70 hover:scale-[1.02] active:opacity-50 active:scale-[0.98]"
                     style={{
                       backgroundColor: panelVars["--background" as any],
                       color: panelVars["--foreground" as any],
@@ -587,7 +602,7 @@ export function LeadChat() {
                   onChange={(e) => setOtherDetails(e.target.value)}
                   rows={3}
                   placeholder={c.placeholderOther}
-                  className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-opacity resize-none"
+                  className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-all duration-300 ease-out focus:border-foreground/50 resize-none"
                   style={{
                     backgroundColor: panelVars["--background" as any],
                     color: panelVars["--foreground" as any],
@@ -597,7 +612,7 @@ export function LeadChat() {
                 <button
                   type="button"
                   onClick={onSubmitOther}
-                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50"
+                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-all duration-300 ease-out hover:opacity-70 hover:scale-[1.01] active:opacity-50 active:scale-[0.99]"
                   style={{
                     backgroundColor: panelVars["--foreground" as any],
                     color: panelVars["--background" as any],
@@ -624,7 +639,7 @@ export function LeadChat() {
                         onSubmitName()
                       }
                     }}
-                    className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-opacity"
+                    className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-all duration-300 ease-out focus:border-foreground/50"
                     style={{
                       backgroundColor: panelVars["--background" as any],
                       color: panelVars["--foreground" as any],
@@ -638,7 +653,7 @@ export function LeadChat() {
                   type="button"
                   disabled={status === "sending" || !name.trim()}
                   onClick={onSubmitName}
-                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50 disabled:opacity-30"
+                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-all duration-300 ease-out hover:opacity-70 hover:scale-[1.01] active:opacity-50 active:scale-[0.99] disabled:opacity-30 disabled:scale-100"
                   style={{
                     backgroundColor: panelVars["--foreground" as any],
                     color: panelVars["--background" as any],
@@ -665,7 +680,7 @@ export function LeadChat() {
                         onSubmitEmail()
                       }
                     }}
-                    className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-opacity"
+                    className="w-full text-sm tracking-tight border px-4 py-3 focus:outline-none transition-all duration-300 ease-out focus:border-foreground/50"
                     style={{
                       backgroundColor: panelVars["--background" as any],
                       color: panelVars["--foreground" as any],
@@ -680,7 +695,7 @@ export function LeadChat() {
                   type="button"
                   disabled={status === "sending" || !email.trim() || !name.trim()}
                   onClick={onSubmitEmail}
-                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-opacity hover:opacity-70 active:opacity-50 disabled:opacity-30"
+                  className="w-full px-4 py-2.5 text-sm tracking-tight border transition-all duration-300 ease-out hover:opacity-70 hover:scale-[1.01] active:opacity-50 active:scale-[0.99] disabled:opacity-30 disabled:scale-100"
                   style={{
                     backgroundColor: panelVars["--foreground" as any],
                     color: panelVars["--background" as any],

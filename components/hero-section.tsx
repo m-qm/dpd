@@ -137,23 +137,25 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </span>
             </div>
 
-            {/* Main Title */}
-            <h1 className="relative mb-4 md:mb-10 font-serif min-h-[4.8rem] md:min-h-[5.6rem]">
-              {currentHero.titleLines.map((line, index) => (
-                <span
-                  key={`${locale}-${currentVariant}-${line}-${index}`}
-                  className={`block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em] transition-all ${
-                    isTransitioning ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"
-                  }`}
-                  style={{
-                    transitionDuration: isTransitioning ? "500ms" : "700ms",
-                    transitionTimingFunction: isTransitioning ? "cubic-bezier(0.4, 0, 0.2, 1)" : "cubic-bezier(0.16, 1, 0.3, 1)",
-                    transitionDelay: isTransitioning ? "0ms" : `${index * 120}ms`,
-                  }}
-                >
-                  {line}
-                </span>
-              ))}
+            {/* Main Title - Fixed height to prevent layout shift */}
+            <h1 className="relative mb-4 md:mb-10 font-serif h-[32vw] sm:h-[26vw] md:h-[16rem] lg:h-[17rem] flex flex-col justify-center overflow-hidden">
+              <div className="relative">
+                {currentHero.titleLines.map((line, index) => (
+                  <span
+                    key={`${locale}-${currentVariant}-${line}-${index}`}
+                    className={`block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em] transition-all ${
+                      isTransitioning ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"
+                    }`}
+                    style={{
+                      transitionDuration: isTransitioning ? "500ms" : "700ms",
+                      transitionTimingFunction: isTransitioning ? "cubic-bezier(0.4, 0, 0.2, 1)" : "cubic-bezier(0.16, 1, 0.3, 1)",
+                      transitionDelay: isTransitioning ? "0ms" : `${index * 120}ms`,
+                    }}
+                  >
+                    {line}
+                  </span>
+                ))}
+              </div>
             </h1>
 
             {/* Subtitle - static, doesn't change */}
