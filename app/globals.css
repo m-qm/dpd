@@ -442,6 +442,22 @@ html[data-theme="dark"] {
     }
   }
 
+  /* Smooth animated gradient for mobile hero section */
+  @keyframes mobile-gradient-move {
+    0% {
+      transform: translate3d(-10%, -10%, 0) scale(1.1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate3d(10%, 5%, 0) scale(1.15);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translate3d(15%, 10%, 0) scale(1.1);
+      opacity: 0.85;
+    }
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
