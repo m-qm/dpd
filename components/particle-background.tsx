@@ -64,6 +64,7 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
     return { positions, colors, sizes }
   }, [particleCount, size])
   
+  
   useFrame((state) => {
     if (cloudRef.current) {
       cloudRef.current.rotation.y = state.clock.elapsedTime * 0.02
@@ -95,7 +96,6 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
       <shaderMaterial
         vertexShader={`
           attribute float size;
-          attribute vec3 color;
           varying vec3 vColor;
           varying float vSize;
           
@@ -108,6 +108,7 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
           }
         `}
         fragmentShader={`
+          precision mediump float;
           varying vec3 vColor;
           varying float vSize;
           
@@ -116,7 +117,6 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
             float dist = length(center);
             
             // Create perfect circular shape with smooth edges
-            // Using a tighter smoothstep for a more defined circle
             float radius = 0.5;
             float edgeSoftness = 0.1;
             float alpha = 1.0 - smoothstep(radius - edgeSoftness, radius, dist);
@@ -133,6 +133,7 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
         opacity={opacity}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
+        vertexColors
         uniforms={{}}
       />
     </points>
@@ -188,3 +189,4 @@ export function ParticleBackground({ isMobile = false }: { isMobile?: boolean })
     </Canvas>
   )
 }
+

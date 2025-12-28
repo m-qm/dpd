@@ -77,35 +77,16 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         </div>
       )}
 
-      {/* Smooth gradient background for mobile */}
+      {/* Simple smooth gradient background for mobile */}
       {isMobile && (
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: `
-                radial-gradient(circle at 20% 30%, rgba(184, 160, 255, 0.08), transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 160, 208, 0.06), transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(160, 200, 255, 0.05), transparent 60%),
-                radial-gradient(circle at 0% 100%, rgba(208, 160, 255, 0.07), transparent 55%)
-              `,
-              filter: 'blur(60px)',
-              animation: 'mobile-gradient-move 20s ease-in-out infinite alternate',
-            }}
-          />
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: `
-                radial-gradient(circle at 60% 20%, rgba(46, 88, 255, 0.04), transparent 45%),
-                radial-gradient(circle at 40% 80%, rgba(184, 160, 255, 0.03), transparent 50%)
-              `,
-              filter: 'blur(80px)',
-              animation: 'mobile-gradient-move 25s ease-in-out infinite alternate-reverse',
-              opacity: 0.5,
-            }}
-          />
-        </div>
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(46, 88, 255, 0.12), transparent 70%)',
+            filter: 'blur(80px)',
+            opacity: 0.6,
+          }}
+        />
       )}
 
       {/* Navigation */}
