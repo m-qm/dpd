@@ -8,10 +8,13 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import dynamic from "next/dynamic"
 
 // Lazy load Three.js - it's heavy and only needed for the particle background
-const ParticleBackground = dynamic(() => import("@/components/particle-background").then(mod => ({ default: mod.ParticleBackground })), {
-  ssr: false,
-  loading: () => null, // Don't show loading state for background
-})
+const ParticleBackground = dynamic(
+  () => import("@/components/particle-background").then((mod) => ({ default: mod.ParticleBackground })),
+  {
+    ssr: false,
+    loading: () => null, // Don't show loading state for background
+  }
+)
 
 
 // Two value proposition options for each locale (only titles change)
@@ -128,8 +131,8 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           </>
         )}
 
-        <div className="relative max-w-7xl mx-auto w-full">
-          <div className="max-w-4xl">
+        <div className="dpd-container w-full relative z-10">
+          <div className="w-full">
             {/* Eyebrow */}
             <div className="mb-2 md:mb-3 hidden md:block">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
@@ -284,7 +287,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             Scroll
           </span>
           <div 
-            className="w-0.5 h-16 bg-gradient-to-b from-foreground via-foreground/70 to-transparent animate-pulse"
+            className="w-0.5 h-12 bg-gradient-to-b from-foreground via-foreground/70 to-transparent animate-pulse"
             style={{
               boxShadow: '0 0 8px rgba(255, 255, 255, 0.4), 0 0 16px rgba(255, 255, 255, 0.2)',
             }}

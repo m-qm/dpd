@@ -29,7 +29,7 @@ export function CTASection({ inverted = false, locale = "en" }: { inverted?: boo
         }}
       />
       
-      <div className="dpd-container-narrow relative z-10">
+      <div className="dpd-container relative z-10">
         <SectionBadge number={6} label={locale === "es" ? "Contacto" : "Contact"} />
         <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-8 md:mb-12 leading-[1.1] tracking-tight">
           {copy[locale].ctaHeading}

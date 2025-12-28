@@ -45,7 +45,7 @@ export function FAQSection({ locale = "en", inverted = false }: { locale?: Local
       data-theme={inverted ? "light" : "dark"}
       className="dpd-section dpd-chapter pb-32 md:pb-40 lg:pb-48"
     >
-      <div className="dpd-container-narrow">
+      <div className="dpd-container">
         <SectionBadge number={5} label={locale === "es" ? "Preguntas frecuentes" : "FAQ"} />
         <div
           className={`transition-all ${isMobile ? "duration-300" : "duration-700"} ${
