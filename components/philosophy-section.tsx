@@ -127,8 +127,8 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
                         {/* Glow effect behind icon */}
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl group-hover:blur-3xl group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-700 opacity-50 group-hover:opacity-100" />
                         {/* Icon container */}
-                        <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-3xl border-2 border-border/60 bg-background/90 backdrop-blur-xl flex items-center justify-center group-hover:border-blue-500/80 group-hover:bg-blue-500/15 group-hover:scale-105 group-hover:rotate-[-2deg] transition-all duration-700 ease-out shadow-2xl group-hover:shadow-blue-500/20">
-                          <Icon className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-foreground/90 group-hover:text-blue-400 transition-colors duration-700" />
+                        <div className="relative w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-3xl border-2 border-border/60 bg-background/90 backdrop-blur-xl flex items-center justify-center group-hover:border-blue-500/80 group-hover:bg-blue-500/15 group-hover:scale-105 group-hover:rotate-[-2deg] transition-all duration-700 ease-out shadow-2xl group-hover:shadow-blue-500/20">
+                          <Icon className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 text-foreground/90 group-hover:text-blue-400 transition-colors duration-700" />
                         </div>
                       </div>
                     </div>
@@ -136,7 +136,7 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
                     {/* Content section */}
                     <div className="flex-1 space-y-6 md:space-y-8">
                       <div>
-                        <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground tracking-tight leading-[1.05] mb-6 group-hover:text-foreground transition-colors duration-700">
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal text-foreground tracking-tight leading-[1.05] mb-6 group-hover:text-foreground transition-colors duration-700">
                           {point.title}
                         </h3>
                         {/* Decorative underline that expands */}
