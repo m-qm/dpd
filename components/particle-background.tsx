@@ -108,6 +108,7 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
           }
         `}
         fragmentShader={`
+          precision mediump float;
           varying vec3 vColor;
           varying float vSize;
           
@@ -116,24 +117,25 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
             float dist = length(center);
             
             // Create perfect circular shape with smooth edges
-            // Using a tighter smoothstep for a more defined circle
             float radius = 0.5;
             float edgeSoftness = 0.1;
-            float alpha = 1.0 - smoothstep(radius - edgeSoftness, radius, dist);
             
-            // Discard pixels outside the circle for perfect circular shape
+            // Discard pixels outside the circle first for perfect circular shape
             if (dist > radius) {
               discard;
             }
             
+            // Smooth edge fade
+            float alpha = 1.0 - smoothstep(radius - edgeSoftness, radius, dist);
+            
             gl_FragColor = vec4(vColor, alpha);
           }
         `}
-        transparent
+        transparent={true}
         opacity={opacity}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
-        uniforms={{}}
+        vertexColors={true}
       />
     </points>
   )
