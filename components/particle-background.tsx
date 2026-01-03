@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useMemo } from "react"
+import { useRef, useMemo, useEffect } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei"
 import * as THREE from "three"
@@ -65,79 +65,66 @@ function CloudParticles({ particleCount = 4000, opacity = 0.2, size = 0.08 }: { 
   }, [particleCount, size])
   
   
+  // Create material and geometry manually to avoid React Three Fiber's automatic color injection
+  const pointsObject = useMemo(() => {
+    const geometry = new THREE.BufferGeometry()
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    geometry.setAttribute('customColor', new THREE.BufferAttribute(colors, 3))
+    geometry.setAttribute('customSize', new THREE.BufferAttribute(sizes, 1))
+
+    const material = new THREE.ShaderMaterial({
+      vertexShader: `
+        attribute float customSize;
+        attribute vec3 customColor;
+        varying vec3 vColor;
+        varying float vSize;
+        
+        void main() {
+          vColor = customColor;
+          vSize = customSize;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = customSize * (300.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        precision mediump float;
+        varying vec3 vColor;
+        varying float vSize;
+        
+        void main() {
+          vec2 center = gl_PointCoord - vec2(0.5);
+          float dist = length(center);
+          
+          // Create perfect circular shape with smooth edges
+          float radius = 0.5;
+          float edgeSoftness = 0.1;
+          float alpha = 1.0 - smoothstep(radius - edgeSoftness, radius, dist);
+          
+          // Discard pixels outside the circle for perfect circular shape
+          if (dist > radius) {
+            discard;
+          }
+          
+          gl_FragColor = vec4(vColor, alpha);
+        }
+      `,
+      transparent: true,
+      opacity: opacity,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    })
+
+    return new THREE.Points(geometry, material)
+  }, [positions, colors, sizes, opacity])
+
   useFrame((state) => {
-    if (cloudRef.current) {
-      cloudRef.current.rotation.y = state.clock.elapsedTime * 0.02
+    if (pointsObject) {
+      pointsObject.rotation.y = state.clock.elapsedTime * 0.02
     }
   })
-  
-  return (
-    <points ref={cloudRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={positions.length / 3}
-          array={positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={colors.length / 3}
-          array={colors}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-size"
-          count={sizes.length}
-          array={sizes}
-          itemSize={1}
-        />
-      </bufferGeometry>
-      <shaderMaterial
-        vertexShader={`
-          attribute float size;
-          varying vec3 vColor;
-          varying float vSize;
-          
-          void main() {
-            vColor = color;
-            vSize = size;
-            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = size * (300.0 / -mvPosition.z);
-            gl_Position = projectionMatrix * mvPosition;
-          }
-        `}
-        fragmentShader={`
-          precision mediump float;
-          varying vec3 vColor;
-          varying float vSize;
-          
-          void main() {
-            vec2 center = gl_PointCoord - vec2(0.5);
-            float dist = length(center);
-            
-            // Create perfect circular shape with smooth edges
-            float radius = 0.5;
-            float edgeSoftness = 0.1;
-            float alpha = 1.0 - smoothstep(radius - edgeSoftness, radius, dist);
-            
-            // Discard pixels outside the circle for perfect circular shape
-            if (dist > radius) {
-              discard;
-            }
-            
-            gl_FragColor = vec4(vColor, alpha);
-          }
-        `}
-        transparent
-        opacity={opacity}
-        blending={THREE.AdditiveBlending}
-        depthWrite={false}
-        vertexColors
-        uniforms={{}}
-      />
-    </points>
-  )
+
+  return <primitive ref={cloudRef} object={pointsObject} />
 }
 
 // Multiple cloud layers for depth

@@ -52,7 +52,7 @@ export function FAQSection({ locale = "en", inverted = false }: { locale?: Local
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground mb-4 tracking-tight leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-4 tracking-tight leading-[1.1]">
             FAQ
           </h2>
           <p className="text-sm md:text-base text-muted-foreground mb-8 max-w-2xl">

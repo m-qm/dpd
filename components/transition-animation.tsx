@@ -164,10 +164,10 @@ export function TransitionAnimation({ locale = "en" }: { locale?: Locale }) {
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 lg:px-20">
         {/* Main heading */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-foreground mb-4 transition-all duration-1000 opacity-100 translate-y-0">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-4 transition-all duration-1000 opacity-100 translate-y-0">
             {locale === "es" ? "Velocidad y eficiencia" : "Speed & Efficiency"}
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground/80 max-w-2xl mx-auto transition-all duration-1000 delay-200 opacity-100 translate-y-0">
+          <p className="text-sm md:text-base text-muted-foreground/80 max-w-2xl mx-auto transition-all duration-1000 delay-200 opacity-100 translate-y-0">
             {locale === "es" 
               ? "Entregamos soluciones modernas rápidamente, sin comprometer la calidad."
               : "We deliver modern solutions fast, without compromising quality."}

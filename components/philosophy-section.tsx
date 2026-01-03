@@ -102,9 +102,20 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text-foreground leading-[0.95] tracking-tight mb-20 md:mb-24 max-w-5xl">
-            {locale === "es" ? "Por qué trabajar con nosotros" : "Why Work With Us"}
-          </h2>
+          {/* Draper B1 style header */}
+          <div className="mb-16 md:mb-20">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground leading-[1.1] tracking-tight mb-6 md:mb-8">
+              {locale === "es" ? "Trabajamos" : "We work"}
+            </h2>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground leading-[1.1] tracking-tight mb-6 md:mb-8">
+              {locale === "es" ? "con personas" : "with people"}
+            </h3>
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl leading-relaxed">
+              {locale === "es" 
+                ? "Apoyamos e invertimos en equipos ambiciosos que buscan transformar sus procesos digitales."
+                : "We support and invest in ambitious teams looking to transform their digital processes."}
+            </p>
+          </div>
           
           {/* Unique visual design - no numbers, just beautiful content blocks */}
           <div className="space-y-20 md:space-y-28 lg:space-y-32">
@@ -136,13 +147,13 @@ export function PhilosophySection({ inverted = false, locale = "en" }: { inverte
                     {/* Content section */}
                     <div className="flex-1 space-y-6 md:space-y-8">
                       <div>
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal text-foreground tracking-tight leading-[1.05] mb-6 group-hover:text-foreground transition-colors duration-700">
+                        <h3 className="text-xl md:text-2xl lg:text-3xl font-normal text-foreground tracking-tight leading-[1.2] mb-6 group-hover:text-foreground transition-colors duration-700">
                           {point.title}
                         </h3>
                         {/* Decorative underline that expands */}
                         <div className="h-1 w-20 bg-gradient-to-r from-blue-500/80 via-blue-500/60 to-transparent group-hover:w-32 transition-all duration-700 rounded-full" />
                       </div>
-                      <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl group-hover:text-muted-foreground/95 transition-colors duration-700">
+                      <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl group-hover:text-muted-foreground/95 transition-colors duration-700">
                         {point.description}
                       </p>
                     </div>

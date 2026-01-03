@@ -124,32 +124,23 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-foreground mb-8 md:mb-12 tracking-tight leading-[0.9]">
-            {copy[locale].approachHeading}
-          </h2>
-
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mb-16 md:mb-20 leading-relaxed font-normal">
-            {copy[locale].approachIntro}
-          </p>
+          <div className="mb-12 md:mb-16">
+            <p className="text-sm md:text-base uppercase tracking-[0.2em] text-muted-foreground/80 font-medium mb-4 md:mb-6">
+              {locale === "es" ? "Cómo trabajamos" : "How we work"}
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-8 md:mb-10 tracking-tight leading-[1.1]">
+              {copy[locale].approachHeading}
+            </h2>
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl leading-relaxed font-normal">
+              {copy[locale].approachIntro}
+            </p>
+          </div>
         </div>
 
         <div className="relative">
-          {/* Animated vertical timeline */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border/60 to-transparent" />
-          
-          {/* Animated progress line that fills as you scroll */}
-          <div 
-            className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 w-px bg-gradient-to-b from-blue-500/40 via-blue-500/60 to-transparent transition-all duration-1000"
-            style={{ 
-              height: isVisible ? '100%' : '0%',
-              opacity: isVisible ? 1 : 0 
-            }}
-          />
-
-          <div className="flex flex-col gap-12 md:gap-16 lg:gap-20">
+          <div className="flex flex-col gap-16 md:gap-24 lg:gap-32">
             {copy[locale].approachSteps.map((step, index) => {
               const Icon = approachIcons[index]
-              const isLeft = index % 2 === 0
               const isStepVisible = visibleSteps.includes(index)
               
               return (
@@ -160,72 +151,60 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
                   }`}
                   style={{ transitionDelay: isMobile ? `${index * 50}ms` : `${index * 150}ms` }}
                 >
-                  {/* Timeline dot with icon */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-10 h-10 rounded-full border-2 border-foreground/40 bg-background/80 backdrop-blur-md group-hover:border-blue-500/60 group-hover:scale-110 group-hover:bg-blue-500/10 transition-all duration-300">
-                    {Icon && (
-                      <Icon className="w-4 h-4 text-foreground/70 group-hover:text-blue-400 transition-colors duration-300" />
-                    )}
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                    {/* Card */}
-                    <div
-                      ref={(el) => (cardRefs.current[index] = el)}
-                      className={`group/card relative p-8 md:p-10 lg:p-12 border-2 transition-all duration-500 ${
-                        isLeft ? "md:order-1" : "md:order-2"
-                      } ${
-                        highlightedCards.has(index)
-                          ? "border-blue-500/50 bg-background/70 shadow-xl shadow-blue-500/10 -translate-y-2"
-                          : "border-border/50 bg-background/40 backdrop-blur-sm hover:border-blue-500/30 hover:bg-background/60 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-1"
-                      }`}
-                    >
-                      {/* Number badge - large and prominent */}
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 border-2 flex items-center justify-center backdrop-blur-md transition-all duration-300 ${
+                  <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12 lg:gap-16">
+                    {/* Large number - Draper B1 style */}
+                    <div className="flex-shrink-0">
+                      <div 
+                        ref={(el) => (cardRefs.current[index] = el)}
+                        className={`relative transition-all duration-500 ${
                           highlightedCards.has(index)
-                            ? "border-blue-500/60 scale-110 bg-blue-500/15"
-                            : "border-border/60 bg-background/60 group-hover/card:border-blue-500/40 group-hover/card:scale-110 group-hover/card:bg-blue-500/10"
-                        }`}>
-                          {Icon && (
-                            <Icon className={`w-8 h-8 md:w-10 md:h-10 transition-colors duration-300 ${
-                              highlightedCards.has(index)
-                                ? "text-blue-400"
-                                : "text-foreground/70 group-hover/card:text-blue-400"
-                            }`} />
-                          )}
-                        </div>
-                        <div className={`text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight transition-colors duration-300 ${
+                            ? "scale-105"
+                            : "group-hover:scale-105"
+                        }`}
+                      >
+                        {/* Large number display */}
+                        <div className={`text-[6rem] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-normal leading-none tracking-tight transition-all duration-500 ${
                           highlightedCards.has(index)
-                            ? "text-foreground/70"
-                            : "text-foreground/30 group-hover/card:text-foreground/50"
+                            ? "text-foreground/20"
+                            : "text-foreground/10 group-hover:text-foreground/15"
                         }`}>
                           {index + 1 < 10 ? `0${index + 1}` : index + 1}
                         </div>
+                        
+                        {/* Icon overlay on number */}
+                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
+                          highlightedCards.has(index)
+                            ? "opacity-100 scale-110"
+                            : "opacity-0 group-hover:opacity-100 scale-100"
+                        }`}>
+                          {Icon && (
+                            <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-2 border-blue-500/40 bg-background/80 backdrop-blur-md flex items-center justify-center">
+                              <Icon className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-blue-400" />
+                            </div>
+                          )}
+                        </div>
                       </div>
-
-                      <h3 className={`text-2xl md:text-3xl lg:text-4xl font-normal mb-4 md:mb-6 tracking-tight leading-tight transition-colors duration-300 ${
-                        highlightedCards.has(index)
-                          ? "text-foreground"
-                          : "text-foreground group-hover/card:text-foreground"
-                      }`}>
-                        {step.title}
-                      </h3>
-                      <p className={`text-base md:text-lg lg:text-xl leading-relaxed transition-colors duration-300 ${
-                        highlightedCards.has(index)
-                          ? "text-muted-foreground/95"
-                          : "text-muted-foreground group-hover/card:text-muted-foreground/90"
-                      }`}>
-                        {step.description}
-                      </p>
-
-                      {/* Highlight accent line */}
-                      <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/40 to-transparent transition-opacity duration-500 ${
-                        highlightedCards.has(index) ? "opacity-100" : "opacity-0 group-hover/card:opacity-100"
-                      }`} />
                     </div>
 
-                    {/* Spacer for desktop alignment */}
-                    <div className={`hidden md:block ${isLeft ? "order-2" : "order-1"}`} />
+                    {/* Content section */}
+                    <div className="flex-1 pt-4 md:pt-8 lg:pt-12">
+                      <div className="max-w-2xl">
+                        <h3 className={`text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8 tracking-tight leading-[1.2] transition-colors duration-300 ${
+                          highlightedCards.has(index)
+                            ? "text-foreground"
+                            : "text-foreground group-hover:text-foreground"
+                        }`}>
+                          {step.title}
+                        </h3>
+                        <p className={`text-base md:text-lg leading-relaxed transition-colors duration-300 ${
+                          highlightedCards.has(index)
+                            ? "text-muted-foreground/95"
+                            : "text-muted-foreground group-hover:text-muted-foreground/90"
+                        }`}>
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )

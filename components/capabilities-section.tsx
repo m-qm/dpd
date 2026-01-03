@@ -125,7 +125,7 @@ export function CapabilitiesSection({
 
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl font-normal text-foreground mb-4 leading-tight tracking-tight">
+                  <h3 className="text-xl md:text-2xl font-normal text-foreground mb-4 leading-tight tracking-tight">
                     {capability.title}
                   </h3>
                   <p className="dpd-body max-w-xl">

@@ -174,7 +174,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
             </h1>
 
             {/* Subtitle - static, doesn't change */}
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-8">
+            <p className="text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-8">
               {copy[locale].hero.subtitle}
             </p>
 

@@ -330,7 +330,7 @@ html[data-theme="dark"] {
   }
 
   .dpd-display {
-    @apply text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight;
+    @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight;
   }
 
   .dpd-body {
