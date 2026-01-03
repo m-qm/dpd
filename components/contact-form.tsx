@@ -13,6 +13,7 @@ type ContactFormProps = {
 export function ContactForm({ locale = "en" }: ContactFormProps) {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [service, setService] = useState("")
   const [message, setMessage] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
@@ -63,7 +64,7 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, locale }),
+        body: JSON.stringify({ name, email, service, message, locale }),
       })
 
       if (!res.ok) {
@@ -81,6 +82,7 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
       setStatusDetail(null)
       setName("")
       setEmail("")
+      setService("")
       setMessage("")
       setErrors({})
     } catch (err) {
@@ -144,6 +146,23 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
           />
           {errors.email && <p className="text-sm text-destructive mt-1.5">{errors.email}</p>}
         </div>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">
+          {isSpanish ? "Interesado en" : "Interested in"}
+        </label>
+        <select
+          value={service}
+          onChange={(e) => setService(e.target.value)}
+          className="w-full rounded-none border-x-0 border-t-0 border-b-2 border-border/80 focus:border-foreground !bg-transparent px-0 py-3.5 text-base text-foreground focus:ring-0 focus:outline-none transition-colors"
+        >
+          <option value="">{isSpanish ? "Selecciona un servicio" : "Select a service"}</option>
+          <option value="whatsapp">{isSpanish ? "Automatización de WhatsApp" : "WhatsApp Automation"}</option>
+          <option value="events">{isSpanish ? "Display Interactivo para Eventos" : "Interactive Event Display"}</option>
+          <option value="both">{isSpanish ? "Ambos Servicios" : "Both Services"}</option>
+          <option value="other">{isSpanish ? "Otro" : "Other"}</option>
+        </select>
       </div>
 
       <div className="space-y-2">

@@ -9,6 +9,24 @@ export type FAQItem = {
 export const faqContent: Record<Locale, FAQItem[]> = {
   en: [
     {
+      id: "whatsapp-pricing",
+      question: "How much does WhatsApp automation cost?",
+      answer:
+        "Our WhatsApp automation service starts at €5,500 for the initial setup (API integration, chatbot design, CRM connection, testing, and training), plus €1,200 per month for ongoing support and optimization. The monthly retainer includes monitoring, updates, feature enhancements, and priority support to ensure your chatbot continues delivering value.",
+    },
+    {
+      id: "retainer-included",
+      question: "What's included in the monthly retainer?",
+      answer:
+        "The €1,200/month retainer covers continuous monitoring of your chatbot performance, regular content updates, small feature tweaks, optimization based on usage data, priority support, and monthly check-ins to discuss improvements. We ensure your automation stays effective as your business evolves.",
+    },
+    {
+      id: "whatsapp-roi",
+      question: "How long until WhatsApp automation pays for itself?",
+      answer:
+        "Most clients see ROI within 3 months. If you're currently handling 50+ WhatsApp inquiries daily, that's roughly 15-20 hours per week of staff time. Automating even 50% of those inquiries typically saves €1,500-€2,500/month in labor costs, making the investment self-funding quickly while improving response times.",
+    },
+    {
       id: "crm-erp",
       question: "Can you integrate with our existing CRM/ERP system?",
       answer:
@@ -74,8 +92,44 @@ export const faqContent: Record<Locale, FAQItem[]> = {
       answer:
         "Both. We often extend what you already have—adding a chatbot to your website, connecting your CRM to WhatsApp, or building an interactive display that pulls data from your existing database. We integrate with your tools rather than replacing them, so your team doesn't have to learn new systems.",
     },
+    {
+      id: "barcelona-events",
+      question: "What events have you worked on in Barcelona?",
+      answer:
+        "We've delivered interactive display solutions for trade shows and exhibitions in Barcelona, including work with event organizers and exhibitors. Our displays have been used at major Barcelona venues for lead capture, real-time data visualization, and attendee engagement. Each project is custom-built for the specific event and booth requirements.",
+    },
+    {
+      id: "payment-plans",
+      question: "Do you offer payment plans?",
+      answer:
+        "Yes. For both WhatsApp automation and event display projects, we typically structure payments as 50% upfront when starting and 50% upon delivery. For ongoing monthly retainers, payment is billed at the beginning of each month. We can discuss custom payment arrangements for larger projects.",
+    },
+    {
+      id: "fast-event-delivery",
+      question: "Can you deliver an event display in 2-3 weeks?",
+      answer:
+        "Yes, when needed. We've delivered interactive event displays on tight timelines for urgent trade shows. The key is starting with a clear understanding of your requirements upfront. For rush projects, we prioritize core functionality first and can iterate after the event. Contact us as soon as possible to discuss your event timeline.",
+    },
   ],
   es: [
+    {
+      id: "whatsapp-pricing",
+      question: "¿Cuánto cuesta la automatización de WhatsApp?",
+      answer:
+        "Nuestro servicio de automatización de WhatsApp comienza en €5.500 para la configuración inicial (integración API, diseño del chatbot, conexión CRM, pruebas y formación), más €1.200 al mes por soporte continuo y optimización. La cuota mensual incluye monitoreo, actualizaciones, mejoras de funcionalidades y soporte prioritario para asegurar que tu chatbot sigue generando valor.",
+    },
+    {
+      id: "retainer-included",
+      question: "¿Qué incluye la cuota mensual?",
+      answer:
+        "La cuota de €1.200/mes cubre el monitoreo continuo del rendimiento de tu chatbot, actualizaciones regulares de contenido, pequeños ajustes de funcionalidad, optimización basada en datos de uso, soporte prioritario y revisiones mensuales para discutir mejoras. Nos aseguramos de que tu automatización siga siendo efectiva a medida que tu negocio evoluciona.",
+    },
+    {
+      id: "whatsapp-roi",
+      question: "¿Cuánto tarda en amortizarse la automatización de WhatsApp?",
+      answer:
+        "La mayoría de clientes ven ROI en 3 meses. Si actualmente gestionas 50+ consultas diarias de WhatsApp, son aproximadamente 15-20 horas semanales de tiempo del equipo. Automatizar solo el 50% de esas consultas típicamente ahorra €1.500-€2.500/mes en costes laborales, haciendo que la inversión se autofinancie rápidamente mientras mejora los tiempos de respuesta.",
+    },
     {
       id: "crm-erp",
       question: "¿Podéis integraros con nuestro CRM o ERP actual?",
@@ -141,6 +195,24 @@ export const faqContent: Record<Locale, FAQItem[]> = {
       question: "¿Trabajáis con sistemas existentes o solo creáis nuevos?",
       answer:
         "Ambas cosas. A menudo ampliamos lo que ya tenéis—agregando un chatbot a vuestro sitio web, conectando vuestro CRM a WhatsApp, o construyendo un display interactivo que extrae datos de vuestra base de datos existente. Nos integramos con vuestras herramientas en lugar de reemplazarlas, para que vuestro equipo no tenga que aprender nuevos sistemas.",
+    },
+    {
+      id: "barcelona-events",
+      question: "¿En qué eventos de Barcelona habéis trabajado?",
+      answer:
+        "Hemos entregado soluciones de displays interactivos para ferias y exposiciones en Barcelona, incluyendo trabajo con organizadores de eventos y expositores. Nuestros displays se han usado en venues importantes de Barcelona para captura de leads, visualización de datos en tiempo real y engagement de asistentes. Cada proyecto se construye a medida para los requisitos específicos del evento y stand.",
+    },
+    {
+      id: "payment-plans",
+      question: "¿Ofrecéis planes de pago?",
+      answer:
+        "Sí. Para proyectos de automatización de WhatsApp y displays para eventos, típicamente estructuramos los pagos como 50% al inicio y 50% en la entrega. Para cuotas mensuales continuas, se factura al principio de cada mes. Podemos discutir arreglos de pago personalizados para proyectos más grandes.",
+    },
+    {
+      id: "fast-event-delivery",
+      question: "¿Podéis entregar un display para eventos en 2-3 semanas?",
+      answer:
+        "Sí, cuando es necesario. Hemos entregado displays interactivos para eventos con plazos ajustados para ferias urgentes. La clave es empezar con una comprensión clara de vuestros requisitos desde el inicio. Para proyectos urgentes, priorizamos la funcionalidad principal primero y podemos iterar después del evento. Contactadnos lo antes posible para discutir vuestro timeline de evento.",
     },
   ],
 }

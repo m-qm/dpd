@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
+import Link from "next/link"
 import { LanguageToggle } from "@/components/language-toggle"
 import type { Locale } from "@/lib/copy"
 import Image from "next/image"
@@ -58,7 +59,7 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
       }}
     >
       <div className="dpd-container w-full flex justify-between items-center">
-        <div className="flex items-center gap-3 sm:gap-3.5 md:gap-4 min-w-0 flex-1 pr-2">
+        <Link href={locale === "es" ? "/es" : "/"} className="flex items-center gap-3 sm:gap-3.5 md:gap-4 min-w-0 flex-1 pr-2 hover:opacity-80 transition-opacity">
           <div className="flex-shrink-0">
             <Image
               src="/favicon-512.png"
@@ -73,11 +74,25 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
           <div className="text-xs sm:text-sm md:text-sm font-normal tracking-tight text-foreground truncate">
             Dual Perspective Digital
           </div>
-        </div>
+        </Link>
         <div className="flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-xs md:text-sm flex-shrink-0">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+            <Link 
+              href={locale === "es" ? "/es/services/automatizacion-whatsapp" : "/services/whatsapp-automation"} 
+              className="text-foreground/80 hover:text-foreground transition-colors font-normal text-xs md:text-sm whitespace-nowrap"
+            >
+              {locale === "es" ? "WhatsApp" : "WhatsApp"}
+            </Link>
+            <Link 
+              href={locale === "es" ? "/es/services/displays-eventos" : "/services/event-displays"} 
+              className="text-foreground/80 hover:text-foreground transition-colors font-normal text-xs md:text-sm whitespace-nowrap"
+            >
+              {locale === "es" ? "Eventos" : "Events"}
+            </Link>
+          </nav>
           <div className="hidden lg:flex items-center gap-1.5 text-foreground/60">
             <span className="text-xs">→</span>
-            <a href="mailto:hello@dualperspective.digital" className="text-foreground/80 hover:text-foreground transition-colors font-normal text-xs">
+            <a href="mailto:hello@dualperspective.digital" className="text-foreground/80 hover:text-foreground transition-colors font-normal text-xs md:text-sm">
               hello@dualperspective.digital
             </a>
           </div>
