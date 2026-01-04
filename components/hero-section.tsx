@@ -1,11 +1,13 @@
 "use client"
 
 import { useEffect, useState, useRef, Suspense } from "react"
+import { motion } from "framer-motion"
 import { HeroNavigation } from "@/components/hero-navigation"
 import { copy, type Locale } from "@/lib/copy"
 import { ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import dynamic from "next/dynamic"
+import { textRevealVariants, staggerContainerVariants, buttonVariants } from "@/lib/animations"
 
 // Lazy load Three.js - it's heavy and only needed for the particle background
 const ParticleBackground = dynamic(
@@ -144,45 +146,62 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         )}
 
         <div className="dpd-container w-full relative z-10">
-          <div className="w-full">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainerVariants}
+            className="w-full"
+          >
             {/* Eyebrow */}
-            <div className="mb-2 md:mb-3 hidden md:block">
+            <motion.div variants={textRevealVariants} className="mb-2 md:mb-3 hidden md:block">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
                 {copy[locale].hero.eyebrow}
               </span>
-            </div>
+            </motion.div>
 
             {/* Main Title - Fixed height to prevent layout shift */}
-            <h1 className="relative mb-4 md:mb-6 font-serif h-[32vw] sm:h-[26vw] md:h-[16rem] lg:h-[17rem] flex flex-col justify-center overflow-hidden">
+            <motion.h1 
+              variants={textRevealVariants}
+              className="relative mb-4 md:mb-6 font-serif h-[32vw] sm:h-[26vw] md:h-[16rem] lg:h-[17rem] flex flex-col justify-center overflow-hidden"
+            >
               <div className="relative">
                 {currentHero.titleLines.map((line, index) => (
-                  <span
+                  <motion.span
                     key={`${locale}-${currentVariant}-${line}-${index}`}
-                    className={`block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em] transition-all ${
-                      isTransitioning ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"
-                    }`}
-                    style={{
-                      transitionDuration: isTransitioning ? "500ms" : "700ms",
-                      transitionTimingFunction: isTransitioning ? "cubic-bezier(0.4, 0, 0.2, 1)" : "cubic-bezier(0.16, 1, 0.3, 1)",
-                      transitionDelay: isTransitioning ? "0ms" : `${index * 120}ms`,
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: isTransitioning ? 0 : 1, y: isTransitioning ? 8 : 0 }}
+                    transition={{
+                      duration: isTransitioning ? 0.5 : 0.7,
+                      ease: isTransitioning ? [0.4, 0, 0.2, 1] : [0.16, 1, 0.3, 1],
+                      delay: isTransitioning ? 0 : index * 0.12,
                     }}
+                    className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
                   >
                     {line}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
-            </h1>
+            </motion.h1>
 
             {/* Subtitle - static, doesn't change */}
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-8">
+            <motion.p 
+              variants={textRevealVariants}
+              className="text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-8"
+            >
               {copy[locale].hero.subtitle}
-            </p>
+            </motion.p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-8">
-              <a
+            <motion.div 
+              variants={textRevealVariants}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-8"
+            >
+              <motion.a
                 href="#contact"
-                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:shadow-xl hover:shadow-blue-500/30"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30"
               >
                 {/* Animated gradient shimmer effect */}
                 <span 
@@ -193,7 +212,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                     animation: 'shimmer 2s ease-in-out infinite',
                   }}
                 />
-                <span className="relative z-10 flex items-center">
+                  <span className="relative z-10 flex items-center">
                   {copy[locale].ctaButton}
                   <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
@@ -204,10 +223,13 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                     background: 'radial-gradient(circle, rgba(46, 88, 255, 0.5) 0%, transparent 70%)',
                   }}
                 />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
                 href="#capabilities"
-                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:shadow-blue-500/10 overflow-hidden"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 overflow-hidden"
               >
                 {/* Animated border glow */}
                 <span 
@@ -228,11 +250,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                 <span className="relative z-10">
                   {locale === "es" ? "Ver capacidades" : "View capabilities"}
                 </span>
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             {/* Stats Section */}
-            <div className="hidden md:flex flex-wrap items-center gap-6 md:gap-10 mb-6 md:mb-8">
+            <motion.div 
+              variants={staggerContainerVariants}
+              className="hidden md:flex flex-wrap items-center gap-6 md:gap-10 mb-6 md:mb-8"
+            >
               {(
                 locale === "es"
                   ? [
@@ -244,14 +269,10 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                       { value: "Custom", label: "Focus" },
                     ]
               ).map((stat, index) => (
-                <div
+                <motion.div
                   key={stat.label}
+                  variants={textRevealVariants}
                   className="flex items-baseline gap-2"
-                  style={{
-                    animationDelay: `${(index + 5) * 100}ms`,
-                    animation: 'fadeInUp 0.6s ease-out forwards',
-                    opacity: 1
-                  }}
                 >
                   <span className="text-xl md:text-3xl font-serif text-foreground tracking-tight">
                     {stat.value}
@@ -259,36 +280,41 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                   <span className="text-[10px] md:text-sm uppercase tracking-[0.12em] text-muted-foreground/70 font-medium">
                     {stat.label}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Service tags - visible on all screens but smaller on mobile */}
-            <div className="flex flex-wrap gap-2.5 md:gap-3 mb-6 md:mb-8">
+            <motion.div 
+              variants={staggerContainerVariants}
+              className="flex flex-wrap gap-2.5 md:gap-3 mb-6 md:mb-8"
+            >
               {(
                 locale === "es"
                   ? ["Software a medida", "Displays interactivos", "Automatización de procesos", "Integraciones de sistemas"]
                   : ["Custom software", "Interactive displays", "Process automation", "System integrations"]
               ).map((label, index) => (
-                <span
+                <motion.span
                   key={label}
-                  className="inline-flex items-center px-2.5 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200"
-                  style={{
-                    animationDelay: `${(index + 8) * 100}ms`,
-                    animation: 'fadeInUp 0.6s ease-out forwards',
-                    opacity: 1
-                  }}
+                  variants={textRevealVariants}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="inline-flex items-center px-2.5 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 border border-border/40 bg-black/20 backdrop-blur-sm hover:border-border/60 hover:text-foreground/80 transition-all duration-200 cursor-default"
                 >
                   {label}
-                </span>
+                </motion.span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll indicator - positioned to avoid collision with service tags */}
-      <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block z-[100] pointer-events-none">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block z-[100] pointer-events-none"
+      >
         <div className="flex flex-col items-center gap-3">
           <span 
             className="text-sm uppercase tracking-[0.2em] font-medium text-foreground"
@@ -298,14 +324,23 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           >
             Scroll
           </span>
-          <div 
-            className="w-0.5 h-12 bg-gradient-to-b from-foreground via-foreground/70 to-transparent animate-pulse"
+          <motion.div 
+            className="w-0.5 h-12 bg-gradient-to-b from-foreground via-foreground/70 to-transparent"
+            animate={{ 
+              scaleY: [1, 1.2, 1],
+              opacity: [0.6, 1, 0.6]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
             style={{
               boxShadow: '0 0 8px rgba(255, 255, 255, 0.4), 0 0 16px rgba(255, 255, 255, 0.2)',
             }}
           />
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

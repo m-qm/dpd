@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { HomeClient } from "@/components/home-client"
 import { HeroSection } from "@/components/hero-section"
+import { HeroSectionFlora } from "@/components/hero-section-flora"
 import dynamic from "next/dynamic"
 import { getFaqJsonLd } from "@/lib/faq"
 
