@@ -130,7 +130,7 @@ export function ApproachSection({ inverted = false, locale = "en" }: { inverted?
             <p className="text-sm md:text-base uppercase tracking-[0.2em] text-muted-foreground/80 font-medium mb-4 md:mb-6">
               {locale === "es" ? "Cómo trabajamos" : "How we work"}
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-8 md:mb-10 tracking-tight leading-[1.1]">
+            <h2 className="dpd-display font-normal text-foreground mb-6 md:mb-8">
               {copy[locale].approachHeading}
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl leading-relaxed font-normal">
