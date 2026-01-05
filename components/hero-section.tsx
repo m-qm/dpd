@@ -1,21 +1,10 @@
 "use client"
 
-import { useEffect, useState, useRef, Suspense } from "react"
+import { useEffect, useState, useRef } from "react"
 import { HeroNavigation } from "@/components/hero-navigation"
 import { copy, type Locale } from "@/lib/copy"
 import { ArrowRight } from "lucide-react"
-import { useIsMobile } from "@/hooks/use-mobile"
-import dynamic from "next/dynamic"
-
-// Lazy load Three.js - it's heavy and only needed for the particle background
-const ParticleBackground = dynamic(
-  () => import("@/components/particle-background").then((mod) => ({ default: mod.ParticleBackground })),
-  {
-    ssr: false,
-    loading: () => null, // Don't show loading state for background
-  }
-)
-
+import { motion } from "framer-motion"
 
 // Two value proposition options for each locale (only titles change)
 const heroVariants = {
@@ -40,7 +29,6 @@ const heroVariants = {
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [currentVariant, setCurrentVariant] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const isMobile = useIsMobile()
 
   // Auto-rotate between variants every 5 seconds
   useEffect(() => {
@@ -68,26 +56,16 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       data-theme="dark"
       className="relative min-h-screen flex flex-col"
     >
-      {/* 3D Cloud Canvas Background - Lazy loaded (desktop only to reduce JS on mobile) */}
-      {!isMobile && (
-        <div className="absolute inset-0 z-0">
-          <Suspense fallback={null}>
-            <ParticleBackground isMobile={isMobile} />
-          </Suspense>
-        </div>
-      )}
 
-      {/* Simple smooth gradient background for mobile */}
-      {isMobile && (
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            background: 'radial-gradient(circle at 50% 50%, rgba(46, 88, 255, 0.12), transparent 70%)',
-            filter: 'blur(80px)',
-            opacity: 0.6,
-          }}
-        />
-      )}
+      {/* Simple smooth gradient background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(46, 88, 255, 0.12), transparent 70%)',
+          filter: 'blur(80px)',
+          opacity: 0.6,
+        }}
+      />
 
       {/* Navigation */}
       <HeroNavigation locale={locale} />
@@ -129,19 +107,15 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           }}
         />
         
-        {/* Animated orbs - more visible for depth, reduced on mobile */}
-        {!isMobile && (
-          <>
-            <div className="pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full animate-pulse opacity-30" style={{ filter: 'blur(60px)' }} />
-            <div className="pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-500/5 rounded-full animate-pulse opacity-25" style={{ animationDelay: '1s', animationDuration: '4s', filter: 'blur(50px)' }} />
-            <div className="pointer-events-none absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-500/4 rounded-full animate-pulse opacity-20" style={{ animationDelay: '2s', animationDuration: '5s', filter: 'blur(40px)' }} />
-            
-            {/* Floating geometric shapes */}
-            <div className="pointer-events-none absolute top-[15%] right-[20%] w-2 h-2 bg-foreground/20 rounded-full animate-float" />
-            <div className="pointer-events-none absolute bottom-[25%] right-[15%] w-1.5 h-1.5 bg-blue-400/30 rounded-full animate-float-delayed" />
-            <div className="pointer-events-none absolute top-[60%] left-[10%] w-1 h-1 bg-purple-400/25 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
-          </>
-        )}
+        {/* Animated orbs - more visible for depth (hidden on mobile via CSS if needed) */}
+        <div className="hidden md:block pointer-events-none absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full animate-pulse opacity-30" style={{ filter: 'blur(60px)' }} />
+        <div className="hidden md:block pointer-events-none absolute bottom-1/4 left-1/4 w-80 h-80 bg-purple-500/5 rounded-full animate-pulse opacity-25" style={{ animationDelay: '1s', animationDuration: '4s', filter: 'blur(50px)' }} />
+        <div className="hidden md:block pointer-events-none absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-500/4 rounded-full animate-pulse opacity-20" style={{ animationDelay: '2s', animationDuration: '5s', filter: 'blur(40px)' }} />
+        
+        {/* Floating geometric shapes */}
+        <div className="hidden md:block pointer-events-none absolute top-[15%] right-[20%] w-2 h-2 bg-foreground/20 rounded-full animate-float" />
+        <div className="hidden md:block pointer-events-none absolute bottom-[25%] right-[15%] w-1.5 h-1.5 bg-blue-400/30 rounded-full animate-float-delayed" />
+        <div className="hidden md:block pointer-events-none absolute top-[60%] left-[10%] w-1 h-1 bg-purple-400/25 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
 
         <div className="dpd-container w-full relative z-10">
           <div className="w-full">

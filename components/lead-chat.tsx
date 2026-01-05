@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { MessageCircle } from "lucide-react"
 import { useRouter, usePathname } from "next/navigation"
 
@@ -18,8 +19,8 @@ type ChatStep =
   | { id: "done" }
 
 type TranscriptItem =
-  | { role: "bot"; text: string }
-  | { role: "user"; text: string }
+  | { role: "bot"; text: string; id: string }
+  | { role: "user"; text: string; id: string }
 
 function detectLocale(): Locale {
   if (typeof window === "undefined" || typeof document === "undefined") return "en"
@@ -248,7 +249,7 @@ export function LeadChat() {
     const currentPageLocale = detectLocale()
     // Always start with language selection (even for Spanish users, ask them)
     setStep({ id: "language" })
-    setTranscript([{ role: "bot", text: copyFor("en").qLanguage }])
+    setTranscript([{ role: "bot", text: copyFor("en").qLanguage, id: `bot-${Date.now()}-init` }])
     // Set locale to current page language initially, will be confirmed/updated when user chooses
     setLocale(currentPageLocale)
     setScope(null)
@@ -258,16 +259,16 @@ export function LeadChat() {
     setStatus("idle")
   }, [open])
 
-  const pushUser = (text: string) => setTranscript((t) => [...t, { role: "user", text }])
+  const pushUser = (text: string) => setTranscript((t) => [...t, { role: "user", text, id: `user-${Date.now()}-${Math.random()}` }])
   const pushBot = (text: string, delay: number = 0) => {
     if (delay > 0) {
       setIsTyping(true)
       setTimeout(() => {
         setIsTyping(false)
-        setTranscript((t) => [...t, { role: "bot", text }])
+        setTranscript((t) => [...t, { role: "bot", text, id: `bot-${Date.now()}-${Math.random()}` }])
       }, delay)
     } else {
-      setTranscript((t) => [...t, { role: "bot", text }])
+      setTranscript((t) => [...t, { role: "bot", text, id: `bot-${Date.now()}-${Math.random()}` }])
     }
   }
 
@@ -387,68 +388,97 @@ export function LeadChat() {
   return (
     <div className="fixed bottom-6 right-6 z-[60]">
       {/* Launcher */}
-      {!open && (
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className={`relative flex items-center justify-center h-14 w-14 md:h-16 md:w-16 rounded-full border-2 transition-all duration-500 ease-out hover:scale-110 active:scale-95 shadow-2xl hover:shadow-blue-500/30 ${
-            hasUnread ? "animate-chatPulse" : ""
-          }`}
-          style={{
-            backgroundColor: "#0b0b0b",
-            color: "oklch(1 0 0)",
-            borderColor: "oklch(0.35 0 0)",
-            boxShadow: "0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 88, 255, 0.2)",
-          }}
-          aria-label={c.launcher}
-        >
-          {/* Glow effect */}
-          <div 
-            className="absolute inset-0 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500 ease-out"
-            style={{
-              background: "radial-gradient(circle, rgba(46, 88, 255, 0.3) 0%, transparent 70%)",
-              filter: "blur(8px)",
+      <AnimatePresence>
+        {!open && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ 
+              duration: 0.3,
+              ease: [0.16, 1, 0.3, 1]
             }}
-          />
-          <MessageCircle className="relative h-6 w-6 md:h-7 md:w-7" style={{ color: "oklch(1 0 0)" }} />
-          {hasUnread && (
-            <>
-              {/* Notification badge - larger and more visible */}
-              <span
-                className="absolute -top-1 -right-1 h-4 w-4 md:h-5 md:w-5 rounded-full animate-badgePulse"
-                style={{
-                  backgroundColor: "#ef4444",
-                  border: `3px solid #0b0b0b`,
-                  boxShadow: "0 0 10px rgba(239, 68, 68, 0.6)",
-                }}
-              />
-              {/* Outer pulse ring - more visible */}
-              <span
-                className="absolute inset-0 rounded-full animate-ringPulse"
-                style={{
-                  border: `2px solid #ef4444`,
-                  opacity: 0.6,
-                  boxShadow: "0 0 20px rgba(239, 68, 68, 0.4)",
-                }}
-              />
-            </>
-          )}
-        </button>
-      )}
+            type="button"
+            onClick={() => setOpen(true)}
+            className="group relative flex items-center justify-center h-14 w-14 md:h-16 md:w-16 rounded-full border-2 shadow-2xl"
+            style={{
+              backgroundColor: "#0b0b0b",
+              color: "oklch(1 0 0)",
+              borderColor: "oklch(0.35 0 0)",
+              boxShadow: "0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 88, 255, 0.2)",
+            }}
+            aria-label={c.launcher}
+          >
+            {/* Glow effect */}
+            <div 
+              className="absolute inset-0 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500 ease-out"
+              style={{
+                background: "radial-gradient(circle, rgba(46, 88, 255, 0.3) 0%, transparent 70%)",
+                filter: "blur(8px)",
+              }}
+            />
+            <MessageCircle className="relative h-6 w-6 md:h-7 md:w-7" style={{ color: "oklch(1 0 0)" }} />
+            {hasUnread && (
+              <>
+                {/* Notification badge - larger and more visible */}
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="absolute -top-1 -right-1 h-4 w-4 md:h-5 md:w-5 rounded-full"
+                  style={{
+                    backgroundColor: "#ef4444",
+                    border: `3px solid #0b0b0b`,
+                    boxShadow: "0 0 10px rgba(239, 68, 68, 0.6)",
+                  }}
+                />
+                {/* Outer pulse ring - more visible */}
+                <motion.span
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.6, 0.2, 0.6]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    border: `2px solid #ef4444`,
+                    boxShadow: "0 0 20px rgba(239, 68, 68, 0.4)",
+                  }}
+                />
+              </>
+            )}
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Panel */}
-      {open && (
-        <div 
-          className="w-[92vw] max-w-[400px] border overflow-hidden"
-          style={{
-            ...panelVars,
-            backgroundColor: panelVars["--background" as any],
-            borderColor: panelVars["--border" as any],
-            animation: "chatSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-            transformOrigin: "bottom right",
-            willChange: "transform, opacity",
-          }}
-        >
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            transition={{ 
+              duration: 0.4, 
+              ease: [0.16, 1, 0.3, 1]
+            }}
+            className="w-[92vw] max-w-[400px] border overflow-hidden"
+            style={{
+              ...panelVars,
+              backgroundColor: panelVars["--background" as any],
+              borderColor: panelVars["--border" as any],
+              transformOrigin: "bottom right",
+            }}
+          >
           <div 
             className="px-5 py-4 border-b flex items-center justify-between"
             style={{
@@ -473,74 +503,102 @@ export function LeadChat() {
           </div>
 
           <div ref={scrollRef} className="max-h-[50vh] overflow-auto px-5 py-4 space-y-3" style={{ backgroundColor: panelVars["--background" as any] }}>
-            {transcript.map((m, idx) => (
-              <div 
-                key={`${m.role}-${idx}-${m.text.slice(0, 10)}`}
-                className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} chat-message-enter`}
-                style={{
-                  animationDelay: `${idx * 50}ms`,
-                }}
-              >
-                <div
-                  className="max-w-[80%] text-sm leading-relaxed px-4 py-2.5 border"
-                  style={{
-                    backgroundColor: m.role === "user" 
-                      ? panelVars["--foreground" as any]
-                      : panelVars["--muted" as any],
-                    color: m.role === "user"
-                      ? panelVars["--background" as any]
-                      : panelVars["--foreground" as any],
-                    borderColor: panelVars["--border" as any],
+            <AnimatePresence mode="popLayout" initial={false}>
+              {transcript.map((m) => (
+                <motion.div
+                  key={m.id}
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ 
+                    duration: 0.3, 
+                    ease: [0.16, 1, 0.3, 1]
                   }}
+                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  {m.text}
-                </div>
-              </div>
-            ))}
-            {isTyping && (
-              <div className="flex justify-start chat-message-enter">
-                <div 
-                  className="max-w-[80%] px-4 py-3 border"
-                  style={{
-                    backgroundColor: panelVars["--muted" as any],
-                    borderColor: panelVars["--border" as any],
-                  }}
-                >
-                  <div className="flex gap-1.5">
-                    <span 
-                      className="w-2 h-2 rounded-full animate-bounce" 
-                      style={{ 
-                        backgroundColor: panelVars["--foreground" as any],
-                        opacity: 0.6,
-                        animationDelay: "0ms",
-                        animationDuration: "1.4s",
-                        animationTimingFunction: "ease-in-out",
-                      }} 
-                    />
-                    <span 
-                      className="w-2 h-2 rounded-full animate-bounce" 
-                      style={{ 
-                        backgroundColor: panelVars["--foreground" as any],
-                        opacity: 0.6,
-                        animationDelay: "200ms",
-                        animationDuration: "1.4s",
-                        animationTimingFunction: "ease-in-out",
-                      }} 
-                    />
-                    <span 
-                      className="w-2 h-2 rounded-full animate-bounce" 
-                      style={{ 
-                        backgroundColor: panelVars["--foreground" as any],
-                        opacity: 0.6,
-                        animationDelay: "400ms",
-                        animationDuration: "1.4s",
-                        animationTimingFunction: "ease-in-out",
-                      }} 
-                    />
+                  <div
+                    className="max-w-[80%] text-sm leading-relaxed px-4 py-2.5 border"
+                    style={{
+                      backgroundColor: m.role === "user" 
+                        ? panelVars["--foreground" as any]
+                        : panelVars["--muted" as any],
+                      color: m.role === "user"
+                        ? panelVars["--background" as any]
+                        : panelVars["--foreground" as any],
+                      borderColor: panelVars["--border" as any],
+                    }}
+                  >
+                    {m.text}
                   </div>
-                </div>
-              </div>
-            )}
+                </motion.div>
+              ))}
+              {isTyping && (
+                <motion.div
+                  key="typing-indicator"
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ 
+                    duration: 0.3, 
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="flex justify-start"
+                >
+                  <div 
+                    className="max-w-[80%] px-4 py-3 border"
+                    style={{
+                      backgroundColor: panelVars["--muted" as any],
+                      borderColor: panelVars["--border" as any],
+                    }}
+                  >
+                    <div className="flex gap-1.5">
+                      <motion.span
+                        animate={{ y: [0, -6, 0] }}
+                        transition={{ 
+                          duration: 1.4, 
+                          repeat: Infinity, 
+                          ease: "easeInOut",
+                          delay: 0
+                        }}
+                        className="w-2 h-2 rounded-full" 
+                        style={{ 
+                          backgroundColor: panelVars["--foreground" as any],
+                          opacity: 0.6,
+                        }} 
+                      />
+                      <motion.span
+                        animate={{ y: [0, -6, 0] }}
+                        transition={{ 
+                          duration: 1.4, 
+                          repeat: Infinity, 
+                          ease: "easeInOut",
+                          delay: 0.2
+                        }}
+                        className="w-2 h-2 rounded-full" 
+                        style={{ 
+                          backgroundColor: panelVars["--foreground" as any],
+                          opacity: 0.6,
+                        }} 
+                      />
+                      <motion.span
+                        animate={{ y: [0, -6, 0] }}
+                        transition={{ 
+                          duration: 1.4, 
+                          repeat: Infinity, 
+                          ease: "easeInOut",
+                          delay: 0.4
+                        }}
+                        className="w-2 h-2 rounded-full" 
+                        style={{ 
+                          backgroundColor: panelVars["--foreground" as any],
+                          opacity: 0.6,
+                        }} 
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div 
@@ -731,8 +789,9 @@ export function LeadChat() {
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </div>
   )
 }
