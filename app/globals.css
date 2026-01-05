@@ -4,40 +4,40 @@
 @custom-variant dark (&:is(html[data-theme="dark"] *));
 
 :root {
-  /* Light theme tokens (default). Dark mode overrides are in `.dark` below. */
-  --background: #f5f5f5; /* warm off-white */
-  --foreground: oklch(0.1 0 0); /* near-black */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.1 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.1 0 0);
-  --primary: oklch(0.1 0 0);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0 0);
-  --secondary-foreground: oklch(0.1 0 0);
-  --muted: oklch(0.95 0 0);
-  --muted-foreground: oklch(0.4 0 0);
-  --accent: oklch(0.1 0 0);
-  --accent-foreground: oklch(1 0 0);
+  /* Light theme tokens (Flora-inspired) */
+  --background: #FAFAFA; /* Flora's light background */
+  --foreground: #0A0A0A; /* Flora's dark text */
+  --card: #FFFFFF; /* Pure white cards */
+  --card-foreground: #0A0A0A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0A0A;
+  --primary: #0A0A0A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F5F5;
+  --secondary-foreground: #0A0A0A;
+  --muted: #F5F5F5;
+  --muted-foreground: #666666; /* Mid-gray for muted text */
+  --accent: #0066FF; /* Flora's blue accent */
+  --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.1 0 0);
-  --chart-1: oklch(0.1 0 0);
-  --chart-2: oklch(1 0 0);
-  --chart-3: oklch(0.4 0 0);
-  --chart-4: oklch(0.95 0 0);
-  --chart-5: oklch(0.7 0 0);
-  --radius: 0;
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.1 0 0);
-  --sidebar-primary: oklch(0.1 0 0);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.95 0 0);
-  --sidebar-accent-foreground: oklch(0.1 0 0);
-  --sidebar-border: oklch(0.9 0 0);
-  --sidebar-ring: oklch(0.1 0 0);
+  --destructive-foreground: #FFFFFF;
+  --border: #E5E5E5; /* Very subtle borders */
+  --input: #E5E5E5;
+  --ring: #0A0A0A;
+  --chart-1: #0A0A0A;
+  --chart-2: #FFFFFF;
+  --chart-3: #666666;
+  --chart-4: #F5F5F5;
+  --chart-5: #999999;
+  --radius: 12px; /* Slightly rounded like Flora */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0A0A0A;
+  --sidebar-primary: #0A0A0A;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F5F5F5;
+  --sidebar-accent-foreground: #0A0A0A;
+  --sidebar-border: #E5E5E5;
+  --sidebar-ring: #0A0A0A;
 }
 
 html[data-theme="dark"] {
@@ -303,9 +303,25 @@ html[data-theme="dark"] {
   }
 
   .dpd-section {
-    @apply px-6 md:px-12 lg:px-20 py-24 md:py-32 lg:py-40;
+    @apply px-6 md:px-12 lg:px-20 xl:px-24;
+    padding-top: 120px;
+    padding-bottom: 120px;
     overflow: visible;
     height: auto;
+  }
+  
+  @media (min-width: 1024px) {
+    .dpd-section {
+      padding-top: 160px;
+      padding-bottom: 160px;
+    }
+  }
+  
+  @media (min-width: 1440px) {
+    .dpd-section {
+      padding-top: 200px;
+      padding-bottom: 200px;
+    }
   }
   
   /* Ensure sections don't create scroll containers - overflow-hidden is only for clipping backgrounds */
@@ -329,23 +345,64 @@ html[data-theme="dark"] {
     @apply text-xs md:text-sm uppercase tracking-[0.18em] text-muted-foreground;
   }
 
+  /* Flora-style massive display text */
   .dpd-display {
-    @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-[1.1] tracking-tight;
+    font-size: clamp(48px, 8vw, 140px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+  }
+  
+  /* For hero - even larger */
+  .dpd-hero-display {
+    font-size: clamp(60px, 10vw, 180px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 400;
   }
 
   .dpd-body {
-    @apply text-base md:text-lg text-muted-foreground leading-relaxed;
+    @apply text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed;
   }
 
+  /* Flora-inspired utility classes */
+  .flora-section-spacing {
+    @apply py-40 md:py-52 lg:py-64;
+  }
+
+  .flora-text-display {
+    @apply text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight;
+  }
+
+  .flora-text-large {
+    @apply text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight;
+  }
+
+  .flora-text-body {
+    @apply text-lg md:text-xl lg:text-2xl leading-relaxed;
+  }
+
+  .flora-card {
+    @apply p-8 md:p-10 lg:p-12 border-2 border-border/40 transition-all duration-300;
+  }
+
+  .flora-card:hover {
+    @apply border-foreground/60 shadow-xl -translate-y-2;
+  }
+
+  /* Flora-style cards - clean white with subtle borders */
   .dpd-card {
-    @apply relative border border-border/60 bg-black/[0.02] transition-all duration-300;
-    backdrop-filter: blur(1px);
+    @apply relative bg-card;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 48px 40px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dpd-card:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
   }
 
   /* Full color inversion - white background, black text */

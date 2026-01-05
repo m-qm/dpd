@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { motion } from "framer-motion"
 import { SectionBadge } from "@/components/section-badge"
 import { copy, type Locale } from "@/lib/copy"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { staggerContainerVariants, gridItemVariants, fadeInUpVariants } from "@/lib/animations"
 
 export function CapabilitiesSection({
   inverted = false,
@@ -72,25 +74,41 @@ export function CapabilitiesSection({
       <div className="pointer-events-none absolute inset-0 hero-grid" />
       
       <div className="dpd-container relative z-10">
-        <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
-        <h2 className="dpd-display font-normal text-foreground mb-6 md:mb-8">
-          {copy[locale].capabilitiesHeading}
-        </h2>
-        <p className="dpd-kicker mb-14 md:mb-16 max-w-3xl">
-          {locale === "es"
-            ? "Soluciones enfocadas en el proceso · Con base en Barcelona · Diseñadas para durar"
-            : "Process-focused solutions · Barcelona-based · Built to last"}
-        </p>
+        <motion.div
+          initial="hidden"
+          animate={visibleItems.length > 0 ? "visible" : "hidden"}
+          variants={staggerContainerVariants}
+        >
+          <motion.div variants={fadeInUpVariants}>
+            <SectionBadge number={1} label={copy[locale].capabilitiesLabel} />
+          </motion.div>
+          
+          <motion.h2 variants={fadeInUpVariants} className="dpd-display font-normal text-foreground mb-6 md:mb-8">
+            {copy[locale].capabilitiesHeading}
+          </motion.h2>
+          
+          <motion.p variants={fadeInUpVariants} className="dpd-kicker mb-14 md:mb-16 max-w-3xl">
+            {locale === "es"
+              ? "Soluciones enfocadas en el proceso · Con base en Barcelona · Diseñadas para durar"
+              : "Process-focused solutions · Barcelona-based · Built to last"}
+          </motion.p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
           {copy[locale].capabilities.map((capability, index) => {
             const kind = iconKinds[index % iconKinds.length]
             return (
-              <div
+              <motion.div
                 key={index}
-                className={`dpd-card group ${
-                  visibleItems.includes(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                } hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-500`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={visibleItems.includes(index) ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={!isMobile ? { y: -8, scale: 1.02 } : undefined}
+                className="dpd-card group hover:shadow-lg hover:shadow-blue-500/10"
                 style={{
                   willChange: (!isMobile && !visibleItems.includes(index)) ? 'transform, opacity' : 'auto',
                   transform: 'translate3d(0, 0, 0)', // Hardware acceleration
@@ -99,7 +117,11 @@ export function CapabilitiesSection({
                 <div className="relative p-8 md:p-10">
                   <div className="flex items-start justify-between gap-6 mb-10">
                     <div className="flex items-center gap-4">
-                      <div className="h-11 w-11 border border-border flex items-center justify-center bg-black/[0.02] group-hover:border-foreground/50 group-hover:scale-110 transition-all duration-300">
+                      <motion.div 
+                        className="h-11 w-11 border border-border flex items-center justify-center bg-black/[0.02] group-hover:border-foreground/50 transition-colors duration-300"
+                        whileHover={!isMobile ? { scale: 1.1, rotate: 180 } : undefined}
+                        transition={{ duration: 0.6 }}
+                      >
                         {kind === "square" && <div className="h-5 w-5 border border-foreground/70" />}
                         {kind === "circle" && <div className="h-5 w-5 rounded-full border border-foreground/70" />}
                         {kind === "triangle" && (
@@ -117,7 +139,7 @@ export function CapabilitiesSection({
                             <div className="h-2 w-2 border border-foreground/70" />
                           </div>
                         )}
-                      </div>
+                      </motion.div>
                       <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                         {index + 1 < 10 ? `0${index + 1}` : index + 1}
                       </div>
@@ -132,7 +154,7 @@ export function CapabilitiesSection({
                     {capability.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>

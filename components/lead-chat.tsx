@@ -18,9 +18,11 @@ type ChatStep =
   | { id: "contact_email" }
   | { id: "done" }
 
-type TranscriptItem =
-  | { role: "bot"; text: string; id: string }
-  | { role: "user"; text: string; id: string }
+type TranscriptItem = {
+  id: string
+  role: "bot" | "user"
+  text: string
+}
 
 function detectLocale(): Locale {
   if (typeof window === "undefined" || typeof document === "undefined") return "en"
@@ -131,6 +133,7 @@ export function LeadChat() {
   // Initialize to false to match server render, then update in useEffect after hydration
   const [hasUnread, setHasUnread] = useState(false)
   const [autoOpened, setAutoOpened] = useState(false)
+  const transcriptIdRef = useRef(0)
 
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -149,7 +152,7 @@ export function LeadChat() {
   }, [])
 
   // Keep the launcher/panel always readable by adapting to the theme of what's *behind* it.
-  // This mimics the “always visible” feel on weareonforyou.com.
+  // This mimics the "always visible" feel on weareonforyou.com.
   useEffect(() => {
     let rafId = 0
 
@@ -249,7 +252,8 @@ export function LeadChat() {
     const currentPageLocale = detectLocale()
     // Always start with language selection (even for Spanish users, ask them)
     setStep({ id: "language" })
-    setTranscript([{ role: "bot", text: copyFor("en").qLanguage, id: `bot-${Date.now()}-init` }])
+    transcriptIdRef.current = 0
+    setTranscript([{ id: (transcriptIdRef.current++).toString(), role: "bot", text: copyFor("en").qLanguage }])
     // Set locale to current page language initially, will be confirmed/updated when user chooses
     setLocale(currentPageLocale)
     setScope(null)
@@ -259,16 +263,21 @@ export function LeadChat() {
     setStatus("idle")
   }, [open])
 
-  const pushUser = (text: string) => setTranscript((t) => [...t, { role: "user", text, id: `user-${Date.now()}-${Math.random()}` }])
+  const pushUser = (text: string) => {
+    const id = (transcriptIdRef.current++).toString()
+    setTranscript((t) => [...t, { id, role: "user", text }])
+  }
   const pushBot = (text: string, delay: number = 0) => {
+    const id = (transcriptIdRef.current++).toString()
+    
     if (delay > 0) {
       setIsTyping(true)
       setTimeout(() => {
         setIsTyping(false)
-        setTranscript((t) => [...t, { role: "bot", text, id: `bot-${Date.now()}-${Math.random()}` }])
+        setTranscript((t) => [...t, { id, role: "bot", text }])
       }, delay)
     } else {
-      setTranscript((t) => [...t, { role: "bot", text, id: `bot-${Date.now()}-${Math.random()}` }])
+      setTranscript((t) => [...t, { id, role: "bot", text }])
     }
   }
 
@@ -503,102 +512,27 @@ export function LeadChat() {
           </div>
 
           <div ref={scrollRef} className="max-h-[50vh] overflow-auto px-5 py-4 space-y-3" style={{ backgroundColor: panelVars["--background" as any] }}>
-            <AnimatePresence mode="popLayout" initial={false}>
-              {transcript.map((m) => (
-                <motion.div
-                  key={m.id}
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ 
-                    duration: 0.3, 
-                    ease: [0.16, 1, 0.3, 1]
+            {transcript.map((m) => (
+              <div 
+                key={m.id}
+                className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} chat-message-enter`}
+              >
+                <div
+                  className="max-w-[80%] text-sm leading-relaxed px-4 py-2.5 border"
+                  style={{
+                    backgroundColor: m.role === "user" 
+                      ? panelVars["--foreground" as any]
+                      : panelVars["--muted" as any],
+                    color: m.role === "user"
+                      ? panelVars["--background" as any]
+                      : panelVars["--foreground" as any],
+                    borderColor: panelVars["--border" as any],
                   }}
-                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <div
-                    className="max-w-[80%] text-sm leading-relaxed px-4 py-2.5 border"
-                    style={{
-                      backgroundColor: m.role === "user" 
-                        ? panelVars["--foreground" as any]
-                        : panelVars["--muted" as any],
-                      color: m.role === "user"
-                        ? panelVars["--background" as any]
-                        : panelVars["--foreground" as any],
-                      borderColor: panelVars["--border" as any],
-                    }}
-                  >
-                    {m.text}
-                  </div>
-                </motion.div>
-              ))}
-              {isTyping && (
-                <motion.div
-                  key="typing-indicator"
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ 
-                    duration: 0.3, 
-                    ease: [0.16, 1, 0.3, 1]
-                  }}
-                  className="flex justify-start"
-                >
-                  <div 
-                    className="max-w-[80%] px-4 py-3 border"
-                    style={{
-                      backgroundColor: panelVars["--muted" as any],
-                      borderColor: panelVars["--border" as any],
-                    }}
-                  >
-                    <div className="flex gap-1.5">
-                      <motion.span
-                        animate={{ y: [0, -6, 0] }}
-                        transition={{ 
-                          duration: 1.4, 
-                          repeat: Infinity, 
-                          ease: "easeInOut",
-                          delay: 0
-                        }}
-                        className="w-2 h-2 rounded-full" 
-                        style={{ 
-                          backgroundColor: panelVars["--foreground" as any],
-                          opacity: 0.6,
-                        }} 
-                      />
-                      <motion.span
-                        animate={{ y: [0, -6, 0] }}
-                        transition={{ 
-                          duration: 1.4, 
-                          repeat: Infinity, 
-                          ease: "easeInOut",
-                          delay: 0.2
-                        }}
-                        className="w-2 h-2 rounded-full" 
-                        style={{ 
-                          backgroundColor: panelVars["--foreground" as any],
-                          opacity: 0.6,
-                        }} 
-                      />
-                      <motion.span
-                        animate={{ y: [0, -6, 0] }}
-                        transition={{ 
-                          duration: 1.4, 
-                          repeat: Infinity, 
-                          ease: "easeInOut",
-                          delay: 0.4
-                        }}
-                        className="w-2 h-2 rounded-full" 
-                        style={{ 
-                          backgroundColor: panelVars["--foreground" as any],
-                          opacity: 0.6,
-                        }} 
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  {m.text}
+                </div>
+              </div>
+            ))}
           </div>
 
           <div 
@@ -795,5 +729,3 @@ export function LeadChat() {
     </div>
   )
 }
-
-
