@@ -142,7 +142,7 @@ const en: CopyShape = {
     eyebrow: "WhatsApp Automation & Event Displays | Barcelona",
     titleLines: ["Automate", "interactions.", "Elevate", "experiences."],
     subtitle:
-      "WhatsApp automation that saves hours daily. Event displays that stop traffic. Built for Barcelona.",
+      "WhatsApp automation that saves hours daily. Event displays that stop traffic. Built in Barcelona.",
   },
   capabilitiesHeading: "What we do",
   capabilitiesLabel: "What we do",
@@ -366,7 +366,7 @@ const es: CopyShape = {
     eyebrow: "Automatización WhatsApp y Displays para Eventos | Barcelona",
     titleLines: ["Automatiza", "interacciones.", "Eleva", "experiencias."],
       subtitle:
-        "Automatización WhatsApp que ahorra horas diarias. Displays que capturan miradas. Construido para Barcelona.",
+        "Automatización WhatsApp que ahorra horas diarias. Displays que capturan miradas. Construido en Barcelona.",
   },
   capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Qué hacemos",
