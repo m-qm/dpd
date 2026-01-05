@@ -139,74 +139,74 @@ type CopyShape = {
 
 const en: CopyShape = {
   hero: {
-    eyebrow: "WhatsApp Automation & Interactive Event Displays | Barcelona",
-    titleLines: ["Automate Customer", "Interactions.", "Elevate Event", "Experiences."],
+    eyebrow: "WhatsApp Automation & Event Displays | Barcelona",
+    titleLines: ["Automate", "interactions.", "Elevate", "experiences."],
     subtitle:
-      "We specialize in two things: WhatsApp/chatbot integrations that save Spanish businesses hours every day, and interactive event displays that turn booths into engaging experiences. Clear pricing. Proven ROI.",
+      "WhatsApp automation that saves hours daily. Event displays that stop traffic. Built for Barcelona.",
   },
-  capabilitiesHeading: "Two Core Services: WhatsApp Automation & Event Displays",
-  capabilitiesLabel: "Services",
+  capabilitiesHeading: "Fast. Specialized. Visually striking.",
+  capabilitiesLabel: "What we do",
   capabilities: [
     {
-      title: "WhatsApp & Chatbot Automation",
+      title: "WhatsApp Automation",
       description:
-        "Stop drowning in manual WhatsApp inquiries. Our intelligent chatbots handle FAQs, qualify leads, route requests, and sync with your CRM automatically. Save 15-20 hours per week on customer interactions. Starting at €5,500 setup + €1,200/month support.",
+        "Intelligent chatbots that handle FAQs, qualify leads, and sync with your CRM. Save 15-20 hours weekly. From €5,500 setup.",
     },
     {
-      title: "Interactive Event Displays",
+      title: "Event Displays",
       description:
-        "Transform your trade show booth from static to stunning. Custom interactive displays that capture leads, showcase real-time data, and create memorable experiences at Barcelona events like MWC and ISE. From €2,000 per event.",
+        "Interactive displays that capture attention and leads. Perfect for MWC, ISE, and Barcelona events. From €2,000.",
     },
     {
-      title: "Messaging Platform Integrations",
+      title: "Messaging Integrations",
       description:
-        "Connect your existing systems with WhatsApp, Telegram, and messaging platforms. Reach your customers where they already communicate, with automated flows that integrate seamlessly with your CRM and databases.",
+        "Connect WhatsApp, Telegram, and messaging platforms to your existing systems. Automated flows that work.",
     },
     {
-      title: "Custom Web Applications",
+      title: "Web Applications",
       description:
-        "Custom web applications that automate your internal processes. Event organizers managing exhibitor data, floor plans, and attendee check-ins from one dashboard. Built for your specific workflow.",
+        "Custom dashboards for event organizers. Manage exhibitors, floor plans, and check-ins in one place.",
     },
     {
-      title: "Process Automation & Integrations",
+      title: "Process Automation",
       description:
-        "Turn manual workflows into automated flows by connecting the tools you already use. Fewer spreadsheets, fewer status meetings, fewer errors. Focus on growth while we handle the automation.",
+        "Connect your tools. Automate workflows. Fewer spreadsheets, fewer meetings, more growth.",
     },
   ],
-  approachHeading: "Our Approach",
+  approachHeading: "How we work",
   approachIntro:
-    "We understand your process first, then build the solution. Fast execution comes from deep understanding, not shortcuts. As a Barcelona-based studio, we offer in-person meetings and local support.",
+    "Understand first. Build fast. Barcelona-based with in-person support.",
   approachSteps: [
     {
-      title: "Understand Your Process",
+      title: "Understand",
       description:
-        "We start by learning how your team works, what slows you down, and what success looks like. Even for urgent projects, we take time to understand first.",
+        "Learn how you work. What slows you down. What success looks like.",
     },
     {
-      title: "Design for Clarity",
+      title: "Design",
       description:
-        "We create interfaces that make complex processes feel simple. Visual design that guides users, not just looks good.",
+        "Make complex feel simple. Guide users naturally.",
     },
     {
-      title: "Build with Precision",
+      title: "Build",
       description:
-        "We deliver solutions that integrate seamlessly with your existing systems. Clean code, solid performance, ready from day one.",
+        "Integrate seamlessly. Clean code. Ready from day one.",
     },
     {
-      title: "Evolve Together",
+      title: "Evolve",
       description:
-        "As your needs change, we adapt. We measure what matters, refine what doesn't work, and iterate as your business grows.",
+        "Adapt as you grow. Measure. Refine. Iterate.",
     },
   ],
-  clientsHeading: "Select Clients",
+  clientsHeading: "Trusted by",
   clientsLabel: "Clients",
-  clientTypes: ["Event organization", "Industrial groups", "Global manufacturers", "Logistics & shipping", "New brand launches"],
+  clientTypes: ["Event organizers", "Industrial", "Manufacturers", "Logistics", "Retail"],
   clientsIntro:
-    "We work with Spanish SMEs who need software that fits their process, not the other way around. From event organizers who need interactive displays connected to their systems, to retailers automating WhatsApp inquiries—we build solutions that work from day one. Barcelona-based with in-person meetings available.",
-  ctaHeading: "Start Automating or Planning Your Event Display",
+    "Spanish SMEs who need software that fits their process. Barcelona-based. In-person meetings available.",
+  ctaHeading: "Ready to automate?",
   ctaBody:
-    "Book a free 30-minute consultation. We'll assess your WhatsApp automation needs or discuss your upcoming event display—with no commitment. You'll leave with actionable insights, even if we're not the right fit.",
-  ctaButton: "Book Free Consultation",
+    "30-minute consultation. No commitment. Actionable insights.",
+  ctaButton: "Book consultation",
   services: {
     whatsapp: {
       breadcrumb: "WhatsApp Automation",
@@ -363,80 +363,80 @@ const en: CopyShape = {
 
 const es: CopyShape = {
   hero: {
-    eyebrow: "Automatización WhatsApp y Displays Interactivos para Eventos | Barcelona",
-    titleLines: ["Automatiza las", "interacciones.", "Eleva la experiencia", "de tus eventos."],
+    eyebrow: "Automatización WhatsApp y Displays para Eventos | Barcelona",
+    titleLines: ["Automatiza", "interacciones.", "Eleva", "experiencias."],
       subtitle:
-        "Nos especializamos en dos cosas: integraciones de WhatsApp/chatbots que ahorran horas diarias a empresas españolas, y displays interactivos que convierten stands en experiencias memorables. Precios claros. ROI demostrado.",
+        "Automatización WhatsApp que ahorra horas diarias. Displays que capturan miradas. Construido para Barcelona.",
   },
-  capabilitiesHeading: "Dos Servicios Principales: Automatización WhatsApp y Displays para Eventos",
-  capabilitiesLabel: "Servicios",
+  capabilitiesHeading: "Rápido. Especializado. Impactante.",
+  capabilitiesLabel: "Qué hacemos",
   capabilities: [
     {
-      title: "Automatización de WhatsApp y Chatbots",
+      title: "Automatización WhatsApp",
       description:
-        "Deja de ahogarte en consultas manuales de WhatsApp. Nuestros chatbots inteligentes gestionan FAQs, cualifican leads, enrutan solicitudes y se sincronizan con tu CRM automáticamente. Ahorra 15-20 horas semanales. Desde €5.500 configuración + €1.200/mes soporte.",
+        "Chatbots inteligentes que gestionan FAQs, cualifican leads y sincronizan con tu CRM. Ahorra 15-20 horas semanales. Desde €5.500.",
     },
     {
-      title: "Displays Interactivos para Eventos",
+      title: "Displays para Eventos",
       description:
-        "Transforma tu stand de feria de estático a impresionante. Displays interactivos personalizados que capturan leads, muestran datos en tiempo real y crean experiencias memorables en eventos de Barcelona como MWC e ISE. Desde €2.000 por evento.",
+        "Displays interactivos que capturan atención y leads. Perfecto para MWC, ISE y eventos en Barcelona. Desde €2.000.",
     },
     {
-      title: "Integraciones con Plataformas de Mensajería",
+      title: "Integraciones de Mensajería",
       description:
-        "Conecta tus sistemas existentes con WhatsApp, Telegram y plataformas de mensajería. Alcanza a tus clientes donde ya se comunican, con flujos automatizados que se integran perfectamente con tu CRM y bases de datos.",
+        "Conecta WhatsApp, Telegram y plataformas de mensajería a tus sistemas. Flujos automatizados que funcionan.",
     },
     {
-      title: "Aplicaciones Web a Medida",
+      title: "Aplicaciones Web",
       description:
-        "Aplicaciones web personalizadas que automatizan tus procesos internos. Organizadores de eventos gestionando datos de expositores, planos y registro de asistentes desde un panel. Construido para tu flujo de trabajo específico.",
+        "Paneles personalizados para organizadores. Gestiona expositores, planos y registro en un solo lugar.",
     },
     {
-      title: "Automatización de Procesos e Integraciones",
+      title: "Automatización de Procesos",
       description:
-        "Convierte flujos de trabajo manuales en procesos automatizados conectando las herramientas que ya usas. Menos excels, menos reuniones de estado, menos errores. Enfócate en crecer mientras nosotros manejamos la automatización.",
+        "Conecta tus herramientas. Automatiza flujos. Menos excels, menos reuniones, más crecimiento.",
     },
   ],
-  approachHeading: "Nuestro Enfoque",
+  approachHeading: "Cómo trabajamos",
   approachIntro:
-    "Entendemos tu proceso primero, luego construimos la solución. La ejecución rápida viene de entender en profundidad, no de atajos. Como estudio local en Barcelona, ofrecemos reuniones presenciales y soporte cercano.",
+    "Entendemos primero. Construimos rápido. Con base en Barcelona y soporte presencial.",
   approachSteps: [
     {
-      title: "Entender Tu Proceso",
+      title: "Entender",
       description:
-        "Empezamos aprendiendo cómo trabaja tu equipo, qué los ralentiza y cómo se ve el éxito. Incluso para proyectos urgentes, tomamos tiempo para entender primero.",
+        "Cómo trabajas. Qué te ralentiza. Cómo se ve el éxito.",
     },
     {
-      title: "Diseño Claro",
+      title: "Diseñar",
       description:
-        "Creamos interfaces que hacen que procesos complejos se sientan simples. Diseño visual que guía a los usuarios, no solo se ve bien.",
+        "Hacer lo complejo simple. Guiar naturalmente.",
     },
     {
-      title: "Construir con Precisión",
+      title: "Construir",
       description:
-        "Entregamos soluciones que se integran perfectamente con tus sistemas existentes. Código limpio, rendimiento sólido, listo desde el inicio.",
+        "Integración perfecta. Código limpio. Listo desde día uno.",
     },
     {
-      title: "Evolucionar Juntos",
+      title: "Evolucionar",
       description:
-        "A medida que tus necesidades cambian, nos adaptamos. Medimos lo que importa, afinamos lo que no funciona e iteramos mientras tu negocio crece.",
+        "Adaptarnos mientras creces. Medir. Refinar. Iterar.",
     },
   ],
-  clientsHeading: "Clientes",
+  clientsHeading: "Confían en nosotros",
   clientsLabel: "Clientes",
   clientTypes: [
-    "Organización de eventos",
-    "Grupos industriales",
-    "Fabricantes globales",
-    "Logística y transporte",
-    "Lanzamientos de nuevas marcas",
+    "Organizadores de eventos",
+    "Industrial",
+    "Fabricantes",
+    "Logística",
+    "Retail",
   ],
   clientsIntro:
-    "Trabajamos con PYMEs españolas que necesitan software que se adapte a su proceso, no al revés. Desde organizadores de eventos que necesitan displays interactivos conectados a sus sistemas, hasta comercios que buscan automatizar WhatsApp—construimos soluciones que funcionan desde el primer día. Con base en Barcelona, reuniones presenciales disponibles.",
-  ctaHeading: "Comienza a Automatizar o Planifica tu Display para Eventos",
+    "PYMEs españolas que necesitan software que se adapta. Con base en Barcelona. Reuniones presenciales disponibles.",
+  ctaHeading: "¿Listo para automatizar?",
   ctaBody:
-    "Reserva una consulta gratuita de 30 minutos. Evaluaremos tus necesidades de automatización de WhatsApp o discutiremos tu próximo display para eventos—sin compromiso. Saldrás con insights accionables, incluso si no somos la mejor opción para ti.",
-  ctaButton: "Reservar Consulta Gratuita",
+    "Consulta de 30 minutos. Sin compromiso. Insights accionables.",
+  ctaButton: "Reservar consulta",
   services: {
     whatsapp: {
       breadcrumb: "Automatización WhatsApp",

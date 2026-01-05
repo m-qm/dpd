@@ -6,17 +6,16 @@ import { HeroNavigation } from "@/components/hero-navigation"
 import { copy, type Locale } from "@/lib/copy"
 import { ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-import dynamic from "next/dynamic"
 import { textRevealVariants, staggerContainerVariants, buttonVariants } from "@/lib/animations"
 
-// Lazy load Three.js - it's heavy and only needed for the particle background
-const ParticleBackground = dynamic(
-  () => import("@/components/particle-background").then((mod) => ({ default: mod.ParticleBackground })),
-  {
-    ssr: false,
-    loading: () => null, // Don't show loading state for background
-  }
-)
+// Particle background disabled for Flora-style minimalism
+// const ParticleBackground = dynamic(
+//   () => import("@/components/particle-background").then((mod) => ({ default: mod.ParticleBackground })),
+//   {
+//     ssr: false,
+//     loading: () => null,
+//   }
+// )
 
 
 // Two value proposition options for each locale (only titles change)
@@ -70,14 +69,14 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       data-theme="dark"
       className="relative min-h-screen flex flex-col"
     >
-      {/* 3D Cloud Canvas Background - Lazy loaded (desktop only to reduce JS on mobile) */}
-      {!isMobile && (
+      {/* 3D Cloud Canvas Background - Disabled for Flora-style minimalism */}
+      {/* {!isMobile && (
         <div className="absolute inset-0 z-0">
           <Suspense fallback={null}>
             <ParticleBackground isMobile={isMobile} />
           </Suspense>
         </div>
-      )}
+      )} */}
 
       {/* Simple smooth gradient background for mobile */}
       {isMobile && (
@@ -100,7 +99,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
         <div className="pointer-events-none absolute inset-0 hero-gradient" />
         <div className="pointer-events-none absolute inset-0 hero-grid" />
         
-        {/* Extended gradient that bleeds into next section - more visible */}
+        {/* Extended gradient that bleeds into next section */}
         <div 
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[60vh] md:h-[70vh] lg:h-[80vh]"
           style={{
@@ -145,6 +144,62 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           </>
         )}
 
+        {/* Flora-style floating visual element - Abstract gradient card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, y: 100 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="hidden lg:block absolute right-[8%] top-[20%] w-[420px] h-[520px] pointer-events-none z-[5]"
+        >
+          {/* Floating card with gradient and blur */}
+          <motion.div
+            animate={{ 
+              y: [0, -20, 0],
+              rotate: [0, 2, 0],
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              repeatType: "reverse" 
+            }}
+            className="relative w-full h-full"
+          >
+            {/* Main card */}
+            <div className="absolute inset-0 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10"
+              style={{
+                background: 'linear-gradient(135deg, rgba(46, 88, 255, 0.15) 0%, rgba(184, 160, 255, 0.1) 50%, rgba(0, 102, 255, 0.08) 100%)',
+                boxShadow: '0 20px 60px rgba(46, 88, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              }}
+            >
+              {/* Grid pattern overlay */}
+              <div 
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
+                  `,
+                  backgroundSize: '40px 40px',
+                }}
+              />
+              
+              {/* Floating accent elements inside */}
+              <div className="absolute top-8 left-8 w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm" />
+              <div className="absolute bottom-12 right-12 w-24 h-24 rounded-lg bg-blue-400/10 backdrop-blur-sm rotate-12" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-2 bg-white/20 rounded-full blur-sm" />
+            </div>
+            
+            {/* Glow effect */}
+            <div 
+              className="absolute -inset-4 rounded-3xl opacity-40 blur-2xl"
+              style={{
+                background: 'radial-gradient(circle, rgba(46, 88, 255, 0.3) 0%, transparent 70%)',
+              }}
+            />
+          </motion.div>
+        </motion.div>
+
         <div className="dpd-container w-full relative z-10">
           <motion.div 
             initial="hidden"
@@ -159,23 +214,26 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </span>
             </motion.div>
 
-            {/* Main Title - Fixed height to prevent layout shift */}
+            {/* Main Title - Flora-style massive headline */}
             <motion.h1 
               variants={textRevealVariants}
-              className="relative mb-4 md:mb-6 font-serif h-[32vw] sm:h-[26vw] md:h-[16rem] lg:h-[17rem] flex flex-col justify-center overflow-hidden"
+              className="relative mb-6 md:mb-8 font-serif flex flex-col justify-center overflow-visible"
             >
               <div className="relative">
                 {currentHero.titleLines.map((line, index) => (
                   <motion.span
                     key={`${locale}-${currentVariant}-${line}-${index}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isTransitioning ? 0 : 1, y: isTransitioning ? 8 : 0 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: isTransitioning ? 0 : 1, y: isTransitioning ? 10 : 0 }}
                     transition={{
-                      duration: isTransitioning ? 0.5 : 0.7,
+                      duration: isTransitioning ? 0.5 : 0.8,
                       ease: isTransitioning ? [0.4, 0, 0.2, 1] : [0.16, 1, 0.3, 1],
-                      delay: isTransitioning ? 0 : index * 0.12,
+                      delay: isTransitioning ? 0 : index * 0.15,
                     }}
-                    className="block text-[10.4vw] sm:text-[8vw] md:text-[5.6vw] lg:text-[4.8rem] xl:text-[5.6rem] font-normal text-foreground leading-[0.95] tracking-[-0.02em]"
+                    className="block font-normal text-foreground leading-[0.95] tracking-[-0.03em]"
+                    style={{
+                      fontSize: 'clamp(60px, 10vw, 180px)',
+                    }}
                   >
                     {line}
                   </motion.span>
@@ -284,8 +342,8 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               ))}
             </motion.div>
 
-            {/* Service tags - visible on all screens but smaller on mobile */}
-            <motion.div 
+            {/* Service tags - REMOVED for Flora-style minimalism */}
+            {/* <motion.div 
               variants={staggerContainerVariants}
               className="flex flex-wrap gap-2.5 md:gap-3 mb-6 md:mb-8"
             >
@@ -303,7 +361,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                   {label}
                 </motion.span>
               ))}
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
       </div>

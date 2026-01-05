@@ -1,10 +1,12 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { motion } from "framer-motion"
 import { SectionBadge } from "@/components/section-badge"
 import { copy, type Locale } from "@/lib/copy"
 import { Search, Palette, Code, TrendingUp } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { staggerContainerVariants, fadeInUpVariants, gridItemVariants } from "@/lib/animations"
 
 const approachIcons = [Search, Palette, Code, TrendingUp]
 

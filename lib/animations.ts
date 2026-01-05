@@ -265,7 +265,7 @@ export const buttonVariants = {
     scale: 1.03,
     transition: {
       duration: 0.2,
-      ease: "easeOut",
+      ease: [0.4, 0, 0.2, 1] as any,
     },
   },
   tap: {
