@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
 import { LanguageToggle } from "@/components/language-toggle"
+import { MailIcon } from "lucide-react"
 import type { Locale } from "@/lib/copy"
 import Image from "next/image"
 
@@ -43,6 +44,13 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
     return () => window.removeEventListener("scroll", throttledScroll)
   }, [])
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact")
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "end" })
+    }
+  }
+
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 px-6 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 lg:py-7 z-50 transition-all duration-300 ease-in-out ${
@@ -77,7 +85,7 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
         </Link>
         <div className="flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-xs md:text-sm flex-shrink-0">
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-            <Link 
+            {/* <Link 
               href={locale === "es" ? "/es/services/automatizacion-whatsapp" : "/services/whatsapp-automation"} 
               className="text-foreground/80 hover:text-foreground transition-colors font-normal text-xs md:text-sm whitespace-nowrap"
             >
@@ -88,13 +96,11 @@ export function HeroNavigation({ locale = "en" }: HeroNavigationProps) {
               className="text-foreground/80 hover:text-foreground transition-colors font-normal text-xs md:text-sm whitespace-nowrap"
             >
               {locale === "es" ? "Eventos" : "Events"}
-            </Link>
+            </Link> */}
           </nav>
           <div className="hidden lg:flex items-center gap-1.5 text-foreground/60">
             <span className="text-xs">→</span>
-            <a href="mailto:hello@dualperspective.digital" className="text-foreground/80 hover:text-foreground transition-colors font-normal text-xs md:text-sm">
-              hello@dualperspective.digital
-            </a>
+              <MailIcon className="w-4 h-4" onClick={scrollToContact} />
           </div>
           <div className="hidden md:block h-5 w-px bg-border/40" />
           <LanguageToggle />

@@ -144,7 +144,7 @@ const en: CopyShape = {
     subtitle:
       "WhatsApp automation that saves hours daily. Event displays that stop traffic. Built for Barcelona.",
   },
-  capabilitiesHeading: "Fast. Specialized. Visually striking.",
+  capabilitiesHeading: "What we do",
   capabilitiesLabel: "What we do",
   capabilities: [
     {
@@ -368,7 +368,7 @@ const es: CopyShape = {
       subtitle:
         "Automatización WhatsApp que ahorra horas diarias. Displays que capturan miradas. Construido para Barcelona.",
   },
-  capabilitiesHeading: "Rápido. Especializado. Impactante.",
+  capabilitiesHeading: "Capacidades",
   capabilitiesLabel: "Qué hacemos",
   capabilities: [
     {

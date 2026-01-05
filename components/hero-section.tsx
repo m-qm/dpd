@@ -8,15 +8,6 @@ import { ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { textRevealVariants, staggerContainerVariants, buttonVariants } from "@/lib/animations"
 
-// Particle background disabled for Flora-style minimalism
-// const ParticleBackground = dynamic(
-//   () => import("@/components/particle-background").then((mod) => ({ default: mod.ParticleBackground })),
-//   {
-//     ssr: false,
-//     loading: () => null,
-//   }
-// )
-
 
 // Two value proposition options for each locale (only titles change)
 const heroVariants = {
@@ -232,7 +223,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
                     }}
                     className="block font-normal text-foreground leading-[0.95] tracking-[-0.03em]"
                     style={{
-                      fontSize: 'clamp(60px, 10vw, 180px)',
+                      fontSize: 'clamp(60px, 8vw, 180px)',
                     }}
                   >
                     {line}
