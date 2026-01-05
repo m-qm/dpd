@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const resend = new Resend(apiKey)
 
     const from = process.env.RESEND_FROM || "Dual Perspective Digital <hello@dualperspective.digital>"
-    const to = process.env.CONTACT_TO || "hello@dualperspective.digital"
+    const to = process.env.CONTACT_TO || "mireiaquerol@gmail.com"
 
     const { data, error } = await resend.emails.send({
       from,
