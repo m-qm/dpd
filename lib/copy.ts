@@ -142,7 +142,7 @@ const en: CopyShape = {
     eyebrow: "WhatsApp Automation & Event Displays | Barcelona",
     titleLines: ["Automate", "interactions.", "Elevate", "experiences."],
     subtitle:
-      "WhatsApp automation that saves hours daily. Event displays that stop traffic. Built in Barcelona.",
+      "WhatsApp automation that saves hours daily. Event displays that capture attention. Built in Barcelona.",
   },
   capabilitiesHeading: "What we do",
   capabilitiesLabel: "What we do",
@@ -175,27 +175,27 @@ const en: CopyShape = {
   ],
   approachHeading: "How we work",
   approachIntro:
-    "Understand first. Build fast. Barcelona-based with in-person support.",
+    "No templates. No fluff. Just software that fits how you actually work. Barcelona-based with in-person support.",
   approachSteps: [
     {
-      title: "Understand",
+      title: "We Listen (Really Listen)",
       description:
-        "Learn how you work. What slows you down. What success looks like.",
+        "We dive into your daily grind. What makes you curse at your screen? What would make your team actually celebrate? We ask the awkward questions so we build the right thing.",
     },
     {
-      title: "Design",
+      title: "We Design for Humans",
       description:
-        "Make complex feel simple. Guide users naturally.",
+        "Complex problems, simple solutions. We obsess over making things feel obvious—because your team shouldn't need a manual to use software they use every day.",
     },
     {
-      title: "Build",
+      title: "We Build to Last",
       description:
-        "Integrate seamlessly. Clean code. Ready from day one.",
+        "Clean code. Real integrations. No duct tape. Your software works on day one and keeps working as you scale. We're in it for the long haul.",
     },
     {
-      title: "Evolve",
+      title: "We Never Stop Improving",
       description:
-        "Adapt as you grow. Measure. Refine. Iterate.",
+        "Your business evolves. So does your software. We measure what matters, fix what's broken, and add what you actually need—not what sounds cool in a meeting.",
     },
   ],
   clientsHeading: "Trusted by",
@@ -290,7 +290,7 @@ const en: CopyShape = {
       breadcrumb: "Interactive Event Displays",
       hero: {
         badge: "Interactive Event Displays",
-        title: "Interactive Displays That Stop Traffic",
+        title: "Interactive Displays That Capture Attention",
         subtitle: "Transform your trade show booth from static to stunning. Our custom interactive displays capture leads, showcase real-time data, and create memorable experiences that stand out at Barcelona's biggest events.",
         cta1: "Plan Your Event Display",
         cta2: "View Pricing",
@@ -399,27 +399,27 @@ const es: CopyShape = {
   ],
   approachHeading: "Cómo trabajamos",
   approachIntro:
-    "Entendemos primero. Construimos rápido. Con base en Barcelona y soporte presencial.",
+    "Sin plantillas. Sin relleno. Solo software que se adapta a cómo trabajáis realmente. Con base en Barcelona y soporte presencial.",
   approachSteps: [
     {
-      title: "Entender",
+      title: "Escuchamos (De Verdad)",
       description:
-        "Cómo trabajas. Qué te ralentiza. Cómo se ve el éxito.",
+        "Nos metemos en vuestro día a día. ¿Qué os hace maldecir la pantalla? ¿Qué haría que vuestro equipo realmente celebre? Hacemos las preguntas incómodas para construir lo correcto.",
     },
     {
-      title: "Diseñar",
+      title: "Diseñamos para Humanos",
       description:
-        "Hacer lo complejo simple. Guiar naturalmente.",
+        "Problemas complejos, soluciones simples. Nos obsesionamos con hacer que las cosas se sientan obvias—porque vuestro equipo no debería necesitar un manual para usar software que usan cada día.",
     },
     {
-      title: "Construir",
+      title: "Construimos para Durar",
       description:
-        "Integración perfecta. Código limpio. Listo desde día uno.",
+        "Código limpio. Integraciones reales. Sin cinta adhesiva. Vuestro software funciona desde el día uno y sigue funcionando mientras crecéis. Estamos aquí para el largo plazo.",
     },
     {
-      title: "Evolucionar",
+      title: "Nunca Dejamos de Mejorar",
       description:
-        "Adaptarnos mientras creces. Medir. Refinar. Iterar.",
+        "Vuestro negocio evoluciona. Vuestro software también. Medimos lo que importa, arreglamos lo que está roto y añadimos lo que realmente necesitáis—no lo que suena bien en una reunión.",
     },
   ],
   clientsHeading: "Confían en nosotros",

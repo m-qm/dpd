@@ -36,7 +36,7 @@ export default function EventDisplaysPage() {
           />
           <SectionBadge number={1} label="Interactive Event Displays" />
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-normal text-foreground mb-6 md:mb-8 leading-[1.1] tracking-tight">
-            Interactive Displays That Stop Traffic
+            Interactive Displays That Capture Attention
           </h1>
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl leading-relaxed mb-8">
             Transform your trade show booth from static to stunning. Our custom interactive displays capture leads, 

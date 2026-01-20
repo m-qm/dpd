@@ -2,12 +2,12 @@ import type { Metadata } from "next"
 import { ContactForm } from "@/components/contact-form"
 import { SectionBadge } from "@/components/section-badge"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { Check, MessageCircle, Zap, TrendingUp, Clock } from "lucide-react"
+import { Check, MessageCircle, Zap, TrendingUp } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "WhatsApp Automation & Chatbot Integration for Spanish Businesses | Dual Perspective",
   description:
-    "Automate WhatsApp customer interactions for Spanish SMEs. Save 15-20 hours/week with intelligent chatbots that handle FAQs, qualify leads, and sync with your CRM. From €5,500 + €1,200/month support.",
+    "Automate WhatsApp customer interactions for Spanish SMEs. Save 15-20 hours/week with intelligent chatbots that handle FAQs, qualify leads, and sync with your CRM. Custom pricing tailored to your needs.",
 }
 
 export default function WhatsAppAutomationPage() {
@@ -194,76 +194,34 @@ export default function WhatsAppAutomationPage() {
         />
         <div className="dpd-container relative z-10">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal text-foreground mb-6 tracking-tight">
-            Transparent Pricing
+            Pricing Tailored to Your Needs
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-12">
-            No hidden fees. No surprises. Clear pricing that reflects the value you get.
+            Every business is different. We customize our pricing based on your specific requirements, 
+            integration complexity, and support needs. Get a transparent quote during your free assessment.
           </p>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
+          <div className="max-w-2xl">
             <div className="border-2 border-border p-8">
-              <h3 className="text-2xl font-normal text-foreground mb-4">Initial Setup</h3>
-              <div className="mb-6">
-                <span className="text-4xl font-normal text-foreground">€5,500</span>
-                <span className="text-muted-foreground ml-2">one-time</span>
-              </div>
-              <ul className="space-y-3 mb-8">
+              <h3 className="text-xl font-normal text-foreground mb-4">What's Included</h3>
+              <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">WhatsApp Business API setup</span>
+                  <span className="text-sm text-muted-foreground">WhatsApp Business API setup & integration</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">Custom chatbot flow design</span>
+                  <span className="text-sm text-muted-foreground">Custom chatbot design & development</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">CRM integration (1 system)</span>
+                  <span className="text-sm text-muted-foreground">CRM integration & data sync</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">Testing & team training</span>
+                  <span className="text-sm text-muted-foreground">Ongoing support & optimization</span>
                 </li>
               </ul>
-            </div>
-
-            <div className="border-2 border-foreground p-8 bg-foreground/5">
-              <h3 className="text-2xl font-normal text-foreground mb-4">Monthly Support</h3>
-              <div className="mb-6">
-                <span className="text-4xl font-normal text-foreground">€1,200</span>
-                <span className="text-muted-foreground ml-2">per month</span>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">Continuous monitoring & optimization</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">Regular content & flow updates</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">Priority support</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">Monthly performance reviews</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 p-6 bg-blue-500/10 border border-blue-500/20 max-w-2xl">
-            <div className="flex items-start gap-4">
-              <Clock className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
-              <div>
-                <h4 className="text-lg font-normal text-foreground mb-2">Typical ROI: 3 Months</h4>
-                <p className="text-sm text-muted-foreground">
-                  If you handle 50+ WhatsApp inquiries daily, that's ~20 hours/week of staff time. 
-                  Automating 50% saves €1,500-€2,500/month in labor costs. Investment pays for itself quickly.
-                </p>
-              </div>
             </div>
           </div>
         </div>

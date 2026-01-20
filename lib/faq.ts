@@ -12,7 +12,7 @@ export const faqContent: Record<Locale, FAQItem[]> = {
       id: "whatsapp-pricing",
       question: "How much does WhatsApp automation cost?",
       answer:
-        "€5,500 setup + €1,200/month. Includes API integration, chatbot design, CRM connection, and ongoing support. Most clients see ROI within 3 months.",
+        "We tailor pricing to your specific needs, integration complexity, and support requirements. Includes API integration, chatbot design, CRM connection, and ongoing support. Get a transparent quote during your free 30-minute assessment.",
     },
     {
       id: "crm-erp",
@@ -44,7 +44,7 @@ export const faqContent: Record<Locale, FAQItem[]> = {
       id: "whatsapp-pricing",
       question: "¿Cuánto cuesta la automatización de WhatsApp?",
       answer:
-        "€5.500 configuración + €1.200/mes. Incluye integración API, diseño del chatbot, conexión CRM y soporte continuo. ROI típico en 3 meses.",
+        "Ajustamos el precio según tus necesidades específicas, la complejidad de integración y los requisitos de soporte. Incluye integración API, diseño del chatbot, conexión CRM y soporte continuo. Obtén un presupuesto transparente en tu evaluación gratuita de 30 minutos.",
     },
     {
       id: "crm-erp",
