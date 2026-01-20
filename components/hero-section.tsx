@@ -7,6 +7,34 @@ import { copy, type Locale } from "@/lib/copy"
 import { ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { textRevealVariants, staggerContainerVariants, buttonVariants } from "@/lib/animations"
+import type { Variants } from "framer-motion"
+
+// Mobile-optimized animation variants - simpler, faster
+const mobileTextRevealVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 12,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+}
+
+const mobileStaggerContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+}
 
 // Two value proposition options for each locale (only titles change)
 const heroVariants = {
@@ -31,6 +59,7 @@ const heroVariants = {
 export function HeroSection({ locale = "en" }: { locale?: Locale }) {
   const [currentVariant, setCurrentVariant] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const isMobile = useIsMobile()
 
   // Auto-rotate between variants every 5 seconds
   useEffect(() => {
@@ -39,19 +68,25 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
       setIsTransitioning(true)
       
       // After fade out completes, change content and fade in
+      // Faster transitions on mobile
+      const fadeOutDuration = isMobile ? 300 : 500
       setTimeout(() => {
         setCurrentVariant((prev) => (prev + 1) % heroVariants[locale].length)
         // Small delay before fade in for smoother transition
         setTimeout(() => {
           setIsTransitioning(false)
         }, 50)
-      }, 500) // Wait for fade out to complete (500ms)
+      }, fadeOutDuration)
     }, 5000) // Change every 5 seconds
 
     return () => clearInterval(interval)
-  }, [locale])
+  }, [locale, isMobile])
 
   const currentHero = heroVariants[locale][currentVariant]
+  
+  // Use simplified animations on mobile
+  const containerVariants = isMobile ? mobileStaggerContainerVariants : staggerContainerVariants
+  const textVariants = isMobile ? mobileTextRevealVariants : textRevealVariants
 
   return (
     <section
@@ -187,35 +222,43 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
           <motion.div 
             initial="hidden"
             animate="visible"
-            variants={staggerContainerVariants}
+            variants={containerVariants}
             className="w-full"
           >
-            {/* Eyebrow */}
-            <motion.div variants={textRevealVariants} className="mb-2 md:mb-3 hidden md:block">
-              <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
-                {copy[locale].hero.eyebrow}
-              </span>
-            </motion.div>
+            {/* Eyebrow - hidden on mobile, uses both CSS and JS check */}
+            {!isMobile && (
+              <motion.div variants={textVariants} className="mb-2 md:mb-3 hidden md:block">
+                <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-medium">
+                  {copy[locale].hero.eyebrow}
+                </span>
+              </motion.div>
+            )}
 
-            {/* Main Title - Flora-style massive headline */}
+            {/* Main Title - responsive sizing, simpler mobile animations */}
             <motion.h1 
-              variants={textRevealVariants}
-              className="relative mb-6 md:mb-8 font-serif flex flex-col justify-center overflow-visible"
+              variants={textVariants}
+              className="relative mb-5 md:mb-8 font-serif flex flex-col justify-center overflow-visible"
             >
               <div className="relative">
                 {currentHero.titleLines.map((line, index) => (
                   <motion.span
                     key={`${locale}-${currentVariant}-${line}-${index}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: isTransitioning ? 0 : 1, y: isTransitioning ? 10 : 0 }}
-                    transition={{
-                      duration: isTransitioning ? 0.5 : 0.8,
-                      ease: isTransitioning ? [0.4, 0, 0.2, 1] : [0.16, 1, 0.3, 1],
-                      delay: isTransitioning ? 0 : index * 0.15,
+                    initial={{ opacity: 0, y: isMobile ? 15 : 30 }}
+                    animate={{ 
+                      opacity: isTransitioning ? 0 : 1, 
+                      y: isTransitioning ? (isMobile ? 5 : 10) : 0 
                     }}
-                    className="block font-normal text-foreground leading-[0.95] tracking-[-0.03em]"
+                    transition={{
+                      duration: isMobile 
+                        ? (isTransitioning ? 0.3 : 0.5) 
+                        : (isTransitioning ? 0.5 : 0.8),
+                      ease: isTransitioning ? [0.4, 0, 0.2, 1] : [0.16, 1, 0.3, 1],
+                      delay: isTransitioning ? 0 : index * (isMobile ? 0.08 : 0.15),
+                    }}
+                    className="block font-normal text-foreground leading-[0.95] tracking-[-0.02em] md:tracking-[-0.03em]"
                     style={{
-                      fontSize: 'clamp(60px, 8vw, 180px)',
+                      // Balanced sizing: 40px min for mobile, scales with viewport, 120px max for desktop
+                      fontSize: 'clamp(40px, 8vw, 120px)',
                     }}
                   >
                     {line}
@@ -226,40 +269,40 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
 
             {/* Subtitle - static, doesn't change */}
             <motion.p 
-              variants={textRevealVariants}
-              className="text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-6 md:mb-8"
+              variants={textVariants}
+              className="text-sm md:text-base lg:text-lg text-muted-foreground/90 leading-relaxed font-normal max-w-2xl mb-5 md:mb-8"
             >
               {copy[locale].hero.subtitle}
             </motion.p>
 
             {/* CTAs */}
             <motion.div 
-              variants={textRevealVariants}
+              variants={textVariants}
               className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-6 md:mb-8"
             >
               <motion.a
                 href="#contact"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30"
+                variants={isMobile ? undefined : buttonVariants}
+                whileHover={isMobile ? undefined : "hover"}
+                whileTap={isMobile ? { scale: 0.98 } : "tap"}
+                className="group relative inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-normal tracking-tight bg-foreground text-background overflow-hidden transition-all duration-200 md:duration-300 md:hover:shadow-xl md:hover:shadow-blue-500/30"
               >
-                {/* Animated gradient shimmer effect */}
+                {/* Animated gradient shimmer effect - desktop only */}
                 <span 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="hidden md:block absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
                     background: 'linear-gradient(90deg, transparent 0%, rgba(46, 88, 255, 0.2) 50%, transparent 100%)',
                     backgroundSize: '200% 100%',
                     animation: 'shimmer 2s ease-in-out infinite',
                   }}
                 />
-                  <span className="relative z-10 flex items-center">
+                <span className="relative z-10 flex items-center">
                   {copy[locale].ctaButton}
-                  <ArrowRight className="ml-1.5 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="ml-1.5 h-3.5 w-3.5 md:group-hover:translate-x-1 transition-transform duration-200" />
                 </span>
-                {/* Subtle glow effect on hover */}
+                {/* Subtle glow effect on hover - desktop only */}
                 <span 
-                  className="absolute -inset-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md -z-10"
+                  className="hidden md:block absolute -inset-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md -z-10"
                   style={{
                     background: 'radial-gradient(circle, rgba(46, 88, 255, 0.5) 0%, transparent 70%)',
                   }}
@@ -267,21 +310,21 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </motion.a>
               <motion.a
                 href="#capabilities"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="group relative inline-flex items-center justify-center px-7 md:px-8 py-3.5 md:py-4 text-sm md:text-base font-normal tracking-tight border-2 border-foreground/30 text-foreground hover:border-foreground/60 hover:bg-foreground/5 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 overflow-hidden"
+                variants={isMobile ? undefined : buttonVariants}
+                whileHover={isMobile ? undefined : "hover"}
+                whileTap={isMobile ? { scale: 0.98 } : "tap"}
+                className="group relative inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-sm md:text-base font-normal tracking-tight border-2 border-foreground/30 text-foreground md:hover:border-foreground/60 md:hover:bg-foreground/5 transition-all duration-200 md:duration-300 md:hover:shadow-lg md:hover:shadow-blue-500/10 overflow-hidden"
               >
-                {/* Animated border glow */}
+                {/* Animated border glow - desktop only */}
                 <span 
-                  className="absolute inset-0 border-2 border-blue-500/40 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="hidden md:block absolute inset-0 border-2 border-blue-500/40 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
                     boxShadow: '0 0 20px rgba(46, 88, 255, 0.3)',
                   }}
                 />
-                {/* Subtle background shimmer */}
+                {/* Subtle background shimmer - desktop only */}
                 <span 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="hidden md:block absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
                     background: 'linear-gradient(90deg, transparent 0%, rgba(46, 88, 255, 0.05) 50%, transparent 100%)',
                     backgroundSize: '200% 100%',
@@ -294,9 +337,9 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               </motion.a>
             </motion.div>
 
-            {/* Stats Section */}
+            {/* Stats Section - only on desktop */}
             <motion.div 
-              variants={staggerContainerVariants}
+              variants={containerVariants}
               className="hidden md:flex flex-wrap items-center gap-6 md:gap-10 mb-6 md:mb-8"
             >
               {(
@@ -312,7 +355,7 @@ export function HeroSection({ locale = "en" }: { locale?: Locale }) {
               ).map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  variants={textRevealVariants}
+                  variants={textVariants}
                   className="flex items-baseline gap-2"
                 >
                   <span className="text-xl md:text-3xl font-serif text-foreground tracking-tight">
