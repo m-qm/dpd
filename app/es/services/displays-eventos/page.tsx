@@ -7,7 +7,7 @@ import { Check, Sparkles, Users, BarChart3, Zap } from "lucide-react"
 export const metadata: Metadata = {
   title: "Displays Interactivos para Ferias de Barcelona | Dual Perspective",
   description:
-    "Transforma tu stand de feria con displays interactivos personalizados para eventos de Barcelona. Captura leads, muestra datos en tiempo real, crea experiencias memorables. Desde €2.000 por evento. MWC, ISE, ferias comerciales.",
+    "Transforma tu stand de feria con displays interactivos personalizados para eventos de Barcelona. Captura leads, muestra datos en tiempo real, crea experiencias memorables. MWC, ISE, ferias comerciales.",
 }
 
 export default function DisplaysEventosPage() {

@@ -7,7 +7,7 @@ import { Check, Sparkles, Users, BarChart3, Zap } from "lucide-react"
 export const metadata: Metadata = {
   title: "Interactive Event Displays for Barcelona Trade Shows | Dual Perspective",
   description:
-    "Transform your trade show booth with custom interactive displays for Barcelona events. Capture leads, showcase real-time data, create memorable experiences. From €2,000 per event. MWC, ISE, trade expos.",
+    "Transform your trade show booth with custom interactive displays for Barcelona events. Capture leads, showcase real-time data, create memorable experiences. MWC, ISE, trade expos.",
 }
 
 export default function EventDisplaysPage() {

@@ -150,12 +150,12 @@ const en: CopyShape = {
     {
       title: "WhatsApp Automation",
       description:
-        "Intelligent chatbots that handle FAQs, qualify leads, and sync with your CRM. Save 15-20 hours weekly. From €5,500 setup.",
+        "Intelligent chatbots that handle FAQs, qualify leads, and sync with your CRM. Save 15-20 hours weekly.",
     },
     {
       title: "Event Displays",
       description:
-        "Interactive displays that capture attention and leads. Perfect for MWC, ISE, and Barcelona events. From €2,000.",
+        "Interactive displays that capture attention and leads. Perfect for MWC, ISE, and Barcelona events.",
     },
     {
       title: "Messaging Integrations",
@@ -374,12 +374,12 @@ const es: CopyShape = {
     {
       title: "Automatización WhatsApp",
       description:
-        "Chatbots inteligentes que gestionan FAQs, cualifican leads y sincronizan con tu CRM. Ahorra 15-20 horas semanales. Desde €5.500.",
+        "Chatbots inteligentes que gestionan FAQs, cualifican leads y sincronizan con tu CRM. Ahorra 15-20 horas semanales.",
     },
     {
       title: "Displays para Eventos",
       description:
-        "Displays interactivos que capturan atención y leads. Perfecto para MWC, ISE y eventos en Barcelona. Desde €2.000.",
+        "Displays interactivos que capturan atención y leads. Perfecto para MWC, ISE y eventos en Barcelona.",
     },
     {
       title: "Integraciones de Mensajería",

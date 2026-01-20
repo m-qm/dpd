@@ -7,7 +7,7 @@ import { Check, MessageCircle, Zap, TrendingUp, Clock } from "lucide-react"
 export const metadata: Metadata = {
   title: "Automatización WhatsApp y Chatbots para PYMEs Españolas | Dual Perspective",
   description:
-    "Automatiza interacciones de WhatsApp para PYMEs españolas. Ahorra 15-20 horas semanales con chatbots inteligentes que gestionan FAQs, cualifican leads y se sincronizan con tu CRM. Desde €5.500 + €1.200/mes soporte.",
+    "Automatiza interacciones de WhatsApp para PYMEs españolas. Ahorra 15-20 horas semanales con chatbots inteligentes que gestionan FAQs, cualifican leads y se sincronizan con tu CRM.",
 }
 
 export default function AutomatizacionWhatsAppPage() {
