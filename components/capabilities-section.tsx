@@ -115,7 +115,7 @@ export function CapabilitiesSection({
                 }}
               >
                 <div className="relative p-8 md:p-10">
-                  <div className="flex items-start justify-between gap-6 mb-10">
+                  <div className="flex items-start justify-between gap-6 mb-6">
                     <div className="flex items-center gap-4">
                       <motion.div 
                         className="h-11 w-11 border border-border flex items-center justify-center bg-black/[0.02] group-hover:border-foreground/50 transition-colors duration-300"
