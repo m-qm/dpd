@@ -78,11 +78,10 @@ export default function HomeEsDefault() {
       />
       <HeroSection locale="es" />
       <CapabilitiesSection inverted={false} locale="es" />
+      <TransitionAnimation locale="es" />
       <ApproachSection inverted={false} locale="es" />
-      {/* PhilosophySection removed for Flora-style minimalism */}
       <ClientsSection inverted={false} locale="es" />
       <FAQSection locale="es" inverted={false} />
-      <TransitionAnimation locale="es" />
       <CTASection inverted={false} locale="es" />
       <Footer locale="es" />
     </main>

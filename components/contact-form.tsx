@@ -4,7 +4,7 @@ import { useState } from "react"
 import type { Locale } from "@/lib/copy"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 
 type ContactFormProps = {
   locale?: Locale
@@ -13,12 +13,11 @@ type ContactFormProps = {
 export function ContactForm({ locale = "en" }: ContactFormProps) {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [service, setService] = useState("")
   const [message, setMessage] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [statusDetail, setStatusDetail] = useState<string | null>(null)
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({})
+  const [errors, setErrors] = useState<{ email?: string; message?: string }>({})
 
   const isSpanish = locale === "es"
 
@@ -26,24 +25,16 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
 
   const validate = () => {
     const next: typeof errors = {}
-
     if (!email.trim()) {
       next.email = isSpanish ? "El email es obligatorio." : "Email is required."
     } else if (!emailLooksValid(email)) {
-      next.email = isSpanish ? "Introduce un email válido." : "Enter a valid email."
+      next.email = isSpanish ? "Introduce un email v\u00e1lido." : "Enter a valid email."
     }
-
     if (!message.trim()) {
       next.message = isSpanish ? "El mensaje es obligatorio." : "Message is required."
     } else if (message.trim().length < 10) {
-      next.message = isSpanish ? "Añade un poco más de contexto (mín. 10 caracteres)." : "Add a bit more context (min. 10 characters)."
+      next.message = isSpanish ? "A\u00f1ade un poco m\u00e1s de contexto." : "Add a bit more context."
     }
-
-    // Name is optional, but if provided make it minimally useful
-    if (name.trim() && name.trim().length < 2) {
-      next.name = isSpanish ? "Nombre demasiado corto." : "Name is too short."
-    }
-
     setErrors(next)
     return Object.keys(next).length === 0
   }
@@ -52,48 +43,27 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
     event.preventDefault()
     setStatus("idle")
     setStatusDetail(null)
-
-    if (!validate()) {
-      setStatus("error")
-      return
-    }
+    if (!validate()) { setStatus("error"); return }
 
     setSubmitting(true)
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, service, message, locale }),
+        body: JSON.stringify({ name, email, message, locale }),
       })
-
       if (!res.ok) {
         let detail = ""
-        try {
-          const data = await res.json()
-          if (data?.error) detail = String(data.error)
-        } catch {
-          // ignore
-        }
+        try { const data = await res.json(); if (data?.error) detail = String(data.error) } catch { /* ignore */ }
         throw new Error(detail || (isSpanish ? "No se pudo enviar el mensaje." : "Could not send message."))
       }
-
       setStatus("success")
-      setStatusDetail(null)
-      setName("")
-      setEmail("")
-      setService("")
-      setMessage("")
-      setErrors({})
+      setName(""); setEmail(""); setMessage(""); setErrors({})
     } catch (err) {
       console.error("Contact form error", err)
       setStatus("error")
       setStatusDetail(
-        err instanceof Error
-          ? err.message
-          : isSpanish
-            ? "Ha habido un problema al enviar el mensaje."
-            : "There was a problem sending your message.",
+        err instanceof Error ? err.message : isSpanish ? "Ha habido un problema." : "There was a problem sending your message."
       )
     } finally {
       setSubmitting(false)
@@ -101,11 +71,11 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
   }
 
   return (
-    <div className="max-w-xl">
-      <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
+    <div className="bg-card border border-border rounded-lg p-6 md:p-8">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        {/* Name */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
             {isSpanish ? "Nombre" : "Name"}
           </label>
           <Input
@@ -114,21 +84,15 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
             name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            onBlur={() => {
-              if (!Object.keys(errors).length) return
-              validate()
-            }}
-            className={`rounded-none border-x-0 border-t-0 border-b-2 ${
-              errors.name ? "border-destructive" : "border-border/80 focus-visible:border-foreground"
-            } !bg-transparent px-0 py-3.5 text-base text-foreground focus-visible:ring-0 placeholder:text-muted-foreground/60 transition-colors`}
+            className="rounded-sm border-border bg-background/50 px-4 py-3 text-sm text-foreground focus-visible:ring-1 focus-visible:ring-accent-blue placeholder:text-muted-foreground/50 transition-colors"
             placeholder={isSpanish ? "Tu nombre" : "Your name"}
-            aria-invalid={Boolean(errors.name)}
           />
-          {errors.name && <p className="text-sm text-destructive mt-1.5">{errors.name}</p>}
         </div>
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-foreground">
-            {isSpanish ? "Correo electrónico" : "Email"} <span className="text-destructive">*</span>
+
+        {/* Email */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            {isSpanish ? "Email" : "Email"} <span className="text-accent-blue">*</span>
           </label>
           <Input
             type="email"
@@ -138,116 +102,73 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => validate()}
-            className={`rounded-none border-x-0 border-t-0 border-b-2 ${
-              errors.email ? "border-destructive" : "border-border/80 focus-visible:border-foreground"
-            } !bg-transparent px-0 py-3.5 text-base text-foreground focus-visible:ring-0 placeholder:text-muted-foreground/60 transition-colors`}
+            className={`rounded-sm border-border bg-background/50 px-4 py-3 text-sm text-foreground focus-visible:ring-1 focus-visible:ring-accent-blue placeholder:text-muted-foreground/50 transition-colors ${errors.email ? "border-destructive" : ""}`}
             placeholder={isSpanish ? "tu@email.com" : "you@email.com"}
             aria-invalid={Boolean(errors.email)}
           />
-          {errors.email && <p className="text-sm text-destructive mt-1.5">{errors.email}</p>}
+          {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
         </div>
-      </div>
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-foreground">
-          {isSpanish ? "Interesado en" : "Interested in"}
-        </label>
-        <select
-          value={service}
-          onChange={(e) => setService(e.target.value)}
-          className="w-full rounded-none border-x-0 border-t-0 border-b-2 border-border/80 focus:border-foreground !bg-transparent px-0 py-3.5 text-base text-foreground focus:ring-0 focus:outline-none transition-colors"
-        >
-          <option value="">{isSpanish ? "Selecciona un servicio" : "Select a service"}</option>
-          <option value="whatsapp">{isSpanish ? "Automatización de WhatsApp" : "WhatsApp Automation"}</option>
-          <option value="events">{isSpanish ? "Display Interactivo para Eventos" : "Interactive Event Display"}</option>
-          <option value="both">{isSpanish ? "Ambos Servicios" : "Both Services"}</option>
-          <option value="other">{isSpanish ? "Otro" : "Other"}</option>
-        </select>
-      </div>
-
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-foreground">
-            {isSpanish ? "Proyecto o contexto" : "Project or context"} <span className="text-destructive">*</span>
+        {/* Brief challenge / message */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            {isSpanish ? "Tu reto" : "Brief challenge"} <span className="text-accent-blue">*</span>
           </label>
-          <span className="text-sm text-muted-foreground">{Math.min(message.length, 1200)}/1200</span>
+          <Textarea
+            required
+            rows={4}
+            maxLength={1200}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onBlur={() => validate()}
+            className={`min-h-[100px] rounded-sm border-border bg-background/50 px-4 py-3 text-sm text-foreground focus-visible:ring-1 focus-visible:ring-accent-blue resize-none placeholder:text-muted-foreground/50 transition-colors ${errors.message ? "border-destructive" : ""}`}
+            placeholder={
+              isSpanish
+                ? "Qu\u00e9 quieres automatizar o construir..."
+                : "What do you want to automate or build..."
+            }
+            aria-invalid={Boolean(errors.message)}
+          />
+          {errors.message && <p className="text-xs text-destructive">{errors.message}</p>}
         </div>
-        <Textarea
-          required
-          rows={4}
-          maxLength={1200}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onBlur={() => validate()}
-          className={`min-h-[120px] rounded-none border-x-0 border-t-0 border-b-2 ${
-            errors.message ? "border-destructive" : "border-border/80 focus-visible:border-foreground"
-          } !bg-transparent px-0 py-3.5 text-base text-foreground focus-visible:ring-0 resize-none placeholder:text-muted-foreground/60 transition-colors`}
-          placeholder={
-            isSpanish
-              ? "Qué quieres construir, para quién y qué parte te está quitando tiempo hoy."
-              : "What you want to build, who it's for, and what's currently taking time today."
-          }
-          aria-invalid={Boolean(errors.message)}
-        />
-        {errors.message && <p className="text-sm text-destructive mt-1.5">{errors.message}</p>}
-      </div>
 
-      <div className="space-y-4">
-        <Button
+        {/* Submit */}
+        <button
           type="submit"
           disabled={submitting || !email || !message}
-          className="inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 text-base md:text-lg font-normal tracking-tight rounded-none bg-foreground text-background hover:bg-foreground/90 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium tracking-tight rounded-sm bg-accent-blue text-foreground hover:brightness-110 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed shadow-md shadow-accent-blue/20"
         >
-          {submitting ? (isSpanish ? "Enviando…" : "Sending…") : isSpanish ? "Enviar mensaje" : "Send message"}
-        </Button>
+          {submitting
+            ? (isSpanish ? "Enviando..." : "Sending...")
+            : (isSpanish ? "Enviar mensaje" : "Send message")}
+          {!submitting && <ArrowRight className="h-4 w-4" />}
+        </button>
 
         {status === "success" && (
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-accent-blue">
             {isSpanish
-              ? "Gracias. Hemos recibido tu mensaje. Te responderemos pronto."
-              : "Thanks. Your message has been sent. We'll get back to you soon."}
+              ? "Gracias. Te responderemos pronto."
+              : "Thanks. We'll get back to you soon."}
           </p>
         )}
-        {status === "error" && (
-          <p className="text-sm text-destructive">
-            {statusDetail ||
-              (isSpanish
-                ? "Ha habido un problema al enviar el mensaje. Por favor, inténtalo de nuevo."
-                : "There was a problem sending your message. Please try again.")}
-          </p>
+        {status === "error" && statusDetail && (
+          <p className="text-sm text-destructive">{statusDetail}</p>
         )}
-      </div>
 
-      <p className="text-xs text-muted-foreground leading-relaxed">
-        {isSpanish ? (
-          <>
-            Al enviar, aceptas nuestra{" "}
-            <a className="text-foreground hover:opacity-70 transition-opacity" href="/es/privacy">
-              política de privacidad
-            </a>{" "}
-            y el uso de cookies según la{" "}
-            <a className="text-foreground hover:opacity-70 transition-opacity" href="/es/cookies">
-              política de cookies
-            </a>
-            .
-          </>
-        ) : (
-          <>
-            By sending, you agree to our{" "}
-            <a className="text-foreground hover:opacity-70 transition-opacity" href="/privacy">
-              privacy policy
-            </a>{" "}
-            and cookies as described in the{" "}
-            <a className="text-foreground hover:opacity-70 transition-opacity" href="/cookies">
-              cookie policy
-            </a>
-            .
-          </>
-        )}
-      </p>
-    </form>
+        <p className="text-[11px] text-muted-foreground/60 leading-relaxed">
+          {isSpanish ? (
+            <>
+              Al enviar, aceptas nuestra{" "}
+              <a className="underline hover:text-muted-foreground transition-colors" href="/es/privacy">pol\u00edtica de privacidad</a>.
+            </>
+          ) : (
+            <>
+              By sending, you agree to our{" "}
+              <a className="underline hover:text-muted-foreground transition-colors" href="/privacy">privacy policy</a>.
+            </>
+          )}
+        </p>
+      </form>
     </div>
   )
 }
-
-

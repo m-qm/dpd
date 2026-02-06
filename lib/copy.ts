@@ -139,38 +139,38 @@ type CopyShape = {
 
 const en: CopyShape = {
   hero: {
-    eyebrow: "WhatsApp Automation & Event Displays | Barcelona",
-    titleLines: ["Automate", "interactions.", "Elevate", "experiences."],
+    eyebrow: "Barcelona-based \u00b7 Trusted by Daikin & Maersk",
+    titleLines: ["Automation That", "Actually Works"],
     subtitle:
-      "WhatsApp automation that saves hours daily. Event displays that capture attention. Built in Barcelona.",
+      "Turn WhatsApp into your best salesperson. Save 20+ hours weekly with intelligent automation. Interactive displays that convert at events.",
   },
-  capabilitiesHeading: "What we do",
-  capabilitiesLabel: "What we do",
+  capabilitiesHeading: "What you'll get",
+  capabilitiesLabel: "Services",
   capabilities: [
     {
-      title: "WhatsApp Automation",
+      title: "WhatsApp Automation That Pays For Itself",
       description:
-        "Intelligent chatbots that handle FAQs, qualify leads, and sync with your CRM. Save 15-20 hours weekly.",
+        "Qualify leads while you sleep. Handle 100+ conversations simultaneously. Free up 15-20 hours per week for your team.",
     },
     {
-      title: "Event Displays",
+      title: "Event Displays That Capture Attention & Leads",
       description:
-        "Interactive displays that capture attention and leads. Perfect for MWC, ISE, and Barcelona events.",
+        "Stand out at MWC, ISE, and major Barcelona events. Interactive experiences that collect qualified contacts automatically.",
     },
     {
-      title: "Messaging Integrations",
+      title: "Seamless Integrations",
       description:
-        "Connect WhatsApp, Telegram, and messaging platforms to your existing systems. Automated flows that work.",
+        "Connect WhatsApp, Telegram, your CRM, and existing tools. Everything works together. Salesforce, HubSpot, custom APIs.",
     },
     {
-      title: "Web Applications",
+      title: "Custom Web Applications",
       description:
-        "Custom dashboards for event organizers. Manage exhibitors, floor plans, and check-ins in one place.",
+        "Dashboards for event organizers. Manage exhibitors, floor plans, and check-ins. Built to fit how you actually work.",
     },
     {
-      title: "Process Automation",
+      title: "End-to-End Process Automation",
       description:
-        "Connect your tools. Automate workflows. Fewer spreadsheets, fewer meetings, more growth.",
+        "Connect your tools. Automate workflows. Fewer spreadsheets, fewer meetings, more growth. ROI in weeks, not months.",
     },
   ],
   approachHeading: "How we work",
@@ -178,24 +178,24 @@ const en: CopyShape = {
     "No templates. No fluff. Just software that fits how you actually work. Barcelona-based with in-person support.",
   approachSteps: [
     {
-      title: "We Listen (Really Listen)",
+      title: "Discovery & Strategy",
       description:
-        "We dive into your daily grind. What makes you curse at your screen? What would make your team actually celebrate? We ask the awkward questions so we build the right thing.",
+        "We dive into your daily grind. What makes you curse at your screen? What would make your team celebrate? We ask the awkward questions so we build the right thing.",
     },
     {
-      title: "We Design for Humans",
+      title: "Design for Humans",
       description:
-        "Complex problems, simple solutions. We obsess over making things feel obvious—because your team shouldn't need a manual to use software they use every day.",
+        "Complex problems, simple solutions. We obsess over making things feel obvious\u2014because your team shouldn't need a manual to use software they use every day.",
     },
     {
-      title: "We Build to Last",
+      title: "Build to Last",
       description:
         "Clean code. Real integrations. No duct tape. Your software works on day one and keeps working as you scale. We're in it for the long haul.",
     },
     {
-      title: "We Never Stop Improving",
+      title: "Launch & Optimize",
       description:
-        "Your business evolves. So does your software. We measure what matters, fix what's broken, and add what you actually need—not what sounds cool in a meeting.",
+        "Your business evolves. So does your software. We measure what matters, fix what's broken, and add what you actually need\u2014not what sounds cool in a meeting.",
     },
   ],
   clientsHeading: "Trusted by",
@@ -203,10 +203,10 @@ const en: CopyShape = {
   clientTypes: ["Event organizers", "Industrial", "Manufacturers", "Logistics", "Retail"],
   clientsIntro:
     "Spanish SMEs who need software that fits their process. Barcelona-based. In-person meetings available.",
-  ctaHeading: "Ready to automate?",
+  ctaHeading: "Let's talk about your automation",
   ctaBody:
-    "30-minute consultation. No commitment. Actionable insights.",
-  ctaButton: "Book consultation",
+    "30-minute consultation. No commitment. Actionable insights you can use immediately.",
+  ctaButton: "Book free consultation",
   services: {
     whatsapp: {
       breadcrumb: "WhatsApp Automation",
@@ -363,38 +363,38 @@ const en: CopyShape = {
 
 const es: CopyShape = {
   hero: {
-    eyebrow: "Automatización WhatsApp y Displays para Eventos | Barcelona",
-    titleLines: ["Automatiza", "interacciones.", "Eleva", "experiencias."],
-      subtitle:
-        "Automatización WhatsApp que ahorra horas diarias. Displays que capturan miradas. Construido en Barcelona.",
+    eyebrow: "Barcelona \u00b7 Confianza de Daikin y Maersk",
+    titleLines: ["Automatización que", "realmente funciona"],
+    subtitle:
+      "Convierte WhatsApp en tu mejor comercial. Ahorra más de 20 horas semanales con automatización inteligente. Displays interactivos que convierten en eventos.",
   },
-  capabilitiesHeading: "Capacidades",
-  capabilitiesLabel: "Qué hacemos",
+  capabilitiesHeading: "Qué conseguirás",
+  capabilitiesLabel: "Servicios",
   capabilities: [
     {
-      title: "Automatización WhatsApp",
+      title: "Automatización WhatsApp que se paga sola",
       description:
-        "Chatbots inteligentes que gestionan FAQs, cualifican leads y sincronizan con tu CRM. Ahorra 15-20 horas semanales.",
+        "Cualifica leads mientras duermes. Gestiona más de 100 conversaciones simultáneamente. Libera 15-20 horas semanales para tu equipo.",
     },
     {
-      title: "Displays para Eventos",
+      title: "Displays que capturan atención y leads",
       description:
-        "Displays interactivos que capturan atención y leads. Perfecto para MWC, ISE y eventos en Barcelona.",
+        "Destaca en MWC, ISE y grandes eventos de Barcelona. Experiencias interactivas que recogen contactos cualificados automáticamente.",
     },
     {
-      title: "Integraciones de Mensajería",
+      title: "Integraciones sin fisuras",
       description:
-        "Conecta WhatsApp, Telegram y plataformas de mensajería a tus sistemas. Flujos automatizados que funcionan.",
+        "Conecta WhatsApp, Telegram, tu CRM y herramientas existentes. Todo funciona junto. Salesforce, HubSpot, APIs personalizadas.",
     },
     {
-      title: "Aplicaciones Web",
+      title: "Aplicaciones Web a medida",
       description:
-        "Paneles personalizados para organizadores. Gestiona expositores, planos y registro en un solo lugar.",
+        "Paneles para organizadores de eventos. Gestiona expositores, planos y check-ins. Construido para adaptarse a cómo trabajáis.",
     },
     {
-      title: "Automatización de Procesos",
+      title: "Automatización de procesos completa",
       description:
-        "Conecta tus herramientas. Automatiza flujos. Menos excels, menos reuniones, más crecimiento.",
+        "Conecta tus herramientas. Automatiza flujos. Menos excels, menos reuniones, más crecimiento. ROI en semanas, no meses.",
     },
   ],
   approachHeading: "Cómo trabajamos",
@@ -402,24 +402,24 @@ const es: CopyShape = {
     "Sin plantillas. Sin relleno. Solo software que se adapta a cómo trabajáis realmente. Con base en Barcelona y soporte presencial.",
   approachSteps: [
     {
-      title: "Escuchamos (De Verdad)",
+      title: "Descubrimiento y estrategia",
       description:
-        "Nos metemos en vuestro día a día. ¿Qué os hace maldecir la pantalla? ¿Qué haría que vuestro equipo realmente celebre? Hacemos las preguntas incómodas para construir lo correcto.",
+        "Nos metemos en vuestro día a día. ¿Qué os hace maldecir la pantalla? ¿Qué haría que vuestro equipo celebre? Hacemos las preguntas incómodas para construir lo correcto.",
     },
     {
-      title: "Diseñamos para Humanos",
+      title: "Diseño para humanos",
       description:
-        "Problemas complejos, soluciones simples. Nos obsesionamos con hacer que las cosas se sientan obvias—porque vuestro equipo no debería necesitar un manual para usar software que usan cada día.",
+        "Problemas complejos, soluciones simples. Nos obsesionamos con hacer que las cosas se sientan obvias\u2014porque vuestro equipo no debería necesitar un manual para usar software que usan cada día.",
     },
     {
-      title: "Construimos para Durar",
+      title: "Construir para durar",
       description:
         "Código limpio. Integraciones reales. Sin cinta adhesiva. Vuestro software funciona desde el día uno y sigue funcionando mientras crecéis. Estamos aquí para el largo plazo.",
     },
     {
-      title: "Nunca Dejamos de Mejorar",
+      title: "Lanzar y optimizar",
       description:
-        "Vuestro negocio evoluciona. Vuestro software también. Medimos lo que importa, arreglamos lo que está roto y añadimos lo que realmente necesitáis—no lo que suena bien en una reunión.",
+        "Vuestro negocio evoluciona. Vuestro software también. Medimos lo que importa, arreglamos lo que está roto y añadimos lo que realmente necesitáis\u2014no lo que suena bien en una reunión.",
     },
   ],
   clientsHeading: "Confían en nosotros",
@@ -433,10 +433,10 @@ const es: CopyShape = {
   ],
   clientsIntro:
     "PYMEs españolas que necesitan software que se adapta. Con base en Barcelona. Reuniones presenciales disponibles.",
-  ctaHeading: "¿Listo para automatizar?",
+  ctaHeading: "Hablemos de tu automatización",
   ctaBody:
-    "Consulta de 30 minutos. Sin compromiso. Insights accionables.",
-  ctaButton: "Reservar consulta",
+    "Consulta de 30 minutos. Sin compromiso. Insights accionables que puedes usar de inmediato.",
+  ctaButton: "Reservar consulta gratuita",
   services: {
     whatsapp: {
       breadcrumb: "Automatización WhatsApp",

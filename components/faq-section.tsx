@@ -46,7 +46,7 @@ export function FAQSection({ locale = "en", inverted = false }: { locale?: Local
       className="dpd-section dpd-chapter pb-32 md:pb-40 lg:pb-48"
     >
       <div className="dpd-container">
-        <SectionBadge number={5} label={locale === "es" ? "Preguntas frecuentes" : "FAQ"} />
+        <SectionBadge number={4} label={locale === "es" ? "Preguntas frecuentes" : "FAQ"} />
         <div
           className={`transition-all ${isMobile ? "duration-300" : "duration-700"} ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
