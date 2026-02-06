@@ -536,18 +536,36 @@ html[data-theme="dark"] {
 
   /* Hero section fade-in animation - works on both mobile and desktop */
   .hero-fade-in {
-    animation: heroFadeIn 0.6s ease-out both;
+    animation: heroFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-
+  
   @keyframes heroFadeIn {
     0% {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(24px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  
+  /* Smooth accent underline on hover */
+  .hover-accent-line {
+    position: relative;
+  }
+  .hover-accent-line::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hover-accent-line:hover::after {
+    width: 100%;
   }
 
   /* Optimize animations for mobile and reduced motion */
